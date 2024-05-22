@@ -23,7 +23,6 @@ switch ( $bloc_h_align ) {
         break;
 }
 
-
 if ( get_field('bloc_frame_color') != 'none' ) { 
     $block_css[] = 'bloc-frame';
     $block_css[] = 'bloc-frame--'.get_field('bloc_frame_color');

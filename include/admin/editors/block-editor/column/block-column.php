@@ -3,9 +3,11 @@ $allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/list-ite
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array( 'bloc-column' );
-if ( get_field('bloc_frame_color') != 'none' ) { 
+
+$block_frame = get_field('bloc_frame_color');
+if ( $block_frame && $block_frame != 'none' ) { 
     $block_css[] = 'bloc-frame';
-    $block_css[] = 'bloc-frame--'.get_field('bloc_frame_color');
+    $block_css[] = 'bloc-frame--'.$block_frame;
 }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
