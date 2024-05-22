@@ -1,0 +1,49 @@
+{
+    "key": "group_663b56252a21c",
+    "title": "[Bloc] Espace",
+    "fields": [
+        {
+            "key": "field_663b56253dc02",
+            "label": "Espace",
+            "name": "bloc_spacer",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "x2": "x2",
+                "x3": "x3",
+                "x4": "x4"
+            },
+            "default_value": "x2",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/pc-spacer"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1716367006
+}

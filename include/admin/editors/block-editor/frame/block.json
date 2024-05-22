@@ -1,0 +1,16 @@
+{
+    "name": "acf/pc-frame",
+    "title": "Encadré",
+    "apiVersion": 2,
+    "category": "design",
+    "keywords": [ "encadré" ],
+    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#1e1e1e\" d=\"M20 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16ZM4 5v14h16V5H4Z\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M7.5 11h9\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M7.5 8h9\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M7.5 14H13\"/></svg>",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-frame.php"
+    },
+    "supports": {
+        "align": false,
+        "anchor": true
+    }
+}

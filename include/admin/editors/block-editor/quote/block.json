@@ -1,0 +1,17 @@
+{
+    "name": "acf/pc-quote",
+    "title": "Citation",
+    "description": "Pour mettre en valeur un texte court",
+    "category": "design",
+    "keywords": [ "citation" ],
+    "icon": "format-quote",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-quote.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "name": "acf/pc-image",
+    "title": "Image",
+    "description": "Affiche une image",
+    "category": "media",
+    "keywords": [ "image" ],
+    "icon": "format-image",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-image.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

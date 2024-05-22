@@ -1,0 +1,15 @@
+{
+    "name": "acf/pc-column",
+    "title": "Colonne",
+    "icon": "text-page",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-column.php"
+    },
+    "supports": {
+        "align": false,
+        "anchor": true
+    },
+    "parent": [ "acf/pc-columns" ]
+}

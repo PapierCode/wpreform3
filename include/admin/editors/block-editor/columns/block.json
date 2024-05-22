@@ -1,0 +1,18 @@
+{
+    "name": "acf/pc-columns",
+    "title": "2 colonnes",
+    "description": "Affiche 2 colonnes",
+    "category": "design",
+    "keywords": [ "colonne" ],
+    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><clipPath id=\"a\"><path d=\"M0 0h24v24H0z\"/></clipPath><g clip-path=\"url(#a)\"><path fill=\"#1e1e1e\" d=\"M9 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7ZM2 5v14h7V5H2Z\"/><path fill=\"#1e1e1e\" d=\"M22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7Zm-7 2v14h7V5h-7Z\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M4 8h3\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M17 8h3\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M17 11h3\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M4 11h3\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M4 14h2\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M17 14h2\"/></g></svg>",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-columns.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "mode": true
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "name": "acf/pc-column-image",
+    "title": "Image pour colonne",
+    "description": "Affiche une image dans une colonne",
+    "keywords": [ "image" ],
+    "icon": "format-image",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-column-image.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "parent": [ "acf/pc-column" ]
+}
