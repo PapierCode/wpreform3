@@ -3,12 +3,12 @@ $allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'core/list-ite
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array( 'bloc-column' );
-
 $block_frame = get_field('bloc_frame_color');
 if ( $block_frame && $block_frame != 'none' ) { 
     $block_css[] = 'bloc-frame';
     $block_css[] = 'bloc-frame--'.$block_frame;
 }
+if ( get_field('bloc_inner_cover') ) { $block_css[] = 'bloc-column--cover'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );

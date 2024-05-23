@@ -171,7 +171,9 @@ $sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'quote' => '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20"><path d="M12.07,2l-3.3,8.57h2.74L9.54,20H0l2-9.61L6.32,2Z"/><path d="M13.92,18l3.3-8.56H14.49l2-9.47H26L24,9.61,19.68,18Z"/></svg>',
 
-	'download' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="20 20 0 20 0 12.5 3 12.5 3 17 17 17 17 12.5 20 12.5 20 20"/><polygon points="13.88 6.59 11.5 8.97 11.5 0 8.5 0 8.5 8.97 6.12 6.59 4 8.71 10 14.71 16 8.71 13.88 6.59"/></svg>'
+	'download' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="20 20 0 20 0 12.5 3 12.5 3 17 17 17 17 12.5 20 12.5 20 20"/><polygon points="13.88 6.59 11.5 8.97 11.5 0 8.5 0 8.5 8.97 6.12 6.59 4 8.71 10 14.71 16 8.71 13.88 6.59"/></svg>',
+
+	'external' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M20 12.999V20H0V0h7.001v3H3v14h14v-4.001h3Z"/><path d="m16.996 5.125-7.935 7.936-2.122-2.122 7.936-7.935L11 3.01V0h9v9h-3.01l.006-3.875Z"/></svg>'
 
 ));
 

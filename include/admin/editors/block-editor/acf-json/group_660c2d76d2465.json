@@ -185,7 +185,7 @@
             "name": "bloc_inner_reverse",
             "aria-label": "",
             "type": "true_false",
-            "instructions": "Par défaut sur smartphone et tablette, la colonne de droite passe dessous celle de gauche. Activez ce bouton pour la faire passer au dessus.",
+            "instructions": "Par défaut, sur smartphone, la colonne de droite passe dessous celle de gauche. Activez ce bouton pour la faire passer au dessus.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -242,5 +242,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1716367161
+    "modified": 1716444661
 }

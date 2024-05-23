@@ -25,6 +25,26 @@
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
+        },
+        {
+            "key": "field_664e5ec41d671",
+            "label": "Contient uniquement un bloc image à adapter à la hauteur de la colonne",
+            "name": "bloc_inner_cover",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -45,5 +65,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1716366999
+    "modified": 1716412378
 }

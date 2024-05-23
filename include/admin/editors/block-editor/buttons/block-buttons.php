@@ -3,12 +3,12 @@ $errors = array();
 $buttons = array();
 $fields = get_fields();
 
-$button_1 = pc_acf_block_get_bloc_btn_attrs( $fields, 1 );
+$button_1 = pc_acf_block_get_bloc_btn_attrs( $fields, 1, $is_preview );
 if ( is_array( $button_1 ) ) { $buttons[] = $button_1;
 } else { $errors[] = $button_1; }
 
 if ( $fields['bloc_btn_2_display'] ) {
-    $button_2 = pc_acf_block_get_bloc_btn_attrs( $fields, 1 );
+    $button_2 = pc_acf_block_get_bloc_btn_attrs( $fields, 2, $is_preview );
     if ( is_array( $button_2 ) ) { $buttons[] = $button_2;
     } else { $errors[] = $button_2; }
 

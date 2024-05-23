@@ -6,7 +6,7 @@ if ( $quote ) {
 	$block_css = array( 
 		'bloc-quote',
 		'bloc-position-h--'.get_field('bloc_position_h'),
-		'bloc-text-align--'.get_field('bloc_text_align'),
+		'has-text-align-'.get_field('bloc_text_align'),
 	);
 	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 	if ( $align = get_field('_bloc_quote_align') ) { $block_css[] = 'bloc-quote--'.$align; }
