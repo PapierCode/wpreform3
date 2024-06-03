@@ -37,3 +37,70 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 
 
 /*=====  FIN Protection par mot de passe  =====*/
+
+/*============================================
+=            Actualités associées            =
+============================================*/
+
+add_action( 'pc_action_index_main_aside', 'pc_page_aside_news', 10 );
+
+	function pc_page_aside_news( $pc_post ) {
+
+		if ( is_page() && get_option('options_news_enabled') ) {
+
+			$metas = $pc_post->metas;
+			$get_news_args = array(
+				'post_type' => NEWS_POST_SLUG,
+				'post_per_page' => 4
+			);
+
+			if ( isset( $metas['_page_news_categories_related'] ) ) {
+
+				$get_news_args = array_merge(
+					array( 
+						'tax_query' => array(
+							array(
+								'taxonomy' => NEWS_TAX_SLUG,
+								'field' => 'term_id',
+								'terms' => unserialize($metas['_page_news_categories_related'])
+							),
+						)
+					),
+					$get_news_args
+				);
+
+			} else {
+
+				$get_news_args = array_merge(
+					array(
+						'meta_key' => '_news_pages_related',
+						'meta_value' => '"'.$pc_post->id.'"',
+						'meta_compare' => 'LIKE'
+					),
+					$get_news_args
+				);
+
+			}
+
+			$get_news = get_posts( $get_news_args );
+
+			if ( !empty( $get_news ) ) {
+				echo '<aside class="aside aside--news">';
+					echo '<h2 class="aside-title aside-title--news">'.apply_filters( 'pc_filter_aside_news_title', 'Actualités' ).'</h2>';
+					echo '<ul class="card-list card-list--news">';
+						foreach ( $get_news as $news ) {
+							$pc_news = new PC_Post( $news );
+							echo '<li class="card-list-item">';
+								$pc_news->display_card(3);
+							echo '</li>';
+						}
+					echo '</ul>';
+				echo '</aside>';
+			}
+
+		}
+
+	}
+
+
+/*=====  FIN Actualités associées  =====*/

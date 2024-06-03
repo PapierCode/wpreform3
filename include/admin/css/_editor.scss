@@ -41,9 +41,9 @@
 }
 
 // onglets bloc settings (col de droite)
-// .block-editor-block-inspector__tabs {
-// 	[role="tablist"] { display: none; }
-// }
+.block-editor-block-inspector__tabs {
+	[role="tablist"] { display: none; }
+}
 
 
 /*----------  Groupe de boutons  ----------*/
@@ -487,21 +487,24 @@ $button-space : 10;
 =            Boutons            =
 ===============================*/
 
+// largeur boutons
+.components-panel__body:has([aria-label="Largeur du bouton"]) { display: none; }
+
 .bloc-buttons {
 
 	> div {
 		display: flex;
 		gap:rem($button-space);
 		flex-wrap: wrap;
+		
+		> [class*="width-50"] { width: 50%; }
 	}
 
 	&.bloc-text-align--center > div { justify-content: center;	}
 	&.bloc-text-align--right > div { justify-content: flex-end;	}
 
-	.acf-block-preview & {
-		max-width: rem($maw-txt);
-		margin-inline: auto;
-	}
+	.wp-element-button { width: 100%; }
+	br { display: none; }
 }
 
 
