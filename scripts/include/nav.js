@@ -34,7 +34,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     /*----------  Visibilité du bouton "burger"  ----------*/
     
     const btnBurgerVisibility = () => {
-        return getComputedStyle( btnBurgerBox ).display == 'none' ? false : true;
+        return getComputedStyle( btnBurger ).display == 'none' ? false : true;
     };
     
     
@@ -220,10 +220,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
     const html = document.querySelector( 'html' );
     
-    const btnBurgerBox = document.querySelector( '.h-nav-btn-box' );
-    const btnBurger = btnBurgerBox.querySelector( '.h-nav-btn' );
+    const btnBurger = document.querySelector( '.h-nav-btn' );
     
-    const nav = btnBurgerBox.nextSibling;
+    const nav = btnBurger.nextSibling;
     const liParents = nav.querySelectorAll( '.h-p-nav-item--l1.is-parent' );
     
     let btnBurgerIsVisible = btnBurgerVisibility();

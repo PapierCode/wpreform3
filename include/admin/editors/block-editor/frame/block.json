@@ -10,7 +10,7 @@
         "renderTemplate": "block-frame.php"
     },
     "supports": {
-        "align": ["left", "right"],
+        "align": ["left", "right", "wide"],
         "anchor": true,
         "mode": false
     }

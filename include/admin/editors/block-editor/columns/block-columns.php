@@ -9,9 +9,7 @@ $block_css = array(
 	'bloc-inner-position-v--'.get_field('inner_align_v'),
     'bloc-columns--'.get_field('inner_proportions')
 );
-if ( $block['align'] ) { $block_css[] = 'bloc-position-h--'.$block['align']; }
-
-
+if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }
 if ( get_field('frame_color') != 'none' ) { 
     $block_css[] = 'bloc-frame';
     $block_css[] = 'bloc-frame--'.get_field('frame_color');

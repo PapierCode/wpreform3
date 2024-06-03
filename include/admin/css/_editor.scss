@@ -511,7 +511,9 @@ $button-space : 10;
 =            Sous-pages            =
 ==================================*/
 
-.bloc-subpages {
+.wp-block-acf-pc-posts { max-width: rem($maw-wide) !important; }
+
+.bloc-posts {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -521,11 +523,12 @@ $button-space : 10;
 	
 	.card-list-item {
 		grid-column: span 4;
-		padding: rem(2*$space-max,0);
-		border:1px solid #000;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	}
+	.card {
+		height: 100%;
+		margin: 0;
+		padding: rem(.5*$space-max);
+		border:1px solid #eee;
 	}
 }
 

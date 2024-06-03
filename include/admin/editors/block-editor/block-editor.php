@@ -105,10 +105,14 @@ add_action( 'acf/json/save_paths', 'pc_admin_acf_save_paths', 10, 2 );
 	function pc_admin_acf_save_paths( $paths, $post ) {
 
 		global $blocks_acf;
-		$settings_acf = array( '[Paramètres] WPreform' );
+		$settings_acf = array(
+			'group_664db0c1e77e1', // [Paramètres] WPreform
+			'group_665c8549c226c', // Actualités associées / Article de blog associés
+			'group_665d740171b6b', // Page associées
+		);
 
-		if ( in_array( $post['title'], $blocks_acf ) || in_array( $post['title'], $settings_acf ) ) {
-			$paths = array( get_template_directory().'/include/admin/editors/block-editor/acf-json' );
+		if ( in_array( $post['title'], $blocks_acf ) || in_array( $post['key'], $settings_acf ) ) {
+			$paths = array( get_template_directory().'/include/admin/acf-json' );
 		}
 
 		return $paths;
@@ -119,7 +123,7 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 
 	function pc_admin_acf_load_json( $paths ) {
 
-		$paths[] = get_template_directory().'/include/admin/editors/block-editor/acf-json';
+		$paths[] = get_template_directory().'/include/admin/acf-json';
 		return $paths;
 
 	};
@@ -198,7 +202,7 @@ add_filter('acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_fil
 
 	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
 
-		$args['post_parent__not_in'] = array( $post_id );
+		$args['post_parent'] = 0;
 		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
 
 		return $args;

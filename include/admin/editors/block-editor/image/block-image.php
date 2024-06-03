@@ -9,6 +9,21 @@ $block_css = array(
     'bloc-image', 
     'bloc-image--'.$img_size 
 );	
+
+// alignement du bloc
+switch ( $img_size ) {
+    case 'medium_large_l':
+        $block_css[] = 'bloc-align-h--left';
+        break;
+    case 'medium_large_r':
+        $block_css[] = 'bloc-align-h--right';
+        break;
+    case 'large':
+        $block_css[] = 'bloc-align-h--wide';
+        break;
+}
+
+// alignement du contenu
 switch ( $img_size ) {
     case 'thumbnail_small':
     case 'thumbnail':

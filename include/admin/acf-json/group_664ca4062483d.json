@@ -40,10 +40,10 @@
                 "id": ""
             },
             "choices": {
-                "selection": "Sélection",
-                "subpages": "Sous-pages"
+                "subpages": "Sous-pages",
+                "selection": "Sélection"
             },
-            "default_value": "selection",
+            "default_value": "subpages",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -103,5 +103,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1717325606
+    "modified": 1717410038
 }

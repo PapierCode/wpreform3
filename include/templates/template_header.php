@@ -26,11 +26,9 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 		add_action( 'pc_header', 'pc_display_header_logo', 50 );
 		add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
 		add_action( 'pc_header', 'pc_display_header_nav', 70 );
-		add_action( 'pc_header', 'pc_display_header_tools', 80 );
+		// add_action( 'pc_header', 'pc_display_header_tools', 80 );
 
 	add_action( 'pc_header', 'pc_display_header_end', 90 );
-
-	add_action( 'pc_header', 'pc_display_nav_overlay', 100 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -83,7 +81,7 @@ function pc_display_header_start() {
 function pc_display_header_end() {
 
 	$tag = '</header>';
-	if ( apply_filters( 'pc_display_main_inner', false ) ) { $tag = '</div>'.$tag; }
+	if ( apply_filters( 'pc_display_header_inner', false ) ) { $tag = '</div>'.$tag; }
 
 	echo apply_filters( 'pc_filter_header_end', $tag );
 
@@ -97,34 +95,25 @@ function pc_display_header_end() {
 ============================*/
 
 function pc_display_header_logo() {
-	
-	global $settings_project;
-
-	echo '<div class="h-logo">';
 		
-		if ( !is_home() ) {
-			$link_datas = apply_filters( 'pc_filter_header_logo_url', array(
-				'href' => get_bloginfo('url'),
-				'title' => 'Page d\'accueil'
-			) );
-			echo '<a href="'.$link_datas['href'].'" class="h-logo-link" title="'.$link_datas['title'].'">';
-		}
+	echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Page d\'accueil">';
 
-			$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', array(
-				'url' => get_bloginfo('template_directory').'/images/logo.svg',
-				'width' => 150,
-				'height' => 150,
-				'alt' => $settings_project['coord-name']
-			) );
+		$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', array(
+			'url' => get_bloginfo('template_directory').'/images/logo.svg',
+			'width' => 150,
+			'height' => 150,
+			'alt' => get_field('options_coord_name','option')
+		) );
 
-			$logo_tag = '<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />';
-			$logo_tag = apply_filters( 'pc_filter_header_logo_img_tag', $logo_tag, $logo_datas );
-			
-			echo $logo_tag;
+		$logo_tag = apply_filters(
+			'pc_filter_header_logo_img_tag',
+			'<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />',
+			$logo_datas
+		);
+		
+		echo $logo_tag;
 
-		if ( !is_home() ) { echo '</a>'; }
-
-	echo '</div>';
+	echo '</a>';
 
 }
 
@@ -139,7 +128,7 @@ function pc_display_header_logo() {
 
 function pc_display_nav_button_open_close() {
 
-	echo '<div class="h-nav-btn-box no-print"><button type="button" title="Ouvrir/fermer le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button></div>';
+	echo '<button type="button" title="Ouvrir/fermer le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
 
 }
 
@@ -157,7 +146,7 @@ function pc_display_header_nav() {
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
-			'depth'           	=> 1,
+			'depth'           	=> 2,
 			'container'       	=> '',
 			'item_spacing'		=> 'discard',
 			'fallback_cb'     	=> false,
@@ -174,24 +163,13 @@ function pc_display_header_nav() {
 
 /*----------  Réseaux sociaux  ----------*/
 
-add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
+// add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 
 	function pc_display_header_social() {
 
 		pc_display_social_links( 'social-list--header' );
 
 	}
-
-
-/*----------  Overlay navigation  ----------*/
-
-function pc_display_nav_overlay() {
-
-	if ( apply_filters( 'pc_filter_nav_overlay_display', false ) ) {
-		echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-button-h-nav no-print" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
-	}
-
-}
 
 
 /*=====  FIN Navigation  =====*/

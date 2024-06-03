@@ -24,4 +24,4 @@ echo '<body class="'.implode(' ',get_body_class()).'">';
 
 /*----------  Hook header  ----------*/
 
-// do_action( 'pc_header' );
+do_action( 'pc_header' );
