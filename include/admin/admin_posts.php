@@ -22,6 +22,17 @@ add_action( 'admin_head-nav-menus.php' , function() {
 =            Pages            =
 =============================*/
 
+add_action( 'after_setup_theme', 'sol_add_theme_support' );
+
+ function sol_add_theme_support() {
+
+	 add_theme_support( 'post-thumbnails', array( 
+		 'page',
+		 NEWS_POST_SLUG
+	 ) );
+
+ }
+
 add_action( 'init', 'pc_admin_page_remove_metaboxes' );
 
 function pc_admin_page_remove_metaboxes() {

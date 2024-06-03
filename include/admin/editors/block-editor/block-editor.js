@@ -13,19 +13,25 @@
 		wp.richText.unregisterFormatType( 'core/keyboard' );
 		wp.richText.unregisterFormatType( 'core/text-color' );
 		wp.richText.unregisterFormatType( 'core/language' );
-		wp.richText.unregisterFormatType( 'core/footnote' );
+
+		/*----------  Styles  ----------*/
+
+		wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
+		wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
+		
    
     });
 
 	function pcRemoveOptions( settings, name ) {
-		if( 'core/paragraph' === name || 'core/heading' === name || 'core/list' === name || 'core/list-item' === name ) {
+
+		if ( ['core/heading'].includes(name)  ) {
 			return lodash.assign( {}, settings, {
 				supports: lodash.assign( {}, settings.supports, {
-					align: false, // pas de wide
-					html: false // pas d'édition en html
+					align: false
 				} )
 			} );
 		}
+		
 		return settings;
 
 	}

@@ -1,0 +1,533 @@
+/**
+*
+** Blocs : paramètres & aperçus
+*
+* xxx
+*
+**/
+
+@use "mixins" as *;
+
+
+/*=================================
+=            Interface            =
+=================================*/
+
+.editor-preview-dropdown, // aperçu responsive
+.block-editor-inserter__tips, // astuces dans le menu des blocs
+.typography-block-support-panel, // box typographie
+.acf-empty-block-fields // message bloc sans champ
+{ display: none !important; }
+
+// liens d'aide
+#editor {
+	// to check !!!
+	// a[target="_blank"]:not(.button):not([aria-label="Voir la page"]):not([data-name="filename"]),
+	// a[href="edit.php?post_type=wp_block"] { display: none !important; }
+}
+
+// champ ACF message d'alerte
+.acf-message-warning {
+	color: #ff5e5e;
+	label { font-weight: bold !important; }
+}
+
+// bloc en erreur
+.editor-error {
+	padding:1rem;
+	background-color: #ff5e5e;
+	text-align: center;
+	font-weight: bold;
+}
+
+// onglets bloc settings (col de droite)
+// .block-editor-block-inspector__tabs {
+// 	[role="tablist"] { display: none; }
+// }
+
+
+/*----------  Groupe de boutons  ----------*/
+
+[data-name="img_size"] .acf-button-group label { padding-inline: 8px; }
+
+[data-name="img_size"],
+[data-name="legend_align_h"],
+[data-name="inner_align_h"],
+[data-name="inner_align_v"] {
+
+	.acf-button-group label {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		&:before {
+			content:"";
+			display: block;
+			width: 24px;
+			height: 24px;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+$icons_url : "../../../images/admin/";
+$icons_fill_default : #444;
+$icons_fill_selected : #fff;
+
+[data-name="inner_align_v"] .acf-button-group label {
+
+	&:has([value="both"])::before {
+		background-image: svg-load( $icons_url + "align-v-both.svg", fill=$icons_fill_default );
+	}
+	&:has([value="both"]).selected::before {
+		background-image: svg-load( $icons_url + "align-v-both.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="top"])::before {
+		background-image: svg-load( $icons_url + "align-v-top.svg", fill=$icons_fill_default );
+	}
+	&:has([value="top"]).selected::before {
+		background-image: svg-load( $icons_url + "align-v-top.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="bottom"])::before {
+		background-image: svg-load( $icons_url + "align-v-bottom.svg", fill=$icons_fill_default );
+	}
+	&:has([value="bottom"]).selected::before {
+		background-image: svg-load( $icons_url + "align-v-bottom.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="center"])::before {
+		background-image: svg-load( $icons_url + "align-v-center.svg", fill=$icons_fill_default );
+	}
+	&:has([value="center"]).selected::before {
+		background-image: svg-load( $icons_url + "align-v-center.svg",fill=$icons_fill_selected );
+	}
+}
+
+[data-name="inner_align_h"] .acf-button-group label {
+
+	&:has([value="left"])::before {
+		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_default );
+	}
+	&:has([value="left"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="center"])::before {
+		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_default );
+	}
+	&:has([value="center"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="right"])::before {
+		background-image: svg-load( $icons_url + "align-h-right.svg", fill=$icons_fill_default );
+	}
+	&:has([value="right"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-right.svg",fill=$icons_fill_selected );
+	}
+}
+
+[data-name="img_size"] .acf-button-group label { // pas de texte
+	text-indent: -666em;
+	line-height: 0;
+	height: rem(38);
+}
+[data-name="img_size"] .acf-button-group label {
+
+	&:has([value="thumbnail_small"])::before {
+		background-image: svg-load( $icons_url + "width-thumbnail_small.svg", fill=$icons_fill_default );
+	}
+	&:has([value="thumbnail_small"]).selected::before {
+		background-image: svg-load( $icons_url + "width-thumbnail_small.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="thumbnail"])::before {
+		background-image: svg-load( $icons_url + "width-thumbnail.svg", fill=$icons_fill_default );
+	}
+	&:has([value="thumbnail"]).selected::before {
+		background-image: svg-load( $icons_url + "width-thumbnail.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="medium"])::before {
+		background-image: svg-load( $icons_url + "width-medium.svg", fill=$icons_fill_default );
+	}
+	&:has([value="medium"]).selected::before {
+		background-image: svg-load( $icons_url + "width-medium.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="medium_large_l"])::before {
+		background-image: svg-load( $icons_url + "width-medium_large_l.svg", fill=$icons_fill_default );
+	}
+	&:has([value="medium_large_l"]).selected::before {
+		background-image: svg-load( $icons_url + "width-medium_large_l.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="medium_large_r"])::before {
+		background-image: svg-load( $icons_url + "width-medium_large_r.svg", fill=$icons_fill_default );
+	}
+	&:has([value="medium_large_r"]).selected::before {
+		background-image: svg-load( $icons_url + "width-medium_large_r.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="large"])::before {
+		background-image: svg-load( $icons_url + "width-large.svg", fill=$icons_fill_default );
+	}
+	&:has([value="large"]).selected::before {
+		background-image: svg-load( $icons_url + "width-large.svg", fill=$icons_fill_selected );
+	}
+}
+
+[data-name="legend_align_h"] .acf-button-group label {
+
+	&:has([value="left"])::before {
+		background-image: svg-load( $icons_url + "legend-left.svg", fill=$icons_fill_default );
+	}
+	&:has([value="left"]).selected::before {
+		background-image: svg-load( $icons_url + "legend-left.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="center"])::before {
+		background-image: svg-load( $icons_url + "legend-center.svg", fill=$icons_fill_default );
+	}
+	&:has([value="center"]).selected::before {
+		background-image: svg-load( $icons_url + "legend-center.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="right"])::before {
+		background-image: svg-load( $icons_url + "legend-right.svg", fill=$icons_fill_default );
+	}
+	&:has([value="right"]).selected::before {
+		background-image: svg-load( $icons_url + "legend-right.svg", fill=$icons_fill_selected );
+	}
+}
+
+
+/*=====  FIN Interface  =====*/
+
+
+/*===============================
+=            Communs            =
+===============================*/
+
+:root {
+	--pc-grid : repeat(12,1fr);
+}
+
+$maw-txt : 590; // idem theme.json
+$maw-wide : 900; // idem theme.json
+$space-max : 30;
+$button-space : 10;
+
+#editor .wp-block-post-content {
+	line-height: 1.5;
+
+    > * { margin-block: rem($space-max); }
+
+	> .alignleft, > .alignright,
+	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_l),
+	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_r),
+    > .wp-block-acf-pc-image:has(.bloc-image--large) {
+		float: none !important;
+		max-width: none !important;
+	}
+	> .alignleft,
+	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_l) { 
+		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 + #{rem(.5*($maw-wide - $maw-txt))} ) !important;
+		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+	}
+	> .alignright,
+	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_r) { 
+		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 + #{rem(.5*($maw-wide - $maw-txt))} ) !important;
+	}
+	> .wp-block-acf-pc-image:has(.bloc-image--large) { 
+		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+	}
+
+}
+
+
+/*----------  Encadré  ----------*/
+
+[class*="bloc-frame"] > div {
+	padding:rem($space-max);
+
+	> * { margin: rem($space-max) 0; }
+	> :first-child { margin-top: 0; }
+	> :last-child { margin-bottom: 0; }
+
+	[class*="bloc-frame"] > div {
+		padding: 0;
+		background-color: transparent;
+	}
+}
+
+
+/*----------  Alignement  ----------*/
+
+
+/*=====  FIN Communs  =====*/
+
+/*=======================================
+=            Défaut / Titres            =
+=======================================*/
+
+/*----------  Paramètres  ----------*/
+
+.block-library-heading-level-dropdown [role="menu"] :nth-child(1), // H1
+.block-library-heading-level-dropdown [role="menu"] :nth-child(n+4) // H4, H5, H6
+{ display: none; }
+
+
+/*----------  Aperçu  ----------*/
+
+// .editor-post-title {
+// 	margin-left: auto;
+// 	margin-right: auto;
+// 	max-width: rem($maw-txt) !important;
+// }
+
+
+/*=====  FIN Défaut / Titres  =====*/
+
+/*==============================
+=            Espace            =
+==============================*/
+
+.wp-block-acf-pc-spacer {
+    max-width: rem($maw-wide) !important;
+
+	&:first-child, &:last-child { display: none; }
+}
+.bloc-spacer {
+	border:1px solid #eee;
+	color: #999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bloc-spacer--x2 { height: rem(2*$space-max); }
+.bloc-spacer--x3 { height: rem(3*$space-max); }
+.bloc-spacer--x4 { height: rem(4*$space-max); }
+
+
+/*=====  FIN Espace  =====*/
+
+/*=============================
+=            Image            =
+=============================*/
+
+.wp-block-acf-pc-image,
+.wp-block-acf-pc-image-column {
+
+    img { display: block; }
+    figure { margin-bottom: 0; }
+
+    
+    &:has(.bloc-image--medium_large_l),
+    &:has(.bloc-image--medium_large_r) {
+        max-width: rem($maw-wide - .5*($maw-wide - $maw-txt));
+	}
+    &:has(.bloc-image--large) {
+        max-width: rem($maw-wide);
+	}
+
+    .bloc-inner-align-h--center .bloc-image-inner { margin-inline: auto; }
+    .bloc-inner-align-h--right .bloc-image-inner { margin-left: auto; }
+}
+
+
+/*=====  FIN Image  =====*/
+
+/*======================================
+=            ACF / Citation            =
+======================================*/
+
+/*----------  Aperçu  ----------*/
+
+.bloc-quote {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+
+	p:first-child {
+		margin:0;		
+		position: relative;
+		z-index: 1;
+
+		&::before, &::after {
+			content:"";
+			position: absolute;
+			z-index: 0;
+		}
+		&::before {
+			transform-origin: right top;
+		}
+		&::after {
+			transform-origin: right top;
+		}
+	}
+
+	cite {
+		display: block;
+		font-style: normal;
+		margin-top:rem(5)
+	}
+}
+
+
+/*=====  FIN ACF / Citation  =====*/
+
+/*=====================================
+=            ACF / Galerie            =
+=====================================*/
+
+/*----------  Paramètres  ----------*/
+
+.acf-gallery-side [data-name="title"],
+.acf-gallery-side [data-name="description"],
+.acf-gallery-side .media-types-required-info
+{
+	display: none;
+}
+
+
+/*----------  Aperçu  ----------*/
+
+.gallery-list {
+	list-style:none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap:1rem;
+	padding:0;
+}
+.gallery-item {
+	width: calc( (100% - 3rem) / 4 );
+
+	.bloc-wide & {
+		width: calc( (100% - 5rem) / 6 );
+	}
+}
+.gallery-link {
+	display: block;
+}
+.gallery-img {
+	vertical-align: bottom;
+}
+.gallery-ico {
+	display: none;
+}
+
+
+/*=====  FIN ACF / Galerie  =====*/
+
+/*===================================
+=            ACF / Embed            =
+===================================*/
+
+.bloc-embed {
+
+	.iframe {
+		position: relative;
+		height: 0;
+		background:none!important;
+	
+		iframe {
+			position: absolute;
+			z-index: 0;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+
+
+/*=====  FIN ACF / Embed  =====*/
+
+/*==================================
+=            2 colonnes            =
+==================================*/
+
+.bloc-columns > div {
+    display: grid;
+	grid-template-columns: repeat(6,1fr);
+	column-gap: rem($space-max);
+    
+    > div { margin: 0; } // colonne
+}
+
+.bloc-inner-position-v--top > div { align-items: start; }
+.bloc-inner-position-v--center > div { align-items: center; }
+.bloc-inner-position-v--bottom > div { align-items: end; }
+
+.bloc-inner-position-v--both > div { align-items: unset; }
+
+.bloc-columns--1-1 > div > * { grid-column: span 3; }
+
+.bloc-columns--1-2 > div > :nth-child(1),
+.bloc-columns--2-1 > div > :nth-child(2) { grid-column: span 2; }
+.bloc-columns--1-2 > div > :nth-child(2),
+.bloc-columns--2-1 > div > :nth-child(1) { grid-column: span 4; }
+
+.bloc-column {
+    height: 100%;
+
+    > div {
+        box-sizing: border-box;
+        height: 100%;
+
+        > * { margin: rem($space-max) 0; }
+        > :first-child { margin-top: 0; }
+        > :last-child { margin-bottom: 0; }
+    }
+}
+
+
+
+/*=====  FIN 2 colonnes  =====*/
+
+/*===============================
+=            Boutons            =
+===============================*/
+
+.bloc-buttons {
+
+	> div {
+		display: flex;
+		gap:rem($button-space);
+		flex-wrap: wrap;
+	}
+
+	&.bloc-text-align--center > div { justify-content: center;	}
+	&.bloc-text-align--right > div { justify-content: flex-end;	}
+
+	.acf-block-preview & {
+		max-width: rem($maw-txt);
+		margin-inline: auto;
+	}
+}
+
+
+/*=====  FIN Boutons  =====*/
+
+/*==================================
+=            Sous-pages            =
+==================================*/
+
+.bloc-subpages {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap:rem($space-max);
+	grid-template-columns: var(--pc-grid);
+	
+	.card-list-item {
+		grid-column: span 4;
+		padding: rem(2*$space-max,0);
+		border:1px solid #000;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+
+/*=====  FIN Sous-pages  =====*/

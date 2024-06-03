@@ -31,6 +31,9 @@ $texts_lengths = array(
 );
 $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 
+define( 'NEWS_POST_SLUG', 'newspost' );
+define( 'NEWS_TAX_SLUG', 'newstax' );
+
 
 /*----------  Rôle utilisateur connecté  ----------*/
 

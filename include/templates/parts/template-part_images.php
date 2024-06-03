@@ -69,6 +69,7 @@ add_action( 'init', 'pc_add_images_sizes' );
 			'st-500'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
 			'st-700'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
 			
+			'thumbnail_small' => array( 'width'=>250, 'height'=>0, 'crop'=>false ),
 			'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),
 			
 			'gl-th'		=> array( 'width'=>200, 'height'=>200, 'crop'=>true ),

@@ -1,0 +1,235 @@
+{
+    "key": "group_665b2a83ac9c5",
+    "title": "[Bloc] Image",
+    "fields": [
+        {
+            "key": "field_665b2a83b7bc9",
+            "label": "Image",
+            "name": "img_args",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "thumbnail_small"
+        },
+        {
+            "key": "field_665b2a83bb59e",
+            "label": "Largeur de l'image",
+            "name": "img_size",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "thumbnail_small": "thumbnail_small",
+                "thumbnail": "thumbnail",
+                "medium": "medium"
+            },
+            "default_value": "medium",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_665b2a83bf1d0",
+            "label": "250 pixels minimum conseillés.",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_665b2a83bb59e",
+                        "operator": "==",
+                        "value": "thumbnail_small"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_665b2a83c2cb6",
+            "label": "450 pixels minimum conseillés.",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_665b2a83bb59e",
+                        "operator": "==",
+                        "value": "thumbnail"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_665b2a83c69b7",
+            "label": "700 pixels minimum conseillés.",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_665b2a83bb59e",
+                        "operator": "==",
+                        "value": "medium"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_665b2a83d1906",
+            "label": "Alignement de l'image",
+            "name": "inner_align_h",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_665b2a83bb59e",
+                        "operator": "==",
+                        "value": "thumbnail_small"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_665b2a83bb59e",
+                        "operator": "==",
+                        "value": "thumbnail"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Gauche",
+                "center": "Centre",
+                "right": "Droit"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_665b2a83d52f0",
+            "label": "Alignement de la légende",
+            "name": "legend_align_h",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Gauche",
+                "center": "Centre",
+                "right": "Droit"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_665b43e74ba52",
+            "label": "Ajuster à la hauteur de la colonne",
+            "name": "cover",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "S'active si ce bloc est seul dans la colonne.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/pc-image-column"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Colonne",
+    "show_in_rest": 1,
+    "modified": 1717257226
+}

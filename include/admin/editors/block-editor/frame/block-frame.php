@@ -1,13 +1,11 @@
 <?php
 
-$allowedBlocks = [ 'core/paragraph', 'core/heading', 'acf/pc-column-image', 'acf/pc-buttons' ];
+$allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image', 'acf/pc-buttons' ];
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array(
     'bloc-frame',
-    'bloc-frame--'.get_field('bloc_frame_color'),
-	'bloc-position-h--'.get_field('bloc_position_h'),
-	'bloc-inner-position-h--'.get_field('bloc_inner_position_h') 
+    'bloc-frame--'.get_field('frame_color')
 );
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 

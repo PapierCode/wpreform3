@@ -1,0 +1,26 @@
+@use "sass:math";
+
+@function rem($a, $b:null, $c:null, $d:null, $base: 16) {
+
+	// $a
+	@if $a != null and $b == null and $c == null and $d == null {
+
+		@return math.div($a,$base)+rem;
+
+	// $a et $b
+	} @else if $a != null and $b != null and $c == null and $d == null {
+
+		@return math.div($a,$base)+rem math.div($b,$base)+rem;
+
+	// $a, $b, $c et $d
+	} @else if $a != null and $b != null and $c != null and $d != null {
+
+		@return math.div($a,$base)+rem math.div($b,$base)+rem math.div($c,$base)+rem math.div($d,$base)+rem;
+
+	} @else {
+
+		@return "!";
+
+	}
+
+}

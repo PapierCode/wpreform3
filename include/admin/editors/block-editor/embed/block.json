@@ -1,7 +1,7 @@
 {
     "name": "acf/pc-embed",
     "title": "Vidéo embarqué",
-    "description": "Affiche une vidéo",
+    "description": "Affiche une vidéo Youtube, Dailymotion et Viméo",
     "category": "media",
     "keywords": [ "vidéo" ],
     "icon": "format-video",

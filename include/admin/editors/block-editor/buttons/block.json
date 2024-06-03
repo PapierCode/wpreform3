@@ -1,7 +1,7 @@
 {
     "name": "acf/pc-buttons",
     "title": "Boutons",
-    "category": "design",
+    "category": "text",
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#1e1e1e\" d=\"M20 7a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16ZM4 9v6h16V9H4Z\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M7.5 12h9\"/></svg>",
     "apiVersion": 2,
     "acf": {
@@ -10,6 +10,7 @@
     },
     "supports": {
         "align": false,
-        "anchor": true
+        "anchor": true,
+        "mode": false
     }
 }

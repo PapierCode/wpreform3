@@ -5,7 +5,7 @@
         {
             "key": "field_663b56253dc02",
             "label": "Espace",
-            "name": "bloc_spacer",
+            "name": "space",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -45,5 +45,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1716367006
+    "modified": 1717250552
 }

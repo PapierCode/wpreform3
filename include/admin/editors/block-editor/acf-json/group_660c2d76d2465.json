@@ -16,14 +16,14 @@
                 "class": "acf-message-warning",
                 "id": ""
             },
-            "message": "La largeur des colonnes varie suivant la taille d'écran. Vérifiez les mises en page complexes avec différentes tailles d'écran.",
+            "message": "La largeur des colonnes varie suivant la taille d'écran. Vérifiez l'affichage public pour les mises en page complexes avec différentes tailles d'écran.",
             "new_lines": "wpautop",
             "esc_html": 0
         },
         {
-            "key": "field_6648d40045d2a",
-            "label": "Alignement horizontal du bloc",
-            "name": "bloc_position_h",
+            "key": "field_66472773a255b",
+            "label": "Couleur de fond",
+            "name": "frame_color",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -35,12 +35,11 @@
                 "id": ""
             },
             "choices": {
-                "left": "Gauche",
-                "center": "Centre",
-                "right": "Droit",
-                "wide": "Large"
+                "none": "Aucun",
+                "v1": "Bleu",
+                "v2": "Vert"
             },
-            "default_value": "center",
+            "default_value": "none",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -48,116 +47,31 @@
         {
             "key": "field_664af4499be48",
             "label": "Proportions des colonnes",
-            "name": "bloc_inner_proportions_center",
+            "name": "inner_proportions",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6648d40045d2a",
-                        "operator": "==",
-                        "value": "center"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
             "choices": {
-                "2-4": "2\/4",
-                "3-3": "3\/3",
-                "4-2": "4\/2"
+                "1-2": "1\/3 2\/3",
+                "1-1": "1\/2 1\/2",
+                "2-1": "2\/3 1\/3"
             },
-            "default_value": "3-3",
+            "default_value": "1-1",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
         },
         {
-            "key": "field_664b54788a54a",
-            "label": "Proportions des colonnes",
-            "name": "bloc_inner_proportions_lr",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6648d40045d2a",
-                        "operator": "==",
-                        "value": "left"
-                    }
-                ],
-                [
-                    {
-                        "field": "field_6648d40045d2a",
-                        "operator": "==",
-                        "value": "right"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "2-6": "2\/6",
-                "3-5": "3\/5",
-                "4-4": "4\/4",
-                "5-3": "5\/3",
-                "6-2": "6\/2"
-            },
-            "default_value": "4-4",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
-            "key": "field_664b558d355ed",
-            "label": "Proportions des colonnes",
-            "name": "bloc_inner_proportions_wide",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6648d40045d2a",
-                        "operator": "==",
-                        "value": "wide"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "2-8": "2\/8",
-                "3-7": "3\/7",
-                "4-6": "4\/6",
-                "5-5": "5\/5",
-                "6-4": "6\/4",
-                "7-3": "7\/3",
-                "8-2": "8\/2"
-            },
-            "default_value": "5-5",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
-            "key": "field_660c265683cbb",
+            "key": "field_66586a61e8cac",
             "label": "Alignement vertical des colonnes",
-            "name": "bloc_inner_position_v",
+            "name": "inner_align_v",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -181,8 +95,8 @@
         },
         {
             "key": "field_6648d55d85c66",
-            "label": "Inverser les colonnes",
-            "name": "bloc_inner_reverse",
+            "label": "Inverser les colonnes sur smartphone",
+            "name": "inner_reverse",
             "aria-label": "",
             "type": "true_false",
             "instructions": "Par défaut, sur smartphone, la colonne de droite passe dessous celle de gauche. Activez ce bouton pour la faire passer au dessus.",
@@ -198,30 +112,6 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "ui": 1
-        },
-        {
-            "key": "field_66472773a255b",
-            "label": "Couleur de fond",
-            "name": "bloc_frame_color",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "none": "Aucun",
-                "v1": "Bleu",
-                "v2": "Vert"
-            },
-            "default_value": "none",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
         }
     ],
     "location": [
@@ -242,5 +132,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1716444661
+    "modified": 1717255019
 }

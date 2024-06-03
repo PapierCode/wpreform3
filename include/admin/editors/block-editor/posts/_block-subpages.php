@@ -19,7 +19,7 @@ if ( !empty( $subpages ) ) {
     $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
     if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-    $subpages_title_level = get_field('bloc_title_level');
+    $subpages_title_level = get_field('title_level');
     		
     echo '<ul '.implode(' ',$block_attrs).'>';
         foreach ( $subpages as $subpage ) {

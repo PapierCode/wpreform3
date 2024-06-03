@@ -1,7 +1,7 @@
 {
     "name": "acf/pc-column",
     "title": "Colonne",
-    "icon": "text-page",
+    "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#1e1e1e\" d=\"M16 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8ZM8 5v14h8V5H8Z\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M10 8h4\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M10 11h4\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M10 14h2.909\"/></svg>",
     "apiVersion": 2,
     "acf": {
         "mode": "preview",

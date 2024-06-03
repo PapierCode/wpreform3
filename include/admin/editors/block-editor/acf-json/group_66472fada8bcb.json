@@ -5,10 +5,10 @@
         {
             "key": "field_66472fadbf730",
             "label": "Couleur de fond",
-            "name": "bloc_frame_color",
+            "name": "frame_color",
             "aria-label": "",
             "type": "button_group",
-            "instructions": "",
+            "instructions": "Non appliqué si le bloc parent \"2 Colonnes\" a une couleur de fond.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -29,7 +29,7 @@
         {
             "key": "field_664e5ec41d671",
             "label": "Contient uniquement un bloc image à adapter à la hauteur de la colonne",
-            "name": "bloc_inner_cover",
+            "name": "inner_cover",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
@@ -65,5 +65,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1716412378
+    "modified": 1717255538
 }

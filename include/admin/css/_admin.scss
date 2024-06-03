@@ -1,0 +1,164 @@
+/**
+*
+**/
+
+
+/*======================================
+=            Liste de posts            =
+======================================*/
+
+table.wp-list-table .column-thumb {
+    width: 50px;
+}
+table.wp-list-table .column-thumb img {
+    max-width: 40px;
+    height: auto;
+}
+
+
+/*=====  FIN Liste de posts  =====*/
+
+/*=============================================
+=            Ajout / Modifications            =
+=============================================*/
+
+/* tax : supprime limite largeur du contenu */
+#edittag { max-width: none ! important; }
+
+/* config & tax : position du btn submit */
+.edit-tag-actions { text-align: center; }
+
+ /* page medias, alignement vertical */
+.upload-php .media-toolbar-secondary button { margin: 12px 10px 12px 0 !important; }
+
+/* modal image */
+.media-modal .actions { color: #F3F3F3; } /* séparateurs liens vers la page du fichier joint & plus de détails */
+.media-modal #media-attachment-date-filters {
+	width: auto !important;
+	max-width: none !important;
+}
+.media-modal .help { margin-top:0; }
+
+/* list des pages */
+.post-state { font-style: italic; }
+
+
+/*=====  FIN Ajout / Modifications  ======*/
+
+/*====================================
+=            Suppressions            =
+====================================*/
+
+/*----------  Medias page  ----------*/
+
+.wp_attachment_details #alt-text-description, /* alt attr help */
+.wp_attachment_details .attachment-content-description, /* description label */
+.wp_attachment_details #wp-attachment_content-wrap, /* description label */
+.media-types-required-info, /* mention  champs obligatoires */
+#misc-publishing-actions .misc-pub-uploadedto,
+#attachment-filter,	/* type de media */
+#media-attachment-filters	/* type de media */
+{ display:none !important; }
+
+.wp_attachment_details  #attachment_caption { max-width: 500px; }
+
+
+
+/*----------  Medias modal  ----------*/
+
+.media-modal .media-frame-title + h2, /* titre "Actions" colonne gauche */
+.media-modal #menu-item-playlist, /* btn ajouter une playlist audio */
+.media-modal #menu-item-video-playlist, /* btn ajouter une playlist vidéo */
+.media-modal #menu-item-embed, /* btn ajouter à partir d'une adresse web */
+
+.media-modal .uploaded-to, /* téléversé dans */
+.media-modal #alt-text-description, /* aide champ texte alternatif */
+.media-modal [data-setting="description"], /* champ description */
+.media-modal [data-setting="title"], /* champ titre */
+
+.media-modal .attachment-display-settings .align, /* select alignement */
+.media-modal .attachment-display-settings label[for="attachment-display-settings-link-to"], /* select alignement */
+.media-modal .attachment-display-settings label[for="attachment-display-settings-link-to"] + select, /* select alignement */
+.media-modal .actions a, /* Options media 	: liens vers la page du fichier joint & plus de détails */
+
+.media-modal .media-types-required-info, /* mention champs obligatoires */
+
+.media-modal .gallery-settings, /* options galerie */
+
+.media-modal .advanced-section, /* modification d'une image insérée, options avancées */
+.media-modal .setting-group, /* modification d'une image insérée, alignement */
+.media-modal .link-to /* modification d'une image insérée, lier à */
+
+{ display:none; }
+
+
+
+/*----------  Suppression diverses  ----------*/
+
+/* post & page */
+.taxonomy-add-new, 						/* Metabox catégorie	: lien pour ajouter */
+.metabox-prefs .columns-prefs, 			/* Options d'écran		: nombre de colonnes */
+.metabox-prefs .editor-expand,			/* Options d'écran		: éditeur plein écran */
+.metabox-prefs .view-mode,				/* Options d'écran		: mode d'affichage */
+.wp-pp-notice,							/* Message				: aide pour les CGU */
+/* catégories */
+.term-description-wrap, 		/* description */
+/* menus */
+.nav-menus-php .metabox-prefs:nth-child(2) label:nth-child(n+5),	/* Afficher description et XFN */
+.auto-add-pages, 													/* Ajoutez automatiquement des pages */
+.nav-menus-php .posttype-tabs li:nth-child(3),						/* onglet rechercher dans les metaboxes */
+.nav-menus-php .nav-tab-wrapper,													/* onglets modifier/gérer */
+/* page commentaire */
+#filter-by-comment-type,			/* select type de commentaires */
+#filter-by-comment-type + input,
+/* profil */
+.user-rich-editing-wrap,
+.user-syntax-highlighting-wrap,
+.user-comment-shortcuts-wrap,
+.user-admin-bar-front-wrap,
+.user-url-wrap,
+.user-nickname-wrap,
+.user-display-name-wrap,
+#your-profile h2:nth-of-type(4),
+#your-profile table:nth-of-type(4),
+.application-passwords
+{ display:none !important; }
+
+
+/*----------  lien vers la page de config du thème  ----------*/
+
+a[href*="customize.php"] { display:none; }
+
+
+/*=====  FIN Suppression  ======*/
+
+/*===========================
+=            ACF            =
+===========================*/
+
+.acf-input { .description { font-style: italic; } }
+.acf-label { .description { font-style: italic; } }
+
+
+/*=====  FIN ACF  =====*/
+
+/*======================================
+=            Matomo widgets            =
+======================================*/
+
+label[for="WP_Piwik-Widget-Browsers-hide"], #WP_Piwik-Widget-Browsers,
+label[for="WP_Piwik-Widget-BrowserDetails-hide"], #WP_Piwik-Widget-BrowserDetails,
+label[for="WP_Piwik-Widget-Screens-hide"], #WP_Piwik-Widget-Screens,
+label[for="WP_Piwik-Widget-Models-hide"], #WP_Piwik-Widget-Models,
+label[for="WP_Piwik-Widget-Systems-hide"], #WP_Piwik-Widget-Systems,
+label[for="WP_Piwik-Widget-SystemDetails-hide"], #WP_Piwik-Widget-SystemDetails,
+label[for="WP_Piwik-Widget-City-hide"], #WP_Piwik-Widget-City,
+label[for="WP_Piwik-Widget-Keywords-hide"], #WP_Piwik-Widget-Keywords,
+label[for="WP_Piwik-Widget-Plugins-hide"], #WP_Piwik-Widget-Plugins,
+label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
+{
+	display: none;
+}
+
+
+/*=====  FIN Matomo widgets  =====*/

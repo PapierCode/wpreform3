@@ -5,8 +5,6 @@
  * 
  */
 
-include 'block-functions.php';
-
 
 /*----------  Dépendances JS & CSS  ----------*/
 
@@ -14,7 +12,7 @@ add_action( 'enqueue_block_editor_assets', 'pc_block_editor_admin_enqueue_script
 
 function pc_block_editor_admin_enqueue_scripts() {
 
-	wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/admin/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash'] );
+	wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/admin/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash', 'wp-edit-post'] );
 	
 }
 
@@ -60,17 +58,17 @@ add_filter( 'acf/blocks/wrap_frontend_innerblocks', '__return_false' );
 
 // id json => nom du groupe (admin)
 $blocks_acf = array(
+	'quote' => '[Bloc] Citation',
 	'frame' => '[Bloc] Encadré',
 	'columns' => '[Bloc] 2 colonnes',
-	'subpages' => '[Bloc] Sous-pages',
-	'quote' => '[Bloc] Citation',
+	'posts' => '[Bloc] Posts',
 	'buttons' => '[Bloc] Boutons',
 	'spacer' => '[Bloc] Espace',
+	// 'gallery' => '[Bloc] Galerie images',
 	'image' => '[Bloc] Image',
-	'gallery' => '[Bloc] Galerie images',
-	'embed' => '[Bloc] Embed',
-	'column' => '[Bloc] Colonne',
-	'column-image' => '[Bloc] Image pour colonne',
+	'image-column' => '[Bloc] Image',
+	// 'embed' => '[Bloc] Embed',
+	'column' => '[Bloc] Colonne'
 );
 
 foreach ( $blocks_acf as $block_id => $block_name ) {
@@ -85,7 +83,9 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 			'core/paragraph',
 			'core/heading',
 			'core/list',
-			'core/list-item'
+			'core/list-item',
+			'core/button',
+			'rank-math/toc-block'
 		);
 		
 		global $blocks_acf;
@@ -123,3 +123,87 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 		return $paths;
 
 	};
+
+/*----------  Tailles d'images  ----------*/
+
+// add_filter( 'image_size_names_choose', 'pc_admin_image_size_names_choose' );
+
+//     function pc_admin_image_size_names_choose( $sizes ) {
+
+//         return array(
+//             'thumbnail_small' 	=> '200',
+//             'thumbnail' 		=> '400',
+//             'medium'    		=> '600',
+//             'medium_large'  	=> '800',
+//             'large'     		=> '1200'
+//         );
+
+//     }
+
+/*======================================
+=            Ajout contexte            =
+======================================*/
+
+add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
+
+	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
+
+		if ( $parent_block ) {
+			$parsed_block['parent'] = array(
+				'attributes' => $parent_block->attributes
+			);
+		}
+		return $parsed_block;
+	}
+
+
+/*=====  FIN Ajout contexte  =====*/	
+
+/*================================
+=            Citation            =
+================================*/
+
+add_filter( 'render_block', 'pc_render_block_quote', 10, 3 );
+
+	function pc_render_block_quote( $content, $args, $block ) {
+
+		// if ( $args['blockName'] == 'core/image' && isset($args['parent']) ) {
+		// 	pc_var($args['parent']);
+		// }	
+
+		if ( $args['blockName'] == 'acf/pc-quote' && trim($args['innerBlocks'][0]['innerHTML']) ) {
+			$block_align = $args['attrs']['align'] ?? 'center';
+			$content = '<blockquote class="bloc-quote bloc-align-h--'.$block_align.'">';
+				$content .= trim($args['innerBlocks'][0]['innerHTML']);
+				$cite = wp_strip_all_tags( trim($args['innerBlocks'][1]['innerHTML']) );
+				if ( $cite ) {
+					$cite_align = $args['innerBlocks'][1]['attrs']['align'] ?? 'left';
+					$content .= '<cite class="has-text-align-'.$cite_align.'">'.$cite.'</cite>';
+				}
+			$content .= '</blockquote>';
+		}
+
+		return $content;
+
+	}
+
+
+/*=====  FIN Citation  =====*/
+
+/*=============================
+=            Posts            =
+=============================*/
+
+add_filter('acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
+
+	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
+
+		$args['post_parent__not_in'] = array( $post_id );
+		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+
+		return $args;
+
+	}
+
+
+/*=====  FIN Posts  =====*/

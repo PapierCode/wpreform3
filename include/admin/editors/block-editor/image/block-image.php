@@ -1,112 +1,42 @@
 <?php
-$img = get_field('_bloc_img_id');
+$img_args = get_field('img_args');
+$img_size = get_field('img_size');
 
-if ( $img ) {
+$caption = trim($img_args['caption']);
+$tag = ( $caption ) ? 'figure' : 'div';
 
-	$caption = trim($img['caption']);
-	$tag = ( $caption ) ? 'figure' : 'div';
-
-	$block_css = array( 'bloc-image' );
-	
-	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
-	
-	$block_size = get_field('_bloc_size');
-	if ( 'wide' == $block_size ) { $block_css[] = 'bloc-wide'; }
-	
-	$img_size = get_field('_bloc_img_size');
-
-	if ( '200' == $img_size ) {
-
-		$src = $img['sizes']['thumbnail_small'];
-		$width = $img['sizes']['thumbnail_small-width'];
-		$height = $img['sizes']['thumbnail_small-height'];
-
-	} else {
-
-		$src = $img['sizes']['thumbnail'];
-		$width = $img['sizes']['thumbnail-width'];
-		$height = $img['sizes']['thumbnail-height'];
-
-		if ( 'wide' == $block_size || ( 'default' == $block_size && in_array( $img_size, array('600','800') ) ) ) {
-
-			$srcset = array(
-				$img['sizes']['thumbnail'].' 400w',
-				$img['sizes']['medium'].' 600w'
-			);
-
-			if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
-
-				$srcset[] = $img['sizes']['medium_large'].' 800w';
-
-				if ( 'wide' == $block_size ) {
-					$srcset[] = $img['sizes']['large'].' 1200w';
-				}
-
-			}
-
-			$sizes = array(
-				'(max-width:'.(400/16).'em) 400px'
-			);
-
-			if ( 'default' == $block_size && '600' == $img_size ) {
-				$sizes[] = '(min-width:'.(401/16).'em) 600px';			
-				$src = $img['sizes']['medium'];
-				$width = $img['sizes']['medium-width'];
-				$height = $img['sizes']['medium-height'];
-			}
-			if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
-				$sizes[] = '(min-width:'.(401/16).'em) and (max-width:'.(600/16).'em) 600px';
-			}
-			if ( 'default' == $block_size && '800' == $img_size ) {
-				$sizes[] = '(min-width:'.(601/16).'em) 800px';		
-				$src = $img['sizes']['medium_large'];
-				$width = $img['sizes']['medium_large-width'];
-				$height = $img['sizes']['medium_large-height'];
-			}
-			if ( 'wide' == $block_size ) {
-				$sizes = array_merge(
-					$sizes,
-					array(
-						'(min-width:'.(601/16).'em) and (max-width:'.(800/16).'em) 800px',
-						'(min-width:'.(801/16).'em) 1200px'
-					)
-				);		
-				$src = $img['sizes']['large'];
-				$width = $img['sizes']['large-width'];
-				$height = $img['sizes']['large-height'];
-			}
-
-		}
-
-	}
-
-	$attrs = array(
-		'alt' => trim($img['alt']),
-		'loading' => 'lazy',
-		'src' => $src,
-		'width' => $width,
-		'height' => $height,
-	);
-	if ( isset( $srcset ) ) { $attrs['srcset'] = implode( ', ', $srcset ); }
-	if ( isset( $sizes ) ) { $attrs['sizes'] = implode( ', ', $sizes ); }
-
-	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
-
-	echo '<div '.implode(' ',$block_attrs).'><'.$tag.'>';
-
-		echo '<img';
-			foreach ( $attrs as $key => $value ) {
-				echo ' '.$key.'="'.$value.'"';
-			}
-		echo '/>';
-
-		if ( $caption ) { echo '<figcaption class="has-text-align-'.get_field('_bloc_img_caption_align').'">'.$caption.'</figcaption>'; }
-
-	echo '</'.$tag.'></div>';
-
-} else if ( $is_preview ) {
-
-	echo '<p class="editor-error">Erreur bloc <em>Image</em> : sélectionnez une image.</p>';
-
+$block_css = array( 
+    'bloc-image', 
+    'bloc-image--'.$img_size 
+);	
+switch ( $img_size ) {
+    case 'thumbnail_small':
+    case 'thumbnail':
+        $block_css[] = 'bloc-inner-align-h--'.get_field('inner_align_h');
+        break;
+    case 'medium':
+    case 'large':
+        $block_css[] = 'bloc-inner-align-h--center';
+        break;
+    case 'medium_large_l':
+        $block_css[] = 'bloc-inner-align-h--left';
+        break;
+    case 'medium_large_r':
+        $block_css[] = 'bloc-inner-align-h--right';
+        break;
 }
+if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+
+
+$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+
+if ( in_array( $img_size, ['medium_large_l','medium_large_r'] ) ) { $img_size = 'medium_large'; }
+
+echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem">';
+
+    echo '<img src="'.$img_args['sizes'][$img_size].'" alt="'.$img_args['alt'].'" width="'.$img_args['sizes'][$img_size.'-width'].'" height="'.$img_args['sizes'][$img_size.'-height'].'">';
+
+    if ( $caption ) { echo '<figcaption class="has-text-align-'.get_field('legend_align_h').'">'.$caption.'</figcaption>'; }
+
+echo '</'.$tag.'></div>';
