@@ -6,7 +6,7 @@ $template = [ ['acf/pc-column' ], ['acf/pc-column' ] ];
 
 $block_css = array(
     'bloc-columns',
-	'bloc-inner-position-v--'.get_field('inner_align_v'),
+	'bloc-inner-align-v--'.get_field('inner_align_v'),
     'bloc-columns--'.get_field('inner_proportions')
 );
 if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }

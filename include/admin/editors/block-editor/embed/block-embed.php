@@ -16,6 +16,6 @@ if ( $embed ) {
 
 } else if ( $is_preview ) {
 
-	echo '<p class="editor-error">Erreur bloc <em>Contenu embarqué</em> : saisissez l\'adresse du contenu.</p>';
+	echo '<p class="bloc-warning">Erreur bloc <em>Contenu embarqué</em> : saisissez l\'adresse du contenu.</p>';
 
 }

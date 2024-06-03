@@ -34,6 +34,6 @@ if ( $gallery ) {
 
 } else if ( $is_preview ) {
 
-	echo '<p class="editor-error">Erreur bloc <em>Galerie</em> : sélectionnez au moins une image.</p>';
+	echo '<p class="bloc-warning">Erreur bloc <em>Galerie</em> : sélectionnez au moins une image.</p>';
 
 }

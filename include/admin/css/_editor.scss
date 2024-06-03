@@ -33,7 +33,7 @@
 }
 
 // bloc en erreur
-.editor-error {
+.bloc-warning {
 	padding:1rem;
 	background-color: #ff5e5e;
 	text-align: center;
@@ -453,11 +453,11 @@ $button-space : 10;
     > div { margin: 0; } // colonne
 }
 
-.bloc-inner-position-v--top > div { align-items: start; }
-.bloc-inner-position-v--center > div { align-items: center; }
-.bloc-inner-position-v--bottom > div { align-items: end; }
+.bloc-inner-align-v--top > div { align-items: start; }
+.bloc-inner-align-v--center > div { align-items: center; }
+.bloc-inner-align-v--bottom > div { align-items: end; }
 
-.bloc-inner-position-v--both > div { align-items: unset; }
+.bloc-inner-align-v--both > div { align-items: unset; }
 
 .bloc-columns--1-1 > div > * { grid-column: span 3; }
 
@@ -500,8 +500,8 @@ $button-space : 10;
 		> [class*="width-50"] { width: 50%; }
 	}
 
-	&.bloc-text-align--center > div { justify-content: center;	}
-	&.bloc-text-align--right > div { justify-content: flex-end;	}
+	&.bloc-inner-align-h--center > div { justify-content: center;	}
+	&.bloc-inner-align-h--right > div { justify-content: flex-end;	}
 
 	.wp-element-button { width: 100%; }
 	br { display: none; }
