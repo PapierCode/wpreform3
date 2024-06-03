@@ -1,6 +1,6 @@
 <?php
 
-$allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image', 'acf/pc-buttons' ];
+$allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-frame', 'acf/pc-buttons' ];
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array(

@@ -1,9 +1,9 @@
 {
-    "key": "group_665b2a83ac9c5",
-    "title": "[Bloc] Image colonne",
+    "key": "group_665db297449cd",
+    "title": "[Bloc] Image encadré",
     "fields": [
         {
-            "key": "field_665b2a83b7bc9",
+            "key": "field_665db2974dabb",
             "label": "Image",
             "name": "img_args",
             "aria-label": "",
@@ -28,7 +28,7 @@
             "preview_size": "thumbnail_small"
         },
         {
-            "key": "field_665b2a83bb59e",
+            "key": "field_665db29751408",
             "label": "Largeur de l'image",
             "name": "img_size",
             "aria-label": "",
@@ -52,7 +52,7 @@
             "layout": "horizontal"
         },
         {
-            "key": "field_665b2a83bf1d0",
+            "key": "field_665db29754f68",
             "label": "250 pixels minimum conseillés.",
             "name": "",
             "aria-label": "",
@@ -62,7 +62,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_665b2a83bb59e",
+                        "field": "field_665db29751408",
                         "operator": "==",
                         "value": "thumbnail_small"
                     }
@@ -78,7 +78,7 @@
             "esc_html": 0
         },
         {
-            "key": "field_665b2a83c2cb6",
+            "key": "field_665db29758ac4",
             "label": "450 pixels minimum conseillés.",
             "name": "",
             "aria-label": "",
@@ -88,7 +88,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_665b2a83bb59e",
+                        "field": "field_665db29751408",
                         "operator": "==",
                         "value": "thumbnail"
                     }
@@ -104,7 +104,7 @@
             "esc_html": 0
         },
         {
-            "key": "field_665b2a83c69b7",
+            "key": "field_665db2975c457",
             "label": "700 pixels minimum conseillés.",
             "name": "",
             "aria-label": "",
@@ -114,7 +114,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_665b2a83bb59e",
+                        "field": "field_665db29751408",
                         "operator": "==",
                         "value": "medium"
                     }
@@ -130,7 +130,7 @@
             "esc_html": 0
         },
         {
-            "key": "field_665b2a83d1906",
+            "key": "field_665db2975fec7",
             "label": "Alignement de l'image",
             "name": "inner_align_h",
             "aria-label": "",
@@ -140,14 +140,14 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_665b2a83bb59e",
+                        "field": "field_665db29751408",
                         "operator": "==",
                         "value": "thumbnail_small"
                     }
                 ],
                 [
                     {
-                        "field": "field_665b2a83bb59e",
+                        "field": "field_665db29751408",
                         "operator": "==",
                         "value": "thumbnail"
                     }
@@ -169,7 +169,7 @@
             "layout": "horizontal"
         },
         {
-            "key": "field_665b2a83d52f0",
+            "key": "field_665db29763bc4",
             "label": "Alignement de la légende",
             "name": "legend_align_h",
             "aria-label": "",
@@ -191,26 +191,6 @@
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
-        },
-        {
-            "key": "field_665b43e74ba52",
-            "label": "Ajuster à la hauteur de la colonne",
-            "name": "cover",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "S'active si ce bloc est seul dans la colonne.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
         }
     ],
     "location": [
@@ -218,7 +198,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/pc-image-column"
+                "value": "acf\/pc-image-frame"
             }
         ]
     ],
@@ -231,5 +211,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1717416575
+    "modified": 1717416677
 }

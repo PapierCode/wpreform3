@@ -66,7 +66,8 @@ $blocks_acf = array(
 	'spacer' => '[Bloc] Espace',
 	// 'gallery' => '[Bloc] Galerie images',
 	'image' => '[Bloc] Image',
-	'image-column' => '[Bloc] Image',
+	'image-column' => '[Bloc] Image colonne',
+	'image-frame' => '[Bloc] Image encadré',
 	// 'embed' => '[Bloc] Embed',
 	'column' => '[Bloc] Colonne'
 );
