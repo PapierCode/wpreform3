@@ -6,22 +6,16 @@
 include 'parts/template-part_images.php';
 // navigation
 include 'parts/template-part_navigation.php';
-// wysiwyg par défaut
-include 'parts/template-part_editor.php';
 // Données structurées
 include 'parts/template-part_schemas.php';
 // liens réseaux sociaux & partage
 include 'parts/template-part_social.php';
 // layout global
-include 'parts/template-part_layout.php';
-// fil d'ariane
-include 'parts/template-part_breadcrumb.php';
+include 'parts/template-part_main.php';
 // contenu de l'entête (head)
 include 'parts/template-part_head.php';
 // recherche
 include 'parts/template-part_search.php';
-// Pagination
-include 'parts/template-part_pager.php';
 // Pages
 include 'parts/template-part_page.php';
 

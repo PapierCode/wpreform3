@@ -3,6 +3,11 @@
  * 
  * Template : résultats de la recherche
  * 
+ ** Hooks
+ ** Titre de la page
+ ** Résultats de recherche
+ ** Pagination
+ * 
  */
 
 /*=============================
@@ -10,48 +15,59 @@
 =============================*/
 
 // main start
-add_action( 'pc_action_search_main_start', 'pc_display_main_start', 10 ); // template-part_layout.php
+add_action( 'pc_action_template_search', 'pc_display_main_start', 10 ); // template-part_layout.php
 
 	// header
-	add_action( 'pc_action_search_main_header', 'pc_display_main_header_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_search_main_header', 'pc_display_breadcrumb', 20 ); // breadcrumb
-		add_action( 'pc_action_search_main_header', 'pc_display_search_main_title', 30 ); // titre
-	add_action( 'pc_action_search_main_header', 'pc_display_main_header_end', 100 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_main_header_start', 20 ); // template-part_layout.php
+		add_action( 'pc_action_template_search', 'pc_display_breadcrumb', 30 ); // breadcrumb
+		add_action( 'pc_action_template_search', 'pc_display_search_main_title', 40 ); // titre
+	add_action( 'pc_action_template_search', 'pc_display_main_header_end', 50 ); // template-part_layout.php
 
 	// content
-	add_action( 'pc_action_search_main_content', 'pc_display_main_content_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_search_main_content', 'pc_display_search_results', 20 ); // résultats
-	add_action( 'pc_action_search_main_content', 'pc_display_main_content_end', 100 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_main_content_start', 60 ); // template-part_layout.php
+		add_action( 'pc_action_template_search', 'pc_display_search_results', 70 ); // résultats
+	add_action( 'pc_action_template_search', 'pc_display_main_content_end', 80 ); // template-part_layout.php
 
 	// footer
-	add_action( 'pc_action_search_main_footer', 'pc_display_search_footer', 10 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_search_footer', 90 ); // template-part_layout.php
 
 // main end
-add_action( 'pc_action_search_main_end', 'pc_display_main_end', 10 ); // template-part_layout.php
-
-
+add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // template-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/
 
+/*========================================
+=            Titre de la page            =
+========================================*/
+
 function pc_display_search_main_title() {
 	
 	global $wp_query;
-	$title = ( '' != get_search_query() && $wp_query->found_posts > 0 ) ? 'Résultats de la recherche' : "Recherche";
+	$title = ( get_search_query() && $wp_query->found_posts > 0 ) ? 'Résultats de la recherche' : "Recherche";
 
 	echo apply_filters( 'pc_filter_search_main_title', '<h1><span>'.$title.'</span></h1>' );
 
 }
 
+
+/*=====  FIN Titre de la page  =====*/
+
+/*=================================
+=            Résultats            =
+=================================*/
+
 function pc_display_search_results() {
 
 	global $wp_query;
-	$search_query = get_search_query();
 
-	if ( '' != $search_query ) {
+	if ( $search_query = get_search_query() ) {
 
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
-		$types = apply_filters( 'pc_filter_search_results_type', array( 'page' => 'Page' ) );
+		$types = apply_filters( 'pc_filter_search_results_type', array( 
+			'page' => 'Page',
+			'news' => 'Actualité'
+		) );
 
 
 		/*----------  Affichage  ----------*/
@@ -93,6 +109,13 @@ function pc_display_search_results() {
 
 }
 
+
+/*=====  FIN Résultats  =====*/
+
+/*==================================
+=            Pagination            =
+==================================*/
+
 function pc_display_search_footer() {
 
 	global $wp_query;
@@ -100,11 +123,12 @@ function pc_display_search_footer() {
 	if ( get_search_query() && $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
 		
 		pc_display_main_footer_start();
-
-			pc_get_pager();
-			
+			pc_get_pager();			
 		pc_display_main_footer_end();
 
 	}
 
 }
+
+
+/*=====  FIN Pagination  =====*/

@@ -1,33 +1,14 @@
 <?php
 /**
  * 
- * Communs templates : structure globale
+ * Template : structure main
  * 
- ** Hooks
- ** Body inner
  ** Main
+ ** Header & Title
+ ** Content
+ ** Footer
  *  
  */
-
-
-/*==================================
-=            Body inner            =
-==================================*/
-
-function pc_display_body_inner_start() {
-
-	echo apply_filters( 'pc_filter_body_inner_start', '<div class="body-inner">' );
-
-}
-
-function pc_display_body_inner_end() {
-
-	echo apply_filters( 'pc_filter_body_inner_end', '</div>' );
-
-}
-
-
-/*=====  FIN Body inner  =====*/
 
 /*============================
 =            Main            =
@@ -52,7 +33,11 @@ function pc_display_main_end() {
 }
 
 
-/*----------  Header  ----------*/
+/*=====  FIN Main  =====*/
+
+/*======================================
+=            Header & Title            =
+======================================*/
 
 function pc_display_main_header_start() {
 
@@ -79,7 +64,11 @@ function pc_display_main_header_end() {
 }
 
 
-/*----------  Content  ----------*/
+/*=====  FIN Header & Title  =====*/
+
+/*===============================
+=            Content            =
+===============================*/
 
 function pc_display_main_content_start() {
 
@@ -102,7 +91,11 @@ function pc_display_main_content_end() {
 }
 
 
-/*----------  Footer  ----------*/
+/*=====  FIN Content  =====*/
+
+/*==============================
+=            Footer            =
+==============================*/
 
 function pc_display_main_footer_start() {
 
@@ -123,4 +116,4 @@ function pc_display_main_footer_end() {
 }
 
 
-/*=====  FIN Main  =====*/
+/*=====  FIN Footer  =====*/

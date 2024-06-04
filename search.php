@@ -1,15 +1,5 @@
 <?php
 
 get_header();
-
-	do_action( 'pc_action_search_main_start' );
-
-		do_action( 'pc_action_search_main_header' );
-		
-		do_action( 'pc_action_search_main_content' );
-
-		do_action( 'pc_action_search_main_footer' );
-
-	do_action( 'pc_action_search_main_end' );
-
+    do_action( 'pc_action_template_search' );
 get_footer();

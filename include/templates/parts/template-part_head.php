@@ -1,15 +1,19 @@
 <?php
 /**
 *
-* Communs templates : head
+* Template : head
 *
-** Attributs balise HTML
-** Metas SEO & social, CSS inline
+** Nettoyage
+** CSS inline
 ** Favicon
 ** Statistiques
 *
 **/
 
+
+/*=================================
+=            Nettoyage            =
+=================================*/
 
 add_action( 'wp_head', 'pc_head_cleaning', 0 );
 
@@ -44,6 +48,8 @@ add_action( 'wp_enqueue_scripts', 'pc_head_remove_default_block_editor_css', 666
 	}
 
 
+/*=====  FIN Nettoyage  =====*/
+
 /*===============================
 =            Favicon            =
 ===============================*/
@@ -56,6 +62,7 @@ add_action( 'wp_head', 'pc_display_favicon', 6 );
 			'type' => 'image/jpg',
 			'url' => get_bloginfo( 'template_directory' ).'/images/favicon.jpg'
 		) );
+
 		echo '<link rel="icon" type="'.$file['type'].'" href="'.$file['url'].'" />';
 
 	};
@@ -87,7 +94,7 @@ add_action( 'wp_head', 'pc_display_matomo_tracker', 20 );
 
 	function pc_display_matomo_tracker() {
 
-		if ( !get_field( 'wpr_dev', 'option' ) && ( $matomo_seetings = get_field( 'wpr_matomo', 'option' ) ) ) {
+		if ( !get_option( 'options_wpr_dev' ) && ( $matomo_seetings = get_option( 'options_wpr_matomo' ) ) ) {
 
 			echo '<script>var _paq = window._paq || [];_paq.push(["trackPageView"]);_paq.push(["enableLinkTracking"]);(function(){var u="'.$matomo_seetings['id'].'";_paq.push(["setSecureCookie", true]);_paq.push(["setTrackerUrl", u+"matomo.php"]);_paq.push(["setSiteId", "'.$matomo_seetings['url'].'"]);_paq.push(["HeatmapSessionRecording::disable"]);var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);})();</script>';
 

@@ -42,14 +42,8 @@ add_filter( 'intermediate_image_sizes_advanced', 'pc_remove_images_sizes', 10 );
 
 	function pc_remove_images_sizes( $sizes ) {
 
-		$sizes_to_remove = array(
-			'1536x1536',
-			'2048x2048'
-		);
-
-		foreach ($sizes_to_remove as $size) {
-			unset( $sizes[$size] );
-		}
+		$sizes_to_remove = array( '1536x1536', '2048x2048' );
+		foreach ($sizes_to_remove as $size) { unset( $sizes[$size] ); }
 
 		return $sizes;
 

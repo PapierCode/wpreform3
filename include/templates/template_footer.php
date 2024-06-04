@@ -20,18 +20,14 @@
 		
 	add_action( 'pc_footer', 'pc_display_footer_end', 40 );
 
-add_action( 'pc_footer', 'pc_display_body_inner_end', 50 );
-
 add_action( 'pc_wp_footer', 'pc_display_js_footer', 10 );
 
 
 /*=====  FIN Hooks  =====*/
 
-/*==================================================
-=            Footer structure & contenu            =
-==================================================*/
-
-/*----------  Début du pied de page  ----------*/
+/*==============================
+=            Layout            =
+==============================*/
 
 function pc_display_footer_start() {
 
@@ -42,8 +38,21 @@ function pc_display_footer_start() {
 
 }
 
+function pc_display_footer_end() {
 
-/*----------  Adresse  ----------*/
+	$tag = '</footer>';
+	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag = '</div>'.$tag; }
+
+	echo apply_filters( 'pc_filter_footer_end', $tag );
+
+}
+
+
+/*=====  FIN Layout  =====*/
+
+/*==========================================
+=            Logo & coordonnées            =
+==========================================*/
 
 function pc_display_footer_contact() {
 	
@@ -115,7 +124,11 @@ function pc_display_footer_contact() {
 }
 
 
-/*----------  Navigation  ----------*/
+/*=====  FIN Logo & coordonnées  =====*/
+
+/*==================================
+=            Navigation            =
+==================================*/
 
 function pc_display_footer_nav() {
 
@@ -149,23 +162,8 @@ function pc_display_footer_nav() {
 }
 
 
-/*----------  Fin du pied de page  ----------*/
+/*=====  FIN Navigation  =====*/
 
-function pc_display_footer_end() {
-
-	$tag = '</footer>';
-	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag = '</div>'.$tag; }
-
-	echo apply_filters( 'pc_filter_footer_end', $tag );
-
-}
-
-
-/*=====  FIN Footer structure & contenu  =====*/
-
-/*=============================================
-=            Fin du container body            =
-=============================================*/
 
 /*----------  Javascript  ----------*/
 
@@ -190,8 +188,8 @@ function pc_display_js_footer() {
 	) );
 
 	echo '<script>';
-		echo 'var navArgs='.json_encode( $h_nav_js_args, JSON_PRETTY_PRINT ).';';
-		echo 'var sprite='.json_encode( $sprite_to_json, JSON_PRETTY_PRINT ).';';
+		echo 'const navArgs='.json_encode( $h_nav_js_args ).';';
+		echo 'const sprite='.json_encode( $sprite_to_json ).';';
 	echo '</script>';
 	
 

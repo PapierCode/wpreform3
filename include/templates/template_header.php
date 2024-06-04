@@ -4,11 +4,11 @@
  * Template : header
  * 
  ** Hooks
+ ** Accès directs
  ** Layout
  ** Logo
  ** Navigation
  ** Tools
- ** Recherche
  * 
  */
 
@@ -19,16 +19,14 @@
 
 add_action( 'pc_header', 'pc_display_skip_nav', 10 );
 
-add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
+add_action( 'pc_header', 'pc_display_header_start', 40 );
 
-	add_action( 'pc_header', 'pc_display_header_start', 40 );
+	add_action( 'pc_header', 'pc_display_header_logo', 50 );
+	add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
+	add_action( 'pc_header', 'pc_display_header_nav', 70 );
+	// TODO add_action( 'pc_header', 'pc_display_header_tools', 80 );
 
-		add_action( 'pc_header', 'pc_display_header_logo', 50 );
-		add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
-		add_action( 'pc_header', 'pc_display_header_nav', 70 );
-		// add_action( 'pc_header', 'pc_display_header_tools', 80 );
-
-	add_action( 'pc_header', 'pc_display_header_end', 90 );
+add_action( 'pc_header', 'pc_display_header_end', 90 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -102,7 +100,7 @@ function pc_display_header_logo() {
 			'url' => get_bloginfo('template_directory').'/images/logo.svg',
 			'width' => 150,
 			'height' => 150,
-			'alt' => get_field('options_coord_name','option')
+			'alt' => get_option( 'options_coord_name' )
 		) );
 
 		$logo_tag = apply_filters(
@@ -133,7 +131,7 @@ function pc_display_nav_button_open_close() {
 }
 
 
-/*----------  Navigation  ----------*/
+/*----------  Menu  ----------*/
 
 function pc_display_header_nav() {
 
@@ -163,7 +161,7 @@ function pc_display_header_nav() {
 
 /*----------  Réseaux sociaux  ----------*/
 
-// add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
+// TODO add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 
 	function pc_display_header_social() {
 

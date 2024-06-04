@@ -46,6 +46,7 @@ function pc_display_social_links( $css_class ) {
 =            Partage            =
 ===============================*/
 
+// TODO
 function pc_display_share_links() {
 
 	// données page courante

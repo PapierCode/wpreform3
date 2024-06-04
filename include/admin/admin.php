@@ -122,7 +122,7 @@ add_action( 'phpmailer_init', 'pc_mail_smtp_settings' );
 
 	function pc_mail_smtp_settings( $phpmailer ) {
 
-		$smtp = get_field('wpr_smtp','option') ?? array();
+		$smtp = get_option( 'options_wpr_smtp' ) ?? array();
 
 		if ( $smtp['enabled'] ) {
 
@@ -281,7 +281,7 @@ add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 
 	function pc_admin_acf_google_map_api_key( $api ) {
 
-		$api['key'] = get_field( 'wpr_google_api_map_key', 'option' );
+		$api['key'] = get_option( 'options_wpr_google_api_map_key' );
 		return $api;
 		
 	}

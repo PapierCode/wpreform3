@@ -10,16 +10,6 @@
 **/
 
 
-include 'include/tools.php';
-include 'include/init.php';
-include 'include/register.php';
-
-/*----------  Classes  ----------*/
-
-include 'include/classes/class-pc-walker-nav.php';
-include 'include/classes/class-pc-post.php';
-
-
 /*----------  Configuration projet (agence)  ----------*/
 
 $texts_lengths = array(
@@ -33,6 +23,19 @@ $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 
 define( 'NEWS_POST_SLUG', 'newspost' );
 define( 'NEWS_TAX_SLUG', 'newstax' );
+
+
+/*----------  Include  ----------*/
+
+include 'include/tools.php';
+include 'include/init.php';
+include 'include/register.php';
+
+/*----------  Classes  ----------*/
+
+include 'include/classes/class-pc-walker-nav.php';
+include 'include/classes/class-pc-post.php';
+
 
 
 /*----------  Rôle utilisateur connecté  ----------*/

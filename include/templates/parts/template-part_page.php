@@ -1,5 +1,26 @@
 <?php 
 
+/*==================================
+=            Sous-pages            =
+==================================*/
+
+/*----------  Lien retour  ----------*/
+
+add_action( 'pc_action_template_index', 'pc_display_subpage_backlink', 99 );
+
+	function pc_display_subpage_backlink( $pc_post ) {
+
+		if ( is_page() && $pc_post->parent > 0 ) {
+
+			echo '<nav class="main-footer-prev" role="navigation" aria-label="Retour à la page parente"><a href="'.get_the_permalink($pc_post->parent).'" class="button" title="'.get_the_title($pc_post->parent).'"><span class="ico">'.pc_svg('arrow').'</span><span class="txt">Retour</span></a></nav>';
+
+		}
+
+	}
+
+
+/*=====  FIN Sous-pages  =====*/
+
 /*===================================================
 =            Protection par mot de passe            =
 ===================================================*/
@@ -41,6 +62,8 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 /*============================================
 =            Actualités associées            =
 ============================================*/
+
+// TODO
 
 add_action( 'pc_action_index_main_aside', 'pc_page_aside_news', 10 );
 
