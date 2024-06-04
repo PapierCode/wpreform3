@@ -32,6 +32,11 @@
 	label { font-weight: bold !important; }
 }
 
+// onglets bloc réglages/styles (WP défaut)
+.block-editor-block-inspector__tabs {
+	[role="tablist"] { display: none; }
+}
+
 // bloc en erreur
 .bloc-warning {
 	padding:1rem;
@@ -40,17 +45,17 @@
 	font-weight: bold;
 }
 
-// onglets bloc settings (col de droite)
-.block-editor-block-inspector__tabs {
-	[role="tablist"] { display: none; }
-}
 
+/*=====  FIN Interface  =====*/
 
-/*----------  Groupe de boutons  ----------*/
+/*====================================================
+=            Icônes groupe de boutons ACF            =
+====================================================*/
 
-[data-name="img_size"] .acf-button-group label { padding-inline: 8px; }
+/*----------  Communs  ----------*/
 
 [data-name="img_size"],
+[data-name="inner_proportions"],
 [data-name="legend_align_h"],
 [data-name="inner_align_h"],
 [data-name="inner_align_v"] {
@@ -59,12 +64,16 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-inline: rem(8);
+		text-indent: -666em;
+		line-height: 0;
+		height: rem(37);
 
 		&:before {
 			content:"";
 			display: block;
-			width: 24px;
-			height: 24px;
+			width: rem(24);
+			height: rem(24);
 			background-position: center;
 			background-repeat: no-repeat;
 		}
@@ -74,6 +83,9 @@
 $icons_url : "../../../images/admin/";
 $icons_fill_default : #444;
 $icons_fill_selected : #fff;
+
+
+/*----------  Alignement vertical d'enfants  ----------*/
 
 [data-name="inner_align_v"] .acf-button-group label {
 
@@ -103,6 +115,9 @@ $icons_fill_selected : #fff;
 	}
 }
 
+
+/*----------  Alignement horizontal d'enfants  ----------*/
+
 [data-name="inner_align_h"] .acf-button-group label {
 
 	&:has([value="left"])::before {
@@ -125,11 +140,9 @@ $icons_fill_selected : #fff;
 	}
 }
 
-[data-name="img_size"] .acf-button-group label { // pas de texte
-	text-indent: -666em;
-	line-height: 0;
-	height: rem(38);
-}
+
+/*----------  Taille & alignement d'image  ----------*/
+
 [data-name="img_size"] .acf-button-group label {
 
 	&:has([value="thumbnail_small"])::before {
@@ -192,17 +205,36 @@ $icons_fill_selected : #fff;
 	}
 }
 
+/*----------  Proportions  ----------*/
 
-/*=====  FIN Interface  =====*/
+[data-name="inner_proportions"] .acf-button-group label {
 
+	&:has([value="1-2"])::before {
+		background-image: svg-load( $icons_url + "inner-proportions-1-2.svg", fill=$icons_fill_default );
+	}
+	&:has([value="1-2"]).selected::before {
+		background-image: svg-load( $icons_url + "inner-proportions-1-2.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="1-1"])::before {
+		background-image: svg-load( $icons_url + "inner-proportions-1-1.svg", fill=$icons_fill_default );
+	}
+	&:has([value="1-1"]).selected::before {
+		background-image: svg-load( $icons_url + "inner-proportions-1-1.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="2-1"])::before {
+		background-image: svg-load( $icons_url + "inner-proportions-2-1.svg", fill=$icons_fill_default );
+	}
+	&:has([value="2-1"]).selected::before {
+		background-image: svg-load( $icons_url + "inner-proportions-2-1.svg", fill=$icons_fill_selected );
+	}
+}
+
+
+/*=====  FIN Icônes groupe de boutons ACF  =====*/
 
 /*===============================
 =            Communs            =
 ===============================*/
-
-:root {
-	--pc-grid : repeat(12,1fr);
-}
 
 $maw-txt : 590; // idem theme.json
 $maw-wide : 900; // idem theme.json
@@ -239,7 +271,7 @@ $button-space : 10;
 }
 
 
-/*----------  Encadré  ----------*/
+/*----------  Colonnes/Colonne/Encadré  ----------*/
 
 [class*="bloc-style"] {
 	padding:rem($space-max);
@@ -250,19 +282,16 @@ $button-space : 10;
 	}
 }
 
-
 .bloc-column, .bloc-frame-inner {
-	> :nth-child(n+2) { margin: 1rem 0 0; }
+	.acf-innerblocks-container > :nth-child(n+2) { margin: 1rem 0 0; }
 }
-
-/*----------  Alignement  ----------*/
 
 
 /*=====  FIN Communs  =====*/
 
-/*=======================================
-=            Défaut / Titres            =
-=======================================*/
+/*==============================
+=            Titres            =
+==============================*/
 
 /*----------  Paramètres  ----------*/
 
@@ -271,79 +300,21 @@ $button-space : 10;
 { display: none; }
 
 
-/*----------  Aperçu  ----------*/
+/*=====  FIN Titres  =====*/
 
-// .editor-post-title {
-// 	margin-left: auto;
-// 	margin-right: auto;
-// 	max-width: rem($maw-txt) !important;
-// }
-
-
-/*=====  FIN Défaut / Titres  =====*/
-
-/*==============================
-=            Espace            =
-==============================*/
-
-.wp-block-acf-pc-spacer {
-    max-width: rem($maw-wide) !important;
-
-	&:first-child, &:last-child { display: none; }
-}
-.bloc-spacer {
-	border:1px solid #eee;
-	color: #999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.bloc-spacer--x2 { height: rem(2*$space-max); }
-.bloc-spacer--x3 { height: rem(3*$space-max); }
-.bloc-spacer--x4 { height: rem(4*$space-max); }
-
-
-/*=====  FIN Espace  =====*/
-
-/*=============================
-=            Image            =
-=============================*/
-
-.wp-block-acf-pc-image,
-.wp-block-acf-pc-image-column {
-
-    img { display: block; }
-    figure { margin-bottom: 0; }
-
-    
-    &:has(.bloc-image--medium_large_l),
-    &:has(.bloc-image--medium_large_r) {
-        max-width: rem($maw-wide - .5*($maw-wide - $maw-txt));
-	}
-    &:has(.bloc-image--large) {
-        max-width: rem($maw-wide);
-	}
-
-    .bloc-inner-align-h--center .bloc-image-inner { margin-inline: auto; }
-    .bloc-inner-align-h--right .bloc-image-inner { margin-left: auto; }
-}
-
-
-/*=====  FIN Image  =====*/
-
-/*======================================
-=            ACF / Citation            =
-======================================*/
+/*================================
+=            Citation            =
+================================*/
 
 /*----------  Aperçu  ----------*/
 
-.bloc-quote {
+.wp-block-acf-pc-quote {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
 
-	p:first-child {
+	p:nth-child(1) {
 		margin:0;		
 		position: relative;
 		z-index: 1;
@@ -353,15 +324,8 @@ $button-space : 10;
 			position: absolute;
 			z-index: 0;
 		}
-		&::before {
-			transform-origin: right top;
-		}
-		&::after {
-			transform-origin: right top;
-		}
 	}
-
-	cite {
+	p:nth-child(2) {
 		display: block;
 		font-style: normal;
 		margin-top:rem(5)
@@ -369,114 +333,165 @@ $button-space : 10;
 }
 
 
-/*=====  FIN ACF / Citation  =====*/
+/*=====  FIN Citation  =====*/
 
-/*=====================================
-=            ACF / Galerie            =
-=====================================*/
+/*==============================
+=            Spacer            =
+==============================*/
+
+/*----------  Aperçu  ----------*/
+
+.wp-block-acf-pc-spacer {
+    max-width: rem($maw-wide) !important;
+	border:1px solid #eee;
+	color: #999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	&:has(.bloc-spacer--x2) { height: rem(2*$space-max); }
+	&:has(.bloc-spacer--x3) { height: rem(3*$space-max); }
+	&:has(.bloc-spacer--x4) { height: rem(4*$space-max); }
+}
+
+
+/*=====  FIN Spacer  =====*/
+
+/*=============================
+=            Image            =
+=============================*/
+
+/*----------  Aperçu  ----------*/
+
+.wp-block-acf-pc-image,
+.wp-block-acf-pc-image-frame,
+.wp-block-acf-pc-image-column {
+
+    img { display: block; }
+    figure { margin-bottom: 0; }
+    
+    &:has(.bloc-image--medium_large_l),
+    &:has(.bloc-image--medium_large_r) {
+		max-width: rem($maw-wide - .5*($maw-wide - $maw-txt));
+	}
+    &:has(.bloc-image--large) { max-width: rem($maw-wide); }
+
+    .bloc-inner-align-h--center .bloc-image-inner { margin-inline: auto; }
+    .bloc-inner-align-h--right .bloc-image-inner { margin-left: auto; }
+}
+
+
+/*=====  FIN Image  =====*/
+
+/*===============================
+=            Galerie            =
+===============================*/
 
 /*----------  Paramètres  ----------*/
 
-.acf-gallery-side [data-name="title"],
-.acf-gallery-side [data-name="description"],
-.acf-gallery-side .media-types-required-info
-{
-	display: none;
-}
+// .acf-gallery-side [data-name="title"],
+// .acf-gallery-side [data-name="description"],
+// .acf-gallery-side .media-types-required-info
+// {
+// 	display: none;
+// }
 
 
 /*----------  Aperçu  ----------*/
 
-.gallery-list {
-	list-style:none;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap:1rem;
-	padding:0;
-}
-.gallery-item {
-	width: calc( (100% - 3rem) / 4 );
+// .gallery-list {
+// 	list-style:none;
+// 	display: flex;
+// 	flex-wrap: wrap;
+// 	justify-content: center;
+// 	gap:1rem;
+// 	padding:0;
+// }
+// .gallery-item {
+// 	width: calc( (100% - 3rem) / 4 );
 
-	.bloc-wide & {
-		width: calc( (100% - 5rem) / 6 );
-	}
-}
-.gallery-link {
-	display: block;
-}
-.gallery-img {
-	vertical-align: bottom;
-}
-.gallery-ico {
-	display: none;
-}
+// 	.bloc-wide & { width: calc( (100% - 5rem) / 6 ); }
+// }
+// .gallery-link {
+// 	display: block;
+// }
+// .gallery-img {
+// 	vertical-align: bottom;
+// }
+// .gallery-ico {
+// 	display: none;
+// }
 
 
-/*=====  FIN ACF / Galerie  =====*/
+/*=====  FIN Galerie  =====*/
 
-/*===================================
-=            ACF / Embed            =
-===================================*/
+/*=============================
+=            Embed            =
+=============================*/
 
-.bloc-embed {
+/*----------  Aperçu  ----------*/
 
-	.iframe {
-		position: relative;
-		height: 0;
-		background:none!important;
+// .bloc-embed {
+
+// 	.iframe {
+// 		position: relative;
+// 		height: 0;
+// 		background:none!important;
 	
-		iframe {
-			position: absolute;
-			z-index: 0;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
-	}
-}
+// 		iframe {
+// 			position: absolute;
+// 			z-index: 0;
+// 			top: 0;
+// 			left: 0;
+// 			width: 100%;
+// 			height: 100%;
+// 		}
+// 	}
+// }
 
 
-
-/*=====  FIN ACF / Embed  =====*/
+/*=====  FIN Embed  =====*/
 
 /*==================================
 =            2 colonnes            =
 ==================================*/
 
-.bloc-columns > div {
-    display: grid;
-	grid-template-columns: repeat(6,1fr);
-	column-gap: rem($space-max);
+/*----------  Aperçu  ----------*/
+
+.wp-block-acf-pc-columns {
+
+	.bloc-columns > .acf-innerblocks-container {
+	    display: grid;
+		grid-template-columns: repeat(6,1fr); // var grid ?
+		column-gap: rem($space-max);
+	}
     
-    > div { margin: 0; } // colonne
-}
+    // > div { margin: 0; } // colonne
 
-.bloc-inner-align-v--top > div { align-items: start; }
-.bloc-inner-align-v--center > div { align-items: center; }
-.bloc-inner-align-v--bottom > div { align-items: end; }
+	.bloc-inner-align-v--top > .acf-innerblocks-container { align-items: start; }
+	.bloc-inner-align-v--center > .acf-innerblocks-container { align-items: center; }
+	.bloc-inner-align-v--bottom > .acf-innerblocks-container { align-items: end; }
+	.bloc-inner-align-v--both > .acf-innerblocks-container { align-items: unset; }
 
-.bloc-inner-align-v--both > div { align-items: unset; }
+	.bloc-columns--1-1 > .acf-innerblocks-container > * { grid-column: span 3; }
+	.bloc-columns--1-2 > .acf-innerblocks-container > :nth-child(1),
+	.bloc-columns--2-1 > .acf-innerblocks-container > :nth-child(2) { grid-column: span 2; }
+	.bloc-columns--1-2 > .acf-innerblocks-container > :nth-child(2),
+	.bloc-columns--2-1 > .acf-innerblocks-container > :nth-child(1) { grid-column: span 4; }
 
-.bloc-columns--1-1 > div > * { grid-column: span 3; }
+	.bloc-column {
+		height: 100%;
+		box-sizing: border-box;
 
-.bloc-columns--1-2 > div > :nth-child(1),
-.bloc-columns--2-1 > div > :nth-child(2) { grid-column: span 2; }
-.bloc-columns--1-2 > div > :nth-child(2),
-.bloc-columns--2-1 > div > :nth-child(1) { grid-column: span 4; }
+		> div {
+			box-sizing: border-box;
+			height: 100%;
 
-.bloc-column {
-    height: 100%;
-
-    > div {
-        box-sizing: border-box;
-        height: 100%;
-
-        > * { margin: rem($space-max) 0; }
-        > :first-child { margin-top: 0; }
-        > :last-child { margin-bottom: 0; }
-    }
+			> * { margin: rem($space-max) 0; }
+			> :first-child { margin-top: 0; }
+			> :last-child { margin-bottom: 0; }
+		}
+	}
 }
 
 
@@ -487,21 +502,22 @@ $button-space : 10;
 =            Boutons            =
 ===============================*/
 
-// largeur boutons
+/*----------  Paramètres  ----------*/
+
 .components-panel__body:has([aria-label="Largeur du bouton"]) { display: none; }
 
-.bloc-buttons {
 
-	> div {
+/*----------  Aperçu  ----------*/
+
+.wp-block-acf-pc-buttons {
+
+	.acf-innerblocks-container {
 		display: flex;
-		gap:rem($button-space);
 		flex-wrap: wrap;
-		
-		> [class*="width-50"] { width: 50%; }
+		gap:rem($button-space);
 	}
-
-	&.bloc-inner-align-h--center > div { justify-content: center;	}
-	&.bloc-inner-align-h--right > div { justify-content: flex-end;	}
+	.bloc-inner-align-h--center .acf-innerblocks-container { justify-content: center; }
+	.bloc-inner-align-h--right .acf-innerblocks-container { justify-content: flex-end; }
 
 	.wp-element-button { width: 100%; }
 	br { display: none; }
@@ -514,24 +530,26 @@ $button-space : 10;
 =            Sous-pages            =
 ==================================*/
 
-.wp-block-acf-pc-posts { max-width: rem($maw-wide) !important; }
+/*----------  Aperçu  ----------*/
 
-.bloc-posts {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: grid;
-	gap:rem($space-max);
-	grid-template-columns: var(--pc-grid);
-	
-	.card-list-item {
-		grid-column: span 4;
-	}
-	.card {
-		height: 100%;
+.wp-block-acf-pc-posts {
+	max-width: rem($maw-wide) !important;
+
+	.bloc-posts {
+		list-style: none;
 		margin: 0;
-		padding: rem(.5*$space-max);
-		border:1px solid #eee;
+		padding: 0;
+		display: grid;
+		gap:rem($space-max);
+		grid-template-columns: repeat(6,1fr);
+		
+		.card-list-item { grid-column: span 2; }
+		.card {
+			height: 100%;
+			margin: 0;
+			padding: rem(.5*$space-max);
+			border:1px solid #eee;
+		}
 	}
 }
 

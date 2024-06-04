@@ -11,7 +11,7 @@ if ( $img_args ) {
 
     $block_css = array( 
         'bloc-image',
-        'bloc-image--column',
+        'bloc-image--frame',
         'bloc-image--'.$img_size
     );	
     switch ( $img_size ) {
