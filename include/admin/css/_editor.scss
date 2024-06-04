@@ -236,10 +236,13 @@ $icons_fill_selected : #fff;
 =            Communs            =
 ===============================*/
 
-$maw-txt : 590; // idem theme.json
-$maw-wide : 900; // idem theme.json
-$space-max : 30;
-$button-space : 10;
+$maw-txt 		: 590; // idem theme.json
+$maw-wide 		: 900; // idem theme.json
+$space-max 		: 30;
+$button-space 	: 10;
+
+
+/*----------  Marges & Alignement  ----------*/
 
 #editor .wp-block-post-content {
 	line-height: 1.5;
@@ -283,7 +286,10 @@ $button-space : 10;
 }
 
 .bloc-column, .bloc-frame-inner {
-	.acf-innerblocks-container > :nth-child(n+2) { margin: 1rem 0 0; }
+	.acf-innerblocks-container {
+		> * { margin: 0; }
+		> :nth-child(n+2) { margin-top: rem(.5*$space-max); }
+	}
 }
 
 
@@ -328,7 +334,7 @@ $button-space : 10;
 	p:nth-child(2) {
 		display: block;
 		font-style: normal;
-		margin-top:rem(5)
+		margin-top: rem(.5*$space-max)
 	}
 }
 
@@ -369,6 +375,11 @@ $button-space : 10;
 
     img { display: block; }
     figure { margin-bottom: 0; }
+    figcaption {
+		font-size: rem(16);
+		font-style: italic;
+		margin-top: rem(.25*$space-max);
+	}
     
     &:has(.bloc-image--medium_large_l),
     &:has(.bloc-image--medium_large_r) {
@@ -465,8 +476,6 @@ $button-space : 10;
 		grid-template-columns: repeat(6,1fr); // var grid ?
 		column-gap: rem($space-max);
 	}
-    
-    // > div { margin: 0; } // colonne
 
 	.bloc-inner-align-v--top > .acf-innerblocks-container { align-items: start; }
 	.bloc-inner-align-v--center > .acf-innerblocks-container { align-items: center; }
@@ -486,14 +495,9 @@ $button-space : 10;
 		> div {
 			box-sizing: border-box;
 			height: 100%;
-
-			> * { margin: rem($space-max) 0; }
-			> :first-child { margin-top: 0; }
-			> :last-child { margin-bottom: 0; }
 		}
 	}
 }
-
 
 
 /*=====  FIN 2 colonnes  =====*/
