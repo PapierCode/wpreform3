@@ -4,12 +4,12 @@
     "fields": [
         {
             "key": "field_66433b5a0dfcb",
-            "label": "Couleur de fond",
-            "name": "frame_color",
+            "label": "Style",
+            "name": "bloc_style",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -20,7 +20,7 @@
                 "v1": "Bleu",
                 "v2": "Vert"
             },
-            "default_value": "style-1",
+            "default_value": "v1",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -44,5 +44,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717145789
+    "modified": 1717482262
 }

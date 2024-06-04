@@ -164,13 +164,13 @@ add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
 
 /*=====  FIN Ajout contexte  =====*/	
 
-/*================================
-=            Citation            =
-================================*/
+/*=======================================
+=            Rendu des blocs            =
+=======================================*/
 
-add_filter( 'render_block', 'pc_render_block_quote', 10, 3 );
+add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
-	function pc_render_block_quote( $content, $args, $block ) {
+	function pc_render_block( $content, $args, $block ) {
 
 		// if ( $args['blockName'] == 'core/image' && isset($args['parent']) ) {
 		// 	pc_var($args['parent']);
@@ -186,14 +186,14 @@ add_filter( 'render_block', 'pc_render_block_quote', 10, 3 );
 					$content .= '<cite class="has-text-align-'.$cite_align.'">'.$cite.'</cite>';
 				}
 			$content .= '</blockquote>';
-		}
+		}	
 
 		return $content;
 
 	}
 
 
-/*=====  FIN Citation  =====*/
+/*=====  FIN Rendu des blocs  =====*/
 
 /*=============================
 =            Posts            =

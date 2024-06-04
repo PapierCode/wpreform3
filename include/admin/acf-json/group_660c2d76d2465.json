@@ -22,8 +22,8 @@
         },
         {
             "key": "field_66472773a255b",
-            "label": "Couleur de fond",
-            "name": "frame_color",
+            "label": "Style",
+            "name": "bloc_style",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -132,5 +132,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717255019
+    "modified": 1717482249
 }

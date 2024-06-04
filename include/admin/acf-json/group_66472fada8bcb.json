@@ -4,8 +4,8 @@
     "fields": [
         {
             "key": "field_66472fadbf730",
-            "label": "Couleur de fond",
-            "name": "frame_color",
+            "label": "Style",
+            "name": "bloc_style",
             "aria-label": "",
             "type": "button_group",
             "instructions": "Non appliqué si le bloc parent \"2 Colonnes\" a une couleur de fond.",
@@ -25,26 +25,6 @@
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
-        },
-        {
-            "key": "field_664e5ec41d671",
-            "label": "Contient uniquement un bloc image à adapter à la hauteur de la colonne",
-            "name": "inner_cover",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
         }
     ],
     "location": [
@@ -65,5 +45,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717255538
+    "modified": 1717482255
 }

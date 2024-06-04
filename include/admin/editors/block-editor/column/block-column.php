@@ -3,12 +3,7 @@ $allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array( 'bloc-column' );
-$block_frame = get_field('frame_color');
-if ( $block_frame && $block_frame != 'none' ) { 
-    $block_css[] = 'bloc-frame';
-    $block_css[] = 'bloc-frame--'.$block_frame;
-}
-if ( get_field('inner_cover') ) { $block_css[] = 'bloc-column--cover'; }
+if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );

@@ -10,11 +10,8 @@ $block_css = array(
     'bloc-columns--'.get_field('inner_proportions')
 );
 if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }
-if ( get_field('frame_color') != 'none' ) { 
-    $block_css[] = 'bloc-frame';
-    $block_css[] = 'bloc-frame--'.get_field('frame_color');
-}
-if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
+if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
+// if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );

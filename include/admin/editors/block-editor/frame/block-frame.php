@@ -5,7 +5,7 @@ $template =  [ ['core/paragraph'] ];
 
 $block_css = array(
     'bloc-frame',
-    'bloc-frame--'.get_field('frame_color')
+    'bloc-style--'.get_field('bloc_style')
 );
 if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }

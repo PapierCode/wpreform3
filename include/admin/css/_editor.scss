@@ -241,19 +241,19 @@ $button-space : 10;
 
 /*----------  Encadré  ----------*/
 
-[class*="bloc-frame"] > div {
+[class*="bloc-style"] {
 	padding:rem($space-max);
 
-	> * { margin: rem($space-max) 0; }
-	> :first-child { margin-top: 0; }
-	> :last-child { margin-bottom: 0; }
-
-	[class*="bloc-frame"] > div {
+	[class*="bloc-style"] {
 		padding: 0;
 		background-color: transparent;
 	}
 }
 
+
+.bloc-column, .bloc-frame-inner {
+	> :nth-child(n+2) { margin: 1rem 0 0; }
+}
 
 /*----------  Alignement  ----------*/
 
