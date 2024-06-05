@@ -11,7 +11,7 @@ if ( $img_args ) {
 
     $block_css = array( 
         'bloc-image',
-        'bloc-image--column',
+        'bloc-image--frame',
         'bloc-image--'.$img_size
     );	
     switch ( $img_size ) {
@@ -30,11 +30,11 @@ if ( $img_args ) {
             $block_css[] = 'bloc-inner-align-h--right';
             break;
     }
-    if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+    if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 
     $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-    if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+    if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
     if ( in_array( $img_size, ['medium_large_l','medium_large_r'] ) ) { $img_size = 'medium_large'; }
 

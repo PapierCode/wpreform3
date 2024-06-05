@@ -24,9 +24,7 @@ add_filter( 'mce_external_plugins', 'pc_admin_acf_tinymce_plugins' );
 
 	function pc_admin_acf_tinymce_plugins( $plugins ) {
 
-		$path = get_template_directory_uri();
-
-		$plugins['visualblocks'] = $path.'/include/admin/editors/acf-tinymce/plugins/visualblocks.js';
+		$plugins['visualblocks'] = get_template_directory_uri().'/include/editors/acf-tinymce/plugins/visualblocks.js';
 
 		return $plugins;
 

@@ -13,7 +13,7 @@
 
  function pc_var( $var, $margin = false ) {
 
-	$margin == true ? $style = 'style="margin-left:200px"' : $style = '';
+	$margin == true ? $style = 'style="margin-left:200px"' : $style = ''; // navigation admin
 	echo '<pre '.$style.'>'.print_r( $var,true ).'</pre>';
 
 }

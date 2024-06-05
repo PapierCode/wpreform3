@@ -299,7 +299,7 @@ function pc_display_breadcrumb() {
 	);
 
 	// si requête custom
-    if ( is_object( $query ) && '' != $current ) {
+    if ( is_object( $query ) && $current ) {
 
         $args['total'] = $query->max_num_pages;
         $args['current'] = $current;

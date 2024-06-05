@@ -1,16 +1,36 @@
 <?php
-/**
-*
-** Réglages projet
-** Slug custom post & tax
-** Variables utiles
-** Includes
-** Expérimentations
-*
-**/
 
+define( 'NEWS_POST_SLUG', 'newspost' );
+define( 'NEWS_TAX_SLUG', 'newstax' );
 
-/*----------  Configuration projet (agence)  ----------*/
+include 'include/tools.php'; // fonction utiles
+
+include 'include/register.php'; // settings, custom posts & taxonomies
+
+include 'include/editors/block-editor/block-editor.php'; // bloc editor
+include 'include/editors/acf-tinymce/acf-tinymce.php'; // tinymce ACF
+
+include 'include/classes/class-pc-walker-nav.php'; // structure de menu
+include 'include/classes/class-pc-post.php'; // custom objet post
+
+include 'include/admin/admin.php'; // custom admin
+
+include 'include/templates/templates.php'; // modèles & fonctions
+
+add_action( 'wp', 'pc_wp', 10 );
+
+	function pc_wp() {
+
+		if ( is_singular() && class_exists( 'PC_Post' ) ) {
+			global $post, $pc_post;
+			$pc_post = new PC_Post( $post );
+		}
+
+	}
+
+	
+
+// TODO
 
 $texts_lengths = array(
 	'excerpt' => 100, // mots
@@ -21,44 +41,5 @@ $texts_lengths = array(
 );
 $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 
-define( 'NEWS_POST_SLUG', 'newspost' );
-define( 'NEWS_TAX_SLUG', 'newstax' );
-
-
-/*----------  Include  ----------*/
-
-include 'include/tools.php';
-include 'include/init.php';
-include 'include/register.php';
-
-/*----------  Classes  ----------*/
-
-include 'include/classes/class-pc-walker-nav.php';
-include 'include/classes/class-pc-post.php';
-
-
-
-/*----------  Rôle utilisateur connecté  ----------*/
-
-$current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] : '';
-
-add_filter( 'admin_body_class', 'pc_edit_admin_body_class' );
-
-	function pc_edit_admin_body_class( $classes ) {
-
-		global $current_user_role;
-		$classes .= ' role_'.$current_user_role;
-
-		return $classes;
-
-	}
-
-
-/*----------  Administration  ----------*/
-
-include 'include/admin/admin.php';
-
-
-/*----------  Templates  ----------*/
-
-include 'include/templates/templates.php';
+add_filter( 'excerpt_length', function() use ( $texts_lengths ) { return $texts_lengths['excerpt']; }, 999 );
+add_filter( 'excerpt_more', function() { return ''; }, 999 );

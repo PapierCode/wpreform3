@@ -169,7 +169,7 @@ class PC_Post {
 			), $metas['visual-id'], $this );
 			
 			$image_alt = get_post_meta( $metas['visual-id'], '_wp_attachment_image_alt', true );
-			$image_datas['alt'] = ( '' != $image_alt ) ? $image_alt : $this->get_card_title();
+			$image_datas['alt'] = ( $image_alt ) ? $image_alt : $this->get_card_title();
 		
 		} else {
 
@@ -296,7 +296,7 @@ class PC_Post {
 				// hook	
 				do_action( 'pc_post_card_after_title', $this, $params );
 				
-				if ( '' != $description ) {
+				if ( $description ) {
 					echo '<p class="card-desc">';
 						echo $description;
 						if ( $ico_more_display ) { echo ' <span class="card-desc-ico">'.$ico_more.'</span>';	}	
@@ -322,235 +322,6 @@ class PC_Post {
 	
 	/*=====  FIN Résumé  =====*/
 
-	/*====================================
-	=            SEO & Social            =
-	====================================*/
-
-	/**
-	 * 
-	 * [SEO & SOCIAL] Titre
-	 * 
-	 * @return string Méta seo-title | get_card_title()
-	 * 
-	 */
-
-	public function get_seo_meta_title() {
-
-		$metas = $this->metas;
-
-		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title();
-
-		if ( 'page' == $this->type && get_query_var( 'paged' ) ) {
-			$title .= ' - Page '.get_query_var( 'paged' );	
-		}
-
-		global $settings_project;
-		$title .= ' - '.$settings_project['coord-name'];
-		
-		return $title;
-	
-	}
-
-	/**
-	 * 
-	 * [SEO & SOCIAL] Description
-	 * 
-	 * @return string Méta seo-desc | get_card_description()
-	 * 
-	 */
-
-	public function get_seo_meta_description() {
-
-		$metas = $this->metas;
-		
-		if ( isset( $metas['seo-desc'] ) ) {
-			
-			$description = $metas['seo-desc'];
-			
-		} else if ( '' != $this->get_card_description() ) {
-
-			$description = $this->get_card_description();
-
-		} else {
-
-			global $settings_project;
-			$description = $settings_project['seo-desc'];
-
-		}
-		
-		global $texts_lengths;
-		return pc_words_limit( $description, $texts_lengths['seo-desc'] );
-	
-	}
-
-	/**
-	 * 
-	 * [SEO & SOCIAL] Url et dimensions de l'image
-	 * 
-	 * @return array 	méta visual-id | default
-	 * 					Url/width/height 
-	 * 
-	 */
-
-	public function get_seo_meta_image_datas() {
-
-		$metas = $this->metas;
-		$image = ( $this->has_image ) ? wp_get_attachment_image_src( $metas['visual-id'], 'share' ) : pc_get_default_image_to_share();
-		
-		return $image;
-	
-	}
-
-	/**
-	 * 
-	 * [SEO & SOCIAL] Titre, Description, Image
-	 * 
-	 * @param 	array	$seo_metas	Valeurs par défaut
-	 * 
-	 * @return	array	get_seo_meta_title()
-	 * 					get_seo_meta_description()
-	 * 					get_seo_meta_image_datas()
-	 * 
-	 */
-
-	public function get_seo_metas( ) {
-
-		// titre
-		$metas['title'] = $this->get_seo_meta_title();
-		// description
-		$metas['description'] = $this->get_seo_meta_description();
-		// image
-		$metas['image'] = $this->get_seo_meta_image_datas();
-		// url
-		$metas['permalink'] = $this->get_canonical();
-
-		return $metas;
-
-	}
-	
-	
-	/*=====  FIN SEO & Social  =====*/
-
-	/*===========================================
-	=            Données structurées            =
-	===========================================*/
-	
-	/**
-	 * 
-	 * [SCHÉMA] Auteur
-	 * 
-	 * @param	bool	$is_part_of	Schéma Article (true) | itemListElement (false)
-	 * 
-	 * @return	array	Pour conversion JSON
-	 * 
-	 */
-
-	public function get_schema_author() {
-
-		global $settings_project;
-
-		$author_first_name = get_the_author_meta( 'first_name', $this->author );
-		$author_last_name = get_the_author_meta( 'last_name', $this->author );
-	
-		if ( isset( $settings_project['seo-author-default'] ) || '' == $author_first_name ) {
-			$author_first_name = $settings_project['seo-author-first-name'];
-		}
-		if ( isset( $settings_project['seo-author-default'] ) || '' == $author_last_name ) {
-			$author_last_name = $settings_project['seo-author-last-name'];
-		}
-	
-		$author = array(
-			'@type' => 'Person',
-			'name' => $author_first_name.' '.$author_last_name
-		);
-
-		// filtre
-		$author = apply_filters( 'pc_filter_post_schema_author', $author, $this );
-	
-		return $author;
-
-	}
-	
-	/**
-	 * 
-	 * [SCHÉMA] Article
-	 * 
-	 * @param	bool	$is_part_of	
-	 * 
-	 * @return	array	Pour conversion JSON
-	 * 
-	 */
-
-	public function get_schema_article( $is_part_of = false ) {
-
-		global $settings_project;
-			
-		$image_to_share = $this->get_seo_meta_image_datas();		
-
-		// données structurées
-		$schema = array(
-			'@type' => 'Article',
-			'url' => $this->get_canonical(),
-			'datePublished' => $this->get_date( 'c' ),
-			'dateModified' => $this->get_date( 'c', true ),
-			'headline' => $this->get_seo_meta_title(),
-			'description' => $this->get_seo_meta_description(),
-			'mainEntityOfPage'	=> $this->get_canonical(),
-			'image' => array(
-				'@type'		=>'ImageObject',
-				'url' 		=> $image_to_share[0],
-				'width' 	=> $image_to_share[1],
-				'height' 	=> $image_to_share[2]
-			),
-			'author' => $this->get_schema_author(),
-			'publisher' => pc_get_schema_publisher(),
-			'isPartOf' => pc_get_schema_website()
-		);
-
-		if( !$is_part_of ) { $schema = array_merge( array('@context' =>'http://schema.org'), $schema ); }
-		
-		// filtre
-		$schema = apply_filters( 'pc_filter_post_schema_article', $schema, $this );
-
-		return $schema;
-
-	}
-	
-	/**
-	 * 
-	 * [SCHÉMA] ListItem
-	 * 
-	 * @param	int		$position	Position dans la liste
-	 * 
-	 * @return	array	Pour conversion JSON
-	 * 
-	 */
-
-	public function get_schema_list_item( $position ) {
-
-		$image_to_share = $this->get_seo_meta_image_datas();	
-
-		$schema = array(
-			'@type' => 'ListItem',
-			'name' => $this->get_seo_meta_title(),
-			'description' => $this->get_seo_meta_description(),
-			'url' => $this->get_canonical(),
-			'position' => $position,
-			'image' => array(
-				'@type'		=>'ImageObject',
-				'url' 		=> $image_to_share[0],
-				'width' 	=> $image_to_share[1],
-				'height' 	=> $image_to_share[2]
-			)
-		);
-
-		return $schema;
-
-	}
-	
-	
-	/*=====  FIN Données structurées  =====*/
-
 	/*===================================
 	=            WooCommerce            =
 	===================================*/
@@ -572,7 +343,7 @@ class PC_Post {
 			} else if ( 'product_variation' == $this->type ) {
 
 				$parent_image_id = get_post_meta( $this->parent, '_thumbnail_id', true );
-				if ( '' != $parent_image_id && $parent_image_id > 0 ) { $this->metas['visual-id'] = $parent_image_id; }
+				if ( $parent_image_id && $parent_image_id > 0 ) { $this->metas['visual-id'] = $parent_image_id; }
 
 			}
 

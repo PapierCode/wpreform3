@@ -88,7 +88,7 @@ function pc_display_share_links() {
 
 		do_action( 'pc_social_share_after_start' );
 
-		if ( '' != $share_title ) {	echo '<p class="social-share-title">'.$share_title.'</p>'; }
+		if ( $share_title ) {	echo '<p class="social-share-title">'.$share_title.'</p>'; }
 		
 		echo '<ul class="social-list social-list--share reset-list">';
 			foreach ( $share_links as $name => $href ) {
