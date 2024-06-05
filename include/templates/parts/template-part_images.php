@@ -59,9 +59,9 @@ add_action( 'init', 'pc_add_images_sizes' );
 		global $images_sizes;
 		$images_sizes = array(
 			
-			'st-400'	=> array( 'width'=>400, 'height'=>250, 'crop'=>true ),
-			'st-500'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
-			'st-700'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
+			'card-400'	=> array( 'width'=>400, 'height'=>250, 'crop'=>true ),
+			'card-500'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
+			'card-700'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
 			
 			'thumbnail_small' => array( 'width'=>250, 'height'=>0, 'crop'=>false ),
 			'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),

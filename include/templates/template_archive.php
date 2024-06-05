@@ -69,7 +69,7 @@ function pc_display_archive_post( $post ) {
 
     $pc_post = new PC_Post( $post );
     echo '<li class="card-list-item card-list-item--news">';
-        $pc_post->display_card(get_field('title_level'));
+        $pc_post->display_card(2);
     echo '</li>';
 
 }

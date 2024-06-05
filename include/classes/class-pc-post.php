@@ -44,7 +44,7 @@ class PC_Post {
 
 		// test image associée
 		$this->use_woo_product_image(); // si le post est un produit WooCommerce
-		$this->has_image = ( isset( $this->metas['visual-id'] ) && is_object( get_post( $this->metas['visual-id'] ) ) ) ? true : false;
+		$this->has_image = ( isset( $this->metas['_thumbnail_id'] ) && is_object( get_post( $this->metas['_thumbnail_id'] ) ) ) ? true : false;
 
 	}
 
@@ -103,7 +103,41 @@ class PC_Post {
 	}
 	
 	
-	/*=====  FIN Date  =====*/
+	/*=====  FIN Canonical  =====*/
+
+	/*=================================
+	=            Taxonomie            =
+	=================================*/
+	
+	/**
+	 * 
+	 * @return	string 	Liste des termes
+	 * 
+	 */
+
+	public function display_terms() {
+
+		if ( in_array( $this->type, apply_filters( 'pc_post_card_taxonomy_for', [NEWS_POST_SLUG], $this ) ) && get_option('options_news_tax') ) {	
+
+			$terms = wp_get_post_terms( $this->id, apply_filters( 'pc_post_card_taxonomy_slug', NEWS_TAX_SLUG, $this ) );
+	
+			if ( is_array( $terms ) && !empty( $terms ) ) {
+	
+				echo '<p class="card-tax">'.pc_svg('tag');	
+					foreach ( $terms as $key => $term ) {	
+						if ( $key > 0 ) { echo ', '; }
+						echo '<a href="'.get_post_type_archive_link( $this->type ).'?term='.$term->term_id.'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
+					}	
+				echo '</p>';
+	
+			}
+	
+		}
+
+	}
+	
+	
+	/*=====  FIN Taxonomie  =====*/
 
 	/*==============================
 	=            Résumé            =
@@ -151,7 +185,7 @@ class PC_Post {
 	 * 
 	 * [RESUMÉ] Urls & attribut alt de la vignette
 	 * 
-	 * @return 	array 	array 	urls card-400/card-500/card-700	Méta visual-id | default
+	 * @return 	array 	array 	urls card-400/card-500/card-700	Méta _thumbnail_id | default
 	 * 					string	attribut alt				Méta _wp_attachment_image_alt | get_card_title()
 	 * 
 	 */
@@ -162,23 +196,23 @@ class PC_Post {
 
 		if ( $this->has_image ) {
 			
-			$image_datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
-				'400' => wp_get_attachment_image_src( $metas['visual-id'], 'card-400' ),
-				'500' => wp_get_attachment_image_src( $metas['visual-id'], 'card-500' ),
-				'700' => wp_get_attachment_image_src( $metas['visual-id'], 'card-700' )
-			), $metas['visual-id'], $this );
+			$datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
+				'400' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-400' ),
+				'500' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-500' ),
+				'700' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-700' )
+			), $metas['_thumbnail_id'], $this );
 			
-			$image_alt = get_post_meta( $metas['visual-id'], '_wp_attachment_image_alt', true );
-			$image_datas['alt'] = ( $image_alt ) ? $image_alt : $this->get_card_title();
+			$alt = get_post_meta( $metas['_thumbnail_id'], '_wp_attachment_image_alt', true );
+			$datas['alt'] = ( $alt ) ? $alt : $this->get_card_title();
 		
 		} else {
 
-			$image_datas['sizes'] = pc_get_default_card_image();
-			$image_datas['alt'] = $this->get_card_title();
+			$datas['sizes'] = pc_get_default_card_image();
+			$datas['alt'] = $this->get_card_title();
 
 		}
 		
-		return $image_datas;
+		return $datas;
 	
 	}
 	
@@ -192,36 +226,36 @@ class PC_Post {
 
 	public function display_card_image( $alt = true ) {
 
-		$image_datas = $this->get_card_image_datas();
-		$sizes_count = count( $image_datas['sizes'] );
-		$last_size_key = array_key_last($image_datas['sizes']);
+		$datas = $this->get_card_image_datas();
+		$sizes_count = count( $datas['sizes'] );
+		$last_size_key = array_key_last($datas['sizes']);
 
-		$image_attrs = array(
-			'src' => $image_datas['sizes'][$last_size_key][0],
-			'width' => $image_datas['sizes'][$last_size_key][1],
-			'height' => $image_datas['sizes'][$last_size_key][2],
-			'alt' => ( $alt ) ? $image_datas['alt'] : '',
+		$attrs = array(
+			'src' => $datas['sizes'][$last_size_key][0],
+			'width' => $datas['sizes'][$last_size_key][1],
+			'height' => $datas['sizes'][$last_size_key][2],
+			'alt' => ( $alt ) ? $datas['alt'] : '',
 			'loading' => 'lazy'
 		);
 	
 		if ( $sizes_count > 1 ) {
 			
 			$attr_srcset = array();
-			foreach ( $image_datas['sizes'] as $size => $attachment ) {
+			foreach ( $datas['sizes'] as $size => $attachment ) {
 				$attr_srcset[] = $attachment[0].' '.$size.'w';
 			}
-			$image_attrs['srcset'] = implode(', ',$attr_srcset);
-			$image_attrs['sizes'] = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $image_datas, $this );
+			$attrs['srcset'] = implode(', ',$attr_srcset);
+			$attrs['sizes'] = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $datas, $this );
 
 		}
 		
 		$tag = '<img';
-		foreach ( $image_attrs as $attr => $attr_value ) {
+		foreach ( $attrs as $attr => $attr_value ) {
 			$tag .= ' '.$attr.'="'.$attr_value.'"';
 		}
 		$tag .= ' />';
 		
-		echo apply_filters( 'pc_filter_card_image', $tag, $image_datas, $this );
+		echo apply_filters( 'pc_filter_card_image', $tag, $datas, $this );
 	
 	}
 	
@@ -295,6 +329,12 @@ class PC_Post {
 	
 				// hook	
 				do_action( 'pc_post_card_after_title', $this, $params );
+
+				// date
+				if ( in_array( $this->type, apply_filters( 'pc_post_card_date_for', [NEWS_POST_SLUG], $this ) ) ) {
+					$date_prefix = apply_filters( 'pc_post_card_date_prefix', pc_svg('calendar'), $this );
+					echo '<time class="card-date" aria-label="Date de publication" datetime="'.$this->get_date('c').'">'.$date_prefix.' <span>'.$this->get_date().'</span></time>';		
+				}
 				
 				if ( $description ) {
 					echo '<p class="card-desc">';
@@ -309,6 +349,8 @@ class PC_Post {
 				if ( $read_more_display ) {
 					echo '<div class="card-read-more" aria-hidden="true"><span class="card-read-more-ico">'.$ico_more.'</span> <span class="card-read-more-txt">Lire la suite</span></a></div>';
 				}
+
+				$this->display_terms();
 			
 				// hook
 				do_action( 'pc_post_card_before_end', $this, $params );

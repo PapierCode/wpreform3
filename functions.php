@@ -27,7 +27,6 @@ add_action( 'wp', 'pc_wp', 10 );
 		}
 
 	}
-
 	
 
 // TODO
