@@ -28,6 +28,8 @@ include 'template_header.php';
 include 'template_footer.php';
 // page
 include 'template_index.php';
+// archive
+include 'template_archive.php';
 // recherche
 include 'template_search.php';
 // 404

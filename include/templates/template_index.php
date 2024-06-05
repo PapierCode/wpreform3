@@ -28,7 +28,7 @@ add_action( 'pc_action_template_index', 'pc_display_main_start', 10 ); // templa
 
 	// footer
 	add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 90 ); // template-part_layout.php
-		add_action( 'pc_action_index_main_footer', 'pc_display_share_links', 100 ); // liens de partage
+		// add_action( 'pc_action_index_main_footer', 'pc_display_share_links', 100 ); // liens de partage
 	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 110 ); // template-part_layout.php
 
 // main end

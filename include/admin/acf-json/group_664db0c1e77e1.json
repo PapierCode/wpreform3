@@ -491,8 +491,8 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "Activer\/désactiver un groupe de champs et modifier les labels suivant la configuration : \"Actualités associées\" pour les pages ou \"Pages associées\" pour les actualités.",
-                    "new_lines": "",
+                    "message": "Configuration groupes de champs ACF : \r\n- <em>Actualités associées<\/em> pour les pages ou <em>Pages associées<\/em> pour les actualités.\r\n- <em>[Paramètres] Actualités\/Blog<\/em>",
+                    "new_lines": "br",
                     "esc_html": 0
                 },
                 {
@@ -595,5 +595,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717406790
+    "modified": 1717600115
 }

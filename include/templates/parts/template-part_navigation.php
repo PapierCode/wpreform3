@@ -117,6 +117,17 @@ function pc_display_breadcrumb() {
 			)
 		)
 	);
+
+    /*----------  Archives  ----------*/
+    
+    if ( is_post_type_archive() ) {
+
+        $links[] = array(
+            'name' => post_type_archive_title( '', false ),
+            'permalink' => get_post_type_archive_link( get_query_var('post_type') )
+        );
+
+    }
 	
 
 	/*----------  Single  ----------*/
@@ -125,20 +136,35 @@ function pc_display_breadcrumb() {
 
 		global $pc_post;
 
-		$parent_id = $pc_post->parent;
-		$parent_links = array();
+		if ( is_page() ) {
 
-		while ( $parent_id ) {
-			$pc_post_parent = new PC_Post( get_post( $parent_id ) );
-			$parent_links[] = array(
-				'name' => $pc_post_parent->get_card_title(),
-				'permalink' => $pc_post_parent->permalink
-			);
-			$parent_id = $pc_post_parent->parent;
+			$parent_id = $pc_post->parent;
+			$parent_links = array();
+
+			while ( $parent_id ) {
+				$pc_post_parent = new PC_Post( get_post( $parent_id ) );
+				$parent_links[] = array(
+					'name' => $pc_post_parent->get_card_title(),
+					'permalink' => $pc_post_parent->permalink
+				);
+				$parent_id = $pc_post_parent->parent;
+			}
+
+			if ( !empty( $parent_links ) ) {
+				$links = array_merge( $links, array_reverse( $parent_links ) );
+			}
+
 		}
 
-		if ( !empty( $parent_links ) ) {
-			$links = array_merge( $links, array_reverse( $parent_links ) );
+		if ( is_single() ) {
+
+			$post_object = get_post_type_object( $pc_post->type );
+
+			$links[] = array(
+				'name' => $post_object->labels->name,
+				'permalink' => get_post_type_archive_link( $pc_post->type )
+			);
+
 		}
 
 		$links[] = array(
@@ -147,7 +173,7 @@ function pc_display_breadcrumb() {
 		);
 
 		
-		if ( is_page() && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+		if ( is_single() && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
 
 			$links[] = array(
 				'name' => 'Page '.get_query_var( 'paged' ),
@@ -281,7 +307,7 @@ function pc_display_breadcrumb() {
  * 
  */
 
- function pc_get_pager( $query = null, $current = null, $args = array() ) {
+ function pc_display_pager( $query = null, $current = null, $args = array() ) {
 
 	// fusion des arguments
     $args = array_merge(

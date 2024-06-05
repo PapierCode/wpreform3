@@ -140,22 +140,65 @@ add_filter( 'attachment_fields_to_edit', 'pc_admin_help_img_fields', 10, 2 );
  
 /*=====  FIN Médias  =====*/
 
-/*==============================
-=            Divers            =
-==============================*/
+/*==================================
+=            Admin init            =
+==================================*/
 
 add_action( 'admin_init', 'pc_admin_init' ); 
 
 	function pc_admin_init() {
 
-		remove_action( 'welcome_panel', 'wp_welcome_panel' ); // annonce bienvenue
-		remove_filter( 'update_footer', 'core_update_footer' ); // affichage version 
-
+		// Menu apparence pour les éditeurs (accès sous-menu)		
+		$editor = get_role( 'editor' );
+		$editor->add_cap( 'edit_theme_options' );
 		// emoji
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script', 10 );
 		remove_action( 'admin_print_styles', 'print_emoji_styles', 10 );
+		// annonce bienvenue
+		remove_action( 'welcome_panel', 'wp_welcome_panel' ); 
+		 // affichage version 
+		remove_filter( 'update_footer', 'core_update_footer' );
+
+		// métaboxe archive
+		add_meta_box(
+			'sol_archive_links',
+			'Toutes/tous les...',
+			'pc_admin_menu_metaboxes_archive_content',
+			'nav-menus',
+			'side',
+			'low'
+		);	
 
 	}
+
+/*----------  Métaboxe archive contenu  ----------*/
+
+function pc_admin_menu_metaboxes_archive_content() {
+
+	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', array( 1 => array( NEWS_POST_SLUG, 'Actualités' ) ) );
+
+	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';
+
+		foreach ( $archives as $key => $values ) {
+			
+		echo '<li>';
+			echo '<label class="menu-item-title"><input type="checkbox" class="menu-item-checkbox" name="menu-item['.-$key.'][menu-item-object-id]" value="'.-$key.'">'.$values[1].'</label>';
+			echo '<input type="hidden" class="menu-item-object" name="menu-item['.-$key.'][menu-item-object]" value="'.$values[0].'">';
+			echo '<input type="hidden" class="menu-item-type" name="menu-item['.-$key.'][menu-item-type]" value="post_type_archive">';
+			echo '<input type="hidden" class="menu-item-title" name="menu-item['.-$key.'][menu-item-title]" value="'.$values[1].'">';
+			echo '<input type="hidden" class="menu-item-url" name="menu-item['.-$key.'][menu-item-url]" value="'.get_post_type_archive_link( $values[0] ).'">';
+		echo '</li>';
+		}
+
+	echo '</ul></div><p class="button-controls"><span class="add-to-menu"><input type="submit" class="button-secondary submit-add-to-menu right" value="Add to Menu" name="add-post-type-menu-item" id="submit-posttype-archives"><span class="spinner"></span></span></p></div>';
+
+}
+
+/*=====  FIN Admin init  =====*/
+
+/*==============================
+=            Divers            =
+==============================*/
 
 
 /*----------  Simplication de la barre d'admin  ----------*/
@@ -263,19 +306,6 @@ add_action( 'admin_menu', 'pc_admin_menu', 999 );
 		// Médias, modifier l'icône
 		$menu[10][6] = 'dashicons-format-gallery';
 		
-	}
-
-
-/*----------  Ajout de droits  ----------*/
-
-add_action( 'admin_init', 'pc_admin_menu_capabilities', 999 );
-
-	function pc_admin_menu_capabilities() {
-		
-		// active le menu apparence pour l'accès aux menus
-		$editor = get_role( 'editor' );
-		$editor->add_cap( 'edit_theme_options' );
-
 	}
 
 
