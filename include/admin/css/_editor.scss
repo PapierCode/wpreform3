@@ -286,7 +286,7 @@ $button-space 	: 10;
 }
 
 .bloc-column, .bloc-frame-inner {
-	.acf-innerblocks-container {
+	> .acf-innerblocks-container {
 		> * { margin: 0; }
 		> :nth-child(n+2) { margin-top: rem(.5*$space-max); }
 	}
@@ -518,6 +518,7 @@ $button-space 	: 10;
 	.acf-innerblocks-container {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: center;
 		gap:rem($button-space);
 	}
 	.bloc-inner-align-h--center .acf-innerblocks-container { justify-content: center; }
