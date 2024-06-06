@@ -1,5 +1,32 @@
 <?php 
 
+/*================================
+=            Date CGU            =
+================================*/
+
+add_filter( 'pc_filter_display_main_date', 'pc_edit_display_cgu_date', 10, 2 );
+
+    function pc_edit_display_cgu_date( $display, $pc_post ) {
+
+        if ( $pc_post->id == get_option( 'wp_page_for_privacy_policy' ) ) { $display = true; }
+
+        return $display;
+
+    }
+
+add_filter( 'pc_filter_display_date_modified', 'pc_edit_display_cgu_type', 10, 2 );
+
+    function pc_edit_display_cgu_type( $modified, $pc_post ) {
+
+        if ( $pc_post->id == get_option( 'wp_page_for_privacy_policy' ) ) { $modified = true; }
+
+        return $modified;
+
+    }
+
+
+/*=====  FIN Date CGU  =====*/
+
 /*==================================
 =            Sous-pages            =
 ==================================*/

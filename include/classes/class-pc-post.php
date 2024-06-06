@@ -51,35 +51,6 @@ class PC_Post {
 	
 	/*=====  FIN Construct  =====*/
 
-	/*=================================
-	=            Canonical            =
-	=================================*/
-	
-	/**
-	 * 
-	 * [CANONICAL] Méta link canonical
-	 * 
-	 * @return string string url
-	 * 
-	 */
-
-	public function get_canonical() {
-
-		$canonical = $this->permalink;
-
-		if ( 'page' == $this->type && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
-
-			$canonical = $this->permalink.'page/'.get_query_var( 'paged' ).'/';
-
-		}
-
-		return apply_filters( 'pc_filter_post_canonical', $canonical, $this );
-
-	}
-	
-	
-	/*=====  FIN Canonical  =====*/
-
 	/*============================
 	=            Date            =
 	============================*/
@@ -102,8 +73,29 @@ class PC_Post {
 
 	}
 	
+	/**
+	 * 
+	 * [DATE] affichage
+	 * 
+	 * @param	string	$css		Classe de l'élément
+	 * 
+	 * @return	string 	Time
+	 * 
+	 */
+
+	public function display_date( $css ) {
+
+		$type = apply_filters( 'pc_filter_display_date_modified', false, $this );		
+		$format = apply_filters( 'pc_filter_display_date_format', 'j F Y', $this );		
+		$prefix = apply_filters( 'pc_post_card_date_prefix', pc_svg('calendar'), $this );
+		$label = !$type ? 'publication' : 'modification';
+
+		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date('c',$type).'">'.$prefix.'<span>'.$this->get_date($format,$type).'</span></time>';
+
+	}
 	
-	/*=====  FIN Canonical  =====*/
+	
+	/*=====  FIN Date  =====*/
 
 	/*=================================
 	=            Taxonomie            =
@@ -115,15 +107,18 @@ class PC_Post {
 	 * 
 	 */
 
-	public function display_terms() {
+	public function display_terms( $css ) {
 
-		if ( in_array( $this->type, apply_filters( 'pc_post_card_taxonomy_for', [NEWS_POST_SLUG], $this ) ) && get_option('options_news_tax') ) {	
+		if ( apply_filters( 'pc_filter_post_card_taxonomy_slug', '', $this ) ) {	
 
-			$terms = wp_get_post_terms( $this->id, apply_filters( 'pc_post_card_taxonomy_slug', NEWS_TAX_SLUG, $this ) );
+			$terms = wp_get_post_terms( 
+				$this->id, 
+				apply_filters( 'pc_filter_post_card_taxonomy_slug', '', $this )
+			);
 	
 			if ( is_array( $terms ) && !empty( $terms ) ) {
 	
-				echo '<p class="card-tax">'.pc_svg('tag');	
+				echo '<p class="'.$css.'">'.pc_svg('tag');	
 					foreach ( $terms as $key => $term ) {	
 						if ( $key > 0 ) { echo ', '; }
 						echo '<a href="'.get_post_type_archive_link( $this->type ).'?term='.$term->term_id.'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
@@ -331,9 +326,8 @@ class PC_Post {
 				do_action( 'pc_post_card_after_title', $this, $params );
 
 				// date
-				if ( in_array( $this->type, apply_filters( 'pc_post_card_date_for', [NEWS_POST_SLUG], $this ) ) ) {
-					$date_prefix = apply_filters( 'pc_post_card_date_prefix', pc_svg('calendar'), $this );
-					echo '<time class="card-date" aria-label="Date de publication" datetime="'.$this->get_date('c').'">'.$date_prefix.' <span>'.$this->get_date().'</span></time>';		
+				if ( apply_filters( 'pc_filter_display_card_date', false, $this ) ) {
+					$this->display_date( 'card-date' );		
 				}
 				
 				if ( $description ) {
@@ -350,7 +344,7 @@ class PC_Post {
 					echo '<div class="card-read-more" aria-hidden="true"><span class="card-read-more-ico">'.$ico_more.'</span> <span class="card-read-more-txt">Lire la suite</span></a></div>';
 				}
 
-				$this->display_terms();
+				$this->display_terms( 'card-terms' );
 			
 				// hook
 				do_action( 'pc_post_card_before_end', $this, $params );

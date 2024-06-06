@@ -4,6 +4,7 @@ define( 'NEWS_POST_SLUG', 'newspost' );
 define( 'NEWS_TAX_SLUG', 'newstax' );
 
 include 'include/tools.php'; // fonction utiles
+include 'images/sprite.php'; // fonction utiles
 
 include 'include/register.php'; // settings, custom posts & taxonomies
 

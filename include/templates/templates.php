@@ -18,6 +18,8 @@ include 'parts/template-part_head.php';
 include 'parts/template-part_search.php';
 // Pages
 include 'parts/template-part_page.php';
+// Actualités
+include 'parts/template-part_news.php';
 
 
 /*----------  Spécifiques  ----------*/

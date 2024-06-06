@@ -45,8 +45,18 @@ function pc_display_archive_title( $settings ) {
     $title = isset($settings['title']) && trim($settings['title']) ? trim($settings['title']) : post_type_archive_title('',false);
 	echo '<h1><span>'.$title.'</span></h1>';
 
-    if ( isset($settings['desc']) && trim($settings['desc']) ) {
+    if ( !get_query_var('term') && isset($settings['desc']) && trim($settings['desc']) ) {
         echo '<div class="editor">'.wpautop(trim($settings['desc'])).'</div>';
+    }
+
+    if ( get_query_var('term') ) {
+        $term = get_term( sanitize_key( get_query_var('term') ) );
+        $tax_names = get_object_taxonomies( get_query_var('post_type'), 'objects' );
+        echo '<p class="term-current"> ';
+            echo $tax_names[$term->taxonomy]->labels->singular_name.' : ';
+            echo $term->name;
+            echo '&nbsp;<a class="term-current-remove" href="'.get_post_type_archive_link( get_query_var('post_type') ).'" title="Annuler le filtre">'.pc_svg('cross').'</a>';
+        echo '</p>';
     }
 
 }
