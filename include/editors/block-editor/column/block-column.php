@@ -3,7 +3,7 @@ $allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array( 'bloc-column' );
-if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
+if ( in_array( get_field('bloc_style'), ['v1','v2'] ) ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
