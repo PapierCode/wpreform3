@@ -1,39 +1,43 @@
 <?php
 
-$gallery = get_field('_bloc_gallery_ids');
+$img_ids = get_field('img_ids');
 
-if ( $gallery ) {
+if ( $img_ids && count( $img_ids ) >= 2 ) {
 
-	$block_css = array( 'gallery', 'bloc-gallery' );
+	$enable_js = get_field('enable_js');
+	$enable_crop = get_field('enable_crop');
 
-	$gallery_no_js = get_field('_bloc_gallery_js');
-	if ( $gallery_no_js ) { $block_css[] = 'gallery--nojs'; }
+	$thumb = get_field('enable_crop') ? 'thumbnail_gallery' : 'thumbnail_s';
 
+	$block_css = array(
+		'bloc-gallery',
+		'gallery',
+		'bloc-align-h--wide'
+	);
+	if ( $enable_js ) { $block_css[] = 'gallery--js'; }
 	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
-	
-	$block_size = get_field('_bloc_size');
-	if ( 'wide' == $block_size ) { $block_css[] = 'bloc-wide'; }
 	
 	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
 	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
 	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list reset-list">';
 
-	foreach ( $gallery as $image ) {
+	foreach ( $img_ids as $img ) {
 
 		echo '<li class="gallery-item">';
-			if ( !$gallery_no_js ) { echo '<a class="gallery-link" href="'.$image['sizes']['gl-l'].'" data-gl-caption="'.$image['caption'].'" data-gl-responsive="'.$image['sizes']['gl-m'].'" title="Afficher l\'image">'; }
-				echo '<img class="gallery-img" src="'.$image['sizes']['gl-th'].'" width="'.$image['sizes']['gl-th-width'].'" height="'.$image['sizes']['gl-th-height'].'" alt="'.$image['alt'].'" loading="lazy"/>';
-				echo '<span class="gallery-ico">'.pc_svg('zoom').'</span>';
-			if ( !$gallery_no_js ) { echo '</a>'; }
+
+			if ( $enable_js ) { echo '<a class="gallery-link" href="'.$img['sizes']['large'].'" data-gl-caption="'.$img['caption'].'" data-gl-responsive="'.$img['sizes']['medium'].'" title="Afficher l\'image '.$img['alt'].'">'; }
+		
+				echo '<img class="gallery-img" src="'.$img['sizes'][$thumb].'" width="'.$img['sizes'][$thumb.'-width'].'" height="'.$img['sizes'][$thumb.'-height'].'" alt="'.$img['alt'].'" loading="lazy"/>';
+		
+			if ( $enable_js ) { echo '</a>'; }
+		
 		echo '</li>';
 
 	}
 
+	if ( !$is_preview && $enable_js ) { echo '<li class="gallery-item gallery-item--play"><button type="button" class="gallery-play"><span class="ico">'.pc_svg('zoom').'</span><span class="txt">Diaporama</span></button></li>'; }
+
 	echo '</ul></div>';
 
-} else if ( $is_preview ) {
-
-	echo '<p class="bloc-warning">Erreur bloc <em>Galerie</em> : sélectionnez au moins une image.</p>';
-
-}
+} else if ( $is_preview ) { echo '<div class="bloc-warning">Sélectionnez au moins deux images.</div>'; }

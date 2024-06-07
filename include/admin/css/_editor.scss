@@ -145,11 +145,11 @@ $icons_fill_selected : #fff;
 
 [data-name="img_size"] .acf-button-group label {
 
-	&:has([value="thumbnail_small"])::before {
-		background-image: svg-load( $icons_url + "width-thumbnail_small.svg", fill=$icons_fill_default );
+	&:has([value="thumbnail_s"])::before {
+		background-image: svg-load( $icons_url + "width-thumbnail_s.svg", fill=$icons_fill_default );
 	}
-	&:has([value="thumbnail_small"]).selected::before {
-		background-image: svg-load( $icons_url + "width-thumbnail_small.svg", fill=$icons_fill_selected );
+	&:has([value="thumbnail_s"]).selected::before {
+		background-image: svg-load( $icons_url + "width-thumbnail_s.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="thumbnail"])::before {
 		background-image: svg-load( $icons_url + "width-thumbnail.svg", fill=$icons_fill_default );
@@ -400,38 +400,59 @@ $button-space 	: 10;
 
 /*----------  Paramètres  ----------*/
 
-// .acf-gallery-side [data-name="title"],
-// .acf-gallery-side [data-name="description"],
-// .acf-gallery-side .media-types-required-info
-// {
-// 	display: none;
-// }
+.-open .acf-gallery-main,
+.acf-gallery-main .acf-gallery-toolbar li:nth-child(2),
+.acf-gallery-side-info,
+.acf-gallery-side [data-name="title"],
+.acf-gallery-side [data-name="description"],
+.acf-gallery-side .media-types-required-info,
+.acf-gallery-side tr:has([name*="rank_math_media_exclude_sitemap"]) {
+	display: none;
+}
+
+.acf-gallery-side {
+	width: auto !important;
+	left: 0;
+	table * {
+		display: block;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	th.label label {
+		font-size: 14px;
+  		color: #23282d;
+	}
+}
+.acf-gallery-side-inner {
+	width: auto !important;
+	right: 0;
+}
 
 
 /*----------  Aperçu  ----------*/
 
-// .gallery-list {
-// 	list-style:none;
-// 	display: flex;
-// 	flex-wrap: wrap;
-// 	justify-content: center;
-// 	gap:1rem;
-// 	padding:0;
-// }
-// .gallery-item {
-// 	width: calc( (100% - 3rem) / 4 );
+.gallery-list {
+	list-style:none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap:1rem;
+	padding:0;
+}
+.gallery-item {
+	width: calc( (100% - 3rem) / 4 );
 
-// 	.bloc-wide & { width: calc( (100% - 5rem) / 6 ); }
-// }
-// .gallery-link {
-// 	display: block;
-// }
-// .gallery-img {
-// 	vertical-align: bottom;
-// }
-// .gallery-ico {
-// 	display: none;
-// }
+	.bloc-wide & { width: calc( (100% - 5rem) / 6 ); }
+}
+.gallery-link {
+	display: block;
+}
+.gallery-img {
+	vertical-align: bottom;
+}
+.gallery-ico {
+	display: none;
+}
 
 
 /*=====  FIN Galerie  =====*/

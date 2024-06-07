@@ -180,7 +180,7 @@ class PC_Post {
 	 * 
 	 * [RESUMÉ] Urls & attribut alt de la vignette
 	 * 
-	 * @return 	array 	array 	urls card-400/card-500/card-700	Méta _thumbnail_id | default
+	 * @return 	array 	array 	urls card-s/card-m/card-l	Méta _thumbnail_id | default
 	 * 					string	attribut alt				Méta _wp_attachment_image_alt | get_card_title()
 	 * 
 	 */
@@ -192,9 +192,9 @@ class PC_Post {
 		if ( $this->has_image ) {
 			
 			$datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
-				'400' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-400' ),
-				'500' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-500' ),
-				'700' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-700' )
+				'400' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-s' ),
+				'500' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-m' ),
+				'700' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-l' )
 			), $metas['_thumbnail_id'], $this );
 			
 			$alt = get_post_meta( $metas['_thumbnail_id'], '_wp_attachment_image_alt', true );

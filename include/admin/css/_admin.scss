@@ -87,7 +87,9 @@ table.wp-list-table .column-thumb img {
 
 .media-modal .advanced-section, /* modification d'une image insérée, options avancées */
 .media-modal .setting-group, /* modification d'une image insérée, alignement */
-.media-modal .link-to /* modification d'une image insérée, lier à */
+.media-modal .link-to, /* modification d'une image insérée, lier à */
+
+.media-modal tr:has([name*="rank_math_media_exclude_sitemap"]), // rank math option
 
 { display:none; }
 

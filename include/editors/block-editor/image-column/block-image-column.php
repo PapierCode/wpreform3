@@ -15,7 +15,7 @@ if ( $img_args ) {
         'bloc-image--'.$img_size
     );	
     switch ( $img_size ) {
-        case 'thumbnail_small':
+        case 'thumbnail_s':
         case 'thumbnail':
             $block_css[] = 'bloc-inner-align-h--'.get_field('inner_align_h');
             break;
@@ -46,6 +46,6 @@ if ( $img_args ) {
 
     echo '</'.$tag.'></div>';
 
-} else {
+} else if ( $is_preview ) {
     echo '<div class="bloc-warning">Sélectionnez une image</div>';
 }

@@ -12,44 +12,41 @@ var rem = function( size, base ) {
 
 /*=====  FIN Tools  ======*/
 
+/*===========================
+=            ???            =
+===========================*/
+
+document.addEventListener( 'DOMContentLoaded', function () {
+
+	const blocEmbeds = document.querySelectorAll('.bloc-embed');
+
+	blocEmbeds.forEach( (bloc) => {
+		const iframe = bloc.querySelector('iframe');
+		const src = iframe.dataset.src;
+		const rgpd = bloc.querySelector('.iframe-accept');
+		const btn = bloc.querySelector('button');
+		btn.addEventListener( 'click', () => {
+			iframe.setAttribute( 'src', src );
+			rgpd.remove();
+		});
+	});
+
+});
+
+
+/*=====  FIN ???  =====*/
+
 jQuery(document).ready(function($){
 
 /*=================================
 =            variables            =
 =================================*/
 
-var $html = $('html'),
-	$body = $('body'),
-	$head = $('head');
+const $body = $('body');
+const $head = $('head');
 	
 
 /*=====  End of variables  ======*/
-
-/*=========================================
-=            Toggle open/close            =
-=========================================*/
-
-$('.js-toggle').click( function() {
-	
-	var $btn = $(this),
-	$target = $('#'+$btn.attr('aria-controls'));
-
-	if ( !$btn.hasClass('is-open') ) {
-		$target.slideDown( function() {
-			$btn.addClass('is-open').attr('aria-expanded','true');
-			$target.addClass('is-open').removeAttr('aria-hidden');
-		} );
-	} else {
-		$target.slideUp( function() {
-			$btn.removeClass('is-open').attr('aria-expanded','false');
-			$target.removeClass('is-open').attr('aria-hidden','true');
-		} );
-	}
-
-} ); // FIN toggle
-
-
-/*=====  FIN Toggle open/close  =====*/
 
 /*==============================
 =            divers            =
@@ -57,12 +54,15 @@ $('.js-toggle').click( function() {
 
 /*----------  gallery  ----------*/
 
-$('.gallery:not(.gallery--nojs)').gallery({
+$('.gallery').gallery({
 	btnNextInner:sprite.arrow,
 	btnPrevInner:sprite.arrow,
 	btnCloseInner:sprite.cross,
 	moveDuration:500,
 	responsiveImg:true
+});
+$('.gallery-play').click(function() {
+	$(this).parents('ul').find('>:first-child').children('a').click();
 });
 
 

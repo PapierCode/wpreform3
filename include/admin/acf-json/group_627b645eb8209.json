@@ -3,11 +3,11 @@
     "title": "[Bloc] Galerie images",
     "fields": [
         {
-            "key": "field_628f17716f9e6",
-            "label": "Galerie",
-            "name": "",
+            "key": "field_627b64719f534",
+            "label": "Images",
+            "name": "img_ids",
             "aria-label": "",
-            "type": "tab",
+            "type": "gallery",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,13 +16,24 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0
+            "return_format": "array",
+            "library": "all",
+            "min": 2,
+            "max": "",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "insert": "append",
+            "preview_size": "thumbnail_gallery"
         },
         {
             "key": "field_63d284b041e44",
-            "label": "Désactiver le diaporama",
-            "name": "_bloc_gallery_js",
+            "label": "Activer le diaporama",
+            "name": "enable_js",
             "aria-label": "",
             "type": "true_false",
             "instructions": "",
@@ -40,11 +51,11 @@
             "ui": 1
         },
         {
-            "key": "field_627b64719f534",
-            "label": "Images",
-            "name": "_bloc_gallery_ids",
+            "key": "field_6662b19e3fb71",
+            "label": "Recadrer les images au format carré",
+            "name": "enable_crop",
             "aria-label": "",
-            "type": "gallery",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -53,59 +64,11 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "preview_size": "gl-th",
-            "insert": "append",
-            "library": "all",
-            "min": "",
-            "max": "",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
-        },
-        {
-            "key": "field_628f17866f9e7",
-            "label": "Bloc",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_628f17976f9e8",
-            "label": "Taille du bloc",
-            "name": "_bloc_size",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "default": "Standard",
-                "wide": "Large"
-            },
-            "allow_null": 0,
-            "default_value": "default",
-            "layout": "horizontal",
-            "return_format": "value"
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -125,6 +88,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0,
-    "modified": 1716367008
+    "show_in_rest": 1,
+    "modified": 1717748337
 }

@@ -57,18 +57,17 @@ add_action( 'init', 'pc_add_images_sizes' );
 	function pc_add_images_sizes() {
 		
 		global $images_sizes;
+
+		// thumbnail 450, medium 750, medium_large 1000, large 1200
 		$images_sizes = array(
 			
-			'card-400'	=> array( 'width'=>400, 'height'=>250, 'crop'=>true ),
-			'card-500'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
-			'card-700'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
+			'thumbnail_s' => array( 'width'=>250, 'height'=>0, 'crop'=>false ),
 			
-			'thumbnail_small' => array( 'width'=>250, 'height'=>0, 'crop'=>false ),
-			'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),
+			'card-s'	=> array( 'width'=>400, 'height'=>250, 'crop'=>true ),
+			'card-m'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
+			'card-l'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
 			
-			'gl-th'		=> array( 'width'=>200, 'height'=>200, 'crop'=>true ),
-			'gl-m'		=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
-			'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
+			'thumbnail_gallery'	=> array( 'width'=>250, 'height'=>250, 'crop'=>true ),
 			
 		);
 
@@ -87,26 +86,26 @@ add_action( 'init', 'pc_add_images_sizes' );
 =            Images par défaut            =
 =========================================*/
 
-function pc_get_default_image_to_share() {
+// function pc_get_default_image_to_share() {
 
-	global $images_sizes;
+// 	global $images_sizes;
 
-	return apply_filters( 'pc_filter_default_image_to_share', array(
-		get_template_directory_uri().'/images/share-default.jpg',
-		$images_sizes['share']['width'],
-		$images_sizes['share']['height']
-	) );
+// 	return apply_filters( 'pc_filter_default_image_to_share', array(
+// 		get_template_directory_uri().'/images/share-default.jpg',
+// 		$images_sizes['share']['width'],
+// 		$images_sizes['share']['height']
+// 	) );
 
-}
+// }
 
 function pc_get_default_card_image() {
 
 	$directory = get_bloginfo('template_directory');
 
 	return apply_filters( 'pc_filter_default_card_image', array(
-		'400' => array(	$directory.'/images/st-default-400.jpg', 400, 250 ),
-		'500' => array(	$directory.'/images/st-default-500.jpg', 500, 320 ),
-		'700' => array(	$directory.'/images/st-default-700.jpg', 700, 440 )
+		'400' => array(	$directory.'/images/st-default-s.jpg', 400, 250 ),
+		'500' => array(	$directory.'/images/st-default-m.jpg', 500, 320 ),
+		'700' => array(	$directory.'/images/st-default-l.jpg', 700, 440 )
 	) );
 
 }

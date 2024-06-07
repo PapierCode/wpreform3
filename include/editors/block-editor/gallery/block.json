@@ -7,11 +7,12 @@
     "icon": "format-gallery",
     "apiVersion": 2,
     "acf": {
-        "mode": "auto",
+        "mode": "preview",
         "renderTemplate": "block-gallery.php"
     },
     "supports": {
         "anchor": true,
-        "align": false
+        "align": false,
+        "mode": false
     }
 }
