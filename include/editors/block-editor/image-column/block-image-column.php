@@ -5,7 +5,7 @@ $img_args = get_field('img_args');
 if ( $img_args ) {
 
     $img_size = get_field('img_size');
-
+	$enable_js = get_field('enable_js');
     $caption = trim($img_args['caption']);
     $tag = ( $caption ) ? 'figure' : 'div';
 
@@ -31,6 +31,7 @@ if ( $img_args ) {
             break;
     }
     if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+    if ( $enable_js ) { $block_css[] = 'diaporama'; }
 
 
     $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
@@ -40,7 +41,11 @@ if ( $img_args ) {
 
     echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem">';
 
-        echo '<img src="'.$img_args['sizes'][$img_size].'" alt="'.$img_args['alt'].'" width="'.$img_args['sizes'][$img_size.'-width'].'" height="'.$img_args['sizes'][$img_size.'-height'].'">';
+        if ( !$is_preview && $enable_js ) { echo '<a class="diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher l\'image '.$img_args['alt'].'">'; }
+
+            echo '<img src="'.$img_args['sizes'][$img_size].'" alt="'.$img_args['alt'].'" width="'.$img_args['sizes'][$img_size.'-width'].'" height="'.$img_args['sizes'][$img_size.'-height'].'">';
+            
+        if ( !$is_preview && $enable_js ) {echo '<span class="ico">'.pc_svg('fullscreen').'</span></a>'; }
 
         if ( $caption ) { echo '<figcaption class="has-text-align-'.get_field('legend_align_h').'">'.$caption.'</figcaption>'; }
 

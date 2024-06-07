@@ -113,7 +113,7 @@
             $element.on('click', 'a', function(event) {
 
 				// if elements are added dynamically 
-				$itemLinks = $element.find('li:not(.gallery-not-in) a');
+				$itemLinks = $element.find('a');
 
                 // remove default action
                 event.preventDefault();
@@ -138,6 +138,7 @@
 
                 // numbers of images
                 imgNb = imgUrls.length;
+                console.log($itemLinks);
                 // add gallery
                 addStructure();
                 // indicates activation

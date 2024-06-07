@@ -41,6 +41,8 @@ $sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'zoom' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M20,17.88,14.62,12.5a8,8,0,1,0-2.12,2.12L17.88,20ZM3,8a5,5,0,1,1,5,5A5,5,0,0,1,3,8Z"/></svg>',
 
+	'fullscreen' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 8V0h8v2H3.414L8 6.586 6.586 8 2 3.414V8H0Z"/><path d="M16.586 18 12 13.414 13.414 12 18 16.586V12h2v8h-8v-2h4.586Z"/><path d="M0 20v-8h2v4.586L6.586 12 8 13.414 3.414 18H8v2H0Z"/><path d="M16.586 2H12V0h8v8h-2V3.414L13.414 8 12 6.586 16.586 2Z"/></svg>',
+
 	'tag' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M11.42,1.09A4.36,4.36,0,0,0,8.77,0H1.55A1.56,1.56,0,0,0,0,1.55V8.77a4.36,4.36,0,0,0,1.09,2.65l8.14,8.13a1.56,1.56,0,0,0,2.19,0l8.13-8.13a1.56,1.56,0,0,0,0-2.19ZM6.32,8.9A2.58,2.58,0,1,1,8.9,6.32,2.58,2.58,0,0,1,6.32,8.9Z"/></svg>',
 
 	'calendar' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M7 1v4a1 1 0 0 1-2 0V1a1 1 0 0 1 2 0Z"/><path d="M15 1v4a1 1 0 0 1-2 0V1a1 1 0 0 1 2 0Z"/><path d="M4 8h5v3H4z"/><path d="M11 8h5v3h-5z"/><path d="M4 13h5v3H4z"/><path d="M11 13h5v3h-5z"/><path d="M8 2h4v2H8z"/><path fill-rule="nonzero" d="M16 2v2h2v13.95H2V4h2V2H0v17.95h20V2h-4Z"/></svg>',

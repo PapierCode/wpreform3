@@ -54,7 +54,7 @@ const $head = $('head');
 
 /*----------  gallery  ----------*/
 
-$('.gallery').gallery({
+$('.diaporama').gallery({
 	btnNextInner:sprite.arrow,
 	btnPrevInner:sprite.arrow,
 	btnCloseInner:sprite.cross,
