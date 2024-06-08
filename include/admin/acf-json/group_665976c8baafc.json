@@ -204,7 +204,7 @@
                     {
                         "field": "field_66598895b1e8e",
                         "operator": "==",
-                        "value": "thumbnail_small"
+                        "value": "thumbnail_s"
                     }
                 ],
                 [
@@ -221,9 +221,9 @@
                 "id": ""
             },
             "choices": {
-                "left": "Gauche",
-                "center": "Centre",
-                "right": "Droit"
+                "left": "left",
+                "center": "center",
+                "right": "right"
             },
             "default_value": "center",
             "return_format": "value",
@@ -245,9 +245,9 @@
                 "id": ""
             },
             "choices": {
-                "left": "Gauche",
-                "center": "Centre",
-                "right": "Droit"
+                "left": "left",
+                "center": "center",
+                "right": "right"
             },
             "default_value": "center",
             "return_format": "value",
@@ -293,5 +293,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1717770575
+    "modified": 1717837136
 }

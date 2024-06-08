@@ -36,10 +36,35 @@
             },
             "choices": {
                 "none": "Aucun",
-                "v1": "Bleu",
+                "v1": "Orange",
                 "v2": "Vert"
             },
             "default_value": "none",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_66641e06b4cf1",
+            "label": "Alignement horizontal du bloc",
+            "name": "bloc_align_h",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "left",
+                "center": "center",
+                "right": "right",
+                "wide": "wide"
+            },
+            "default_value": "wide",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -59,9 +84,9 @@
                 "id": ""
             },
             "choices": {
-                "1-2": "1\/3 2\/3",
-                "1-1": "1\/2 1\/2",
-                "2-1": "2\/3 1\/3"
+                "1-2": "1-2",
+                "1-1": "1-1",
+                "2-1": "2-1"
             },
             "default_value": "1-1",
             "return_format": "value",
@@ -83,10 +108,10 @@
                 "id": ""
             },
             "choices": {
-                "top": "Haut",
-                "center": "Centre",
-                "bottom": "Bas",
-                "both": "Haut & Bas"
+                "top": "top",
+                "center": "center",
+                "bottom": "bottom",
+                "both": "both"
             },
             "default_value": "top",
             "return_format": "value",
@@ -132,5 +157,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717482249
+    "modified": 1717838036
 }

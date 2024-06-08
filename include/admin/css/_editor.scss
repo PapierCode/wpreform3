@@ -54,6 +54,7 @@
 
 /*----------  Communs  ----------*/
 
+[data-name="bloc_align_h"],
 [data-name="img_size"],
 [data-name="inner_proportions"],
 [data-name="legend_align_h"],
@@ -85,33 +86,64 @@ $icons_fill_default : #444;
 $icons_fill_selected : #fff;
 
 
+/*----------  Alignement horizontal du bloc  ----------*/
+
+[data-name="bloc_align_h"] .acf-button-group label {
+
+	&:has([value="center"])::before {
+		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_default );
+	}
+	&:has([value="center"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="wide"])::before {
+		background-image: svg-load( $icons_url + "align-h-wide.svg", fill=$icons_fill_default );
+	}
+	&:has([value="wide"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-wide.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="left"])::before {
+		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_default );
+	}
+	&:has([value="left"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_selected );
+	}
+	&:has([value="right"])::before {
+		background-image: svg-load( $icons_url + "align-h-right.svg", fill=$icons_fill_default );
+	}
+	&:has([value="right"]).selected::before {
+		background-image: svg-load( $icons_url + "align-h-right.svg", fill=$icons_fill_selected );
+	}
+}
+
+
 /*----------  Alignement vertical d'enfants  ----------*/
 
 [data-name="inner_align_v"] .acf-button-group label {
 
 	&:has([value="both"])::before {
-		background-image: svg-load( $icons_url + "align-v-both.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-v-both.svg", fill=$icons_fill_default );
 	}
 	&:has([value="both"]).selected::before {
-		background-image: svg-load( $icons_url + "align-v-both.svg", fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-v-both.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="top"])::before {
-		background-image: svg-load( $icons_url + "align-v-top.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-v-top.svg", fill=$icons_fill_default );
 	}
 	&:has([value="top"]).selected::before {
-		background-image: svg-load( $icons_url + "align-v-top.svg", fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-v-top.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="bottom"])::before {
-		background-image: svg-load( $icons_url + "align-v-bottom.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-v-bottom.svg", fill=$icons_fill_default );
 	}
 	&:has([value="bottom"]).selected::before {
-		background-image: svg-load( $icons_url + "align-v-bottom.svg", fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-v-bottom.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="center"])::before {
-		background-image: svg-load( $icons_url + "align-v-center.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-v-center.svg", fill=$icons_fill_default );
 	}
 	&:has([value="center"]).selected::before {
-		background-image: svg-load( $icons_url + "align-v-center.svg",fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-v-center.svg",fill=$icons_fill_selected );
 	}
 }
 
@@ -121,22 +153,22 @@ $icons_fill_selected : #fff;
 [data-name="inner_align_h"] .acf-button-group label {
 
 	&:has([value="left"])::before {
-		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-h-left.svg", fill=$icons_fill_default );
 	}
 	&:has([value="left"]).selected::before {
-		background-image: svg-load( $icons_url + "align-h-left.svg", fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-h-left.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="center"])::before {
-		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-h-center.svg", fill=$icons_fill_default );
 	}
 	&:has([value="center"]).selected::before {
-		background-image: svg-load( $icons_url + "align-h-center.svg", fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-h-center.svg", fill=$icons_fill_selected );
 	}
 	&:has([value="right"])::before {
-		background-image: svg-load( $icons_url + "align-h-right.svg", fill=$icons_fill_default );
+		background-image: svg-load( $icons_url + "inner-align-h-right.svg", fill=$icons_fill_default );
 	}
 	&:has([value="right"]).selected::before {
-		background-image: svg-load( $icons_url + "align-h-right.svg",fill=$icons_fill_selected );
+		background-image: svg-load( $icons_url + "inner-align-h-right.svg",fill=$icons_fill_selected );
 	}
 }
 
@@ -236,39 +268,40 @@ $icons_fill_selected : #fff;
 =            Communs            =
 ===============================*/
 
-$maw-txt 		: 590; // idem theme.json
-$maw-wide 		: 900; // idem theme.json
+$mw-txt 		: 590; // idem theme.json
+$mw-wide 		: 900; // idem theme.json
 $space-max 		: 30;
 $button-space 	: 10;
 
 
 /*----------  Marges & Alignement  ----------*/
 
+.acf-block-preview {
+	max-width: rem($mw-wide) !important;
+}
+
 #editor .wp-block-post-content {
 	line-height: 1.5;
 
     > * { margin-block: rem($space-max); }
 
-	> .alignleft, > .alignright,
-	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_l),
-	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_r),
-    > .wp-block-acf-pc-image:has(.bloc-image--large) {
-		float: none !important;
-		max-width: none !important;
-	}
-	> .alignleft,
+	> .acf-block-preview:has(.bloc-align-h--left), 
 	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_l) { 
-		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 + #{rem(.5*($maw-wide - $maw-txt))} ) !important;
-		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
+		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
 	}
-	> .alignright,
+	> .acf-block-preview:has(.bloc-align-h--right), 
 	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_r) { 
-		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
-		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 + #{rem(.5*($maw-wide - $maw-txt))} ) !important;
+		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
+		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
+	}
+	> .acf-block-preview:has(.bloc-align-h--center) { 
+		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
+		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
 	}
 	> .wp-block-acf-pc-image:has(.bloc-image--large) { 
-		margin-left: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
-		margin-right: calc( (100% - #{rem($maw-wide)}) / 2 ) !important;
+		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
+		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
 	}
 
 }
@@ -348,7 +381,6 @@ $button-space 	: 10;
 /*----------  Aperçu  ----------*/
 
 .wp-block-acf-pc-spacer {
-    max-width: rem($maw-wide) !important;
 	border:1px solid #eee;
 	color: #999;
 	display: flex;
@@ -383,9 +415,9 @@ $button-space 	: 10;
     
     &:has(.bloc-image--medium_large_l),
     &:has(.bloc-image--medium_large_r) {
-		max-width: rem($maw-wide - .5*($maw-wide - $maw-txt));
+		max-width: rem($mw-wide - .5*($mw-wide - $mw-txt));
 	}
-    &:has(.bloc-image--large) { max-width: rem($maw-wide); }
+    &:has(.bloc-image--large) { max-width: rem($mw-wide); }
 
     .bloc-inner-align-h--center .bloc-image-inner { margin-inline: auto; }
     .bloc-inner-align-h--right .bloc-image-inner { margin-left: auto; }
@@ -484,6 +516,20 @@ $button-space 	: 10;
 
 /*=====  FIN Embed  =====*/
 
+/*===============================
+=            Encadré            =
+===============================*/
+
+.wp-block-acf-pc-frame {
+	.bloc-frame-inner {
+		max-width: rem($mw-txt);
+		margin: 0 auto;
+	}
+}
+
+
+/*=====  FIN Encadré  =====*/
+
 /*==================================
 =            2 colonnes            =
 ==================================*/
@@ -536,6 +582,8 @@ $button-space 	: 10;
 
 .wp-block-acf-pc-buttons {
 
+	.wp-block-post-content > & { max-width: rem($mw-txt) !important; }
+
 	.acf-innerblocks-container {
 		display: flex;
 		flex-wrap: wrap;
@@ -559,7 +607,6 @@ $button-space 	: 10;
 /*----------  Aperçu  ----------*/
 
 .wp-block-acf-pc-posts {
-	max-width: rem($maw-wide) !important;
 
 	.bloc-posts {
 		list-style: none;

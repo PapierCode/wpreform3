@@ -11,7 +11,7 @@
         "renderTemplate": "block-quote.php"
     },
     "supports": {
-        "align": ["left", "right"],
+        "align": false,
         "anchor": true,
         "mode": false
     }

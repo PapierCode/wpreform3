@@ -17,10 +17,35 @@
                 "id": ""
             },
             "choices": {
-                "v1": "Bleu",
+                "v1": "Orange",
                 "v2": "Vert"
             },
             "default_value": "v1",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_666425e50f44a",
+            "label": "Alignement horizontal du bloc",
+            "name": "bloc_align_h",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "left",
+                "center": "center",
+                "right": "right",
+                "wide": "wide"
+            },
+            "default_value": "center",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -44,5 +69,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717482262
+    "modified": 1717839375
 }

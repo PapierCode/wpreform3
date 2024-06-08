@@ -158,10 +158,13 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 		// if ( $args['blockName'] == 'core/image' && isset($args['parent']) ) {
 		// 	pc_var($args['parent']);
-		// }	
+		// }
 
-		if ( $args['blockName'] == 'acf/pc-quote' && trim($args['innerBlocks'][0]['innerHTML']) ) {
-			$block_align = $args['attrs']['align'] ?? 'center';
+		// $quote = new WP_HTML_Tag_Processor( $content );
+
+		if ( $args['blockName'] == 'acf/pc-quote' ) {
+
+			$block_align = $args['attrs']['data']['bloc_align_h'] ?? 'center';
 			$content = '<blockquote class="bloc-quote bloc-align-h--'.$block_align.'">';
 				$content .= trim($args['innerBlocks'][0]['innerHTML']);
 				$cite = wp_strip_all_tags( trim($args['innerBlocks'][1]['innerHTML']) );
@@ -170,6 +173,7 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 					$content .= '<cite class="has-text-align-'.$cite_align.'">'.$cite.'</cite>';
 				}
 			$content .= '</blockquote>';
+
 		}	
 
 		return $content;

@@ -5,9 +5,9 @@ $template =  [ ['core/paragraph'] ];
 
 $block_css = array(
     'bloc-frame',
+    'bloc-align-h--'.get_field('bloc_align_h'),
     'bloc-style--'.get_field('bloc_style')
 );
-if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );

@@ -1,14 +1,14 @@
 {
-    "key": "group_66472fada8bcb",
-    "title": "[Bloc] Colonne",
+    "key": "group_666423b2693a3",
+    "title": "[Bloc] Citation",
     "fields": [
         {
-            "key": "field_66472fadbf730",
-            "label": "Style",
-            "name": "bloc_style",
+            "key": "field_666423b250dd1",
+            "label": "Alignement horizontal du bloc",
+            "name": "bloc_align_h",
             "aria-label": "",
             "type": "button_group",
-            "instructions": "Non appliqué si le bloc parent \"2 Colonnes\" a une couleur de fond.",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -17,11 +17,11 @@
                 "id": ""
             },
             "choices": {
-                "none": "Aucun",
-                "v1": "Orange",
-                "v2": "Vert"
+                "left": "left",
+                "center": "center",
+                "right": "right"
             },
-            "default_value": "none",
+            "default_value": "center",
             "return_format": "value",
             "allow_null": 0,
             "layout": "horizontal"
@@ -32,12 +32,12 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/pc-column"
+                "value": "acf\/pc-quote"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "side",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -45,5 +45,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717837024
+    "modified": 1717838849
 }

@@ -6,10 +6,10 @@ $template = [ ['acf/pc-column' ], ['acf/pc-column' ] ];
 
 $block_css = array(
     'bloc-columns',
+	'bloc-align-h--'.get_field('bloc_align_h'),
 	'bloc-inner-align-v--'.get_field('inner_align_v'),
     'bloc-columns--'.get_field('inner_proportions')
 );
-if ( $block['align'] ) { $block_css[] = 'bloc-align-h--'.$block['align']; }
 if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
 // if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }

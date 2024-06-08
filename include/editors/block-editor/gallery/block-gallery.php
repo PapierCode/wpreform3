@@ -26,7 +26,7 @@ if ( $img_ids && count( $img_ids ) >= 2 ) {
 
 		echo '<li class="gallery-item">';
 
-			if ( !$is_preview && $enable_js ) { echo '<a class="diaporama-link" href="'.$img['sizes']['large'].'" data-gl-caption="'.$img['caption'].'" data-gl-responsive="'.$img['sizes']['medium'].'" title="Afficher l\'image '.$img['alt'].'">'; }
+			if ( !$is_preview && $enable_js ) { echo '<a class="diaporama-link" href="'.$img['sizes']['large'].'" data-gl-caption="'.$img['caption'].'" data-gl-responsive="'.$img['sizes']['medium'].'" title="Afficher l\'image '.$img['alt'].'" rel="nofollow">'; }
 		
 				echo '<img class="gallery-img" src="'.$img['sizes'][$thumb].'" width="'.$img['sizes'][$thumb.'-width'].'" height="'.$img['sizes'][$thumb.'-height'].'" alt="'.$img['alt'].'" loading="lazy"/>';
 		
