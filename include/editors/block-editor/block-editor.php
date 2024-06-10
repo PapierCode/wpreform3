@@ -133,17 +133,17 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 =            Ajout contexte            =
 ======================================*/
 
-add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
+// add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
 
-	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
+// 	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
 
-		if ( $parent_block ) {
-			$parsed_block['parent'] = array(
-				'attributes' => $parent_block->attributes
-			);
-		}
-		return $parsed_block;
-	}
+// 		if ( $parent_block ) {
+// 			$parsed_block['parent'] = array(
+// 				'attributes' => $parent_block->attributes
+// 			);
+// 		}
+// 		return $parsed_block;
+// 	}
 
 
 /*=====  FIN Ajout contexte  =====*/	
@@ -156,7 +156,7 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 	function pc_render_block( $content, $args, $block ) {
 
-		// if ( $args['blockName'] == 'core/image' && isset($args['parent']) ) {
+		// if ( $args['blockName'] == 'core/button' && isset($args['parent']) ) {
 		// 	pc_var($args['parent']);
 		// }
 
@@ -191,15 +191,15 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 				$btn_attrs[] = 'class="button button--'.$btn_ico.'"';
 
-				$content = '<a '.implode(' ',$btn_attrs).'><span class="ico"">'.pc_svg($btn_ico).'</span><span class="txt">'.wp_strip_all_tags($content).'</span></a>';
+				$content = '<a '.implode(' ',$btn_attrs).'><span class="ico">'.pc_svg($btn_ico).'</span><span class="txt">'.wp_strip_all_tags($content).'</span></a>';
 
-			}
+			} else { return ''; }
 			
 		}
 
 		if ( $args['blockName'] == 'acf/pc-quote' ) {
 
-			$block_align = $args['attrs']['data']['bloc_align_h'] ?? 'center';
+			$block_align = $args['attrs']['data']['bloc_align_h'] ?? 'left';
 			$content = '<blockquote class="bloc-quote bloc-align-h--'.$block_align.'">';
 				$content .= trim($args['innerBlocks'][0]['innerHTML']);
 				$cite = wp_strip_all_tags( trim($args['innerBlocks'][1]['innerHTML']) );

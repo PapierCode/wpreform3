@@ -70,14 +70,22 @@
             "layout": "horizontal"
         },
         {
-            "key": "field_664af4499be48",
+            "key": "field_6666c41031a00",
             "label": "Proportions des colonnes",
-            "name": "inner_proportions",
+            "name": "inner_proportions_center",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66641e06b4cf1",
+                        "operator": "==",
+                        "value": "center"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -87,6 +95,40 @@
                 "1-2": "1-2",
                 "1-1": "1-1",
                 "2-1": "2-1"
+            },
+            "default_value": "1-1",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_664af4499be48",
+            "label": "Proportions des colonnes",
+            "name": "inner_proportions_all",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_66641e06b4cf1",
+                        "operator": "!=",
+                        "value": "center"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1-3": "1-3",
+                "1-2": "1-2",
+                "1-1": "1-1",
+                "2-1": "2-1",
+                "3-1": "3-1"
             },
             "default_value": "1-1",
             "return_format": "value",
@@ -157,5 +199,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717838036
+    "modified": 1718011208
 }
