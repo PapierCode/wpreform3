@@ -90,9 +90,7 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 =            Actualités associées            =
 ============================================*/
 
-// TODO
-
-add_action( 'pc_action_index_main_aside', 'pc_page_aside_news', 10 );
+add_action( 'pc_action_template_index', 'pc_page_aside_news', 125 );
 
 	function pc_page_aside_news( $pc_post ) {
 
@@ -112,7 +110,7 @@ add_action( 'pc_action_index_main_aside', 'pc_page_aside_news', 10 );
 							array(
 								'taxonomy' => NEWS_TAX_SLUG,
 								'field' => 'term_id',
-								'terms' => unserialize($metas['_page_news_categories_related'])
+								'terms' => $metas['_page_news_categories_related']
 							),
 						)
 					),

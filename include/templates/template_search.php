@@ -83,15 +83,14 @@ function pc_display_search_results() {
 			foreach ( $wp_query->posts as $post ) {
 				
 				$pc_post = new PC_Post( $post );
-				$metas = $pc_post->metas;
 				$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
 				$css_has_image = ( $pc_post->has_image ) ? ' has-image' : '';
 
 				echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
 					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
-					if ( $pc_post->has_image ) {
-						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="" width="200" height="200" /></figure>';
+					if ( $pc_post->thumb_id ) {
+						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $pc_post->thumb_id, 'gl-th' )[0].'" alt="" width="200" height="200" /></figure>';
 					}
 				echo '</li>';
 

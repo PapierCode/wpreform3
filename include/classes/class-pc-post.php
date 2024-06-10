@@ -14,7 +14,7 @@ class PC_Post {
 	public $permalink;		// string
 	public $metas;			// array
 	
-	public $has_image;		// bool
+	public $thumb_id;		// int/false
 
 
 	/*=================================
@@ -36,15 +36,11 @@ class PC_Post {
 		$this->permalink = get_the_permalink( $post->ID );
 
 		// métas
-		$this->metas = get_post_meta( $post->ID );
-		// simplification tableau métas
-		foreach ( $this->metas as $key => $value) {
-			$this->metas[$key] = implode('', $this->metas[$key] );
-		}
+		$this->metas = get_fields( $post->ID );
 
 		// test image associée
-		$this->use_woo_product_image(); // si le post est un produit WooCommerce
-		$this->has_image = ( isset( $this->metas['_thumbnail_id'] ) && is_object( get_post( $this->metas['_thumbnail_id'] ) ) ) ? true : false;
+		// $this->use_woo_product_image(); // si le post est un produit WooCommerce
+		$this->thumb_id = get_post_thumbnail_id( $this->id );
 
 	}
 
@@ -189,15 +185,15 @@ class PC_Post {
 
 		$metas = $this->metas;
 
-		if ( $this->has_image ) {
+		if ( $this->thumb_id ) {
 			
 			$datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
-				'400' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-s' ),
-				'500' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-m' ),
-				'700' => wp_get_attachment_image_src( $metas['_thumbnail_id'], 'card-l' )
-			), $metas['_thumbnail_id'], $this );
+				'400' => wp_get_attachment_image_src( $this->thumb_id, 'card-s' ),
+				'500' => wp_get_attachment_image_src( $this->thumb_id, 'card-m' ),
+				'700' => wp_get_attachment_image_src( $this->thumb_id, 'card-l' )
+			), $this->thumb_id, $this );
 			
-			$alt = get_post_meta( $metas['_thumbnail_id'], '_wp_attachment_image_alt', true );
+			$alt = get_post_meta( $this->thumb_id, '_wp_attachment_image_alt', true );
 			$datas['alt'] = ( $alt ) ? $alt : $this->get_card_title();
 		
 		} else {
@@ -368,24 +364,24 @@ class PC_Post {
 	 * 
 	 */
 	
-	private function use_woo_product_image() {
+	// private function use_woo_product_image() {
 
-		if ( in_array( $this->type, array('product','product_variation') ) ) {
+	// 	if ( in_array( $this->type, array('product','product_variation') ) ) {
 		
-			if ( isset( $this->metas['_thumbnail_id'] ) && $this->metas['_thumbnail_id'] > 0 ) {
+	// 		if ( isset( $this->metas['_thumbnail_id'] ) && $this->metas['_thumbnail_id'] > 0 ) {
 
-				$this->metas['visual-id'] = $this->metas['_thumbnail_id'];
+	// 			$this->metas['visual-id'] = $this->metas['_thumbnail_id'];
 
-			} else if ( 'product_variation' == $this->type ) {
+	// 		} else if ( 'product_variation' == $this->type ) {
 
-				$parent_image_id = get_post_meta( $this->parent, '_thumbnail_id', true );
-				if ( $parent_image_id && $parent_image_id > 0 ) { $this->metas['visual-id'] = $parent_image_id; }
+	// 			$parent_image_id = get_post_meta( $this->parent, '_thumbnail_id', true );
+	// 			if ( $parent_image_id && $parent_image_id > 0 ) { $this->metas['visual-id'] = $parent_image_id; }
 
-			}
+	// 		}
 
-		}
+	// 	}
 
-	}
+	// }
 	
 	
 	/*=====  FIN WooCommerce  =====*/
