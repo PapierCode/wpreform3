@@ -5,6 +5,7 @@ $template =  [ ['core/button'] ];
 
 $block_css = array(
 	'bloc-buttons',
+	'bloc-align-h--center',
 	'bloc-inner-align-h--'.get_field('inner_align_h')
 );
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }

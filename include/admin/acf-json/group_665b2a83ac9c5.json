@@ -169,30 +169,6 @@
             "layout": "horizontal"
         },
         {
-            "key": "field_665b2a83d52f0",
-            "label": "Alignement de la légende",
-            "name": "legend_align_h",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "left": "left",
-                "center": "center",
-                "right": "right"
-            },
-            "default_value": "center",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
             "key": "field_666318627bd59",
             "label": "Activer le diaporama",
             "name": "enable_js",
@@ -211,6 +187,78 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "ui": 1
+        },
+        {
+            "key": "field_6666d40bd2fe8",
+            "label": "Adapter sa hauteur à la colonne",
+            "name": "enable_cover",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Uniquement si l'image est seule dans la colonne.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_6666fafa8011a",
+            "label": "Afficher dans un cercle",
+            "name": "enable_circle",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_665b2a83d52f0",
+            "label": "Alignement de la légende",
+            "name": "legend_align_h",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6666fafa8011a",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "left",
+                "center": "center",
+                "right": "right"
+            },
+            "default_value": "center",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -231,5 +279,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1717837160
+    "modified": 1718026872
 }

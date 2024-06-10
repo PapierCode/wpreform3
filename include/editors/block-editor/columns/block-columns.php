@@ -18,7 +18,7 @@ switch ( get_field('bloc_align_h') ) {
         break;
 }
 if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
-// if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
+if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );

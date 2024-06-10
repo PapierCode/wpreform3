@@ -290,32 +290,24 @@ $button-space 	: 10;
 
 /*----------  Marges & Alignement  ----------*/
 
-.acf-block-preview {
-	max-width: rem($mw-wide) !important;
-}
-
 #editor .wp-block-post-content {
 	line-height: 1.5;
 
     > * { margin-block: rem($space-max); }
 
-	> .acf-block-preview:has(.bloc-align-h--left), 
-	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_l) { 
+	> .acf-block-preview { max-width: rem($mw-wide) !important; }
+
+	> .acf-block-preview:has( > .bloc-align-h--left ) { 
 		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
 		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
 	}
-	> .acf-block-preview:has(.bloc-align-h--right), 
-	> .wp-block-acf-pc-image:has(.bloc-image--medium_large_r) { 
+	> .acf-block-preview:has( > .bloc-align-h--right ) { 
 		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
 		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
 	}
-	> .acf-block-preview:has(.bloc-align-h--center) { 
+	> .acf-block-preview:has( > .bloc-align-h--center ) { 
 		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
 		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 + #{rem(.5*($mw-wide - $mw-txt))} ) !important;
-	}
-	> .wp-block-acf-pc-image:has(.bloc-image--large) { 
-		margin-left: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
-		margin-right: calc( (100% - #{rem($mw-wide)}) / 2 ) !important;
 	}
 
 }
@@ -419,19 +411,13 @@ $button-space 	: 10;
 .wp-block-acf-pc-image-frame,
 .wp-block-acf-pc-image-column {
 
-    img { display: block; }
     figure { margin-bottom: 0; }
+    img { display: block; }
     figcaption {
 		font-size: rem(16);
 		font-style: italic;
 		margin-top: rem(.25*$space-max);
 	}
-    
-    &:has(.bloc-image--medium_large_l),
-    &:has(.bloc-image--medium_large_r) {
-		max-width: rem($mw-wide - .5*($mw-wide - $mw-txt));
-	}
-    &:has(.bloc-image--large) { max-width: rem($mw-wide); }
 
     .bloc-inner-align-h--center .bloc-image-inner { margin-inline: auto; }
     .bloc-inner-align-h--right .bloc-image-inner { margin-left: auto; }

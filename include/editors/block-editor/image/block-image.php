@@ -5,6 +5,7 @@ if ( $img_args ) {
 
     $img_size = get_field('img_size');
 	$enable_js = get_field('enable_js');
+	$enable_circle = get_field('enable_circle');
     $caption = trim($img_args['caption']);
     $tag = ( $caption ) ? 'figure' : 'div';
 
@@ -15,6 +16,11 @@ if ( $img_args ) {
 
     // alignement du bloc
     switch ( $img_size ) {
+        case 'thumbnail_s':
+        case 'thumbnail':
+        case 'medium':
+            $block_css[] = 'bloc-align-h--center';
+            break;
         case 'medium_large_l':
             $block_css[] = 'bloc-align-h--left';
             break;
@@ -45,7 +51,13 @@ if ( $img_args ) {
     }
     if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
     if ( $enable_js ) { $block_css[] = 'diaporama'; }
-
+    
+    if ( $enable_circle ) { 
+        $block_css[] = 'bloc-image--circle';
+    	$img_paysage = $img_args['sizes'][$img_size.'-width'] > $img_args['sizes'][$img_size.'-height'];
+	    $circle_direction = $img_paysage ? 'height' : 'width';
+	    $img_container_style = ' style="max-width:'.($img_args['sizes'][$img_size.'-'.$circle_direction]/16).'rem"';
+    } else { $img_container_style = ''; }
 
     $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
     if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
@@ -54,13 +66,24 @@ if ( $img_args ) {
 
     echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem">';
 
-        if ( !$is_preview && $enable_js ) { echo '<a class="diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher l\'image '.$img_args['alt'].'" rel="nofollow">'; }
+        if ( !$is_preview && $enable_js ) { 
+            echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';
+        } else {
+            echo '<div class="bloc-image-container" style="'.$img_container_style.'">';
+        }
 
             echo '<img src="'.$img_args['sizes'][$img_size].'" alt="'.$img_args['alt'].'" width="'.$img_args['sizes'][$img_size.'-width'].'" height="'.$img_args['sizes'][$img_size.'-height'].'">';
             
-        if ( !$is_preview && $enable_js ) {echo '<span class="ico">'.pc_svg('fullscreen').'</span></a>'; }
+        if ( !$is_preview && $enable_js ) {
+            echo '<span class="ico">'.pc_svg('fullscreen').'</span></a>';
+        } else {
+            echo '</div>';
+        }
 
-        if ( $caption ) { echo '<figcaption class="has-text-align-'.get_field('legend_align_h').'">'.$caption.'</figcaption>'; }
+        if ( $caption ) {
+            $caption_align = $enable_circle ? 'center' : get_field('legend_align_h');
+            echo '<figcaption class="has-text-align-'.$caption_align.'">'.$caption.'</figcaption>';
+        }
 
     echo '</'.$tag.'></div>';
 
