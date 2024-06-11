@@ -160,6 +160,11 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 		// 	pc_var($args['parent']);
 		// }
 
+		$not_empty = [ 'core/heading', 'core/paragraph', 'core/list', 'core/list-item', 'core/button' ];
+		if ( in_array($args['blockName'], $not_empty) && !trim( wp_strip_all_tags( $content ) ) ) {
+			return '';
+		}
+
 		if ( $args['blockName'] == 'core/button' ) {
 
 			$button = new WP_HTML_Tag_Processor( $content );
