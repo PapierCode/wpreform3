@@ -151,7 +151,7 @@ if ( function_exists('acf_add_options_page') ) {
             'page_title'    => $news_settings_title,
             'menu_title'    => 'Paramètres',
             'menu_slug'     => 'news-settings',
-            'capability'    => 'manage_options',
+            'capability'    => 'edit_posts',
             'update_button' => 'Mettre à jour',
             'autoload'      => true,
             'parent_slug'   => 'edit.php?post_type=newspost'

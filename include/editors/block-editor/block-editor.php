@@ -110,6 +110,7 @@ add_action( 'acf/json/save_paths', 'pc_admin_acf_save_paths', 10, 2 );
 			'group_664db0c1e77e1', // [Paramètres] WPreform
 			'group_665c8549c226c', // Actualités associées / Article de blog associés
 			'group_665d740171b6b', // Page associées
+			'group_66607df2e0a0b', // [Paramètres] Actualités / Blog
 		);
 
 		if ( in_array( $post['title'], $blocks_acf ) || in_array( $post['key'], $settings_acf ) ) {
