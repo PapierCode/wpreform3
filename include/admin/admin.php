@@ -33,7 +33,7 @@ add_action( 'phpmailer_init', 'pc_mail_smtp_settings' );
 
 	function pc_mail_smtp_settings( $phpmailer ) {
 
-		$smtp = get_option( 'options_wpr_smtp' ) ?? array();
+		$smtp = get_field( 'wpr_smtp','option' ) ?? array( 'enabled' => 0 );
 
 		if ( $smtp['enabled'] ) {
 

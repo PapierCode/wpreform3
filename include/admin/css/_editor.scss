@@ -34,6 +34,7 @@
 
 // onglets bloc réglages/styles (WP défaut)
 .block-editor-block-inspector__tabs {
+	[role="tabpanel"] > div:has([aria-label*="conseil"]),
 	[role="tablist"] { display: none; }
 }
 
@@ -293,7 +294,10 @@ $button-space 	: 10;
 #editor .wp-block-post-content {
 	line-height: 1.5;
 
-    > * { margin-block: rem($space-max); }
+    > * { 
+		margin-block: rem($space-max);
+		box-sizing: border-box;
+	}
 
 	> .acf-block-preview { max-width: rem($mw-wide) !important; }
 
