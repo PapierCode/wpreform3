@@ -155,18 +155,22 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 
 add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
-	function pc_render_block( $content, $args, $block ) {
+	function pc_render_block( $content, $block, $instace ) {
 
-		// if ( $args['blockName'] == 'core/button' && isset($args['parent']) ) {
-		// 	pc_var($args['parent']);
+		// if ( $block['blockName'] == 'core/button' && isset($block['parent']) ) {
+		// 	pc_var($block['parent']);
 		// }
 
 		$not_empty = [ 'core/heading', 'core/paragraph', 'core/list', 'core/list-item', 'core/button' ];
-		if ( in_array($args['blockName'], $not_empty) && !trim( wp_strip_all_tags( $content ) ) ) {
-			return '';
+		if ( in_array($block['blockName'], $not_empty) && !trim( wp_strip_all_tags( $content ) ) ) {
+			$content = '';
 		}
 
-		if ( $args['blockName'] == 'core/button' ) {
+		/*==============================
+		=            Bouton            =
+		==============================*/
+		
+		if ( $block['blockName'] == 'core/button' ) {
 
 			$button = new WP_HTML_Tag_Processor( $content );
 			$button->next_tag('a');
@@ -199,23 +203,48 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 				$content = '<a '.implode(' ',$btn_attrs).'><span class="ico">'.pc_svg($btn_ico).'</span><span class="txt">'.wp_strip_all_tags($content).'</span></a>';
 
-			} else { return ''; }
+			} else { $content = ''; }
 			
 		}
+		
+		
+		/*=====  FIN Bouton  =====*/
 
-		if ( $args['blockName'] == 'acf/pc-quote' ) {
+		/*================================
+		=            Citation            =
+		================================*/
+		
+		if ( $block['blockName'] == 'acf/pc-quote' ) {
 
-			$block_align = $args['attrs']['data']['bloc_align_h'] ?? 'left';
-			$content = '<blockquote class="bloc-quote bloc-align-h--'.$block_align.'">';
-				$content .= trim($args['innerBlocks'][0]['innerHTML']);
-				$cite = wp_strip_all_tags( trim($args['innerBlocks'][1]['innerHTML']) );
+			$quote = trim( wp_strip_all_tags( $block['innerBlocks'][0]['innerHTML'] ));
+
+			if ( $quote ) {
+				
+				$block_css = array(
+					'bloc-quote',
+					'bloc-align-h--'.$block['attrs']['data']['bloc_align_h']
+				);
+				if ( isset( $block['attrs']['className'] ) && trim( $block['attrs']['className'] ) ) { $block_css[] = $block['attrs']['className']; }
+				
+				$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+				if ( isset( $block['attrs']['anchor'] ) && trim( $block['attrs']['anchor'] ) ) { $block_attrs[] = 'id="'.$block['attrs']['anchor'].'"'; }
+
+				$content = '<blockquote '.implode(' ',$block_attrs).'>'.$block['innerBlocks'][0]['innerHTML'];
+
+				$cite = trim( wp_strip_all_tags( $block['innerBlocks'][1]['innerHTML'] ));
+
 				if ( $cite ) {
-					$cite_align = $args['innerBlocks'][1]['attrs']['align'] ?? 'left';
-					$content .= '<cite class="has-text-align-'.$cite_align.'">'.$cite.'</cite>';
+					$content .= str_replace(['<p','p>'],['<cite','cite>'],$block['innerBlocks'][1]['innerHTML']);
 				}
-			$content .= '</blockquote>';
+
+				$content .= '</blockquote>';
+
+			} else { $content = ''; }
 
 		}	
+		
+
+		/*=====  FIN Citation  =====*/
 
 		return $content;
 
@@ -224,11 +253,11 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 /*=====  FIN Rendu des blocs  =====*/
 
-/*=============================
-=            Posts            =
-=============================*/
+/*==================================
+=            Bloc posts            =
+==================================*/
 
-add_filter('acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
+add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
 
 	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
 
@@ -240,4 +269,4 @@ add_filter('acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_fil
 	}
 
 
-/*=====  FIN Posts  =====*/
+/*=====  FIN Bloc posts  =====*/

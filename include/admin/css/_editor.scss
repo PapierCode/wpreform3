@@ -351,39 +351,6 @@ $button-space 	: 10;
 
 /*=====  FIN Titres  =====*/
 
-/*================================
-=            Citation            =
-================================*/
-
-/*----------  Aperçu  ----------*/
-
-.wp-block-acf-pc-quote {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-
-	p:nth-child(1) {
-		margin:0;		
-		position: relative;
-		z-index: 1;
-
-		&::before, &::after {
-			content:"";
-			position: absolute;
-			z-index: 0;
-		}
-	}
-	p:nth-child(2) {
-		display: block;
-		font-style: normal;
-		margin-top: rem(.5*$space-max)
-	}
-}
-
-
-/*=====  FIN Citation  =====*/
-
 /*==============================
 =            Spacer            =
 ==============================*/
