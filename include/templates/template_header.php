@@ -126,7 +126,7 @@ function pc_display_header_logo() {
 
 function pc_display_nav_button_open_close() {
 
-	echo '<button type="button" title="Ouvrir/fermer le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
+	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
 
 }
 
@@ -136,6 +136,9 @@ function pc_display_nav_button_open_close() {
 function pc_display_header_nav() {
 
 	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
+
+		$nav_depth = apply_filters( 'pc_filter_header_nav_depth', 2 );
+		if ( $nav_depth > 1 ) { echo '<button type="button" class="h-p-nav-sub-back button"><span class="ico">'.pc_svg('arrow').'</button>'; }
 		
 		do_action( 'pc_header_nav_list_before' );
 
@@ -144,7 +147,7 @@ function pc_display_header_nav() {
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
-			'depth'           	=> 2,
+			'depth'           	=> $nav_depth,
 			'container'       	=> '',
 			'item_spacing'		=> 'discard',
 			'fallback_cb'     	=> false,

@@ -25,12 +25,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
     =            Fonctions            =
     =================================*/
     
-    const subListAttrHeight = ( subList ) => {
-        subList.style.maxHeight = 'none'; // annule les css (max-height:0)
-        subList.setAttribute( 'data-height', rem(subList.offsetHeight) );
-        subList.style.maxHeight = 0;
-    };
-    
     /*----------  Visibilité du bouton "burger"  ----------*/
     
     const btnBurgerVisibility = () => {
@@ -52,11 +46,8 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
         subList.ontransitionend = null; // ajouté à la fermeture
         subList.style.visibility = 'visible';
-    
-        // option valeur transition height gérée en JS
-        if ( navArgs.heightAnimation.small && btnBurgerIsVisible || navArgs.heightAnimation.full && !btnBurgerIsVisible ) {
-            subList.style.maxHeight = subList.dataset.height;
-        }
+        parent.parentNode.ontransitionend = null; // ajouté à la fermeture
+        parent.parentNode.style.overflow = 'visible';
     
         btn.setAttribute( 'aria-expanded', 'true' );
         parent.classList.add('is-open');
@@ -65,12 +56,10 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
     const navSubClose = ( parent, btn, subList ) => {
     
-        // option valeur transition height gérée en JS
-        if ( navArgs.heightAnimation.small && btnBurgerIsVisible || navArgs.heightAnimation.full && !btnBurgerIsVisible ) {
-            subList.style.maxHeight =  0;
-        }
-    
-        // attendre la fin de la transition CSS
+        // attendre la fin des transitions CSS
+        parent.parentNode.ontransitionend = () => {				
+            parent.parentNode.style.overflow = btnBurgerIsVisible ? 'hidden auto' : 'hidden';
+        };
         subList.ontransitionend = () => {				
             subList.style.visibility = 'hidden';
             btn.setAttribute( 'aria-expanded', 'false' );
@@ -96,12 +85,15 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
             nav.ontransitionend = null; // ajouté à la fermeture
     
-            nav.style.visibility = 'visible';	
+            // nav.style.visibility = 'visible';
+            nav.setAttribute('aria-hidden', 'false');
+
             document.addEventListener( 'keydown', navKeyDown );
-            html.classList.add('h-nav-is-open');
     
             btnBurger.setAttribute('aria-expanded','true');	
-            nav.setAttribute('aria-hidden', 'false');
+            btnBurger.setAttribute('title',btnBurgerTitleClose);
+
+            body.classList.add('h-nav-is-open');
             navIsOpen = true;
     
         } else { // fermer
@@ -110,15 +102,20 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
                 nav.ontransitionend = () => {
     
-                    nav.style.visibility = 'hidden'; 
+                    // nav.style.visibility = 'hidden'; 
                     document.removeEventListener( 'keydown', navKeyDown );		
                     btnBurger.setAttribute('aria-expanded','false');	
+                    btnBurger.setAttribute('title',btnBurgerTitleOpen);		
                     nav.setAttribute('aria-hidden','true');
                     navIsOpen = false;
+
+                    // fermer le sous-menu ouvert
+                    let subOpen = nav.querySelector('button[aria-expanded="true"]');
+                    if ( subOpen ) { subOpen.click(); }
     
                 };
     
-                html.classList.remove('h-nav-is-open');	
+                body.classList.remove('h-nav-is-open');	
     
             }
             
@@ -128,8 +125,19 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
     // zone hors menu ouvert
     const navOverlay = ( event ) => { if ( event.target == nav ) { navToggle(); } };
-    // touche échap
-    const navKeyDown = ( event ) => { if ( event.key == 'Escape' ) { navToggle(); } };
+    // touche échap menu masqué
+    const navKeyDown = ( event ) => { if ( event.key == 'Escape' ) {
+        navToggle(); 
+        btnBurger.focus();
+    }};
+    // touche échap submenu, menu visible
+    const subKeyDown = ( event ) => { if ( event.key == 'Escape' ) {
+        let open = [...liParents].find((li) => li.classList.contains('is-open'));
+        if ( open ) {
+            navSubClose( open, open.children[0], open.children[1] );
+            open.children[0].focus();
+        }
+    } };
     
     
     /*----------  Mise à jour menu  ----------*/
@@ -146,40 +154,35 @@ document.addEventListener( 'DOMContentLoaded', () => {
                 let subList = btn.nextSibling;  
                 let siblings = getSiblings( parent );
     
-                // ferme le sous-menu si ouvert
+                // ferme un sous-menu ouvert
                 if ( parent.classList.contains( 'is-open' ) ) { navSubClose( parent, btn, subList ); }
     
                 btn.onclick = () => { navSubToggle( parent, btn, subList, siblings ); };
                 
                 if ( !btnBurgerIsVisible ) { // menu visible
     
-                    if ( !navArgs.heightAnimation.full ) { subList.style.removeProperty( 'max-height' ); }
-    
                     parent.onmouseenter = () => {
-                        btn.onclick = null;
+                        // btn.onclick = null;
                         navSubOpen( parent, btn, subList, siblings );
                     };
                     parent.onmouseleave = () => {
                         // TODO timer
-                        btn.onclick = () => { navSubToggle( parent, btn, subList, siblings ); };
+                        // btn.onclick = () => { navSubToggle( parent, btn, subList, siblings ); };
                         navSubClose( parent, btn, subList );
                     };
+                    document.addEventListener( 'keydown', subKeyDown );
     
                 } else { // menu caché
     
-                    if ( navArgs.heightAnimation.small ) { subListAttrHeight( subList ); }
-    
-                    // ouverture menu actif
-                    if ( parent.classList.contains('is-active') ) { navSubOpen( parent, btn, subList, siblings ); }
-    
                     parent.onmouseenter = null;
                     parent.onmouseleave = null;
+                    document.removeEventListener( 'keydown', subKeyDown );
     
                 }
     
             });
     
-        } // FIN liParents
+        } // FIN liParents foreach
     
     
         /*----------  Menu visible/caché  ----------*/    
@@ -188,7 +191,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
             nav.setAttribute('aria-labelledby','#header-nav-btn');
             nav.setAttribute('aria-hidden','true');
-            nav.style.visibility = 'hidden';
+            // nav.style.visibility = 'hidden';
     
             btnBurger.onclick = () => { navToggle(); };
             nav.onclick = (event) => { navOverlay(event); }; 
@@ -200,11 +203,12 @@ document.addEventListener( 'DOMContentLoaded', () => {
             nav.ontransitionend = null;
     
             btnBurger.setAttribute( 'aria-expanded', 'false' );
+            btnBurger.setAttribute('title',btnBurgerTitleOpen);	
             nav.removeAttribute('aria-labelledby');
             nav.removeAttribute('aria-hidden');
             nav.removeAttribute('style');
     
-            html.classList.remove('h-nav-is-open');
+            body.classList.remove('h-nav-is-open');
             navIsOpen = false;
     
         }
@@ -218,9 +222,11 @@ document.addEventListener( 'DOMContentLoaded', () => {
     =            Variables/constantes de base            =
     ====================================================*/
     
-    const html = document.querySelector( 'html' );
+    const body = document.querySelector( 'body' );
     
     const btnBurger = document.querySelector( '.h-nav-btn' );
+    const btnBurgerTitleOpen = btnBurger.getAttribute('title');
+    const btnBurgerTitleClose = btnBurger.dataset.title;
     
     const nav = btnBurger.nextSibling;
     const liParents = nav.querySelectorAll( '.h-p-nav-item--l1.is-parent' );
@@ -274,13 +280,16 @@ document.addEventListener( 'DOMContentLoaded', () => {
             let subList = btn.nextSibling;
             subList.setAttribute( 'id', 'h-nav-submenu-' + index );
             subList.setAttribute( 'aria-labelledby', 'h-nav-btn-submenu-' + index );
+            // if ( btnBurgerIsVisible ) { parent.parentNode.style.overflow = 'hidden auto'; }
             subList.style.visibility = 'hidden';
     
-            if ( navArgs.heightAnimation.small && btnBurgerIsVisible || navArgs.heightAnimation.full && !btnBurgerIsVisible ) {
-                subListAttrHeight( subList );
-            }
-    
         });
+
+        // sous-menu retour
+        const btnClose = nav.querySelector( '.h-p-nav-sub-back' );
+        btnClose.addEventListener( 'click', () => { 
+            nav.querySelector('button[aria-expanded="true"]').click();
+        } );
     
     }
     
@@ -290,4 +299,4 @@ document.addEventListener( 'DOMContentLoaded', () => {
     /*=====  FIN Start  =====*/
     
     
-    } ); // FIN DOMContentLoaded
+} ); // FIN DOMContentLoaded

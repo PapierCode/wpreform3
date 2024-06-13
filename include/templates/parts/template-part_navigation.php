@@ -153,7 +153,7 @@ function pc_display_breadcrumb() {
 
 	/*----------  Single  ----------*/
 	
-	if ( is_singular() ) {
+	if ( is_singular() && !is_front_page() ) {
 
 		global $pc_post;
 

@@ -169,28 +169,17 @@ function pc_display_footer_nav() {
 
 function pc_display_js_footer() {
 
-	/*----------  PHP to JS  ----------*/
+	/*----------  Sprite to JS  ----------*/
 	
 	$sprite_selection = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
 	if ( !empty( $sprite_selection ) ) {
-		global $sprite;
 		$sprite_to_json = array();
 		foreach ( $sprite_selection as $id ) {
-			$sprite_to_json[$id] = str_replace( '<svg', '<svg aria-hidden="true" focusable="false"', $sprite[$id] );
+			$sprite_to_json[$id] = pc_svg($id);
 		}
 	}
 
-	$h_nav_js_args = apply_filters( 'pc_filter_header_nav_js_args', array(
-		'heightAnimation' => array(
-			'small' => true,
-			'full' => true
-		)
-	) );
-
-	echo '<script>';
-		echo 'const navArgs='.json_encode( $h_nav_js_args ).';';
-		echo 'const sprite='.json_encode( $sprite_to_json ).';';
-	echo '</script>';
+	echo '<script>const sprite='.json_encode( $sprite_to_json ).'</script>';
 	
 
 	/*----------  Fichiers JS  ----------*/
