@@ -141,6 +141,15 @@ a[href*="customize.php"] { display:none; }
 .acf-input { .description { font-style: italic; } }
 .acf-label { .description { font-style: italic; } }
 
+// Map
+.acf-google-map {
+    div.gmnoprint:has(button[title*="plan de ville"]),
+    button.gm-fullscreen-control,
+    button[title*="Pegman"] {
+        display: none;
+    }
+}
+
 
 /*=====  FIN ACF  =====*/
 
