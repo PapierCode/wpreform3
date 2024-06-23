@@ -4,15 +4,7 @@
 =            Communs            =
 ===============================*/
 
-/*----------  Image mise en avant  ----------*/
-
-add_action( 'after_setup_theme', 'pc_admin_add_thumbnail_support' );
-
-	function pc_admin_add_thumbnail_support() {
-
-		add_theme_support( 'post-thumbnails', array( 'page', NEWS_POST_SLUG ) );
-
-	}
+/*----------  Image mise en avant dans les listes  ----------*/
 
 add_filter( 'manage_pages_columns', 'pc_admin_post_column_thumbnail' );
 add_filter( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_post_column_thumbnail' );
@@ -69,6 +61,40 @@ add_action( 'admin_head-nav-menus.php', 'pc_admin_nav_menu_remove_article_metabo
 =            Pages            =
 =============================*/
 
+/*----------  Sélection parent  ----------*/
+
+add_filter('acf/fields/post_object/query/key=field_6677e014751e4', 'pc_admin_page_parent_field_query', 10, 3);
+
+	function pc_admin_page_parent_field_query( $args, $field, $post_id ) {
+
+		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+		$args['post_parent__not_in'] = array( $post_id );
+
+		return $args;
+	}
+
+add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
+
+    function pc_admin_page_parent_field_save( $post_id, $post ) {
+
+        if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' ) {
+
+                // prévention contre une boucle infinie 1/2
+			remove_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
+
+			// mise à jour post
+			wp_update_post( array(
+				'ID' => $post_id,
+				'post_parent' => $_POST['acf']['field_6677e014751e4']
+			));
+
+			// prévention contre une boucle infinie 2/2
+			add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
+
+        }
+
+    }
+
 /*----------  Suppresison métabxoes  ----------*/
 
 add_action( 'init', 'pc_admin_page_remove_metaboxes' );
@@ -77,6 +103,7 @@ add_action( 'init', 'pc_admin_page_remove_metaboxes' );
 			
 		remove_post_type_support( 'page', 'comments' );	
 		remove_post_type_support( 'page', 'revisions' );
+		remove_post_type_support( 'page', 'page-attributes' );
 
 	};
 
