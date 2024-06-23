@@ -16,6 +16,7 @@ include 'admin_custom.php';
 include 'admin_posts.php';
 
 include 'acf-fields/acf-wpr-settings.php';
+include 'acf-fields/acf-blocks.php';
 include 'acf-fields/acf-page.php';
 include 'acf-fields/acf-news.php';
 

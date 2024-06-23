@@ -57,7 +57,8 @@ add_filter( 'acf/blocks/wrap_frontend_innerblocks', '__return_false' );
 /*----------  Blocs ACF  ----------*/
 
 // id json => nom du groupe (admin)
-$blocks_acf = array(
+global $pc_blocks_acf;
+$pc_blocks_acf = array(
 	'quote' => '[Bloc] Citation',
 	'frame' => '[Bloc] Encadré',
 	'columns' => '[Bloc] 2 colonnes',
@@ -72,7 +73,7 @@ $blocks_acf = array(
 	'column' => '[Bloc] Colonne'
 );
 
-foreach ( $blocks_acf as $block_id => $block_name ) {
+foreach ( $pc_blocks_acf as $block_id => $block_name ) {
 	if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { register_block_type( __DIR__.'/'.$block_id ); }
 }
 
@@ -89,8 +90,8 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 			'rank-math/toc-block'
 		);
 		
-		global $blocks_acf;
-		foreach ( $blocks_acf as $block_id => $block_name ) {
+		global $pc_blocks_acf;
+		foreach ( $pc_blocks_acf as $block_id => $block_name ) {
 			if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { $blocks[] = 'acf/pc-'.$block_id; }
 		}
 	
@@ -101,11 +102,12 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 
 /*----------  Répertoire JSON  ----------*/
 
+/*
 add_action( 'acf/json/save_paths', 'pc_admin_acf_save_paths', 10, 2 );
 
 	function pc_admin_acf_save_paths( $paths, $post ) {
 
-		global $blocks_acf;
+		global $pc_blocks_acf;
 		$settings_acf = array(
 			'group_664db0c1e77e1', // [Paramètres] WPreform
 			'group_665c8549c226c', // Actualités associées / Article de blog associés
@@ -113,7 +115,7 @@ add_action( 'acf/json/save_paths', 'pc_admin_acf_save_paths', 10, 2 );
 			'group_66607df2e0a0b', // [Paramètres] Actualités / Blog
 		);
 
-		if ( in_array( $post['title'], $blocks_acf ) || in_array( $post['key'], $settings_acf ) ) {
+		if ( in_array( $post['title'], $pc_blocks_acf ) || in_array( $post['key'], $settings_acf ) ) {
 			$paths = array( get_template_directory().'/include/admin/acf-json' );
 		}
 
@@ -129,6 +131,7 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 		return $paths;
 
 	};
+*/
 
 /*===============================================
 =            No metaboxes taxonomies            =
