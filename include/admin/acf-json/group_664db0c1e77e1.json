@@ -478,24 +478,6 @@
             "layout": "row",
             "sub_fields": [
                 {
-                    "key": "field_665d6ce94f8ef",
-                    "label": "Action manuelle",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "message",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "message": "Configuration groupes de champs ACF : \r\n- <em>Actualités associées<\/em> pour les pages ou <em>Pages associées<\/em> pour les actualités.\r\n- <em>[Paramètres] Actualités\/Blog<\/em>",
-                    "new_lines": "br",
-                    "esc_html": 0
-                },
-                {
                     "key": "field_665d64a18cefe",
                     "label": "Activé",
                     "name": "enabled",
@@ -547,22 +529,34 @@
                     "layout": "horizontal"
                 },
                 {
-                    "key": "field_665c84c033b97",
+                    "key": "field_6677fdf406a4a",
                     "label": "Catégories",
                     "name": "tax",
                     "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": [
-                        [
-                            {
-                                "field": "field_665d64a18cefe",
-                                "operator": "==",
-                                "value": "1"
-                            }
-                        ]
-                    ],
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_6677fdca06a49",
+                    "label": "Associer aux pages",
+                    "name": "pages",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -595,5 +589,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1717600115
+    "modified": 1719139979
 }
