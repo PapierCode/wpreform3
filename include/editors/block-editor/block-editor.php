@@ -130,6 +130,27 @@ add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
 
 	};
 
+/*===============================================
+=            No metaboxes taxonomies            =
+===============================================*/
+
+add_filter( 'rest_prepare_taxonomy', 'pc_admin_remove_default_metabox_taxonomy', 10, 3 );
+
+	function pc_admin_remove_default_metabox_taxonomy( $response, $taxonomy, $request ) {
+		
+		if ( !empty( $request['context'] ) && $request['context'] ) {
+			$data_response = $response->get_data();
+			$data_response['visibility']['show_ui'] = false;
+			$response->set_data( $data_response );
+		}
+
+		return $response;
+		
+	}
+
+
+/*=====  FIN No metaboxes taxonomies  =====*/
+
 /*======================================
 =            Ajout contexte            =
 ======================================*/
