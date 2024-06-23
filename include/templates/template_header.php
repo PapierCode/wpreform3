@@ -138,7 +138,7 @@ function pc_display_header_nav() {
 	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 
 		$nav_depth = apply_filters( 'pc_filter_header_nav_depth', 2 );
-		if ( $nav_depth > 1 ) { echo '<button type="button" class="h-p-nav-sub-back button"><span class="ico">'.pc_svg('arrow').'</button>'; }
+		if ( $nav_depth > 1 ) { echo '<button type="button" class="h-p-nav-sub-back button"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
 		
 		do_action( 'pc_header_nav_list_before' );
 

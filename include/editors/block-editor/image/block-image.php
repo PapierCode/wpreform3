@@ -69,7 +69,7 @@ if ( $img_args ) {
         if ( !$is_preview && $enable_js ) { 
             echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';
         } else {
-            echo '<div class="bloc-image-container" style="'.$img_container_style.'">';
+            echo '<div class="bloc-image-container"'.$img_container_style.'>';
         }
 
             echo '<img src="'.$img_args['sizes'][$img_size].'" alt="'.$img_args['alt'].'" width="'.$img_args['sizes'][$img_size.'-width'].'" height="'.$img_args['sizes'][$img_size.'-height'].'">';

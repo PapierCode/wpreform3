@@ -74,9 +74,9 @@ function pc_display_index_content( $pc_post ) {
 
 		$display_container = apply_filters( 'pc_filter_page_content_container', true, $pc_post );
 
-		if ( $display_container ) { echo '<div class="editor">'; }
+		if ( $display_container ) { echo '<section class="editor">'; }
 			the_content();
-		if ( $display_container ) { echo '</div>'; }
+		if ( $display_container ) { echo '</section>'; }
 		
 	}
 

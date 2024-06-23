@@ -56,8 +56,8 @@ add_filter( 'acf/blocks/wrap_frontend_innerblocks', '__return_false' );
 
 /*----------  Blocs ACF  ----------*/
 
-// id json => nom du groupe (admin)
 global $pc_blocks_acf;
+// id json => nom du groupe (admin)
 $pc_blocks_acf = array(
 	'quote' => '[Bloc] Citation',
 	'frame' => '[Bloc] Encadré',
