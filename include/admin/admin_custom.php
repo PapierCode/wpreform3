@@ -1,4 +1,16 @@
 <?php
+/**
+ * 
+ * Admin : divers
+ * 
+ * Page de connexion
+ * Init / droits navigation éditeur, emojis, panneau d'accueil, version WP, métaboxe archives (navigation)
+ * Navigation admin
+ * Dashboard
+ * Médias / pas de single, formats acceptés, colonnes vue liste, tips champs alt & légende
+ * Divers / Barre d'admin, onglet aide, alertes MAJ, mention pied de page
+ * 
+ */
 
 /*=============================
 =            Login            =
@@ -35,6 +47,121 @@ add_filter( 'login_errors', 'pc_login_errors' ) ;
 
 
 /*=====  FIN Login  =====*/
+
+/*==================================
+=            Admin init            =
+==================================*/
+
+add_action( 'admin_init', 'pc_admin_init' ); 
+
+	function pc_admin_init() {
+
+		// Menu apparence pour les éditeurs (accès sous-menu)		
+		$editor = get_role( 'editor' );
+		$editor->add_cap( 'edit_theme_options' );
+		// emoji
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script', 10 );
+		remove_action( 'admin_print_styles', 'print_emoji_styles', 10 );
+		// annonce bienvenue
+		remove_action( 'welcome_panel', 'wp_welcome_panel' ); 
+		 // affichage version 
+		remove_filter( 'update_footer', 'core_update_footer' );
+
+		// métaboxe archive
+		add_meta_box(
+			'sol_archive_links',
+			'Toutes/tous les...',
+			'pc_admin_menu_metaboxes_archive_content',
+			'nav-menus',
+			'side',
+			'low'
+		);	
+
+	}
+
+/*----------  Métaboxe archive contenu  ----------*/
+
+function pc_admin_menu_metaboxes_archive_content() {
+
+	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', array( 1 => array( NEWS_POST_SLUG, 'Actualités' ) ) );
+
+	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';
+
+		foreach ( $archives as $key => $values ) {
+			
+		echo '<li>';
+			echo '<label class="menu-item-title"><input type="checkbox" class="menu-item-checkbox" name="menu-item['.$key.'][menu-item-object-id]" value="'.$key.'">'.$values[1].'</label>';
+			echo '<input type="hidden" class="menu-item-object" name="menu-item['.$key.'][menu-item-object]" value="'.$values[0].'">';
+			echo '<input type="hidden" class="menu-item-type" name="menu-item['.$key.'][menu-item-type]" value="post_type_archive">';
+			echo '<input type="hidden" class="menu-item-title" name="menu-item['.$key.'][menu-item-title]" value="'.$values[1].'">';
+			echo '<input type="hidden" class="menu-item-url" name="menu-item['.$key.'][menu-item-url]" value="'.get_post_type_archive_link( $values[0] ).'">';
+		echo '</li>';
+		}
+
+	echo '</ul></div><p class="button-controls"><span class="add-to-menu"><input type="submit" class="button-secondary submit-add-to-menu right" value="Add to Menu" name="add-post-type-menu-item" id="submit-posttype-archives"><span class="spinner"></span></span></p></div>';
+
+}
+
+/*=====  FIN Admin init  =====*/
+
+/*==================================
+=            Navigation            =
+==================================*/
+
+add_action( 'admin_menu', 'pc_admin_menu', 999 );
+
+function pc_admin_menu() {
+
+	global $menu, $submenu;
+
+
+	/*----------  Pour les utilisateurs non administrateur  ----------*/
+
+	if ( !current_user_can( 'administrator' ) ) {
+
+		// Apparence	
+		remove_menu_page( 'themes.php' );		
+		// Outils
+		remove_menu_page( 'tools.php' );
+
+		// Menus, déplacer l'item 
+		$menu[59] = array(
+			'Menus',				// Nom
+			'edit_pages',			// droits
+			'nav-menus.php',		// cible
+			'',						// ??
+			'menu-top menu-nav',	// classes CSS
+			'menu-nav',				// id CSS
+			'dashicons-menu'		// icône
+		);
+
+		// TinyPNG
+		if ( is_plugin_active( 'tiny-compress-images/tiny-compress-images.php' ) ) {
+			foreach( $submenu['upload.php'] as $index => $item ) {
+				// sous menu "optimisation en masse"
+				if ( in_array( 'tiny-bulk-optimization', $item ) ) {  unset( $submenu['upload.php'][$index] ); }
+			}
+		}
+
+	}
+
+
+	/*----------  Tous les utilisateurs  ----------*/
+
+	// Articles, supprimer l'item
+	remove_menu_page( 'edit.php' ); 
+	// Commentaires
+	remove_menu_page( 'edit-comments.php' );
+
+	// Médias, supprimer le sous-menu "Ajouter"
+	remove_submenu_page('upload.php', 'media-new.php');
+	// Médias, modifier l'icône
+	$menu[10][6] = 'dashicons-format-gallery';
+	
+}
+
+
+/*=====  FIN Navigation  =====*/
 
 /*=================================
 =            Dashboard            =
@@ -139,66 +266,9 @@ add_filter( 'attachment_fields_to_edit', 'pc_admin_help_img_fields', 10, 2 );
  
 /*=====  FIN Médias  =====*/
 
-/*==================================
-=            Admin init            =
-==================================*/
-
-add_action( 'admin_init', 'pc_admin_init' ); 
-
-	function pc_admin_init() {
-
-		// Menu apparence pour les éditeurs (accès sous-menu)		
-		$editor = get_role( 'editor' );
-		$editor->add_cap( 'edit_theme_options' );
-		// emoji
-		remove_action( 'admin_print_scripts', 'print_emoji_detection_script', 10 );
-		remove_action( 'admin_print_styles', 'print_emoji_styles', 10 );
-		// annonce bienvenue
-		remove_action( 'welcome_panel', 'wp_welcome_panel' ); 
-		 // affichage version 
-		remove_filter( 'update_footer', 'core_update_footer' );
-
-		// métaboxe archive
-		add_meta_box(
-			'sol_archive_links',
-			'Toutes/tous les...',
-			'pc_admin_menu_metaboxes_archive_content',
-			'nav-menus',
-			'side',
-			'low'
-		);	
-
-	}
-
-/*----------  Métaboxe archive contenu  ----------*/
-
-function pc_admin_menu_metaboxes_archive_content() {
-
-	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', array( 1 => array( NEWS_POST_SLUG, 'Actualités' ) ) );
-
-	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';
-
-		foreach ( $archives as $key => $values ) {
-			
-		echo '<li>';
-			echo '<label class="menu-item-title"><input type="checkbox" class="menu-item-checkbox" name="menu-item['.-$key.'][menu-item-object-id]" value="'.-$key.'">'.$values[1].'</label>';
-			echo '<input type="hidden" class="menu-item-object" name="menu-item['.-$key.'][menu-item-object]" value="'.$values[0].'">';
-			echo '<input type="hidden" class="menu-item-type" name="menu-item['.-$key.'][menu-item-type]" value="post_type_archive">';
-			echo '<input type="hidden" class="menu-item-title" name="menu-item['.-$key.'][menu-item-title]" value="'.$values[1].'">';
-			echo '<input type="hidden" class="menu-item-url" name="menu-item['.-$key.'][menu-item-url]" value="'.get_post_type_archive_link( $values[0] ).'">';
-		echo '</li>';
-		}
-
-	echo '</ul></div><p class="button-controls"><span class="add-to-menu"><input type="submit" class="button-secondary submit-add-to-menu right" value="Add to Menu" name="add-post-type-menu-item" id="submit-posttype-archives"><span class="spinner"></span></span></p></div>';
-
-}
-
-/*=====  FIN Admin init  =====*/
-
 /*==============================
 =            Divers            =
 ==============================*/
-
 
 /*----------  Simplication de la barre d'admin  ----------*/
 
@@ -249,63 +319,3 @@ add_filter( 'wp_is_application_passwords_available', '__return_false' );
 
 
 /*=====  FIN Divers  =====*/
-
-/*==================================
-=            Navigation            =
-==================================*/
-
-add_action( 'admin_menu', 'pc_admin_menu', 999 );
-
-	function pc_admin_menu() {
-
-		global $menu, $submenu;
-
-
-		/*----------  Pour les utilisateurs non administrateur  ----------*/
-
-		if ( !current_user_can( 'administrator' ) ) {
-
-			// Apparence	
-			remove_menu_page( 'themes.php' );
-
-			// Menus, déplacer l'item 
-			$menu[59] = array(
-				'Menus',				// Nom
-				'edit_pages',			// droits
-				'nav-menus.php',		// cible
-				'',						// ??
-				'menu-top menu-nav',	// classes CSS
-				'menu-nav',				// id CSS
-				'dashicons-menu'		// icône
-			);
-			
-			// Outils, supprimer l'item
-			remove_menu_page( 'tools.php' );
-
-			// TinyPNG
-			if ( is_plugin_active( 'tiny-compress-images/tiny-compress-images.php' ) ) {
-				foreach( $submenu['upload.php'] as $index => $item ) {
-					// sous menu "optimisation en masse"
-					if ( in_array( 'tiny-bulk-optimization', $item ) ) {  unset( $submenu['upload.php'][$index] ); }
-				}
-			}
-
-		}
-
-
-		/*----------  Tous les utilisateurs  ----------*/
-
-		// Articles, supprimer l'item
-		remove_menu_page( 'edit.php' ); 
-		// Commentaires
-		remove_menu_page( 'edit-comments.php' );
-
-		// Médias, supprimer le sous-menu "Ajouter"
-		remove_submenu_page('upload.php', 'media-new.php');
-		// Médias, modifier l'icône
-		$menu[10][6] = 'dashicons-format-gallery';
-		
-	}
-
-
-/*=====  FIN Navigation  =====*/

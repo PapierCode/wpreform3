@@ -99,36 +99,11 @@ add_action( 'pc_action_template_index', 'pc_page_aside_news', 125 );
 			$metas = $pc_post->metas;
 			$get_news_args = array(
 				'post_type' => NEWS_POST_SLUG,
-				'post_per_page' => 4
+				'post_per_page' => 4,				
+				'meta_key' => '_news_pages_related',
+				'meta_value' => '"'.$pc_post->id.'"',
+				'meta_compare' => 'LIKE'
 			);
-
-			if ( isset( $metas['_page_news_categories_related'] ) ) {
-
-				$get_news_args = array_merge(
-					array( 
-						'tax_query' => array(
-							array(
-								'taxonomy' => NEWS_TAX_SLUG,
-								'field' => 'term_id',
-								'terms' => $metas['_page_news_categories_related']
-							),
-						)
-					),
-					$get_news_args
-				);
-
-			} else {
-
-				$get_news_args = array_merge(
-					array(
-						'meta_key' => '_news_pages_related',
-						'meta_value' => '"'.$pc_post->id.'"',
-						'meta_compare' => 'LIKE'
-					),
-					$get_news_args
-				);
-
-			}
 
 			$get_news = get_posts( $get_news_args );
 

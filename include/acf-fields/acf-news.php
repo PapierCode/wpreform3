@@ -1,4 +1,14 @@
 <?php
+/**
+ * 
+ * ACF : Actualités/BLog
+ * 
+ * Visuel
+ * Catégories
+ * Relation pages
+ * Paramètres
+ * 
+ */
 
 add_action( 'acf/include_fields', 'pc_admin_news_acf_include_fields' );
 
@@ -61,7 +71,10 @@ function pc_admin_news_acf_include_fields() {
         'show_in_rest' => 0,
     );
 
+    /*----------  Taxonomy  ----------*/  
+
     if ( get_option('options_news_tax') ) {
+
         $args['fields'][] = array(
             'key' => 'field_6677ecfed8780',
             'label' => 'Catégorie(s)',
@@ -88,8 +101,13 @@ function pc_admin_news_acf_include_fields() {
             'bidirectional_target' => array(
             ),
         );
+
     }
+
+    /*----------  Relation page  ----------*/
+        
     if ( get_option('options_news_pages') ) {
+
         $args['fields'][] = array(
             'key' => 'field_665d7401032c3',
             'label' => 'Page(s) associée(s)',
@@ -119,6 +137,7 @@ function pc_admin_news_acf_include_fields() {
             'bidirectional_target' => array(
             ),
         );
+
     }
 
 	acf_add_local_field_group( $args );
@@ -210,8 +229,7 @@ function pc_admin_news_acf_include_fields() {
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
-        'show_in_rest' => 0,
-        'modified' => 1718177308,
+        'show_in_rest' => 0
     ) );
     
     

@@ -1,10 +1,22 @@
 <?php
+/**
+ * 
+ * Admin : listes de posts
+ * 
+ * Communs / Ajout colonne visuel
+ * Articles / Suppression métaboxes menus
+ * Pages / Contenu champ parent & sauvegarde
+ * Pages / Suppression métaboxes
+ * Pages / Accueil sans éditeur
+ * Pages / CGU éditeur
+ * 
+ */
 
 /*===============================
 =            Communs            =
 ===============================*/
 
-/*----------  Image mise en avant dans les listes  ----------*/
+/*----------  Visuel dans les listes  ----------*/
 
 add_filter( 'manage_pages_columns', 'pc_admin_post_column_thumbnail' );
 add_filter( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_post_column_thumbnail' );
@@ -79,15 +91,13 @@ add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 
         if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' ) {
 
-                // prévention contre une boucle infinie 1/2
+            // prévention contre une boucle infinie 1/2
 			remove_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
-
 			// mise à jour post
 			wp_update_post( array(
 				'ID' => $post_id,
 				'post_parent' => $_POST['acf']['field_6677e014751e4']
 			));
-
 			// prévention contre une boucle infinie 2/2
 			add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 
@@ -95,7 +105,7 @@ add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 
     }
 
-/*----------  Suppresison métabxoes  ----------*/
+/*----------  Suppression métaboxes  ----------*/
 
 add_action( 'init', 'pc_admin_page_remove_metaboxes' );
 

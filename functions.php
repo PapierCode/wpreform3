@@ -16,6 +16,12 @@ include 'include/classes/class-pc-post.php'; // custom objet post
 
 include 'include/admin/admin.php'; // custom admin
 
+// ACF
+include 'include/acf-fields/acf-wpr-settings.php';
+include 'include/acf-fields/acf-blocks.php';
+include 'include/acf-fields/acf-page.php';
+include 'include/acf-fields/acf-news.php';
+
 include 'include/templates/templates.php'; // modèles & fonctions
 
 add_action( 'wp', 'pc_wp', 10 );
@@ -36,8 +42,6 @@ $texts_lengths = array(
 	'excerpt' => 100, // mots
 	'resum-title' => 40, // signes
 	'resum-desc' => 150, // signes
-	'seo-title' => 70, // signes
-	'seo-desc' => 200 // signes
 );
 $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ * 
+ * ACF : Paramètres thème
+ * 
+ * Version dev
+ * Captcha
+ * Google
+ * SMTP
+ * Actualités/Blog
+ * 
+ */
 
 add_action( 'acf/include_fields', 'pc_admin_wpr_settings_acf_include_fields' );
 
@@ -52,7 +63,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                     'class' => '',
                     'id' => '',
                 ),
-                'layout' => 'block',
+                'layout' => 'row',
                 'sub_fields' => array(
                     array(
                         'key' => 'field_664dee487f253',

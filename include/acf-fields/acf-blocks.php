@@ -1,4 +1,19 @@
 <?php
+/**
+ * 
+ * ACF : Blocs
+ * 
+ * 2 Colonnes
+ * Boutons
+ * Citation
+ * Vidéo
+ * Encadré
+ * Space
+ * Galerie
+ * Image
+ * Posts
+ * 
+ */
 
 add_action( 'acf/include_fields', function() {
 	
@@ -679,7 +694,7 @@ add_action( 'acf/include_fields', function() {
     /*=====  FIN Citation  =====*/
 
     /*=============================
-    =            Embed            =
+    =            Vidéo            =
     =============================*/
 
     if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) {
@@ -729,7 +744,7 @@ add_action( 'acf/include_fields', function() {
     }
     
     
-    /*=====  FIN Embed  =====*/
+    /*=====  FIN Vidéo  =====*/
 
     /*===============================
     =            Encadré            =
@@ -1662,6 +1677,7 @@ add_action( 'acf/include_fields', function() {
                     ),
                     'post_type' => array(
                         0 => 'page',
+                        1 => NEWS_POST_SLUG
                     ),
                     'post_status' => array(
                         0 => 'publish',
