@@ -144,7 +144,7 @@ function pc_display_header_nav() {
 
 		$nav_args = apply_filters( 'pc_filter_header_nav_list_args', array(
 			'theme_location'  	=> 'nav-header',
-			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
+			'nav_prefix'		=> array('h-nav', 'h-p-nav'),
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
 			'depth'           	=> $nav_depth,

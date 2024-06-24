@@ -67,7 +67,7 @@ function cssAdmin() {
 js_src = [
 	'scripts/include/jquery-gallery.js',
 	'scripts/include/nav.js',
-	'scripts/pc-preform.js'
+	'scripts/wpreform.js'
 ];
 
 js_src_all = [
@@ -88,7 +88,7 @@ function js_hint() {
 function js_jquery() {
 
     return src( js_src_all )
-        .pipe(concat( 'pc-preform-jquery.min.js' ))
+        .pipe(concat( 'wpreform-jquery.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
 
@@ -97,7 +97,7 @@ function js_jquery() {
 function js() {
 
     return src( js_src )
-        .pipe(concat( 'pc-preform.min.js' ))
+        .pipe(concat( 'wpreform.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
 
@@ -113,7 +113,7 @@ function js() {
 exports.watch = function() {
 
     watch( 'include/admin/css/**/*.scss', series( cssAdmin ) )
-	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series( js_hint, js_jquery, js )  )
+	watch( [ 'scripts/**/*.js', '!scripts/wpreform.min.js', '!scripts/wpreform-jquery.min.js' ], series( js_hint, js_jquery, js )  )
 };
 
 

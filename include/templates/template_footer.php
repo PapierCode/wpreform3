@@ -20,7 +20,8 @@
 		
 	add_action( 'pc_footer', 'pc_display_footer_end', 40 );
 
-add_action( 'pc_wp_footer', 'pc_display_js_footer', 10 );
+add_action( 'wp_footer', 'pc_display_js_variables_footer', 0 );
+add_action( 'wp_enqueue_scripts', 'pc_enqueue_scripts', 666 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -56,7 +57,6 @@ function pc_display_footer_end() {
 
 function pc_display_footer_contact() {
 	
-	global $settings_project;
 	$dd = array(
 		'with-icons' => true,
 		'list' => array()
@@ -70,20 +70,20 @@ function pc_display_footer_contact() {
 		'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
 		'width' => 100,
 		'height' => 25,
-		'alt' => $settings_project['coord-name']
+		'alt' => get_option( 'options_coord_name' )
 	);
 	// filtre
-	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas, $settings_project );
+	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas );
 	// html
 	$logo_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />';
 
 
 	/*----------  Adresse  ----------*/
 	
-	$address = $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city'].', '.$settings_project['coord-country'];
-	if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
-		$address .= '<br aria-hidden="true" class="no-print"/><button class="reset-btn js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
-	}
+	$address =get_option( 'options_coord_address' ).' <br/>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
+	// if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
+	// 	$address .= '<br aria-hidden="true" class="no-print"/><button class="reset-btn js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
+	// }
 	$dd['list']['addr'] = array(
 		'ico' => 'map',
 		'txt' => $address
@@ -92,21 +92,19 @@ function pc_display_footer_contact() {
 
 	/*----------  Téléphone  ----------*/
 	
-	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.pc_phone($settings_project['coord-phone-1'],false).'</a>';
-	if ( isset( $settings_project['coord-phone-2'] ) && $settings_project['coord-phone-2'] ) {
-		$phone .= '<br/><span class="coord-sep"> / </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.pc_phone($settings_project['coord-phone-2'],false).'</a>';
-	}
+	$phone = get_option( 'options_coord_phone' );
+	$phone_link = '<a href="tel:'.pc_phone($phone).'">'.pc_phone($phone,false).'</a>';
 	$dd['list']['phone'] = array(
 		'ico' => 'phone',
-		'txt' => $phone
+		'txt' => $phone_link
 	);
 	
 
 	/*----------  Affichage  ----------*/
 
 	// filtres	
-	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas, $settings_project );
-	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd, $settings_project );
+	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas );
+	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd );
 
 	echo '<address class="coord"><dl class="coord-list">';
 		echo '<dt class="coord-item coord-item--logo">'.$dt.'</dt>';
@@ -119,7 +117,7 @@ function pc_display_footer_contact() {
 	echo '</dl></address>';
 
 	// données structurées
-	pc_display_schema_local_business();
+	// pc_display_schema_local_business();
 
 }
 
@@ -133,19 +131,14 @@ function pc_display_footer_contact() {
 function pc_display_footer_nav() {
 
 	echo '<nav class="f-nav" role="navigation" aria-label="Navigation du pied de page">';
-	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
 		do_action( 'pc_footer_nav_items_before' );
-
-		if ( apply_filters( 'pc_filter_footer_copyright_display', false ) ) {
-			global $settings_project;
-			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
-		}
 		
 		$nav_footer_args = apply_filters( 'pc_filter_footer_nav_args', array(
 			'theme_location'  	=> 'nav-footer',
 			'nav_prefix'		=> array('f-nav','f-p-nav'),
-			'items_wrap'      	=> '%3$s',
+			'menu_class'      	=> 'f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list',
+			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
 			'depth'           	=> 1,
 			'item_spacing'		=> 'discard',
 			'container'       	=> '',
@@ -156,7 +149,6 @@ function pc_display_footer_nav() {
 
 		do_action( 'pc_footer_nav_items_after' );
 		
-	echo '</ul>';
 	echo '</nav>';
 
 }
@@ -164,10 +156,11 @@ function pc_display_footer_nav() {
 
 /*=====  FIN Navigation  =====*/
 
+/*==================================
+=            Javascript            =
+==================================*/
 
-/*----------  Javascript  ----------*/
-
-function pc_display_js_footer() {
+function pc_display_js_variables_footer() {
 
 	/*----------  Sprite to JS  ----------*/
 	
@@ -180,22 +173,20 @@ function pc_display_js_footer() {
 	}
 
 	echo '<script>const sprite='.json_encode( $sprite_to_json ).'</script>';
-	
 
-	/*----------  Fichiers JS  ----------*/
+}
 
-	$js_preform_path = '/scripts/pc-preform-jquery.min.js';
-	$js_files = apply_filters( 'pc_filter_js_files', array(
-		'wpreform' => get_template_directory_uri().$js_preform_path.'?ver='.filemtime(get_template_directory().$js_preform_path)
-	) );
-	
-	if ( !empty( $js_files ) ) { 
-		foreach ( $js_files as $id => $url ) {
-			echo '<script defer src="'.$url.'"></script>';
-		}
-	}
+function pc_enqueue_scripts() {
+
+	wp_enqueue_script( 
+		'wpreform',
+		get_template_directory_uri().'/scripts/wpreform-jquery.min.js',
+		array(),
+		filemtime(get_template_directory().'/scripts/wpreform-jquery.min.js'),
+		array( 'strategy' => 'defer', 'in_footer' => true )
+	);
 
 }
 
 
-/*=====  FIN Fin du container body  =====*/
+/*=====  FIN Javascript  =====*/
