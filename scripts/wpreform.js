@@ -79,6 +79,7 @@ $('.editor iframe').each(function() {
 =            Carte            =
 =============================*/
 
+/*
 var $js_button_map = $('.js-button-map');
 
 if ( $js_button_map.length > 0 ) {
@@ -210,7 +211,7 @@ if ( $js_button_map.length > 0 ) {
 	}); // FIN $js_button_map.click
 
 } // FIN if $js_button_map
-
+*/
 
 /*=====  FIN Carte  =====*/
 

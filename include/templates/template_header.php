@@ -138,7 +138,7 @@ function pc_display_header_nav() {
 	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 
 		$nav_depth = apply_filters( 'pc_filter_header_nav_depth', 2 );
-		if ( $nav_depth > 1 && apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) { echo '<button type="button" class="h-p-nav-sub-back button button--ico" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
+		if ( $nav_depth > 1 && apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) { echo '<button type="button" class="h-p-nav-sub-back reset-btn" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
 		
 		do_action( 'pc_header_nav_list_before' );
 
