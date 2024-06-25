@@ -286,7 +286,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
         });
 
         // sous-menu retour
-        const btnClose = document.querySelector( '.h-p-nav-sub-back' );
+        const btnClose = nav.querySelector( '.h-p-nav-sub-back' );
         if ( btnClose ) {
             btnClose.addEventListener( 'click', () => { 
                 nav.querySelector('button[aria-expanded="true"]').click();
