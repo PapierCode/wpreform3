@@ -287,9 +287,11 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
         // sous-menu retour
         const btnClose = nav.querySelector( '.h-p-nav-sub-back' );
-        btnClose.addEventListener( 'click', () => { 
-            nav.querySelector('button[aria-expanded="true"]').click();
-        } );
+        if ( btnClose ) {
+            btnClose.addEventListener( 'click', () => { 
+                nav.querySelector('button[aria-expanded="true"]').click();
+            } );
+        }
     
     }
     
