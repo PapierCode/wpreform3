@@ -80,7 +80,7 @@ function pc_display_footer_contact() {
 
 	/*----------  Adresse  ----------*/
 	
-	$address =get_option( 'options_coord_address' ).' <br/>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
+	$address = get_option( 'options_coord_address' ).' <br/>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
 	// if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
 	// 	$address .= '<br aria-hidden="true" class="no-print"/><button class="reset-btn js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
 	// }
@@ -93,7 +93,7 @@ function pc_display_footer_contact() {
 	/*----------  Téléphone  ----------*/
 	
 	$phone = get_option( 'options_coord_phone' );
-	$phone_link = '<a href="tel:'.pc_phone($phone).'">'.pc_phone($phone,false).'</a>';
+	$phone_link = '<a href="tel:'.pc_phone($phone).'" title="Téléphone '.pc_phone($phone,false).'">'.pc_phone($phone,false).'</a>';
 	$dd['list']['phone'] = array(
 		'ico' => 'phone',
 		'txt' => $phone_link
