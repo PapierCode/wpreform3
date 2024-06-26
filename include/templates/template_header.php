@@ -69,19 +69,24 @@ function pc_display_skip_nav() {
 
 function pc_display_header_start() {
 
-	$tag = '<header class="header" role="banner">';
-	if ( apply_filters( 'pc_display_header_inner', false ) ) { $tag .= '<div class="header-inner">'; }
+	$tag = apply_filters( 'pc_filter_header_start', '<header class="header" role="banner">' );
+	if ( apply_filters( 'pc_display_header_inner', false ) ) {
+		$tag .= apply_filters( 'pc_filter_header_inner_start', '<div class="header-inner">' );
+	}
 
-	echo apply_filters( 'pc_filter_header_start', $tag );
+	echo $tag;
 
 }
 
 function pc_display_header_end() {
 
-	$tag = '</header>';
-	if ( apply_filters( 'pc_display_header_inner', false ) ) { $tag = '</div>'.$tag; }
+	$tag = apply_filters( 'pc_filter_header_end', '</header>' );
+	if ( apply_filters( 'pc_display_header_inner', false ) ) {
+		$tag_inner = apply_filters( 'pc_filter_header_inner_end', '</div>' );
+		$tag = $tag_inner.$tag;
+	}
 
-	echo apply_filters( 'pc_filter_header_end', $tag );
+	echo $tag;
 
 }
 
