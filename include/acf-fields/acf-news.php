@@ -17,6 +17,9 @@ function pc_admin_news_acf_include_fields() {
 	if ( !function_exists( 'acf_add_local_field_group' ) ) { return; }
     if ( !get_option('options_news_enabled') ) { return; }
 
+    $short_title_length = apply_filters( 'pc_filter_short_title_length', 40 );
+    $excerpt_length = apply_filters( 'pc_filter_excerpt_length', 150 );
+
     /*============================
     =            Post            =
     ============================*/
@@ -51,12 +54,12 @@ function pc_admin_news_acf_include_fields() {
                 'preview_size' => 'medium',
             ),
             array(
-                'key' => 'field_6137f42b4tc03',
-                'label' => 'Résumé',
-                'name' => 'post_excerpt',
+                'key' => 'field_2356e4zbctam3',
+                'label' => 'Titre court',
+                'name' => 'post_short_title',
                 'aria-label' => '',
-                'type' => 'textarea',
-                'instructions' => '200 signes maximum.',
+                'type' => 'text',
+                'instructions' => $short_title_length.' signes maximum.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -65,10 +68,29 @@ function pc_admin_news_acf_include_fields() {
                     'id' => '',
                 ),
                 'default_value' => '',
-                'maxlength' => 200,
+                'maxlength' => $short_title_length,
                 'rows' => 6,
                 'placeholder' => '',
                 'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_6137f42b4tc03',
+                'label' => 'Résumé',
+                'name' => 'post_excerpt',
+                'aria-label' => '',
+                'type' => 'textarea',
+                'instructions' => $excerpt_length.' signes maximum.',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'maxlength' => $excerpt_length,
+                'rows' => 6,
+                'placeholder' => ''
             )
         ),
         'location' => array(

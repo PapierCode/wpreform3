@@ -14,6 +14,9 @@ function pc_admin_page_acf_include_fields() {
 
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
+    $excerpt_length = apply_filters( 'pc_filter_excerpt_length', 150 );
+    $short_title_length = apply_filters( 'pc_filter_short_title_length', 40 );
+
 	acf_add_local_field_group( array(
         'key' => 'group_665c8549c226c',
         'title' => 'Propriétés de la page',
@@ -72,6 +75,46 @@ function pc_admin_page_acf_include_fields() {
                 'bidirectional_target' => array(
                 ),
             ),
+            array(
+                'key' => 'field_6486ettbct4h6',
+                'label' => 'Titre court',
+                'name' => 'post_short_title',
+                'aria-label' => '',
+                'type' => 'text',
+                'instructions' => $short_title_length.' signes maximum.',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'maxlength' => $short_title_length,
+                'rows' => 6,
+                'placeholder' => '',
+                'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_5137f4xb4tz96',
+                'label' => 'Résumé',
+                'name' => 'post_excerpt',
+                'aria-label' => '',
+                'type' => 'textarea',
+                'instructions' => $excerpt_length.' signes maximum.',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'maxlength' => $excerpt_length,
+                'rows' => 6,
+                'placeholder' => '',
+                'new_lines' => '',
+            )
         ),
         'location' => array(
             array(
@@ -86,7 +129,7 @@ function pc_admin_page_acf_include_fields() {
         'position' => 'side',
         'style' => 'default',
         'label_placement' => 'left',
-        'instruction_placement' => 'label',
+        'instruction_placement' => 'field',
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',

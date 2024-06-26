@@ -145,11 +145,11 @@ class PC_Post {
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = ( isset( $metas['resum-title'] ) ) ? $metas['resum-title'] : $this->title;
+		$title = isset( $metas['resum-title'] ) && trim( $metas['resum-title'] ) ? trim( $metas['resum-title'] ) : $this->title;
 		$title = apply_filters( 'pc_filter_card_title', $title, $this );
 
-		global $texts_lengths;
-		return pc_words_limit( $title, $texts_lengths['resum-title'] );
+		$length = apply_filters( 'pc_filter_short_title_length', 40 );
+		return pc_words_limit( $title, $length );
 
 	}
 
@@ -164,11 +164,11 @@ class PC_Post {
 	public function get_card_description() {
 
 		$metas = $this->metas;
-		$description = ( isset( $metas['resum-desc'] ) ) ? $metas['resum-desc'] : get_the_excerpt( $this->id );
+		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( $metas['post_excerpt'] ) : get_the_excerpt( $this->id );
 		$description = apply_filters( 'pc_filter_card_description', $description, $this );
 	
-		global $texts_lengths;
-		return pc_words_limit( $description, $texts_lengths['resum-desc'] );
+		$length = apply_filters( 'pc_filter_excerpt_length', 150 );
+		return pc_words_limit( $description, $length );
 	
 	}
 
