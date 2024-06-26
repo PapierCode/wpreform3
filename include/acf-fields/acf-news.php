@@ -49,6 +49,26 @@ function pc_admin_news_acf_include_fields() {
                 'max_size' => '',
                 'mime_types' => '',
                 'preview_size' => 'medium',
+            ),
+            array(
+                'key' => 'field_6137f42b4tc03',
+                'label' => 'Résumé',
+                'name' => 'post_excerpt',
+                'aria-label' => '',
+                'type' => 'textarea',
+                'instructions' => '200 signes maximum.',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'maxlength' => 200,
+                'rows' => 6,
+                'placeholder' => '',
+                'new_lines' => '',
             )
         ),
         'location' => array(
