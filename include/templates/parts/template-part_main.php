@@ -50,7 +50,7 @@ function pc_display_main_header_start() {
 
 function pc_display_main_title() {
 	
-	echo '<h1><span>'.get_the_title().'</span></h1>';
+	echo '<h1>'.get_the_title().'</h1>';
 
 }
 

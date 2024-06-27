@@ -145,7 +145,7 @@ class PC_Post {
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = isset( $metas['resum-title'] ) && trim( $metas['resum-title'] ) ? trim( $metas['resum-title'] ) : $this->title;
+		$title = isset( $metas['resum-title'] ) && trim( $metas['resum-title'] ) ? trim( $metas['resum-title'] ) : get_the_title( $this->id );
 		$title = apply_filters( 'pc_filter_card_title', $title, $this );
 
 		$length = apply_filters( 'pc_filter_short_title_length', 40 );
