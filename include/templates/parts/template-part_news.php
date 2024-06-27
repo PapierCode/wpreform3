@@ -1,7 +1,7 @@
 <?php
 
 add_filter( 'pc_filter_display_card_date', 'pc_edit_display_news_date', 10, 2 );
-add_filter( 'pc_filter_display_main_date', 'pc_edit_display_news_date', 10, 2 );
+add_filter( 'pc_filter_display_single_main_date', 'pc_edit_display_news_date', 10, 2 );
 
     function pc_edit_display_news_date( $display, $pc_post ) {
 

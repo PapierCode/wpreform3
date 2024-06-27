@@ -48,7 +48,7 @@ function pc_display_single_main_title( $pc_post ) {
 
 }
 
-function pc_display_main_date( $pc_post ) {
+function pc_display_single_main_date( $pc_post ) {
 
 	if ( apply_filters( 'pc_filter_display_single_main_date', false, $pc_post ) ) {
 
