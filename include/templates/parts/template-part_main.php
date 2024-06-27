@@ -50,7 +50,7 @@ function pc_display_main_header_start() {
 
 function pc_display_main_title() {
 	
-	echo '<h1>'.get_the_title().'</h1>';
+	echo '<h1>'.apply_filters( 'pc_filter_main_title', get_the_title() ).'</h1>';
 
 }
 
