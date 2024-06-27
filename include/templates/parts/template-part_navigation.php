@@ -134,6 +134,7 @@ function pc_display_breadcrumb() {
 		array(
 			array(
 				'name' => 'Accueil',
+				'ico' => pc_svg('house'),
 				'permalink' => get_bloginfo('url')
 			)
 		)
@@ -296,7 +297,9 @@ function pc_display_breadcrumb() {
 		foreach ( $links as $key => $link ) {
 
 			$current = ( $key == ( count($links) - 1 ) ) ? ' aria-current="page"' : '';
-			echo '<li class="breadcrumb-item">'.$separator.'<a class="breadcrumb-link" href="'.$link['permalink'].'"'.$current.'>'.$link['name'].'</a></li>';
+			echo '<li class="breadcrumb-item">'.$separator.'<a class="breadcrumb-link" href="'.$link['permalink'].'"'.$current.'>';
+				echo isset( $link['ico'] ) && $link['ico'] ? $link['ico'] : $link['name'];
+			echo '</a></li>';
 
 			$structured_datas['itemListElement'][] = array(
 				'@type' => 'ListItem',
