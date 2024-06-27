@@ -17,12 +17,12 @@ add_action( 'pc_action_template_archive_before', 'pc_display_main_start', 10 ); 
     // header
     add_action( 'pc_action_template_archive_before', 'pc_display_main_header_start', 20 ); // template-part_layout.php
         add_action( 'pc_action_template_archive_before', 'pc_display_breadcrumb', 30 ); // breadcrumb
-        add_action( 'pc_action_template_archive_before', 'pc_display_archive_title', 40 ); // titre
+        add_action( 'pc_action_template_archive_before', 'pc_display_archive_main_title', 40 ); // titre
     add_action( 'pc_action_template_archive_before', 'pc_display_main_header_end', 50 ); // template-part_layout.php
 
     // content
     add_action( 'pc_action_template_archive_before', 'pc_display_archive_list_start', 60 ); // début liste
-        add_action( 'pc_action_template_archive_post', 'pc_display_archive_post', 10 ); // item liste
+        add_action( 'pc_action_template_archive_post', 'pc_display_archive_post_list', 10 ); // item liste
     add_action( 'pc_action_template_archive_after', 'pc_display_archive_list_end', 10 ); // fin liste
 
 	// footer
@@ -40,10 +40,10 @@ add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 60 ); // 
 =            Entête            =
 ==============================*/
 
-function pc_display_archive_title( $settings ) {
+function pc_display_archive_main_title( $settings ) {
 	
     $title = isset($settings['title']) && trim($settings['title']) ? trim($settings['title']) : post_type_archive_title('',false);
-	echo '<h1><span>'.$title.'</span></h1>';
+	echo '<h1>'.apply_filters( 'pc_filter_archive_main_title', $title, $settings ).'</h1>';
 
     if ( !get_query_var('term') && isset($settings['desc']) && trim($settings['desc']) ) {
         echo '<div class="editor">'.wpautop(trim($settings['desc'])).'</div>';
@@ -75,7 +75,7 @@ function pc_display_archive_list_end() {
     echo '</ul>';
 }
 
-function pc_display_archive_post( $post ) {
+function pc_display_archive_post_list( $post ) {
 
     $pc_post = new PC_Post( $post );
     echo '<li class="card-list-item card-list-item--news">';
