@@ -296,7 +296,7 @@ function pc_display_breadcrumb() {
 		foreach ( $links as $key => $link ) {
 
 			$current = ( $key == ( count($links) - 1 ) ) ? ' aria-current="page"' : '';
-			echo '<li class="breadcrumb-item">'.$separator.'<a href="'.$link['permalink'].'"'.$current.'>'.$link['name'].'</a></li>';
+			echo '<li class="breadcrumb-item">'.$separator.'<a class="breadcrumb-link" href="'.$link['permalink'].'"'.$current.'>'.$link['name'].'</a></li>';
 
 			$structured_datas['itemListElement'][] = array(
 				'@type' => 'ListItem',
