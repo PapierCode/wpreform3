@@ -93,7 +93,7 @@ function pc_display_footer_contact() {
 	/*----------  Téléphone  ----------*/
 	
 	$phone = get_option( 'options_coord_phone' );
-	$phone_link = '<a href="tel:'.pc_phone($phone).'" title="Téléphone '.pc_phone($phone,false).'">'.pc_phone($phone,false).'</a>';
+	$phone_link = '<a href="tel:'.pc_get_phone_format($phone).'" title="Téléphone '.pc_get_phone_format($phone,false).'">'.pc_get_phone_format($phone,false).'</a>';
 	$dd['list']['phone'] = array(
 		'ico' => 'phone',
 		'txt' => $phone_link

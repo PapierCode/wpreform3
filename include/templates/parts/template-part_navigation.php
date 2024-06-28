@@ -128,6 +128,8 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 
 function pc_display_breadcrumb() {
 
+	if ( is_front_page() ) { return; }
+
 	/*----------  Lien accueil et filtre  ----------*/
 	
 	$links = apply_filters( 'pc_filter_breadcrumb', 

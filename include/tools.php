@@ -1,4 +1,15 @@
 <?php
+/**
+ * 
+ * Fonctions utiles
+ * 
+ * pc_var
+ * pc_get_text_cut
+ * pc_get_textarea_to_paragraphs
+ * pc_get_phone_format
+ * pc_display_message
+ * 
+ */
 
 /*=======================================================
 =            Afficher un tableau ou un objet            =
@@ -13,8 +24,8 @@
 
  function pc_var( $var, $margin = false ) {
 
-	$margin == true ? $style = 'style="margin-left:200px"' : $style = ''; // navigation admin
-	echo '<pre '.$style.'>'.print_r( $var,true ).'</pre>';
+	$margin == true ? $style = 'style="margin-left:200px"' : $style = ''; // admin
+	echo '<pre '.$style.'>'.print_r( $var, true ).'</pre>';
 
 }
 
@@ -28,26 +39,21 @@
 /**
  * 
  * @param string    $txt		Texte à couper
- * @param integer	$limit		Nombre de caratères maximum
+ * @param integer	$limit		Nombre de caractères maximum
  * 
  */
 
-function pc_words_limit( $txt, $limit ) {
+function pc_get_text_cut( $txt, $limit ) {
 
-    $length = mb_strlen($txt,'utf-8');
+    if ( mb_strlen( $txt, 'utf-8' ) > $limit ) {
 
-    if ($length > $limit) {
-
-        $temp = mb_substr( $txt,0, $limit, 'utf-8' );
-        $last_space = mb_strripos( $temp, ' ', 0, 'utf-8' );
-
-        return mb_substr( $temp, 0, $last_space, 'utf-8') . '&hellip;';
-
-    } else {
-
-        return $txt;
+        $txt = mb_substr( $txt, 0, $limit, 'utf-8' );
+        $last_space = mb_strripos( $txt, ' ', 0, 'utf-8' );
+        $txt = mb_substr( $txt, 0, $last_space, 'utf-8' ) . '&hellip;';
 
     }
+
+	return $txt;
 
 }
 
@@ -64,16 +70,14 @@ function pc_words_limit( $txt, $limit ) {
  * 
  */
 
-function pc_textearea_to_paragraphs( $txt ) {
+function pc_get_textarea_to_paragraphs( $txt ) {
 
-	$txt_to_array = explode( PHP_EOL, $txt );
-	$txt_formated = '';
-
-	foreach ( $txt_to_array as $p ) {
-		if ( !empty( $p ) ) { $txt_formated .= '<p>'.$p.'</p>'; }
+	$paragraphs = '';
+	foreach ( explode( PHP_EOL, $txt ) as $p ) {
+		if ( !empty( $p ) ) { $paragraphs .= '<p>'.$p.'</p>'; }
 	}
 
-	return $txt_formated;
+	return $paragraphs;
 
 }
 
@@ -93,20 +97,20 @@ function pc_textearea_to_paragraphs( $txt ) {
  * 
  */
 
- function pc_phone( $tel, $href = true, $prefix_display = false, $prefix = '+33' ) {
+ function pc_get_phone_format( $phone, $href = true, $prefix_display = false, $prefix = '+33' ) {
 
 	if ( $href ) {
 
-		$tel = str_replace( ' ', '', $tel );
-		$tel = $prefix.substr( $tel, 1, strlen($tel) );
+		$phone = str_replace( ' ', '', $phone );
+		$phone = $prefix.substr( $phone, 1, strlen($phone) );
 
 	} else if ( $prefix_display ) {
 		
-		$tel = $prefix.' '.substr( $tel, 1, strlen($tel) );
+		$phone = $prefix.' '.substr( $phone, 1, strlen($phone) );
 
 	}
 
-	return $tel;
+	return $phone;
 
 }
 
@@ -119,30 +123,25 @@ function pc_textearea_to_paragraphs( $txt ) {
 
 /**
  * 
- * @param string	$msg		Texte à afficher
- * @param string	$type		Type de message : "error" ou "success"
- * @param string	$format		Format d'affichage : vide ou "block"
- * @param string	$elt		Élément HTML contenant
+ * @param string	$content		Texte à afficher
+ * @param string	$type			Type de message : "error" ou "success"
+ * @param string	$bloc			Format d'affichage : vide ou "block"
+ * @param string	$tag			Élément HTML contenant
  * 
  */
 
- function pc_display_alert_msg( $msg, $type = '', $format = '', $elt = 'p' ) {
+ function pc_display_message( $content, $type = 'default', $bloc = true, $tag = 'p' ) {
 
-	// defaut
 	$css = 'msg';
-	// type block
-	$css .= ( $format == 'block' ) ? ' msg--block' : '';
-	// erreur ou succès
-	if ( $type == 'error' ) { $css .= ' msg--error'; }
-	else if ( $type == 'success' ) { $css .= ' msg--success'; }
+	$css .= $bloc ? ' msg--block' : '';
+	$css .= ' msg--'.$type;
 
-	// affichage
-	$return = '<'.$elt.' class="'.$css.'">';
-	$return .= '<span class="msg-ico">'.pc_svg( 'msg', '', 'svg-block' ).'</span>';
-	$return .= '<span class="msg-txt">'.$msg.'</span>';
-	$return .= '</'.$elt.'>';
+	$message = '<'.$tag.' class="'.$css.'">';
+		$message .= '<span class="msg-ico">'.pc_svg( 'msg', '', 'svg-block' ).'</span>';
+		$message .= '<span class="msg-txt">'.$content.'</span>';
+	$message .= '</'.$tag.'>';
 
-	return $return;
+	return $message;
 
 }
 

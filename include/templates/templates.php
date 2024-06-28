@@ -36,3 +36,41 @@ include 'template_archive.php';
 include 'template_search.php';
 // 404
 include 'template_404.php';
+
+
+/*==========================================
+=            Custom post object            =
+==========================================*/
+
+add_action( 'wp', 'pc_register_custom_post_object', 10 );
+
+	function pc_register_custom_post_object() {
+
+        /*----------  Objet PC_POST  ----------*/
+        
+		if ( is_singular() && class_exists( 'PC_Post' ) ) {
+			global $post, $pc_post;
+			$pc_post = new PC_Post( $post );
+		}
+
+	}
+
+
+/*=====  FIN Custom post object  =====*/
+
+/*===============================
+=            Excerpt            =
+===============================*/
+
+add_filter( 'excerpt_more', '__return_empty_string' );
+
+add_filter( 'excerpt_length', 'pc_edit_excerpt_length' );
+	
+	function pc_edit_excerpt_length() {
+		
+		return apply_filters( 'pc_filter_excerpt_length', 150 );
+	
+	}
+
+
+/*=====  FIN Excerpt  =====*/

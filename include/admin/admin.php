@@ -1,11 +1,12 @@
 <?php
 /**
  * 
- * Customisation de l'administration
+ * Custom administration
  * 
- * Include PHP & CSS
+ * Includes
+ * Settings
  * SMTP
- * ACF Map API key
+ * Map API key
  * 
  */
 
@@ -26,6 +27,43 @@ add_action( 'admin_enqueue_scripts', 'pc_admin_css' );
 
 
 /*=====  FIN Include  =====*/
+
+/*================================
+=            Settings            =
+================================*/
+
+if ( function_exists('acf_add_options_page') ) {
+
+    /*----------  Theme options (admin only)  ----------*/
+     
+    acf_add_options_page( array(
+        'page_title'    => 'Paramètres du thème WPreform',
+        'menu_title'    => 'WPreform',
+        'menu_slug'     => 'wpreform-settings',
+        'capability'    => 'manage_options',
+        'update_button' => 'Mettre à jour',
+        'autoload'      => true,
+        'parent_slug'   => 'options-general.php'
+    ) );
+
+
+    /*----------  Theme project options  ----------*/
+     
+    acf_add_options_page( array(
+        'page_title'    => 'Paramètres du site',
+        'menu_title'    => 'Paramètres',
+        'menu_slug'     => 'site-settings',
+        'capability'    => 'edit_posts',
+        'update_button' => 'Mettre à jour',
+        'autoload'      => true,
+        'position'      => 99,
+        'icon_url'      => 'dashicons-admin-settings'
+    ) );
+
+}
+
+
+/*=====  FIN Settings  =====*/
 
 /*============================
 =            SMTP            =
@@ -59,9 +97,9 @@ add_action( 'phpmailer_init', 'pc_mail_smtp_settings' );
 
 /*=====  FIN SMTP  =====*/
 
-/*==========================================
-=            ACF Google Map API            =
-==========================================*/
+/*===================================
+=            Map API key            =
+===================================*/
 
 add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 
@@ -73,4 +111,4 @@ add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 	}
 
 
-/*=====  FIN ACF Google Map API  =====*/
+/*=====  FIN Map API key  =====*/

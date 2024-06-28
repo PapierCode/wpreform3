@@ -149,7 +149,7 @@ class PC_Post {
 		$title = apply_filters( 'pc_filter_card_title', $title, $this );
 
 		$length = apply_filters( 'pc_filter_short_title_length', 40 );
-		return pc_words_limit( $title, $length );
+		return pc_get_text_cut( $title, $length );
 
 	}
 
@@ -168,7 +168,7 @@ class PC_Post {
 		$description = apply_filters( 'pc_filter_card_description', $description, $this );
 	
 		$length = apply_filters( 'pc_filter_excerpt_length', 150 );
-		return pc_words_limit( $description, $length );
+		return pc_get_text_cut( $description, $length );
 	
 	}
 

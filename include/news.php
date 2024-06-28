@@ -1,4 +1,18 @@
 <?php
+/**
+ * 
+ * Actualités ou Blog
+ * 
+ * Post
+ * Taxonomy
+ * Settings
+ * 
+ */
+
+
+define( 'NEWS_POST_SLUG', 'newspost' );
+define( 'NEWS_TAX_SLUG', 'newstax' );
+
 
 /*=============================
 =            Posts            =
@@ -10,7 +24,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 
         if ( !get_option('options_news_enabled') ) { return; }
 
-        /*----------  Post Actualité/Blog  ----------*/
+        /*----------  Post  ----------*/
 
         switch ( get_option('options_news_type') ) {
             case 'news':                
@@ -60,7 +74,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 		register_post_type( NEWS_POST_SLUG, $post_news_args );
 
 
-        /*----------  Taxonomie Actualité/Blog  ----------*/     
+        /*----------  Taxonomie  ----------*/     
         
         if ( get_option('options_news_tax') ) {
 
@@ -108,34 +122,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 ================================*/
 
 if ( function_exists('acf_add_options_page') ) {
-
-    /*----------  Paramètres du thème (DEV)  ----------*/
-     
-    acf_add_options_page( array(
-        'page_title'    => 'Paramètres du thème WPreform',
-        'menu_title'    => 'WPreform',
-        'menu_slug'     => 'wpreform-settings',
-        'capability'    => 'manage_options',
-        'update_button' => 'Mettre à jour',
-        'autoload'      => true,
-        'parent_slug'   => 'options-general.php'
-    ) );
-
-    /*----------  Paramètres du site  ----------*/
-     
-    acf_add_options_page( array(
-        'page_title'    => 'Paramètres du site',
-        'menu_title'    => 'Paramètres',
-        'menu_slug'     => 'site-settings',
-        'capability'    => 'edit_posts',
-        'update_button' => 'Mettre à jour',
-        'autoload'      => true,
-        'position'      => 99,
-        'icon_url'      => 'dashicons-admin-settings'
-    ) );
-
-    /*----------  Actualités  ----------*/
-    
+        
     if ( get_option('options_news_enabled') ) {
 
         switch ( get_option('options_news_type') ) {
