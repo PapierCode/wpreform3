@@ -17,7 +17,7 @@ switch ( get_field('bloc_align_h') ) {
         $block_css[] = 'bloc-columns--'.get_field('inner_proportions_all');
         break;
 }
-if ( get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
+if ( get_field('bloc_style') && get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
 if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
