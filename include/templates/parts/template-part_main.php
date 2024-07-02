@@ -51,7 +51,7 @@ function pc_display_main_header_start() {
 function pc_display_main_header_end() {
 
 	$tag = '</header>';
-	if ( apply_filters( 'pc_filter_display_main_header_inner', false ) ) { $tag .= '</div>'.$tag; }
+	if ( apply_filters( 'pc_filter_display_main_header_inner', false ) ) { $tag = '</div>'.$tag; }
 	
 	echo apply_filters( 'pc_filter_main_header_end', $tag );
 
