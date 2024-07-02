@@ -158,17 +158,17 @@ add_filter( 'rest_prepare_taxonomy', 'pc_admin_remove_default_metabox_taxonomy',
 =            Ajout contexte            =
 ======================================*/
 
-// add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
+add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
 
-// 	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
+	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
 
-// 		if ( $parent_block ) {
-// 			$parsed_block['parent'] = array(
-// 				'attributes' => $parent_block->attributes
-// 			);
-// 		}
-// 		return $parsed_block;
-// 	}
+		if ( $parent_block ) {
+			$parsed_block['parent'] = array(
+				'attributes' => $parent_block->attributes
+			);
+		}
+		return $parsed_block;
+	}
 
 
 /*=====  FIN Ajout contexte  =====*/	
@@ -179,7 +179,7 @@ add_filter( 'rest_prepare_taxonomy', 'pc_admin_remove_default_metabox_taxonomy',
 
 add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
-	function pc_render_block( $content, $block, $instace ) {
+	function pc_render_block( $content, $block, $instance ) {
 
 		// if ( $block['blockName'] == 'core/button' && isset($block['parent']) ) {
 		// 	pc_var($block['parent']);
