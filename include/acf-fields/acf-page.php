@@ -14,8 +14,8 @@ function pc_admin_page_acf_include_fields() {
 
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
-    $excerpt_length = apply_filters( 'pc_filter_excerpt_length', 150 );
-    $short_title_length = apply_filters( 'pc_filter_short_title_length', 40 );
+    $excerpt_length = apply_filters( 'pc_filter_post_excerpt_length', 150 );
+    $short_title_length = apply_filters( 'pc_filter_post_short_title_length', 40 );
 
 	acf_add_local_field_group( array(
         'key' => 'group_665c8549c226c',
@@ -123,6 +123,11 @@ function pc_admin_page_acf_include_fields() {
                     'operator' => '==',
                     'value' => 'page',
                 ),
+                array(
+                    'param' => 'page_type',
+                    'operator' => '!=',
+                    'value' => 'front_page',
+                )
             ),
         ),
         'menu_order' => 0,

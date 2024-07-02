@@ -3,7 +3,8 @@
  * 
  * Template : 404
  * 
- ** Titre de la page
+ * Hooks
+ * Title
  * 
  */
 
@@ -14,8 +15,8 @@
 add_action( 'pc_action_template_404', 'pc_display_main_start', 10 ); // template-part_layout.php
 
 	add_action( 'pc_action_template_404', 'pc_display_main_header_start', 20 ); // template-part_layout.php
-		add_action( 'pc_action_template_404', 'pc_display_breadcrumb', 30 ); // breadcrumb
-		add_action( 'pc_action_template_404', 'pc_display_404_main_title', 30 ); // template-part_layout.php
+		add_action( 'pc_action_template_404', 'pc_display_breadcrumb', 30 ); // template-part_navigation.php
+		add_action( 'pc_action_template_404', 'pc_display_404_main_title', 30 );
 	add_action( 'pc_action_template_404', 'pc_display_main_header_end', 40 ); // template-part_layout.php
 
 add_action( 'pc_action_template_404', 'pc_display_main_end', 50 ); // template-part_layout.php

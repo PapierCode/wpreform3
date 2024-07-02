@@ -4,6 +4,7 @@
  * Fonctions utiles
  * 
  * pc_var
+ * pc_svg
  * pc_get_text_cut
  * pc_get_textarea_to_paragraphs
  * pc_get_phone_format
@@ -11,9 +12,10 @@
  * 
  */
 
-/*=======================================================
-=            Afficher un tableau ou un objet            =
-=======================================================*/
+
+/*=============================================
+=            Afficher une variable            =
+=============================================*/
 
 /**
  * 
@@ -30,7 +32,31 @@
 }
 
 
-/*=====  FIN Afficher un tableau ou un objet  =====*/
+/*=====  FIN Afficher une variable  =====*/
+
+/*===============================
+=            Get SVG            =
+===============================*/
+
+/**
+ * 
+ * @param string	$index		Index du tableau $sprite
+ * 
+ */
+
+function pc_svg( $index ) {
+
+	global $sprite; // cf. images/sprite.php
+	$svg = $sprite[$index];
+
+	$svg = str_replace('<svg', '<svg class="no-print"', $svg);
+	$svg = str_replace('<svg', '<svg aria-hidden="true" focusable="false"', $svg);
+
+	return $svg;
+
+}
+
+/*=====  FIN Get SVG  =====*/
 
 /*======================================================
 =            Limite du nombre de caractères            =

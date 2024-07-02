@@ -3,10 +3,13 @@
  * 
  * Template : archive
  * 
- ** Hooks
- ** Contenu
+ * Hooks
+ * Main header
+ * Cards list
+ * Pager
  * 
  */
+
 
 /*=============================
 =            Hooks            =
@@ -16,31 +19,28 @@ add_action( 'pc_action_template_archive_before', 'pc_display_main_start', 10 ); 
 
     // header
     add_action( 'pc_action_template_archive_before', 'pc_display_main_header_start', 20 ); // template-part_layout.php
-        add_action( 'pc_action_template_archive_before', 'pc_display_breadcrumb', 30 ); // breadcrumb
-        add_action( 'pc_action_template_archive_before', 'pc_display_archive_main_title', 40 ); // titre
+        add_action( 'pc_action_template_archive_before', 'pc_display_breadcrumb', 30 ); // template-part_navigation.php
+        add_action( 'pc_action_template_archive_before', 'pc_display_archive_main_header_content', 40 );
     add_action( 'pc_action_template_archive_before', 'pc_display_main_header_end', 50 ); // template-part_layout.php
 
     // content
-    add_action( 'pc_action_template_archive_before', 'pc_display_archive_list_start', 60 ); // début liste
-        add_action( 'pc_action_template_archive_post', 'pc_display_archive_post_list', 10 ); // item liste
-    add_action( 'pc_action_template_archive_after', 'pc_display_archive_list_end', 10 ); // fin liste
+    add_action( 'pc_action_template_archive_before', 'pc_display_archive_list_start', 60 );
+        add_action( 'pc_action_template_archive_post', 'pc_display_archive_posts_list', 70 );
+    add_action( 'pc_action_template_archive_after', 'pc_display_archive_list_end', 10 );
 
 	// footer
-	add_action( 'pc_action_template_archive_after', 'pc_display_main_footer_start', 20 ); // template-part_layout.php
-        add_action( 'pc_action_template_archive_after', 'pc_display_pager', 30 ); // pagination
-        // add_action( 'pc_action_template_archive_after', 'pc_display_share_links', 40 ); // liens de partage
-	add_action( 'pc_action_template_archive_after', 'pc_display_main_footer_end', 50 ); // template-part_layout.php
+	add_action( 'pc_action_template_archive_after', 'pc_display_archive_footer', 20 );
 
-add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 60 ); // template-part_layout.php
+add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 30 ); // template-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/
 
-/*==============================
-=            Entête            =
-==============================*/
+/*===================================
+=            Main header            =
+===================================*/
 
-function pc_display_archive_main_title( $settings ) {
+function pc_display_archive_main_header_content( $settings ) {
 	
     $title = isset($settings['title']) && trim($settings['title']) ? trim($settings['title']) : post_type_archive_title('',false);
 	echo '<h1>'.apply_filters( 'pc_filter_archive_main_title', $title, $settings ).'</h1>';
@@ -62,11 +62,11 @@ function pc_display_archive_main_title( $settings ) {
 }
 
 
-/*=====  FIN Entête  =====*/
+/*=====  FIN Main header  =====*/
 
-/*========================================
-=            Liste d'articles            =
-========================================*/
+/*==================================
+=            Cards list            =
+==================================*/
 
 function pc_display_archive_list_start() {
     echo '<ul class="card-list card-list--news">';
@@ -75,7 +75,7 @@ function pc_display_archive_list_end() {
     echo '</ul>';
 }
 
-function pc_display_archive_post_list( $post ) {
+function pc_display_archive_posts_list( $post ) {
 
     $pc_post = new PC_Post( $post );
     echo '<li class="card-list-item card-list-item--news">';
@@ -85,4 +85,26 @@ function pc_display_archive_post_list( $post ) {
 }
 
 
-/*=====  FIN Liste d'articles  =====*/
+/*=====  FIN Cards list  =====*/
+
+/*=============================
+=            Pager            =
+=============================*/
+
+function pc_display_archive_footer() {
+
+	global $wp_query;
+
+    // TODO liens de partage
+	if ( $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
+		
+		pc_display_main_footer_start(); // template-part_layout.php
+			pc_display_pager();  // template-part_navigation.php
+		pc_display_main_footer_end(); // template-part_layout.php
+
+	}
+
+}
+
+
+/*=====  FIN Pager  =====*/

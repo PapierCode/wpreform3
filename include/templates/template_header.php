@@ -4,8 +4,8 @@
  * Template : header
  * 
  ** Hooks
- ** Accès directs
- ** Layout
+ ** Skiplinks
+ ** Container
  ** Logo
  ** Navigation
  ** Tools
@@ -31,9 +31,9 @@ add_action( 'pc_header', 'pc_display_header_end', 90 );
 
 /*=====  FIN Hooks  =====*/
 
-/*=====================================
-=            Accès directs            =
-=====================================*/
+/*=================================
+=            Skiplinks            =
+=================================*/
 
 function pc_display_skip_nav() {
 	
@@ -59,18 +59,16 @@ function pc_display_skip_nav() {
 }
 
 
-/*=====  FIN Accès directs  =====*/
+/*=====  FIN Skiplinks  =====*/
 
 /*==============================
-=            Layout            =
+=            Container            =
 ==============================*/
-
-/*----------  Début de l'entête  ----------*/
 
 function pc_display_header_start() {
 
 	$tag = apply_filters( 'pc_filter_header_start', '<header class="header" role="banner">' );
-	if ( apply_filters( 'pc_display_header_inner', false ) ) {
+	if ( apply_filters( 'pc_filter_display_header_inner', false ) ) {
 		$tag .= apply_filters( 'pc_filter_header_inner_start', '<div class="header-inner">' );
 	}
 
@@ -81,7 +79,7 @@ function pc_display_header_start() {
 function pc_display_header_end() {
 
 	$tag = apply_filters( 'pc_filter_header_end', '</header>' );
-	if ( apply_filters( 'pc_display_header_inner', false ) ) {
+	if ( apply_filters( 'pc_filter_display_header_inner', false ) ) {
 		$tag_inner = apply_filters( 'pc_filter_header_inner_end', '</div>' );
 		$tag = $tag_inner.$tag;
 	}
@@ -91,7 +89,7 @@ function pc_display_header_end() {
 }
 
 
-/*=====  FIN Layout  =====*/
+/*=====  FIN Container  =====*/
 
 /*============================
 =            Logo            =
@@ -127,7 +125,7 @@ function pc_display_header_logo() {
 =            Navigation            =
 ==================================*/
 
-/*----------  Bouton menu  ----------*/
+/*----------  Burger button  ----------*/
 
 function pc_display_nav_button_open_close() {
 
@@ -167,15 +165,15 @@ function pc_display_header_nav() {
 
 }
 
-/*----------  Réseaux sociaux  ----------*/
+/*----------  Social  ----------*/
 
 // TODO add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 
-	function pc_display_header_social() {
+	// function pc_display_header_social() {
 
-		pc_display_social_links( 'social-list--header' );
+	// 	pc_display_social_links( 'social-list--header' );
 
-	}
+	// }
 
 
 /*=====  FIN Navigation  =====*/
@@ -184,31 +182,31 @@ function pc_display_header_nav() {
 =            Tools            =
 =============================*/
 
-function pc_display_header_tools() {
+// function pc_display_header_tools() {
 
-	$items = array();
+// 	$items = array();
 
-	$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
-	$items['search'] = array(
-		'attrs' => '',
-		'html' => '<a href="'.get_bloginfo('url').'/?s" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
-	);
+// 	$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
+// 	$items['search'] = array(
+// 		'attrs' => '',
+// 		'html' => '<a href="'.get_bloginfo('url').'/?s" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
+// 	);
 
-	$items = apply_filters( 'pc_filter_header_tools', $items );
+// 	$items = apply_filters( 'pc_filter_header_tools', $items );
 
-	if ( count( $items ) > 0 ) {
+// 	if ( count( $items ) > 0 ) {
 
-		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
+// 		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
 
-			foreach ( $items as $id => $args ) {
-				echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
-			}
+// 			foreach ( $items as $id => $args ) {
+// 				echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
+// 			}
 
-		echo '</ul></div></nav>';
+// 		echo '</ul></div></nav>';
 
-	}
+// 	}
 
-}
+// }
 
 
 /*=====  FIN Tools  =====*/

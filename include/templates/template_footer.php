@@ -33,7 +33,7 @@ add_action( 'wp_enqueue_scripts', 'pc_enqueue_scripts', 666 );
 function pc_display_footer_start() {
 
 	$tag = '<footer class="footer" role="contentinfo">';
-	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag .= '<div class="footer-inner">'; }
+	if ( apply_filters( 'pc_filter_display_footer_inner', false ) ) { $tag .= '<div class="footer-inner">'; }
 
 	echo apply_filters( 'pc_filter_footer_start', $tag );
 
@@ -42,7 +42,7 @@ function pc_display_footer_start() {
 function pc_display_footer_end() {
 
 	$tag = '</footer>';
-	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag = '</div>'.$tag; }
+	if ( apply_filters( 'pc_filter_display_footer_inner', false ) ) { $tag = '</div>'.$tag; }
 
 	echo apply_filters( 'pc_filter_footer_end', $tag );
 

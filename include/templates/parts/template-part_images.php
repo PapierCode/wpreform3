@@ -86,53 +86,17 @@ add_action( 'init', 'pc_add_images_sizes' );
 =            Images par défaut            =
 =========================================*/
 
-// function pc_get_default_image_to_share() {
-
-// 	global $images_sizes;
-
-// 	return apply_filters( 'pc_filter_default_image_to_share', array(
-// 		get_template_directory_uri().'/images/share-default.jpg',
-// 		$images_sizes['share']['width'],
-// 		$images_sizes['share']['height']
-// 	) );
-
-// }
-
 function pc_get_default_card_image() {
 
 	$directory = get_bloginfo('template_directory');
 
 	return apply_filters( 'pc_filter_default_card_image', array(
-		'400' => array(	$directory.'/images/st-default-s.jpg', 400, 250 ),
-		'500' => array(	$directory.'/images/st-default-m.jpg', 500, 320 ),
-		'700' => array(	$directory.'/images/st-default-l.jpg', 700, 440 )
+		'400' => array(	$directory.'/images/card-default-s.jpg', 400, 250 ),
+		'500' => array(	$directory.'/images/card-default-m.jpg', 500, 320 ),
+		'700' => array(	$directory.'/images/card-default-l.jpg', 700, 440 )
 	) );
 
 }
 
 
 /*=====  FIN Image par défaut  =====*/
-
-/*===============================
-=            Get SVG            =
-===============================*/
-
-/**
- * 
- * @param string	$index		Index du tableau $sprite
- * 
- */
-
- function pc_svg( $index ) {
-
-	global $sprite; // cf. images/sprite.php
-	$svg = $sprite[$index];
-
-	$svg = str_replace('<svg', '<svg class="no-print"', $svg);
-	$svg = str_replace('<svg', '<svg aria-hidden="true" focusable="false"', $svg);
-
-	return $svg;
-
-}
-
-/*=====  FIN Get SVG  =====*/

@@ -14,33 +14,34 @@ class PC_Post {
 	public $permalink;		// string
 	public $metas;			// array
 	
-	public $thumb_id;		// int/false
+	public $thumbnail;		// array
 
 
 	/*=================================
 	=            Construct            =
 	=================================*/
 	
-	public function __construct ( $post ) {
+	public function __construct ( $wp_post ) {
 
-		// WP_post
-		$this->wp_post 		= $post;
-		$this->id 			= $post->ID;
-		$this->type 		= $post->post_type;
-		$this->author 		= $post->post_author;
-		$this->parent 		= $post->post_parent;
-		$this->title 		= $post->post_title;
-		$this->content 		= $post->post_content;
+		$this->wp_post 		= $wp_post;
+		$this->id 			= $wp_post->ID;
+		$this->type 		= $wp_post->post_type;
+		$this->author 		= $wp_post->post_author;
+		$this->parent 		= $wp_post->post_parent;
+		$this->title 		= $wp_post->post_title;
+		$this->content 		= $wp_post->post_content;
 
 		// url
-		$this->permalink = get_the_permalink( $post->ID );
+		$this->permalink = get_the_permalink( $wp_post->ID );
 
-		// métas
-		$this->metas = get_fields( $post->ID );
+		// metas
+		$this->metas = get_fields( $wp_post->ID );
 
-		// test image associée
-		// $this->use_woo_product_image(); // si le post est un produit WooCommerce
-		$this->thumb_id = get_post_thumbnail_id( $this->id );
+		// visual
+		if ( !is_front_page() ) {
+			// $this->use_woo_product_image(); // TODO si le post est un produit WooCommerce
+			$this->thumbnail = $this->metas['_thumbnail_id'];
+		}
 
 	}
 
@@ -53,40 +54,40 @@ class PC_Post {
 	
 	/**
 	 * 
-	 * [DATE] De création ou modification
+	 * [DATE] Format & type
 	 * 
-	 * @param	string	$format		Cf. php date	
-	 * @param	bool	$modified	Date de modification ?
+	 * @param	string	$format		php date	
+	 * @param	bool	$modified	get modification date ?
 	 * 
-	 * @return	string 	Date traduite
+	 * @return	string 	date
 	 * 
 	 */
 
 	public function get_date( $format = 'j F Y', $modified = false ) {
 
-		$date = ( !$modified ) ? $this->wp_post->post_date : $this->wp_post->post_modified;
+		$date = !$modified ? $this->wp_post->post_date : $this->wp_post->post_modified;
 		return date_i18n( $format, strtotime( $date ) );
 
 	}
 	
 	/**
 	 * 
-	 * [DATE] affichage
+	 * [DATE] Display
 	 * 
-	 * @param	string	$css		Classe de l'élément
+	 * @param	string	$css
 	 * 
-	 * @return	string 	Time
+	 * @return	string 	HTML (time)
 	 * 
 	 */
 
 	public function display_date( $css ) {
 
-		$type = apply_filters( 'pc_filter_display_date_modified', false, $this );		
-		$format = apply_filters( 'pc_filter_display_date_format', 'j F Y', $this );		
-		$prefix = apply_filters( 'pc_post_card_date_prefix', pc_svg('calendar'), $this );
-		$label = !$type ? 'publication' : 'modification';
+		$modified = apply_filters( 'pc_filter_post_display_date_modified', false, $this );		
+		$format = apply_filters( 'pc_filter_post_display_date_format', 'j F Y', $this );		
+		$prefix = apply_filters( 'pc_filter_post_date_prefix', pc_svg('calendar'), $this );
 
-		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date('c',$type).'">'.$prefix.'<span>'.$this->get_date($format,$type).'</span></time>';
+		$label = !$modified ? 'publication' : 'modification';
+		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">'.$prefix.'<span>'.$this->get_date( $format, $modified ).'</span></time>';
 
 	}
 	
@@ -99,7 +100,9 @@ class PC_Post {
 	
 	/**
 	 * 
-	 * @return	string 	Liste des termes
+	 * [TAXONOMY] Display terms list
+	 * 
+	 * @return	string 	HTML (terms list)
 	 * 
 	 */
 
@@ -136,28 +139,29 @@ class PC_Post {
 	
 	/**
 	 * 
-	 * [RESUMÉ] Titre
+	 * [CARD] Title
 	 * 
-	 * @return string Méta resum-title | titre du post | '(sans titre)'
+	 * @return string meta post_short_title || post title
 	 * 
 	 */
 
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = isset( $metas['resum-title'] ) && trim( $metas['resum-title'] ) ? trim( $metas['resum-title'] ) : get_the_title( $this->id );
-		$title = apply_filters( 'pc_filter_card_title', $title, $this );
+		$title = isset( $metas['post_short_title'] ) && trim( $metas['post_short_title'] ) ? trim( $metas['post_short_title'] ) : get_the_title( $this->id );
 
-		$length = apply_filters( 'pc_filter_short_title_length', 40 );
-		return pc_get_text_cut( $title, $length );
+		return pc_get_text_cut(
+			apply_filters( 'pc_filter_post_card_title', $title, $this ),
+			apply_filters( 'pc_filter_post_short_title_length', 40 )
+		);
 
 	}
 
 	/**
 	 * 
-	 * [RESUMÉ] Description
+	 * [CARD] Description
 	 * 
-	 * @return string Méta resum-desc | wp_excerpt | empty
+	 * @return string meta post_excerpt || wp_excerpt
 	 * 
 	 */
 
@@ -165,97 +169,97 @@ class PC_Post {
 
 		$metas = $this->metas;
 		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( $metas['post_excerpt'] ) : get_the_excerpt( $this->id );
-		$description = apply_filters( 'pc_filter_card_description', $description, $this );
 	
-		$length = apply_filters( 'pc_filter_excerpt_length', 150 );
-		return pc_get_text_cut( $description, $length );
+		return pc_get_text_cut( 
+			apply_filters( 'pc_filter_post_card_description', $description, $this ), 
+			apply_filters( 'pc_filter_post_excerpt_length', 150 )
+		);
 	
 	}
 
 	/**
 	 * 
-	 * [RESUMÉ] Urls & attribut alt de la vignette
+	 * [CARD] Visual's Urls & attribut alt
 	 * 
-	 * @return 	array 	array 	urls card-s/card-m/card-l	Méta _thumbnail_id | default
-	 * 					string	attribut alt				Méta _wp_attachment_image_alt | get_card_title()
+	 * @return 	array	string	alt attribut	meta _wp_attachment_image_alt
+	 * 				 	array 	urls & sizes	meta _thumbnail_id | default
 	 * 
 	 */
 
-	public function get_card_image_datas() {
+	public function get_card_image_args() {
 
-		$metas = $this->metas;
+		$image = $this->thumbnail;
 
-		if ( $this->thumb_id ) {
+		if ( $image ) {
 			
-			$datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
-				'400' => wp_get_attachment_image_src( $this->thumb_id, 'card-s' ),
-				'500' => wp_get_attachment_image_src( $this->thumb_id, 'card-m' ),
-				'700' => wp_get_attachment_image_src( $this->thumb_id, 'card-l' )
-			), $this->thumb_id, $this );
-			
-			$alt = get_post_meta( $this->thumb_id, '_wp_attachment_image_alt', true );
-			$datas['alt'] = ( $alt ) ? $alt : $this->get_card_title();
+			$sizes = $image['sizes'];
+			$args = array( 
+				'alt' => $image['alt'],
+				'sizes' => apply_filters( 'pc_filter_post_card_thumbnail_sizes_values', array(
+					'400' => [ $sizes['card-s'], $sizes['card-s-width'], $sizes['card-s-height'] ],
+					'500' => [ $sizes['card-m'], $sizes['card-m-width'], $sizes['card-m-height'] ],
+					'700' => [ $sizes['card-l'], $sizes['card-l-width'], $sizes['card-l-height'] ]
+				), $this->thumbnail, $this )
+			);
 		
 		} else {
 
-			$datas['sizes'] = pc_get_default_card_image();
-			$datas['alt'] = $this->get_card_title();
+			$args = array(
+				'alt' => '',
+				'sizes' => pc_get_default_card_image()
+			);
 
 		}
 		
-		return $datas;
+		return $args;
 	
 	}
 	
 	/**
 	 * 
-	 * [RESUMÉ] Affichage vignette
+	 * [CARD] Display visual
 	 * 
-	 * @return string HTML
+	 * @return string HTML (article)
 	 * 
 	 */
 
-	public function display_card_image( $alt = true ) {
+	public function display_card_image() {
 
-		$datas = $this->get_card_image_datas();
-		$sizes_count = count( $datas['sizes'] );
-		$last_size_key = array_key_last($datas['sizes']);
+		$args = $this->get_card_image_args();
+		$last_size_key = array_key_last( $args['sizes'] );
 
 		$attrs = array(
-			'src' => $datas['sizes'][$last_size_key][0],
-			'width' => $datas['sizes'][$last_size_key][1],
-			'height' => $datas['sizes'][$last_size_key][2],
-			'alt' => ( $alt ) ? $datas['alt'] : '',
+			'src' => $args['sizes'][$last_size_key][0],
+			'width' => $args['sizes'][$last_size_key][1],
+			'height' => $args['sizes'][$last_size_key][2],
+			'alt' => $args['alt'],
 			'loading' => 'lazy'
 		);
 	
-		if ( $sizes_count > 1 ) {
+		if ( count( $args['sizes'] ) > 1 ) {
 			
 			$attr_srcset = array();
-			foreach ( $datas['sizes'] as $size => $attachment ) {
-				$attr_srcset[] = $attachment[0].' '.$size.'w';
-			}
-			$attrs['srcset'] = implode(', ',$attr_srcset);
-			$attrs['sizes'] = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $datas, $this );
+			foreach ( $args['sizes'] as $size => $size_args ) { $attr_srcset[] = $size_args[0].' '.$size.'w'; }
+			$attrs['srcset'] = implode( ', ', $attr_srcset );
+
+			$attrs['sizes'] = apply_filters( 'pc_filter_card_thumbnail_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $args, $this );
 
 		}
 		
 		$tag = '<img';
-		foreach ( $attrs as $attr => $attr_value ) {
-			$tag .= ' '.$attr.'="'.$attr_value.'"';
-		}
-		$tag .= ' />';
+			foreach ( $attrs as $attr => $attr_value ) { $tag .= ' '.$attr.'="'.$attr_value.'"'; }
+		$tag .= '>';
 		
-		echo apply_filters( 'pc_filter_card_image', $tag, $datas, $this );
+		echo apply_filters( 'pc_filter_card_image_tag', $tag, $attrs, $this );
 	
 	}
 	
 	/**
 	 * 
-	 * [RESUMÉ] Affichage résumé complet
+	 * [CARD] Display
 	 * 
-	 * @param	int		$title_level	Niveau du titre
-	 * @param	string	$classes_css	Classes css
+	 * @param	int		$title_level	Title level
+	 * @param	string	$classes_css	CSS
 	 * 
 	 * @return	string	HTML
 	 * 
@@ -265,10 +269,10 @@ class PC_Post {
 
 		$metas = $this->metas;
 	
-		// titre
+		// title
 		$title = $this->get_card_title();
 
-		// lien
+		// link
 		$href = $this->permalink;
 		$href_params = apply_filters( 'pc_filter_card_link_params', array(), $this );
 		if ( !empty( $href_params ) ) {
@@ -281,28 +285,16 @@ class PC_Post {
 			}
 		}
 		$link_tag_start = '<a href="'.$href.'" class="card-link" title="Lire la suite de : '.$title.'">';
-		$link_position = apply_filters( 'pc_filter_post_card_link_position', 'title', $this ); // title || card-inner
-
-		// description
-		$description = $this->get_card_description();
-
-		// filtres call to action
-		$ico_more = apply_filters( 'pc_filter_card_ico_more', pc_svg('arrow'), $this );	
-		$ico_more_display = apply_filters( 'pc_filter_card_ico_more_display', true, $this );
-		$read_more_display = apply_filters( 'pc_filter_card_read_more_display', false, $this );
 		
-		
-		/*----------  Affichage  ----------*/
-		
+		// css
 		$classes_css = array_merge( array( 'card' ), $classes_css );
 
-		echo '<article class="'.implode(' ',$classes_css).'">';
-	
-			if ( 'card-inner' == $link_position ) { echo $link_tag_start; }
+		echo '<article class="'.implode( ' ', $classes_css ).'">';
 	
 				// hook
 				do_action( 'pc_post_card_after_start', $this, $params );
 			
+				// visual
 				echo '<figure class="card-figure">';
 					$this->display_card_image();				
 				echo '</figure>';
@@ -310,42 +302,39 @@ class PC_Post {
 				// hook	
 				do_action( 'pc_post_card_after_figure', $this, $params );
 	
+				// title
 				echo '<h'.$title_level.' class="card-title">';
-					if ( 'title' == $link_position ) {
 						echo $link_tag_start.$title.'</a>';
-					} else {
-						echo $title;
-					}
 				echo '</h'.$title_level.'>';	
 	
 				// hook	
 				do_action( 'pc_post_card_after_title', $this, $params );
 
 				// date
-				if ( apply_filters( 'pc_filter_display_card_date', false, $this ) ) {
+				if ( apply_filters( 'pc_filter_display_default_card_date', false, $this ) ) {
 					$this->display_date( 'card-date' );		
 				}
 				
+				// description
+				$description = $this->get_card_description();
+				$ico_more = apply_filters( 'pc_filter_card_ico_more', pc_svg( 'arrow' ), $this );	
 				if ( $description ) {
 					echo '<p class="card-desc">';
 						echo $description;
-						if ( $ico_more_display ) { echo ' <span class="card-desc-ico">'.$ico_more.'</span>';	}	
+						if ( $ico_more ) { echo ' <span class="card-desc-ico">'.$ico_more.'</span>'; }	
 					echo '</p>';
 				}
 
 				// hook
 				do_action( 'pc_post_card_after_desc', $this, $params );
-				
-				if ( $read_more_display ) {
-					echo '<div class="card-read-more" aria-hidden="true"><span class="card-read-more-ico">'.$ico_more.'</span> <span class="card-read-more-txt">Lire la suite</span></a></div>';
-				}
 
-				$this->display_terms( 'card-terms' );
+				// terms
+				if ( apply_filters( 'pc_filter_display_default_card_terms', false, $this ) ) {
+					$this->display_terms( 'card-terms' );
+				}
 			
 				// hook
 				do_action( 'pc_post_card_before_end', $this, $params );
-	
-			if ( 'card-inner' == $link_position ) { echo '</a>'; }
 		
 		echo '</article>';
 		

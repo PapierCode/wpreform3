@@ -17,8 +17,8 @@ function pc_admin_news_acf_include_fields() {
 	if ( !function_exists( 'acf_add_local_field_group' ) ) { return; }
     if ( !get_option('options_news_enabled') ) { return; }
 
-    $short_title_length = apply_filters( 'pc_filter_short_title_length', 40 );
-    $excerpt_length = apply_filters( 'pc_filter_excerpt_length', 150 );
+    $short_title_length = apply_filters( 'pc_filter_post_short_title_length', 40 );
+    $excerpt_length = apply_filters( 'pc_filter_post_excerpt_length', 150 );
 
     /*============================
     =            Post            =

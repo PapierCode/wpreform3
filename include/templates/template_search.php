@@ -1,14 +1,15 @@
 <?php 
 /**
  * 
- * Template : résultats de la recherche
+ * Template : Search results
  * 
- ** Hooks
- ** Titre de la page
- ** Résultats de recherche
- ** Pagination
+ * Hooks
+ * Title
+ * Results
+ * Pager
  * 
  */
+
 
 /*=============================
 =            Hooks            =
@@ -19,17 +20,17 @@ add_action( 'pc_action_template_search', 'pc_display_main_start', 10 ); // templ
 
 	// header
 	add_action( 'pc_action_template_search', 'pc_display_main_header_start', 20 ); // template-part_layout.php
-		add_action( 'pc_action_template_search', 'pc_display_breadcrumb', 30 ); // breadcrumb
-		add_action( 'pc_action_template_search', 'pc_display_search_main_title', 40 ); // titre
+		add_action( 'pc_action_template_search', 'pc_display_breadcrumb', 30 ); // template-part_navigation.php
+		add_action( 'pc_action_template_search', 'pc_display_search_main_title', 40 );
 	add_action( 'pc_action_template_search', 'pc_display_main_header_end', 50 ); // template-part_layout.php
 
 	// content
 	add_action( 'pc_action_template_search', 'pc_display_main_content_start', 60 ); // template-part_layout.php
-		add_action( 'pc_action_template_search', 'pc_display_search_results', 70 ); // résultats
+		add_action( 'pc_action_template_search', 'pc_display_search_results', 70 );
 	add_action( 'pc_action_template_search', 'pc_display_main_content_end', 80 ); // template-part_layout.php
 
 	// footer
-	add_action( 'pc_action_template_search', 'pc_display_search_footer', 90 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_search_footer', 90 );
 
 // main end
 add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // template-part_layout.php
@@ -37,9 +38,9 @@ add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // templa
 
 /*=====  FIN Hooks  =====*/
 
-/*========================================
-=            Titre de la page            =
-========================================*/
+/*=============================
+=            Title            =
+=============================*/
 
 function pc_display_search_main_title() {
 	
@@ -51,11 +52,11 @@ function pc_display_search_main_title() {
 }
 
 
-/*=====  FIN Titre de la page  =====*/
+/*=====  FIN Title  =====*/
 
-/*=================================
-=            Résultats            =
-=================================*/
+/*===============================
+=            Results            =
+===============================*/
 
 function pc_display_search_results() {
 
@@ -109,11 +110,11 @@ function pc_display_search_results() {
 }
 
 
-/*=====  FIN Résultats  =====*/
+/*=====  FIN Results  =====*/
 
-/*==================================
-=            Pagination            =
-==================================*/
+/*=============================
+=            Pager            =
+=============================*/
 
 function pc_display_search_footer() {
 
@@ -121,13 +122,14 @@ function pc_display_search_footer() {
 
 	if ( get_search_query() && $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
 		
-		pc_display_main_footer_start();
-			pc_get_pager();			
-		pc_display_main_footer_end();
+		// TODO liens de partage
+		pc_display_main_footer_start(); // template-part_layout.php
+			pc_display_pager();  // template-part_navigation.php
+		pc_display_main_footer_end(); // template-part_layout.php
 
 	}
 
 }
 
 
-/*=====  FIN Pagination  =====*/
+/*=====  FIN Pager  =====*/
