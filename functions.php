@@ -1,17 +1,17 @@
 <?php
 
-include 'include/tools.php'; // useful functions
-include 'images/sprite.php'; // array of SVG
+include 'include/tools.php'; // fonctions utiles
+include 'images/sprite.php'; // sprite SVG
 
-include 'include/classes/class-pc-walker-nav.php'; // navigation structure
-include 'include/classes/class-pc-post.php'; // custom post object
+include 'include/classes/class-pc-walker-nav.php'; // navigation custom
+include 'include/classes/class-pc-post.php'; // objet post custom
 
-include 'include/news.php'; // CPT news or blog
+include 'include/news.php'; // CPT news ou blog
 
-include 'include/editors/block-editor/block-editor.php'; // block editor & ACF blocks
+include 'include/editors/block-editor/block-editor.php'; // block editor & blocks ACF
 include 'include/editors/acf-tinymce/acf-tinymce.php'; // tinymce ACF
 
-// ACF groups fields
+// groupes de champs ACF
 include 'include/acf-fields/acf-wpr-settings.php';
 include 'include/acf-fields/acf-blocks.php';
 include 'include/acf-fields/acf-page.php';
@@ -19,4 +19,4 @@ include 'include/acf-fields/acf-news.php';
 
 include 'include/admin/admin.php'; // admin custom
 
-include 'include/templates/templates.php'; // templates hooks & functions
+include 'include/templates/templates.php'; // hooks & functions templates

@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Communs templates : données structurée (schema.org)
+ * TODO Communs templates : données structurée (schema.org)
  * 
  */
 

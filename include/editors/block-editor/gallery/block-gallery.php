@@ -20,7 +20,7 @@ if ( $img_ids && count( $img_ids ) >= 2 ) {
 	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
 	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list reset-list">';
+	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list">';
 
 	foreach ( $img_ids as $img ) {
 

@@ -4,9 +4,9 @@
  * Template : archive
  * 
  * Hooks
- * Main header
- * Cards list
- * Pager
+ * Entête
+ * Liste des posts
+ * Pagination
  * 
  */
 
@@ -37,7 +37,7 @@ add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 30 ); // 
 /*=====  FIN Hooks  =====*/
 
 /*===================================
-=            Main header            =
+=            Entête            =
 ===================================*/
 
 function pc_display_archive_main_header_content( $settings ) {
@@ -62,11 +62,11 @@ function pc_display_archive_main_header_content( $settings ) {
 }
 
 
-/*=====  FIN Main header  =====*/
+/*=====  FIN Entête  =====*/
 
-/*==================================
-=            Cards list            =
-==================================*/
+/*=======================================
+=            Liste des posts            =
+=======================================*/
 
 function pc_display_archive_list_start() {
     echo '<ul class="card-list card-list--news">';
@@ -85,11 +85,11 @@ function pc_display_archive_posts_list( $post ) {
 }
 
 
-/*=====  FIN Cards list  =====*/
+/*=====  FIN Liste des posts  =====*/
 
-/*=============================
-=            Pager            =
-=============================*/
+/*==================================
+=            Pagination            =
+==================================*/
 
 function pc_display_archive_footer() {
 
@@ -107,4 +107,4 @@ function pc_display_archive_footer() {
 }
 
 
-/*=====  FIN Pager  =====*/
+/*=====  FIN Pagination  =====*/

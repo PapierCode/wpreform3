@@ -3,9 +3,8 @@
  * 
  * Communs templates : images & galeries
  * 
- ** Tailles
- ** Image de partage par défaut
- ** Sprite
+ * Tailles
+ * Images par défaut des posts
  * 
  */
 
@@ -82,9 +81,9 @@ add_action( 'init', 'pc_add_images_sizes' );
 
 /*=====  FIN Tailles  =====*/
 
-/*=========================================
-=            Images par défaut            =
-=========================================*/
+/*===================================================
+=            Images par défaut des posts            =
+===================================================*/
 
 function pc_get_default_card_image() {
 
@@ -99,4 +98,4 @@ function pc_get_default_card_image() {
 }
 
 
-/*=====  FIN Image par défaut  =====*/
+/*=====  FIN Image par défaut des posts  =====*/

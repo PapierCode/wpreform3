@@ -1,4 +1,10 @@
 <?php
+/**
+ * 
+ * Navigation custom
+ * 
+ */
+
 
 class PC_Walker_Nav_Menu extends Walker_Nav_Menu {
 
@@ -13,7 +19,7 @@ class PC_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$list_css[] = $prefix.'-list';
 			$list_css[] = $prefix.'-list--l'.$display_depth;
 		}
-		$output .= '<ul class="' .implode( ' ', $list_css ) . ' reset-list">';
+		$output .= '<ul class="' .implode( ' ', $list_css ) . '">';
 
 	} // end start_lvl()
 
@@ -65,7 +71,7 @@ class PC_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 			} else {
 
-				$output .= '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
+				$output .= '<button type="button" class="'.$link_class_name.'"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
 
 			}
 

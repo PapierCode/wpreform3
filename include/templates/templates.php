@@ -1,4 +1,17 @@
 <?php
+/**
+ * 
+ * Templates
+ * 
+ * Includes
+ * Objet custom post
+ * Résumé auto
+ * 
+ */
+
+/*================================
+=            Includes            =
+================================*/
 
 /*----------  Communs  ----------*/
 
@@ -28,7 +41,7 @@ include 'parts/template-part_news.php';
 include 'template_header.php';
 // Pied de page (footer)
 include 'template_footer.php';
-// page
+// single
 include 'template_index.php';
 // archive
 include 'template_archive.php';
@@ -38,15 +51,15 @@ include 'template_search.php';
 include 'template_404.php';
 
 
-/*==========================================
-=            Custom post object            =
-==========================================*/
+/*=====  FIN Includes  =====*/
+
+/*=========================================
+=            Objet post custom            =
+=========================================*/
 
 add_action( 'wp', 'pc_register_custom_post_object', 10 );
 
 	function pc_register_custom_post_object() {
-
-        /*----------  Objet PC_POST  ----------*/
         
 		if ( is_singular() && class_exists( 'PC_Post' ) ) {
 			global $post, $pc_post;
@@ -56,11 +69,11 @@ add_action( 'wp', 'pc_register_custom_post_object', 10 );
 	}
 
 
-/*=====  FIN Custom post object  =====*/
+/*=====  FIN Objet post custom  =====*/
 
-/*===============================
-=            Excerpt            =
-===============================*/
+/*===================================
+=            Résumé auto            =
+===================================*/
 
 add_filter( 'excerpt_more', '__return_empty_string' );
 
@@ -73,4 +86,4 @@ add_filter( 'excerpt_length', 'pc_edit_excerpt_length' );
 	}
 
 
-/*=====  FIN Excerpt  =====*/
+/*=====  FIN Résumé auto  =====*/

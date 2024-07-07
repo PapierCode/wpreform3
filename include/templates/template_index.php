@@ -4,8 +4,8 @@
  * Template : page
  * 
  * Hooks
- * Title
- * Editor
+ * Titre
+ * Éditeur
  * 
  */
 
@@ -28,9 +28,9 @@ add_action( 'pc_action_template_index', 'pc_display_main_start', 10 ); // templa
 	add_action( 'pc_action_template_index', 'pc_display_main_content_end', 90 ); // template-part_layout.php
 
 	// footer
-	// add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 100 ); // template-part_layout.php
-		// add_action( 'pc_action_index_main_footer', 'pc_display_share_links', 110 );
-	// add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 120 ); // template-part_layout.php
+	add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 100 ); // template-part_layout.php
+		add_action( 'pc_action_template_index', 'pc_display_share_links', 110 ); // template-part_social.php
+	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 120 ); // template-part_layout.php
 
 // main end
 add_action( 'pc_action_template_index', 'pc_display_main_end', 130 ); // template-part_layout.php
@@ -39,7 +39,7 @@ add_action( 'pc_action_template_index', 'pc_display_main_end', 130 ); // templat
 /*=====  FIN Hooks  =====*/
 
 /*=============================
-=            Title            =
+=            Titre            =
 =============================*/
 
 function pc_display_single_main_title( $pc_post ) {
@@ -49,11 +49,11 @@ function pc_display_single_main_title( $pc_post ) {
 }
 
 
-/*=====  FIN Title  =====*/
+/*=====  FIN Titre  =====*/
 
-/*==============================
-=            Editor            =
-==============================*/
+/*===============================
+=            Éditeur            =
+===============================*/
 
 function pc_display_single_content( $pc_post ) {
 
@@ -78,4 +78,4 @@ function pc_display_single_content( $pc_post ) {
 }
 
 
-/*=====  FIN Editor  =====*/
+/*=====  FIN Éditeur  =====*/

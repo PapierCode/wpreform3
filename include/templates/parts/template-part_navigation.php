@@ -1,12 +1,12 @@
 <?php
 /**
 *
-* Template : navigation
+* Template navigations
 *
-** Emplacement menus
-** Item parent actif (sous-page)
-** Fil d'ariane
-** Pagination
+* Emplacement menus
+* Item parent actif (sous-page)
+* Fil d'ariane
+* Pagination
 *
 **/
 
@@ -294,7 +294,7 @@ function pc_display_breadcrumb() {
 
 	/*----------  Affichage  ----------*/
 	
-	echo '<nav class="breadcrumb no-print" role="navigation" aria-label="Fil d\'ariane"><ol class="breadcrumb-list reset-list">';
+	echo '<nav class="breadcrumb no-print" role="navigation" aria-label="Fil d\'ariane"><ol class="breadcrumb-list">';
 
 		foreach ( $links as $key => $link ) {
 
@@ -333,7 +333,7 @@ function pc_display_breadcrumb() {
  * 
  */
 
- function pc_display_pager( $query = null, $current = null, $args = array() ) {
+function pc_display_pager( $query = null, $current = null, $args = array() ) {
 
 	// fusion des arguments
     $args = array_merge(
@@ -345,7 +345,7 @@ function pc_display_breadcrumb() {
 			'type' 					=> 'array',
 			'before_page_number' 	=> '<span class="visually-hidden">Page </span>',
 			'format'                => '?paged=%#%',
-			'ul_css'				=> 'pager-list reset-list no-print' // custom
+			'ul_css'				=> 'pager-list no-print' // custom
 		),
 		$args
 	);

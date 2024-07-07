@@ -1,4 +1,17 @@
 <?php
+/**
+ * 
+ * Template actualité ou blog
+ * 
+ * Affichage date & catégories
+ * Filtres catégories
+ * 
+ */
+
+
+/*===================================================
+=            Affichage date & catégories            =
+===================================================*/
 
 add_filter( 'pc_filter_display_default_card_date', 'pc_edit_display_news_date', 10, 2 );
 add_filter( 'pc_filter_display_default_card_terms', 'pc_edit_display_news_date', 10, 2 );
@@ -32,6 +45,13 @@ add_action( 'pc_action_template_index', 'pc_display_news_date_and_terms', 55 );
         }
 
     }
+
+
+/*=====  FIN Affichage date & catégories  =====*/
+
+/*==========================================
+=            Filtres catégories            =
+==========================================*/
     
 add_action( 'pre_get_posts', 'pc_news_pre_get_posts' );
 
@@ -48,3 +68,6 @@ add_action( 'pre_get_posts', 'pc_news_pre_get_posts' );
         }
 
     }
+
+
+/*=====  FIN Filtres catégories  =====*/

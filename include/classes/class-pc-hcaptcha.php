@@ -1,11 +1,11 @@
 <?php
-
 /**
 *
-* * Validation reCaptcha
+* Validation reCaptcha
 *
 *
 **/
+
 
 class PC_Hcaptcha {
 

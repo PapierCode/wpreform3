@@ -1,7 +1,12 @@
 <?php
 /**
  * 
- * Customisation de la recherche
+ * Recherche
+ * 
+ * Formulaire
+ * Nombre de résultats
+ * Recherche dans les champs ACF
+ * Suppression des résultats
  * 
  */
 
@@ -10,26 +15,22 @@
 =            Formulaire            =
 ==================================*/
 
-function pc_display_form_search( $txts = array(), $css = array(), $icon = 'zoom' ) {
+function pc_display_form_search( $context ) {
 
-		$txts = array_merge(
-			array(
-				'label' => 'Mots-clés',
-				'btn_title' => 'Rechercher ces mots-clés',
-				'btn_txt' => 'Rechercher'
-			),
-			$txts
-		);
+		$txts = apply_filters( 'pc_filter_search_form_txts', array(
+			'form-aria-label' => 'Formulaire de recherche',
+			'input-label' => 'Mots-clés',
+			'input-placeholder' => '',
+			'submit-title' => 'Rechercher ces mots-clés',
+			'submit-txt' => 'Rechercher'
+		), $context);
 
-		$css = array_merge(
-			array( 'form-search' ),
-			$css
-		);
+		$ico = apply_filters( 'pc_filter_search_form_submit_ico', pc_svg('zoom'), $context );
 
-		echo '<form id="form-search" class="'.implode( ' ', $css ).'" method="get" role="search" aria-label="Formulaire de recherche" action="'.get_bloginfo('url').'">';
-			echo '<label class="form-search-label" for="form-search-input">'.$txts['label'].'</label>';
-			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" required>';
-			echo '<button type="submit" class="form-search-submit reset-btn button" title="'.$txts['btn_title'].'"></span><span class="txt">'.$txts['btn_txt'].'</span><span class="ico">'.pc_svg($icon).'</button>';
+		echo '<form id="form-search-'.$context.'" class="form-search form-search--'.$context.'" method="get" role="search" aria-label="'.$txts['form-aria-label'].'" action="'.get_bloginfo('url').'">';
+			echo '<label class="form-search-label" for="form-search-input">'.$txts['input-label'].'</label>';
+			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" required  aria-invalid="false" autocomplete="off" placeholder="'.$txts['input-placeholder'].'">';
+			echo '<button type="submit" class="form-search-submit button" title="'.$txts['submit-title'].'"><span class="ico">'.$ico.'</span><span class="txt">'.$txts['submit-txt'].'</span></button>';
 		echo '</form>';
 
 }
@@ -37,9 +38,9 @@ function pc_display_form_search( $txts = array(), $css = array(), $icon = 'zoom'
 
 /*=====  FIN Formulaire  =====*/
 
-/*=================================
-=            Résultats            =
-=================================*/
+/*===========================================
+=            Nombre de résultats            =
+===========================================*/
 
 function pc_get_search_count_results( $query ) {
 
@@ -63,22 +64,18 @@ function pc_get_search_count_results( $query ) {
 }
 
 
-/*=====  FIN Résultats  =====*/
+/*=====  FIN Nombre de résultats  =====*/
 
-/*=======================================================================
-=            Indexation des customs fields pour la recherche            =
-=======================================================================*/
+/*=====================================================
+=            Recherche dans les champs ACF            =
+=====================================================*/
 
 add_filter( 'posts_join', 'pc_search_join' );
 
 	function pc_search_join( $join ) {
 
 		global $wpdb;
-
-		if ( is_search() ) {    
-			$join .=' LEFT JOIN '.$wpdb->postmeta. ' wpreform_metas ON '. $wpdb->posts . '.ID = wpreform_metas.post_id ';
-		}
-
+		if ( is_search() ) { $join .=' LEFT JOIN '.$wpdb->postmeta. ' '.$wpdb->prefix.'metas ON '. $wpdb->posts . '.ID = '.$wpdb->prefix.'metas.post_id '; }
 		return $join;
 
 	}
@@ -87,14 +84,14 @@ add_filter( 'posts_where', 'pc_search_where' );
 
 	function pc_search_where( $where ) {
 
-		global $pagenow, $wpdb;
-
+		global $wpdb;
 		if ( is_search() ) {
 			$where = preg_replace(
 				"/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-				"(".$wpdb->posts.".post_title LIKE $1) OR (wpreform_metas.meta_value LIKE $1)", $where );
+				"(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->prefix."metas.meta_value LIKE $1)", 
+				$where
+			);
 		}
-
 		return $where;
 
 	}
@@ -103,15 +100,27 @@ add_filter( 'posts_distinct', 'pc_search_distinct' );
 
 	function pc_search_distinct( $where ) {
 
-		global $wpdb;
-
-		if ( is_search() ) {
-			return "DISTINCT";
-		}
-
+		if ( is_search() ) { return "DISTINCT";	}
 		return $where;
 
 	}
 
 
-/*=====  FIN Indexation des customs fields pour la recherche  ======*/
+/*=====  FIN Recherche dans les champs ACF  ======*/
+
+/*=================================================
+=            Suppression des résultats            =
+=================================================*/
+
+add_action( 'pre_get_posts', 'pc_search_pre_get_posts' );
+
+	function pc_search_pre_get_posts( $query ) {
+
+		if ( !is_admin() && is_search() ) {
+			$query->set( 'post__not_in', array( get_option('page_on_front') ) );
+		}
+
+	}
+
+
+/*=====  FIN Suppression des résultats  =====*/

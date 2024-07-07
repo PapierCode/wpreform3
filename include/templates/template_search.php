@@ -1,12 +1,12 @@
 <?php 
 /**
  * 
- * Template : Search results
+ * Template : résultats de recherche
  * 
  * Hooks
- * Title
- * Results
- * Pager
+ * Titre
+ * Résultats
+ * Pagination
  * 
  */
 
@@ -26,7 +26,7 @@ add_action( 'pc_action_template_search', 'pc_display_main_start', 10 ); // templ
 
 	// content
 	add_action( 'pc_action_template_search', 'pc_display_main_content_start', 60 ); // template-part_layout.php
-		add_action( 'pc_action_template_search', 'pc_display_search_results', 70 );
+		add_action( 'pc_action_template_search', 'pc_display_search_results_content', 70 );
 	add_action( 'pc_action_template_search', 'pc_display_main_content_end', 80 ); // template-part_layout.php
 
 	// footer
@@ -39,59 +39,56 @@ add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // templa
 /*=====  FIN Hooks  =====*/
 
 /*=============================
-=            Title            =
+=            Titre            =
 =============================*/
 
 function pc_display_search_main_title() {
 	
-	global $wp_query;
-	$title = ( get_search_query() && $wp_query->found_posts > 0 ) ? 'Résultats de la recherche' : "Recherche";
-
-	echo apply_filters( 'pc_filter_search_main_title', '<h1><span>'.$title.'</span></h1>' );
+	$title = get_search_query() ? 'Résultats de la recherche' : "Recherche";
+	echo apply_filters( 'pc_filter_search_main_title', '<h1>'.$title.'</h1>' );
 
 }
 
 
-/*=====  FIN Title  =====*/
+/*=====  FIN Titre  =====*/
 
-/*===============================
-=            Results            =
-===============================*/
+/*=================================
+=            Résultats            =
+=================================*/
 
-function pc_display_search_results() {
+function pc_display_search_results_content() {
 
 	global $wp_query;
+
+	echo '<section id="search-results" class="search-result">';
 
 	if ( $search_query = get_search_query() ) {
 
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
-		$types = apply_filters( 'pc_filter_search_results_type', array( 
+		$types = apply_filters( 'pc_filter_search_results_post_types', array( 
 			'page' => 'Page',
 			'news' => 'Actualité'
 		) );
 
-
-		/*----------  Affichage  ----------*/
-
 		echo '<p class="s-results-infos">'.pc_get_search_count_results( $search_query ).'.</p>';		
 
-		pc_display_form_search();
+		pc_display_form_search( 'main' );
 
 		if ( $wp_query->found_posts > 0 ) {
 
-			echo '<ol id="search-results" class="s-results-list reset-list">';
+			echo '<ol class="s-results-list">';
 
 			foreach ( $wp_query->posts as $post ) {
 				
 				$pc_post = new PC_Post( $post );
 				$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
-				$css_has_image = ( $pc_post->has_image ) ? ' has-image' : '';
+				$css_has_image = $pc_post->thumbnail ? ' has-image' : '';
 
 				echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
 					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
-					if ( $pc_post->thumb_id ) {
-						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $pc_post->thumb_id, 'gl-th' )[0].'" alt="" width="200" height="200" /></figure>';
+					if ( $thumb = $pc_post->thumbnail ) {
+						echo '<figure class="s-results-item-img"><img src="'.$thumb['sizes']['thumbnail_gallery'].'" alt="" width="'.$thumb['sizes']['thumbnail_gallery-width'].'" height="'.$thumb['sizes']['thumbnail_gallery-height'].'" /></figure>';
 					}
 				echo '</li>';
 
@@ -101,20 +98,18 @@ function pc_display_search_results() {
 
 		}
 
-	} else {
+	} else { pc_display_form_search( 'main' ); }
 
-		pc_display_form_search();
-		
-	}
+	echo '</section>';
 
 }
 
 
-/*=====  FIN Results  =====*/
+/*=====  FIN Résultats  =====*/
 
-/*=============================
-=            Pager            =
-=============================*/
+/*==================================
+=            Pagination            =
+==================================*/
 
 function pc_display_search_footer() {
 
@@ -132,4 +127,4 @@ function pc_display_search_footer() {
 }
 
 
-/*=====  FIN Pager  =====*/
+/*=====  FIN Pagination  =====*/

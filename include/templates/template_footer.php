@@ -3,9 +3,11 @@
  * 
  * Template : header
  * 
- ** Hooks
- ** Footer structure & contenu
- ** Fin du container body
+ * Hooks
+ * Container
+ * Logo & coordonnées
+ * Navigation
+ * Javascript
  * 
  */
 
@@ -26,9 +28,9 @@ add_action( 'wp_enqueue_scripts', 'pc_enqueue_scripts', 666 );
 
 /*=====  FIN Hooks  =====*/
 
-/*==============================
-=            Layout            =
-==============================*/
+/*=================================
+=            Container            =
+=================================*/
 
 function pc_display_footer_start() {
 
@@ -49,7 +51,7 @@ function pc_display_footer_end() {
 }
 
 
-/*=====  FIN Layout  =====*/
+/*=====  FIN Container  =====*/
 
 /*==========================================
 =            Logo & coordonnées            =
@@ -82,7 +84,7 @@ function pc_display_footer_contact() {
 	
 	$address = get_option( 'options_coord_address' ).' <br/>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
 	// if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
-	// 	$address .= '<br aria-hidden="true" class="no-print"/><button class="reset-btn js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
+	// 	$address .= '<br aria-hidden="true" class="no-print"/><button class="js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
 	// }
 	$dd['list']['addr'] = array(
 		'ico' => 'map',
@@ -137,7 +139,7 @@ function pc_display_footer_nav() {
 		$nav_footer_args = apply_filters( 'pc_filter_footer_nav_args', array(
 			'theme_location'  	=> 'nav-footer',
 			'nav_prefix'		=> array('f-nav','f-p-nav'),
-			'menu_class'      	=> 'f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list',
+			'menu_class'      	=> 'f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
 			'depth'           	=> 1,
 			'item_spacing'		=> 'discard',

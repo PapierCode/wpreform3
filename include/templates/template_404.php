@@ -24,15 +24,15 @@ add_action( 'pc_action_template_404', 'pc_display_main_end', 50 ); // template-p
 
 /*=====  FIN Hooks  =====*/
 
-/*========================================
-=            Titre de la page            =
-========================================*/
+/*=============================
+=            Titre            =
+=============================*/
 
 function pc_display_404_main_title() {
 
-	echo apply_filters( 'pc_filter_404_main_title', '<h1><span>Cette page n\'existe pas.</span></h1>' );
+	echo apply_filters( 'pc_filter_404_main_title', '<h1>Cette page n\'existe pas.</h1>' );
 
 } 
 
 
-/*=====  FIN Titre de la page  =====*/
+/*=====  FIN Titre   =====*/

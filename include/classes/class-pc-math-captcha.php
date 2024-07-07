@@ -1,10 +1,10 @@
 <?php
-
 /**
 *
 * Math Captcha
 *
 **/
+
 
 class PC_MathCaptcha {
 

@@ -1,6 +1,18 @@
 <?php
+/**
+ * 
+ * Configuration ACF TinyMCE
+ * 
+ * Barres d'outils
+ * Plugins
+ * Configuration
+ * 
+ */
 
-/*----------  Barre d'outils custom  ----------*/
+
+/*=======================================
+=            Barres d'outils            =
+=======================================*/
 
 add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_admin_acf_tinymce_toolbars' );
 
@@ -18,7 +30,12 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_admin_acf_tinymce_toolbars' );
 
    }
 
-/*----------  Config & plugins  ----------*/
+
+/*=====  FIN Barres d'outils  =====*/
+
+/*===============================
+=            Plugins            =
+===============================*/
 
 add_filter( 'mce_external_plugins', 'pc_admin_acf_tinymce_plugins' );
 
@@ -29,6 +46,13 @@ add_filter( 'mce_external_plugins', 'pc_admin_acf_tinymce_plugins' );
 		return $plugins;
 
 	}
+
+
+/*=====  FIN Plugins  =====*/
+
+/*=====================================
+=            Configuration            =
+=====================================*/
 
 add_action( 'acf/input/admin_footer', 'pc_admin_acf_tinymce_settings' );
 
@@ -62,3 +86,6 @@ add_action( 'acf/input/admin_footer', 'pc_admin_acf_tinymce_settings' );
 	})(jQuery)</script>
 
 	<?php }
+
+
+/*=====  FIN Configuration  =====*/

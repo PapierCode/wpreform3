@@ -1,4 +1,10 @@
 <?php
+/**
+ * 
+ * Objet post custom
+ * 
+ */
+
 
 class PC_Post {
 
@@ -38,10 +44,10 @@ class PC_Post {
 		$this->metas = get_fields( $wp_post->ID );
 
 		// visual
-		if ( !is_front_page() ) {
-			// $this->use_woo_product_image(); // TODO si le post est un produit WooCommerce
+		if ( isset( $this->metas['_thumbnail_id'] ) ) {
+			// TODO $this->use_woo_product_image(); // TODO si le post est un produit WooCommerce
 			$this->thumbnail = $this->metas['_thumbnail_id'];
-		}
+		} else { $this->thumbnail = ''; }
 
 	}
 
@@ -148,7 +154,7 @@ class PC_Post {
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = isset( $metas['post_short_title'] ) && trim( $metas['post_short_title'] ) ? trim( $metas['post_short_title'] ) : get_the_title( $this->id );
+		$title = isset( $metas['post_short_title'] ) && trim( $metas['post_short_title'] ) ? trim( esc_html( $metas['post_short_title'] ) ) : get_the_title( $this->id );
 
 		return pc_get_text_cut(
 			apply_filters( 'pc_filter_post_card_title', $title, $this ),
@@ -168,7 +174,7 @@ class PC_Post {
 	public function get_card_description() {
 
 		$metas = $this->metas;
-		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( $metas['post_excerpt'] ) : get_the_excerpt( $this->id );
+		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( esc_html( $metas['post_excerpt'] ) ) : get_the_excerpt( $this->id );
 	
 		return pc_get_text_cut( 
 			apply_filters( 'pc_filter_post_card_description', $description, $this ), 

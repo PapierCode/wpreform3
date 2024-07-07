@@ -3,12 +3,11 @@
  * 
  * Template : header
  * 
- ** Hooks
- ** Skiplinks
- ** Container
- ** Logo
- ** Navigation
- ** Tools
+ * Hooks
+ * Liens d'accès rapides
+ * Container
+ * Logo
+ * Navigation
  * 
  */
 
@@ -31,9 +30,9 @@ add_action( 'pc_header', 'pc_display_header_end', 90 );
 
 /*=====  FIN Hooks  =====*/
 
-/*=================================
-=            Skiplinks            =
-=================================*/
+/*=============================================
+=            Liens d'accès rapides            =
+=============================================*/
 
 function pc_display_skip_nav() {
 	
@@ -46,7 +45,7 @@ function pc_display_skip_nav() {
 	$plurial = ( count( $skip_nav_list ) > 1 ) ? 's' : '';
 	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Lien'.$plurial.' d\'accès rapide'.$plurial.'">';
 		if ( count( $skip_nav_list ) > 1 ) {
-			echo '<ul class="skip-nav-list reset-list">';
+			echo '<ul class="skip-nav-list">';
 				foreach ( $skip_nav_list as $args ) {
 					echo '<li><a href="'.$args['href'].'">'.$args['label'].'</a></li>';
 				}
@@ -59,11 +58,11 @@ function pc_display_skip_nav() {
 }
 
 
-/*=====  FIN Skiplinks  =====*/
+/*=====  FIN Liens d'accès rapides  =====*/
 
-/*==============================
+/*=================================
 =            Container            =
-==============================*/
+=================================*/
 
 function pc_display_header_start() {
 
@@ -125,11 +124,11 @@ function pc_display_header_logo() {
 =            Navigation            =
 ==================================*/
 
-/*----------  Burger button  ----------*/
+/*----------  Bouton menu caché  ----------*/
 
 function pc_display_nav_button_open_close() {
 
-	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
+	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
 
 }
 
@@ -141,14 +140,14 @@ function pc_display_header_nav() {
 	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 
 		$nav_depth = apply_filters( 'pc_filter_header_nav_depth', 2 );
-		if ( $nav_depth > 1 && apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) { echo '<button type="button" class="h-p-nav-sub-back reset-btn" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
+		if ( $nav_depth > 1 && apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) { echo '<button type="button" class="h-p-nav-sub-back" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
 		
 		do_action( 'pc_header_nav_list_before' );
 
 		$nav_args = apply_filters( 'pc_filter_header_nav_list_args', array(
 			'theme_location'  	=> 'nav-header',
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'),
-			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
+			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
 			'depth'           	=> $nav_depth,
 			'container'       	=> '',
@@ -167,13 +166,13 @@ function pc_display_header_nav() {
 
 /*----------  Social  ----------*/
 
-// TODO add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
+add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 
-	// function pc_display_header_social() {
+	function pc_display_header_social() {
 
-	// 	pc_display_social_links( 'social-list--header' );
+		pc_display_social_links( 'social-list--header' );
 
-	// }
+	}
 
 
 /*=====  FIN Navigation  =====*/
@@ -196,7 +195,7 @@ function pc_display_header_nav() {
 
 // 	if ( count( $items ) > 0 ) {
 
-// 		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
+// 		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list">';
 
 // 			foreach ( $items as $id => $args ) {
 // 				echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';

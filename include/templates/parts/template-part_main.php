@@ -3,10 +3,10 @@
  * 
  * Template : structure main
  * 
- ** Main
- ** Header & Title
- ** Content
- ** Footer
+ * Main
+ * Header
+ * Content
+ * Footer
  *  
  */
 
@@ -35,9 +35,9 @@ function pc_display_main_end() {
 
 /*=====  FIN Main  =====*/
 
-/*======================================
-=            Header & Title            =
-======================================*/
+/*==============================
+=            Header            =
+==============================*/
 
 function pc_display_main_header_start() {
 
@@ -58,7 +58,7 @@ function pc_display_main_header_end() {
 }
 
 
-/*=====  FIN Header & Title  =====*/
+/*=====  FIN Header  =====*/
 
 /*===============================
 =            Content            =

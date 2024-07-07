@@ -60,9 +60,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
         parent.parentNode.ontransitionend = () => {				
             parent.parentNode.style.overflow = btnBurgerIsVisible ? 'hidden auto' : 'hidden';
         };
-        subList.ontransitionend = () => {				
+        subList.ontransitionend = () => {		
             subList.style.visibility = 'hidden';
-            btn.setAttribute( 'aria-expanded', 'false' );
+            btn.setAttribute( 'aria-expanded', 'false' );		
         };
     
         parent.classList.remove('is-open');

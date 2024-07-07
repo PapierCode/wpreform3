@@ -3,23 +3,32 @@
  * 
  * Block Editor configuration & blocs ACF
  * 
+ * Configuration éditeur
+ * Blocs ACF
+ * Blocs disponibles
+ * Rendu des blocs
+ * 
  */
 
 
-/*----------  Dépendances JS & CSS  ----------*/
+/*=============================================
+=            Configuration éditeur            =
+=============================================*/
+
+// Autres suppressions, voir les fichiers CSS & JS
+
+/*----------  Dépendances JS  ----------*/
 
 add_action( 'enqueue_block_editor_assets', 'pc_block_editor_admin_enqueue_scripts' );
 
-function pc_block_editor_admin_enqueue_scripts() {
+	function pc_block_editor_admin_enqueue_scripts() {
 
-	wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash', 'wp-edit-post'] );
-	
-}
+		wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash', 'wp-edit-post'] );
+		
+	}
 
 
 /*----------  Suppressions divers  ----------*/
-
-// Autres suppressions, voir les fichiers CSS & JS
 
 add_action( 'after_setup_theme', 'pc_block_editor_after_setup_theme' );
 
@@ -50,13 +59,46 @@ add_filter( 'block_editor_settings_all', 'pc_block_editor_settings_all', 10, 2 )
 
 	}
 
-// innerblock sans container
-add_filter( 'acf/blocks/wrap_frontend_innerblocks', '__return_false' );
+
+/*----------  Suppression métaboxe taxonomies  ----------*/
+
+add_filter( 'rest_prepare_taxonomy', 'pc_block_editor_remove_default_metabox_taxonomy', 10, 3 );
+
+	function pc_block_editor_remove_default_metabox_taxonomy( $response, $taxonomy, $request ) {
+		
+		if ( !empty( $request['context'] ) && $request['context'] ) {
+			$data_response = $response->get_data();
+			$data_response['visibility']['show_ui'] = false;
+			$response->set_data( $data_response );
+		}
+
+		return $response;
+		
+	}
 
 
-/*----------  Blocs ACF  ----------*/
+/*----------  Champs ACF  ----------*/
+
+add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
+
+	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
+
+		$args['post_parent'] = 0;
+		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+
+		return $args;
+
+	}
+
+
+/*=====  FIN Configuration éditeur  =====*/
+
+/*=================================
+=            Blocs ACF            =
+=================================*/
 
 global $pc_blocks_acf;
+
 // id json => nom du groupe (admin)
 $pc_blocks_acf = array(
 	'quote' => '[Bloc] Citation',
@@ -76,6 +118,14 @@ $pc_blocks_acf = array(
 foreach ( $pc_blocks_acf as $block_id => $block_name ) {
 	if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { register_block_type( __DIR__.'/'.$block_id ); }
 }
+
+
+
+/*=====  FIN Blocs ACF  =====*/
+
+/*=========================================
+=            Blocs disponibles            =
+=========================================*/
 
 add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 
@@ -100,99 +150,45 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 	}
 
 
-/*----------  Répertoire JSON  ----------*/
-
-/*
-add_action( 'acf/json/save_paths', 'pc_admin_acf_save_paths', 10, 2 );
-
-	function pc_admin_acf_save_paths( $paths, $post ) {
-
-		global $pc_blocks_acf;
-		$settings_acf = array(
-			'group_664db0c1e77e1', // [Paramètres] WPreform
-			'group_665c8549c226c', // Actualités associées / Article de blog associés
-			'group_665d740171b6b', // Page associées
-			'group_66607df2e0a0b', // [Paramètres] Actualités / Blog
-		);
-
-		if ( in_array( $post['title'], $pc_blocks_acf ) || in_array( $post['key'], $settings_acf ) ) {
-			$paths = array( get_template_directory().'/include/admin/acf-json' );
-		}
-
-		return $paths;
-
-	}
-
-add_filter( 'acf/settings/load_json', 'pc_admin_acf_load_json' );
-
-	function pc_admin_acf_load_json( $paths ) {
-
-		$paths[] = get_template_directory().'/include/admin/acf-json';
-		return $paths;
-
-	};
-*/
-
-/*===============================================
-=            No metaboxes taxonomies            =
-===============================================*/
-
-add_filter( 'rest_prepare_taxonomy', 'pc_admin_remove_default_metabox_taxonomy', 10, 3 );
-
-	function pc_admin_remove_default_metabox_taxonomy( $response, $taxonomy, $request ) {
-		
-		if ( !empty( $request['context'] ) && $request['context'] ) {
-			$data_response = $response->get_data();
-			$data_response['visibility']['show_ui'] = false;
-			$response->set_data( $data_response );
-		}
-
-		return $response;
-		
-	}
-
-
-/*=====  FIN No metaboxes taxonomies  =====*/
-
-/*======================================
-=            Ajout contexte            =
-======================================*/
-
-add_filter( 'render_block_data', 'append_parent_block_data', 10, 3 );
-
-	function append_parent_block_data( $parsed_block, $source_block, $parent_block ) {
-
-		if ( $parent_block ) {
-			$parsed_block['parent'] = array(
-				'attributes' => $parent_block->attributes
-			);
-		}
-		return $parsed_block;
-	}
-
-
-/*=====  FIN Ajout contexte  =====*/	
+/*=====  FIN Blocs disponibles  =====*/
 
 /*=======================================
 =            Rendu des blocs            =
 =======================================*/
 
+/*----------  Innerblock sans container  ----------*/
+
+add_filter( 'acf/blocks/wrap_frontend_innerblocks', '__return_false' );
+
+
+/*----------  Contexte parent  ----------*/
+
+add_filter( 'render_block_data', 'pc_render_block_data_parent', 10, 3 );
+
+	function pc_render_block_data_parent( $parsed_block, $source_block, $parent_block ) {
+
+		if ( $parent_block ) { $parsed_block['parent'] = array( 'attributes' => $parent_block->attributes ); }
+		return $parsed_block;
+
+	}
+
+
+/*----------  Rendus customs  ----------*/
+	
 add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 	function pc_render_block( $content, $block, $instance ) {
 
-		// if ( $block['blockName'] == 'core/button' && isset($block['parent']) ) {
-		// 	pc_var($block['parent']);
-		// }
-
+		/*----------  Blocs vides  ----------*/
+		
 		$not_empty = [ 'core/heading', 'core/paragraph', 'core/list', 'core/list-item', 'core/button' ];
 		if ( in_array($block['blockName'], $not_empty) && !trim( wp_strip_all_tags( $content ) ) ) {
 			$content = '';
 		}
 
-		/*==============================
-		=            Bouton            =
-		==============================*/
+
+		/*----------  Bouton  ----------*/
+		
 		
 		if ( $block['blockName'] == 'core/button' ) {
 
@@ -232,11 +228,7 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 		}
 		
 		
-		/*=====  FIN Bouton  =====*/
-
-		/*================================
-		=            Citation            =
-		================================*/
+		/*----------  Citation  ----------*/
 		
 		if ( $block['blockName'] == 'acf/pc-quote' ) {
 
@@ -276,21 +268,3 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 
 
 /*=====  FIN Rendu des blocs  =====*/
-
-/*==================================
-=            Bloc posts            =
-==================================*/
-
-add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
-
-	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
-
-		$args['post_parent'] = 0;
-		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
-
-		return $args;
-
-	}
-
-
-/*=====  FIN Bloc posts  =====*/

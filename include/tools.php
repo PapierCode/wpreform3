@@ -24,7 +24,7 @@
  * 
  */
 
- function pc_var( $var, $margin = false ) {
+function pc_var( $var, $margin = false ) {
 
 	$margin == true ? $style = 'style="margin-left:200px"' : $style = ''; // admin
 	echo '<pre '.$style.'>'.print_r( $var, true ).'</pre>';

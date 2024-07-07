@@ -1,4 +1,15 @@
 <?php 
+/**
+ * 
+ * Template page
+ * 
+ * Date CGU
+ * Lien retour sous-pages
+ * Protection par mot de passe
+ * Actualités associées
+ * 
+ */
+
 
 /*================================
 =            Date CGU            =
@@ -23,11 +34,9 @@ add_filter( 'pc_filter_display_date_modified', 'pc_edit_display_cgu_type', 10, 2
 
 /*=====  FIN Date CGU  =====*/
 
-/*==================================
-=            Sous-pages            =
-==================================*/
-
-/*----------  Lien retour  ----------*/
+/*==============================================
+=            Lien retour sous-pages            =
+==============================================*/
 
 add_action( 'pc_action_template_index', 'pc_display_subpage_backlink', 99 );
 
@@ -42,7 +51,7 @@ add_action( 'pc_action_template_index', 'pc_display_subpage_backlink', 99 );
 	}
 
 
-/*=====  FIN Sous-pages  =====*/
+/*=====  FIN Lien retour sous-pages  =====*/
 
 /*===================================================
 =            Protection par mot de passe            =
@@ -67,7 +76,7 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 		 
 		$output = '<form action="'.esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ).'" method="post" class="form--page-protected">';
 		$output .= '<p>'.__( 'This content is password protected. To view it please enter your password below:' ) . '</p>';
-		$output .= '<ul class="form-list reset-list">';
+		$output .= '<ul class="form-list">';
 			$output .= '<li class="form-item form-item--password">';
 			$output .= '<label for="post-password" class="form-label">'.__( 'Password:' ).'</label>';
 			$output .= '<div class="form-item-inner"><input name="post_password" id="post-password" type="password" /></div>';

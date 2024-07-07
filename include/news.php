@@ -4,8 +4,8 @@
  * Actualités ou Blog
  * 
  * Post
- * Taxonomy
- * Settings
+ * Taxonomies
+ * Paramétres
  * 
  */
 
@@ -14,9 +14,9 @@ define( 'NEWS_POST_SLUG', 'newspost' );
 define( 'NEWS_TAX_SLUG', 'newstax' );
 
 
-/*=============================
-=            Posts            =
-=============================*/
+/*========================================
+=            Post & Taxonomie            =
+========================================*/
 
 add_action( 'init', 'pc_register_custom_types', 20 );
 
@@ -115,11 +115,11 @@ add_action( 'init', 'pc_register_custom_types', 20 );
     }
 
 
-/*=====  FIN Posts  =====*/
+/*=====  FIN Post & Taxonomie  =====*/
 
-/*================================
-=            Settings            =
-================================*/
+/*==================================
+=            Paramètres            =
+==================================*/
 
 if ( function_exists('acf_add_options_page') ) {
         

@@ -4,8 +4,8 @@
 * Template : head
 *
 ** Nettoyage
-** CSS inline
 ** Favicon
+** CSS inline
 ** Statistiques
 *
 **/
