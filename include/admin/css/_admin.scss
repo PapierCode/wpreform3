@@ -157,6 +157,20 @@ a[href*="customize.php"] { display:none; }
 
 /*=====  FIN ACF  =====*/
 
+/*=================================
+=            Rank Math            =
+=================================*/
+
+.rank-math-tooltip:has([href*="score-100-in-tests"]), // aide mots clés
+.tagify__input[data-placeholder*="Rank"], // exemple mot clé
+.components-base-control:has([href*="pillar-content-internal-linking"]),
+.components-notice:has([href*="score-100-in-tests"]), // lien aide score 100
+.rank-math-help-icon // liens aide 
+{ display: none; }
+
+
+/*=====  FIN Rank Math  =====*/
+
 /*======================================
 =            Matomo widgets            =
 ======================================*/

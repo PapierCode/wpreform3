@@ -136,8 +136,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 			'core/heading',
 			'core/list',
 			'core/list-item',
-			'core/button',
-			'rank-math/toc-block'
+			'core/button'
 		);
 		
 		global $pc_blocks_acf;
