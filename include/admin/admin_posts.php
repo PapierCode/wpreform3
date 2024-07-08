@@ -89,7 +89,7 @@ add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 
     function pc_admin_page_parent_field_save( $post_id, $post ) {
 
-        if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' ) {
+        if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' && isset($_POST['acf']['field_6677e014751e4']) ) {
 
             // prévention contre une boucle infinie 1/2
 			remove_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
