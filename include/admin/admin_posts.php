@@ -41,7 +41,7 @@ add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_post_colu
 	function pc_admin_post_column_thumbnail_populate( $column_name, $post_id ) {
 
 		if ( 'thumb' === $column_name ) {
-			$thumb = get_the_post_thumbnail( $post_id );
+			$thumb = get_the_post_thumbnail( $post_id, 'thumbnail_gallery' );
 			echo $thumb ? $thumb : '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.png" />';			
 		}
 
