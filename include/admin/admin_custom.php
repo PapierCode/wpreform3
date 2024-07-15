@@ -83,7 +83,15 @@ add_action( 'admin_init', 'pc_admin_init' );
 
 function pc_admin_menu_metaboxes_archive_content() {
 
-	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', array( 1 => array( NEWS_POST_SLUG, 'Actualités' ) ) );
+	$archives = apply_filters( 
+		'pc_filter_admin_menu_metaboxe_archive_list', 
+		array( 
+			1 => array( 
+				NEWS_POST_SLUG, 
+				get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' 
+			) 
+		) 
+	);
 
 	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';
 
@@ -223,12 +231,13 @@ add_filter( 'upload_mimes', 'pc_admin_edit_upload_mimes' );
 
 /*----------  Vue liste  ----------*/
 
-add_filter( 'manage_media_columns', 'pc_admin_edit_manage_media_columns' );
+add_filter( 'manage_media_columns', 'pc_admin_edit_manage_media_columns', 666 );
 
 	function pc_admin_edit_manage_media_columns( $columns ) {
 		
 		unset( $columns['parent'] );
 		unset( $columns['comments'] );
+		unset( $columns['rank_math_image_title'] );
 		return $columns;
 
 	}
@@ -253,7 +262,7 @@ add_filter( 'attachment_fields_to_edit', 'pc_admin_help_img_fields', 10, 2 );
 			$fields['pc_help'] = array(
 				'label' => 'Aide',
 				'input' => 'html',
-				'html' => '<p style="margin-top:6px">Le texte alternatif pour le référencement et l\'accessibilité</strong>, décrivez l\'image en quelques mots ou laissez vide si l\'image est purement décorative.<br/><strong>La légende s\'affiche sous l\'image</strong> lorsque celle-ci est insérée dans un contenu ou dans une galerie.</p>',
+				'html' => '<p style="margin-top:6px"><strong>Le texte alternatif pour le référencement et l\'accessibilité</strong>, décrivez l\'image en quelques mots ou laissez vide si l\'image est purement décorative.<br/><strong>La légende s\'affiche sous l\'image</strong> lorsque celle-ci est insérée dans un contenu ou dans une galerie.</p>',
 				'show_in_edit' => true,
 			);
 

@@ -3,9 +3,9 @@
  * 
  * Actualités ou Blog
  * 
- * Post
- * Taxonomies
- * Paramétres
+ * Register Post & Taxonomie
+ * Register Paramétres
+ * Customisation
  * 
  */
 
@@ -55,7 +55,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                     'not_found'             => 'Aucun article',
                     'search_items'			=> 'Rechercher un article'
                 );
-                $post_news_rewrite = 'actualites';
+                $post_news_rewrite = 'blog';
                 break;
         }
 
@@ -150,3 +150,23 @@ if ( function_exists('acf_add_options_page') ) {
 
 
 /*=====  FIN Settings  =====*/
+
+/*=====================================
+=            Customisation            =
+=====================================*/
+
+
+add_filter( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_post_column_thumbnail' );
+add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_post_column_thumbnail_populate', 10, 2);
+
+add_filter( 'manage_edit-'.NEWS_TAX_SLUG.'_columns', 'pc_admin_news_edit_taxonomy_columns' );
+
+    function pc_admin_news_edit_taxonomy_columns( $columns ) {
+
+        if ( isset( $columns['description'] ) ) { unset( $columns['description'] ); }
+        return $columns;
+
+    };
+
+
+/*=====  FIN Customisation  =====*/

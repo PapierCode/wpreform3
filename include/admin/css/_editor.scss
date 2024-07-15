@@ -11,6 +11,8 @@
 =            Interface            =
 =================================*/
 
+a[href="https://fr.wordpress.org/support/article/wordpress-editor/"], // aide externe
+a[href="edit.php?post_type=wp_block"], // lien vers les compositions de blocs
 .editor-preview-dropdown, // aperçu responsive
 .block-editor-inserter__tips, // astuces dans le menu des blocs
 .typography-block-support-panel, // box typographie
@@ -21,7 +23,7 @@
 #editor {
 	// to check !!!
 	// a[target="_blank"]:not(.button):not([aria-label="Voir la page"]):not([data-name="filename"]),
-	// a[href="edit.php?post_type=wp_block"] { display: none !important; }
+	// { display: none !important; }
 }
 
 // champ ACF message d'alerte

@@ -3,6 +3,7 @@
  * 
  * Custom administration
  * 
+ * Body classes
  * Includes
  * Settings
  * SMTP
@@ -10,6 +11,26 @@
  * 
  */
 
+
+/*====================================
+=            Body classes            =
+====================================*/
+
+add_filter( 'admin_body_class', 'pc_admin_body_class' );
+
+	function pc_admin_body_class( $classes ) {
+
+		$current_user_role = wp_get_current_user();
+		if ( in_array( $current_user_role->roles[0], array( 'editor', 'shop_manager' ) ) ) {
+			$classes = 'user-is-editor';
+		}
+
+		return $classes;
+
+	}
+
+
+/*=====  FIN Body classes  =====*/
 
 /*===============================
 =            Include            =

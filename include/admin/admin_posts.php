@@ -19,7 +19,6 @@
 /*----------  Visuel dans les listes  ----------*/
 
 add_filter( 'manage_pages_columns', 'pc_admin_post_column_thumbnail' );
-add_filter( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_post_column_thumbnail' );
 
     function pc_admin_post_column_thumbnail( $columns ) {
 
@@ -36,7 +35,6 @@ add_filter( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_post_column_thu
     }
 
 add_action( 'manage_pages_custom_column', 'pc_admin_post_column_thumbnail_populate', 10, 2);
-add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_post_column_thumbnail_populate', 10, 2);
 
 	function pc_admin_post_column_thumbnail_populate( $column_name, $post_id ) {
 
@@ -114,6 +112,7 @@ add_action( 'init', 'pc_admin_page_remove_metaboxes' );
 		remove_post_type_support( 'page', 'comments' );	
 		remove_post_type_support( 'page', 'revisions' );
 		remove_post_type_support( 'page', 'page-attributes' );
+		remove_post_type_support( 'attachment', 'title' );
 
 	};
 
