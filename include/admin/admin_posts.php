@@ -3,7 +3,7 @@
  * 
  * Admin : listes de posts
  * 
- * Communs / Ajout colonne visuel
+ * Communs / Colonne visuel, status précédent après une restauration
  * Articles / Suppression métaboxes menus
  * Pages / Contenu champ parent & sauvegarde
  * Pages / Suppression métaboxes
@@ -44,6 +44,16 @@ add_action( 'manage_pages_custom_column', 'pc_admin_post_column_thumbnail_popula
 		}
 
 	}
+
+/*----------  Status précédent après une restauration  ----------*/
+
+add_filter( 'wp_untrash_post_status', 'pc_admin_untrash_post_status', 10, 3 );
+
+    function pc_admin_untrash_post_status( $new_status, $post_id, $previous_status ) {
+
+        return $previous_status;
+
+    }
 
 
 /*=====  FIN Communs  =====*/
