@@ -132,7 +132,7 @@ function pc_admin_news_acf_include_fields() {
                 'id' => '',
             ),
             'taxonomy' => 'newstax',
-            'add_term' => 0,
+            'add_term' => 1,
             'save_terms' => 1,
             'load_terms' => 1,
             'return_format' => 'object',
@@ -190,14 +190,16 @@ function pc_admin_news_acf_include_fields() {
     /*================================
     =            Settings            =
     ================================*/
+
+    $group_intro_title = get_option('options_news_type') == 'news' ? 'Archive des actualités' : 'Archive du blog';
     
     acf_add_local_field_group( array(
         'key' => 'group_66607df2e0a0b',
-        'title' => '[Paramètres] Actualités/Blog',
+        'title' => $group_intro_title,
         'fields' => array(
             array(
                 'key' => 'field_66607df3b5a18',
-                'label' => 'Archive',
+                'label' => 'Introduction',
                 'name' => 'wpr_newspost_archive',
                 'aria-label' => '',
                 'type' => 'group',

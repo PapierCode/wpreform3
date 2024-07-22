@@ -241,6 +241,7 @@ add_filter( 'manage_media_columns', 'pc_admin_edit_manage_media_columns', 666 );
 		unset( $columns['parent'] );
 		unset( $columns['comments'] );
 		unset( $columns['rank_math_image_title'] );
+		unset( $columns['tiny-compress-images'] );
 		return $columns;
 
 	}
