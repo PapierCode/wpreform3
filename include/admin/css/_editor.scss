@@ -511,6 +511,7 @@ $button-space 	: 10;
 ===============================*/
 
 .wp-block-acf-pc-frame {
+
 	.bloc-frame-inner {
 		max-width: rem($mw-txt);
 		margin: 0 auto;
@@ -552,12 +553,14 @@ $button-space 	: 10;
 	.bloc-column {
 		height: 100%;
 		box-sizing: border-box;
+		border: 1px solid #eee;
 
 		> div {
 			box-sizing: border-box;
 			height: 100%;
 		}
 	}
+	.bloc-column[class*="bloc-style"] { border: none; }
 }
 
 
