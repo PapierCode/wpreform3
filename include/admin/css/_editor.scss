@@ -11,6 +11,8 @@
 =            Interface            =
 =================================*/
 
+.metabox-location-side .handle-order-higher, // btn deplacer la métaboxe
+.metabox-location-side .handle-order-lower, // btn deplacer la métaboxe
 .editor-document-bar, // barre de recherche fonctionnalités
 a[href="https://fr.wordpress.org/support/article/wordpress-editor/"], // aide externe
 a[href="edit.php?post_type=wp_block"], // lien vers les compositions de blocs
@@ -45,6 +47,14 @@ a[href="edit.php?post_type=wp_block"], // lien vers les compositions de blocs
 	background-color: #ff5e5e;
 	text-align: center;
 	font-weight: bold;
+}
+
+// rank math
+.rank-math-group-score {
+	padding: rem(0,8,0,5);
+	letter-spacing: -.05em;
+
+	&::before { vertical-align: sub; }
 }
 
 

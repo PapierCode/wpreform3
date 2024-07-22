@@ -1191,7 +1191,7 @@ add_action( 'acf/include_fields', function() {
                     'max_width' => '',
                     'max_height' => '',
                     'max_size' => '',
-                    'mime_types' => '',
+                    "mime_types" => 'jpg,jpeg,png,webp',
                     'insert' => 'append',
                     'preview_size' => 'thumbnail_gallery',
                 ),

@@ -85,12 +85,13 @@ table.wp-list-table .column-thumb {
 
 #nav-menus-frame {
     display: flex;
+    flex-direction: column;
     gap: 20px;
     margin-left: 0;
 
     #menu-settings-column {
+        width: auto;
         float: none;
-        flex: 1 0 340px;
         margin: 0;
     }
     #menu-management-liquid {
@@ -100,6 +101,15 @@ table.wp-list-table .column-thumb {
         #post-body {
             padding: 0 20px;
         }
+    }
+
+    @media ( min-width : 1200px ) {
+        flex-direction: row; 
+
+        #menu-settings-column {
+            width: 340px;
+            flex-shrink: 0;
+        }       
     }
 }
 
@@ -132,7 +142,7 @@ table.wp-list-table .column-thumb {
 // page de liste & page de modification
 .post-type-attachment {
     
-    // liste filtre rank math
+    // liste : filtre rank math
     #media-attachment-seo-filter {
         max-width: 200px;
         option[value="missing_title"] { display: none; }
@@ -156,7 +166,11 @@ table.wp-list-table .column-thumb {
     #misc-publishing-actions .misc-pub-uploadedto { display:none; }
 }
 
+// modale
 .media-modal {
+    
+    // téléversé sur
+    .uploaded-to { display:none; }
     // aide saisie texte alternatif
     #alt-text-description { display: none; }
     // champ description
@@ -172,6 +186,9 @@ table.wp-list-table .column-thumb {
         // séparateurs
         .links-separator:nth-last-of-type(n+2) { display:none; }
     }
+    // champs pour pdf
+    .attachment-info:has(.actions a[download][href*="pdf"]) .settings { display: none; }
+
 }
 
 
