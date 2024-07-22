@@ -59,7 +59,7 @@ function pc_admin_news_acf_include_fields() {
                 'name' => 'post_short_title',
                 'aria-label' => '',
                 'type' => 'text',
-                'instructions' => 'Pour le fil d\'ariane & le résumé.<br>'.$short_title_length.' signes maximum.',
+                'instructions' => 'Pour le fil d\'ariane & le résumé.<br>'.$short_title_length.' signes maximum conseillés.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -68,7 +68,7 @@ function pc_admin_news_acf_include_fields() {
                     'id' => '',
                 ),
                 'default_value' => '',
-                'maxlength' => $short_title_length,
+                'maxlength' => '',
                 'rows' => 6,
                 'placeholder' => '',
                 'new_lines' => '',
@@ -79,7 +79,7 @@ function pc_admin_news_acf_include_fields() {
                 'name' => 'post_excerpt',
                 'aria-label' => '',
                 'type' => 'textarea',
-                'instructions' => 'Pour le résumé. '.$excerpt_length.' signes maximum.',
+                'instructions' => 'Pour le résumé. '.$excerpt_length.' signes maximum conseillés.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -88,7 +88,7 @@ function pc_admin_news_acf_include_fields() {
                     'id' => '',
                 ),
                 'default_value' => '',
-                'maxlength' => $excerpt_length,
+                'maxlength' => '',
                 'rows' => 6,
                 'placeholder' => ''
             )
