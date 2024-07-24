@@ -86,15 +86,8 @@ add_action( 'admin_init', 'pc_admin_init' );
 
 function pc_admin_menu_metaboxes_archive_content() {
 
-	$archives = apply_filters( 
-		'pc_filter_admin_menu_metaboxe_archive_list', 
-		array( 
-			1 => array( 
-				NEWS_POST_SLUG, 
-				get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' 
-			) 
-		) 
-	);
+	$default = get_option('options_news_enabled') ? [ 1 => [ NEWS_POST_SLUG, get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' ] ] : array();
+	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', $default );
 
 	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';
 
