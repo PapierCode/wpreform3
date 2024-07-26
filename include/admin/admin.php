@@ -119,8 +119,10 @@ add_action( 'phpmailer_init', 'pc_mail_smtp_settings' );
 /*=====  FIN SMTP  =====*/
 
 /*===================================
-=            Map API key            =
+=            ACF            =
 ===================================*/
+
+/*----------  Google Map API key  ----------*/
 
 add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 
@@ -131,5 +133,18 @@ add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 		
 	}
 
+/*----------  Validation format téléphone  ----------*/
 
-/*=====  FIN Map API key  =====*/
+// https://www.advancedcustomfields.com/resources/acf-validate_value/
+
+function pc_admin_acf_validate_phone( $valid, $value, $field, $input_name ) {
+
+    if ( !preg_match( '/^\d{2} \d{2} \d{2} \d{2} \d{2}$/', $value ) ) {
+		return 'Le format est incorrect.';
+	}
+
+    return $valid;
+}
+
+
+/*=====  FIN ACF  =====*/

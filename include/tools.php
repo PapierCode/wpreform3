@@ -111,7 +111,7 @@ function pc_get_textarea_to_paragraphs( $txt ) {
 /*=====  FIN Textarea to paragraphes  =====*/
 
 /*=========================================================
-=            Téléphone au format international            =
+=            Format téléphone            =
 =========================================================*/
 
 /**
@@ -141,7 +141,7 @@ function pc_get_textarea_to_paragraphs( $txt ) {
 }
 
 
-/*=====  FIN Téléphone au format international  =====*/
+/*=====  FIN Format téléphone  =====*/
 
 /*===============================
 =            Message            =
