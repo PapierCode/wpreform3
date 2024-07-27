@@ -134,13 +134,17 @@ table.wp-list-table .column-thumb {
 // liste : filtre par type
 #attachment-filter,
 #media-attachment-filters {
-    option:not([value=""]):not([value="all"]):not([value*="image"]):not([value*="pdf"]):not([value="mine"]) {
+    option:not([value=""]):not([value="all"]):not([value*="image"]):not([value*="pdf"]):not([value="mine"]),
+    option[value*="image/"] {
         display: none;
     }
 }
 
 // page de liste & page de modification
 .post-type-attachment {
+
+    // titre & lien
+    #titlediv { display: none; }
     
     // liste : filtre rank math
     #media-attachment-seo-filter {
@@ -265,3 +269,11 @@ table.wp-list-table .column-thumb {
     /*=====  FIN Profil  =====*/
 
 } // FIN .user-is-editor
+
+/*----------  Rank Math  ----------*/
+
+.page-is-front-page {
+    // tests
+    .rank-math-focus-keyword,
+    .rank-math-checklist { display: none; }
+}

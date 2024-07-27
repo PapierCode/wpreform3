@@ -122,7 +122,6 @@ add_action( 'init', 'pc_admin_page_remove_metaboxes' );
 		remove_post_type_support( 'page', 'comments' );	
 		remove_post_type_support( 'page', 'revisions' );
 		remove_post_type_support( 'page', 'page-attributes' );
-		remove_post_type_support( 'attachment', 'title' );
 
 	};
 
