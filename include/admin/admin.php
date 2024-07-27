@@ -22,7 +22,11 @@ add_filter( 'admin_body_class', 'pc_admin_body_class' );
 
 		$current_user_role = wp_get_current_user();
 		if ( in_array( $current_user_role->roles[0], array( 'editor', 'shop_manager' ) ) ) {
-			$classes = 'user-is-editor';
+			$classes .= ' user-is-editor';
+		}
+
+		if ( get_the_id() == get_option('page_on_front') ) {
+			$classes .= ' page-is-front-page';
 		}
 
 		return $classes;
@@ -39,11 +43,27 @@ add_filter( 'admin_body_class', 'pc_admin_body_class' );
 include 'admin_custom.php';
 include 'admin_posts.php';
 
-add_action( 'admin_enqueue_scripts', 'pc_admin_css' );
+add_action( 'admin_enqueue_scripts', 'pc_admin_enqueue_scripts' );
 
-	function pc_admin_css() {		
-		$file = '/include/admin/css/wpreform-admin.css';
-		wp_enqueue_style( 'wpreform-admin', get_template_directory_uri().$file, null, filemtime(get_template_directory().$file) );
+	function pc_admin_enqueue_scripts() {
+
+		$css_path = '/include/admin/css/wpreform-admin.css';
+		wp_enqueue_style( 
+			'wpreform', 
+			get_template_directory_uri().$css_path, 
+			null, 
+			filemtime(get_template_directory().$css_path),
+			'screen'
+		);
+
+		$js_path = '/include/admin/wpreform-admin.js';
+		wp_enqueue_script( 
+			'wpreform',
+			get_template_directory_uri().$js_path,
+			null,
+			filemtime(get_template_directory().$js_path)
+		);
+		
 	};
 
 
@@ -145,6 +165,27 @@ function pc_admin_acf_validate_phone( $valid, $value, $field, $input_name ) {
 
     return $valid;
 }
+
+/*----------  Types de fichiers  ----------*/
+
+add_filter( 'acf/load_field/type=file', 'pc_admin_acf_file_mimes' );
+
+	function pc_admin_acf_file_mimes( $field ) {
+
+		$field['mime_types'] = 'pdf';
+		return $field;
+
+	}
+
+add_filter( 'acf/load_field/type=image', 'pc_admin_acf_image_mimes' );
+add_filter( 'acf/load_field/type=gallery', 'pc_admin_acf_image_mimes' );
+
+	function pc_admin_acf_image_mimes( $field ) {
+
+		$field['mime_types'] = 'jpg,jpeg,png,webp';
+		return $field;
+
+	}
 
 
 /*=====  FIN ACF  =====*/

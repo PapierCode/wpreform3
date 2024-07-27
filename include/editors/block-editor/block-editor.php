@@ -23,7 +23,13 @@ add_action( 'enqueue_block_editor_assets', 'pc_block_editor_admin_enqueue_script
 
 	function pc_block_editor_admin_enqueue_scripts() {
 
-		wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash', 'wp-edit-post'] );
+		$path = '/include/editors/block-editor/wpreform-block-editor.js';
+		wp_enqueue_script( 
+			'pc-block-editor', 
+			get_template_directory_uri().$path,
+			['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash', 'wp-edit-post'],
+			filemtime(get_template_directory().$path)
+		);
 		
 	}
 

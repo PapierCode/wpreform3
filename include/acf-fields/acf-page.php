@@ -14,8 +14,8 @@ function pc_admin_page_acf_include_fields() {
 
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
-    $excerpt_length = apply_filters( 'pc_filter_post_excerpt_length', 150 );
     $short_title_length = apply_filters( 'pc_filter_post_short_title_length', 40 );
+    $excerpt_length = apply_filters( 'pc_filter_post_excerpt_length', 150 );
 
 	acf_add_local_field_group( array(
         'key' => 'group_665c8549c226c',
@@ -81,7 +81,7 @@ function pc_admin_page_acf_include_fields() {
                 'name' => 'post_short_title',
                 'aria-label' => '',
                 'type' => 'text',
-                'instructions' => 'Pour le fil d\'ariane & le résumé.<br>'.$short_title_length.' signes maximum conseillés.',
+                'instructions' => 'Pour le fil d\'ariane & le résumé.<br><span class="pc-text-counter" data-size="'.$short_title_length.'"><span class="value">0</span> / '.$short_title_length.' caractères conseillés.</span>',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -101,7 +101,7 @@ function pc_admin_page_acf_include_fields() {
                 'name' => 'post_excerpt',
                 'aria-label' => '',
                 'type' => 'textarea',
-                'instructions' => 'Pour le résumé. '.$excerpt_length.' signes maximum conseillés.',
+                'instructions' => 'Pour le résumé.<br><span class="pc-text-counter" data-size="'.$excerpt_length.'"><span class="value">0</span> / '.$excerpt_length.' caractères conseillés.</span>',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(

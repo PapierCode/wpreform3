@@ -17,11 +17,12 @@
 		/*----------  Styles  ----------*/
 
 		wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
-		wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );
-		
+		wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );	
    
     });
 
+	/*----------  Filtre blocs  ----------*/
+	
 	function pcRemoveOptions( settings, name ) {
 
 		if ( ['core/heading'].includes(name)  ) {
@@ -41,7 +42,7 @@
 		'pc/pcRemoveOptions',
 		pcRemoveOptions
 	);
-
+	
 } )()
 
 
