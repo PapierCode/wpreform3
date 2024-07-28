@@ -208,7 +208,7 @@ table.wp-list-table .column-thumb {
     .rank-math-tooltip:has([href*="score-100-in-tests"]), // aide mots clés
     .components-base-control:has([href*="pillar-content-internal-linking"]),
     .components-notice:has([href*="score-100-in-tests"]), // lien aide score 100
-    .rank-math-help-icon // liens aide 
+    a[href*="rankmath.com"] // liens en général
     { 
         display: none;
     }

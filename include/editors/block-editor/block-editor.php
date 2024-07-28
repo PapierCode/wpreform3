@@ -83,18 +83,20 @@ add_filter( 'rest_prepare_taxonomy', 'pc_block_editor_remove_default_metabox_tax
 	}
 
 
-/*----------  Champs ACF  ----------*/
+/*----------  Catégories   ----------*/
 
-add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
+add_filter( 'block_categories_all', 'otro_edit_block_editor_categories', 10, 2 );
 
-	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
+function otro_edit_block_editor_categories( $block_categories, $editor_context ) {
 
-		$args['post_parent'] = 0;
-		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+	$block_categories[] = array(
+		'slug'  => 'specials',
+		'title' => 'Contenus spécifiques',
+		'icon'  => null,
+	);
+	return $block_categories;
 
-		return $args;
-
-	}
+}
 
 
 /*=====  FIN Configuration éditeur  =====*/
@@ -118,7 +120,8 @@ $pc_blocks_acf = array(
 	'image-column' => '[Bloc] Image colonne',
 	'image-frame' => '[Bloc] Image encadré',
 	// 'embed' => '[Bloc] Embed',
-	'column' => '[Bloc] Colonne'
+	'column' => '[Bloc] Colonne',
+	'contactform' => '[Bloc] Formulaire contact'
 );
 
 foreach ( $pc_blocks_acf as $block_id => $block_name ) {

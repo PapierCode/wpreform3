@@ -50,6 +50,17 @@ a[href*="site-editor"], // lien vers les compositions de blocs et autres ?
 	font-weight: bold;
 }
 
+// bloc sans aperçu
+.bloc-no-preview {	
+	min-height: rem(150);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #eee;
+	color: #666;
+	font-size: rem(20);
+}
+
 // rank math
 .rank-math-group-score {
 	padding: rem(0,8,0,5);

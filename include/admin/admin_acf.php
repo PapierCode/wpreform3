@@ -68,3 +68,17 @@ add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_' );
 		return $field;
 
 	}
+
+
+/*----------  Page parent  ----------*/
+
+add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
+
+	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
+
+		$args['post_parent'] = 0;
+		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+
+		return $args;
+
+	}
