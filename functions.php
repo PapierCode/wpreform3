@@ -5,6 +5,9 @@ include 'images/sprite.php'; // sprite SVG
 
 include 'include/classes/class-pc-walker-nav.php'; // navigation custom
 include 'include/classes/class-pc-post.php'; // objet post custom
+include 'include/classes/class-pc-contact-form.php'; // formulaire de contact
+include 'include/classes/class-pc-hcaptcha.php'; // hcaptcha
+include 'include/classes/class-pc-math-captcha.php'; // math captcha
 
 include 'include/news.php'; // CPT news ou blog
 

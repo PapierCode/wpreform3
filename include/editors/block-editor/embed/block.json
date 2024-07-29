@@ -1,17 +1,18 @@
 {
     "name": "acf/pc-embed",
-    "title": "Vidéo embarqué",
-    "description": "Affiche une vidéo Youtube, Dailymotion et Viméo",
+    "title": "Vidéo",
+    "description": "Affiche une vidéo issue de Youtube, Dailymotion ou Viméo",
     "category": "media",
-    "keywords": [ "vidéo" ],
+    "keywords": [ "video", "youtube", "dailymotion", "vimeo" ],
     "icon": "format-video",
     "apiVersion": 2,
     "acf": {
-        "mode": "auto",
+        "mode": "preview",
         "renderTemplate": "block-embed.php"
     },
     "supports": {
         "anchor": true,
-        "align": false
+        "align": false,
+        "mode": false
     }
 }

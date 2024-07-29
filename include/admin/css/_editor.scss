@@ -53,6 +53,8 @@ a[href*="site-editor"], // lien vers les compositions de blocs et autres ?
 // bloc sans aperçu
 .bloc-no-preview {	
 	min-height: rem(150);
+	padding: 1rem 2rem;
+	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -495,25 +497,23 @@ $button-space 	: 10;
 =            Embed            =
 =============================*/
 
-/*----------  Aperçu  ----------*/
+.bloc-embed {
 
-// .bloc-embed {
-
-// 	.iframe {
-// 		position: relative;
-// 		height: 0;
-// 		background:none!important;
+	.iframe {
+		position: relative;
+		height: 0;
+		background:none!important;
 	
-// 		iframe {
-// 			position: absolute;
-// 			z-index: 0;
-// 			top: 0;
-// 			left: 0;
-// 			width: 100%;
-// 			height: 100%;
-// 		}
-// 	}
-// }
+		iframe {
+			position: absolute;
+			z-index: 0;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
 
 
 /*=====  FIN Embed  =====*/

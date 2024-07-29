@@ -119,7 +119,7 @@ $pc_blocks_acf = array(
 	'gallery' => '[Bloc] Galerie images',
 	'image-column' => '[Bloc] Image colonne',
 	'image-frame' => '[Bloc] Image encadré',
-	// 'embed' => '[Bloc] Embed',
+	'embed' => '[Bloc] Embed',
 	'column' => '[Bloc] Colonne',
 	'contactform' => '[Bloc] Formulaire contact'
 );

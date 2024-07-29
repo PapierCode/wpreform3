@@ -252,7 +252,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                             'id' => '',
                         ),
                         'default_value' => '',
-                        'maxlength' => '',
+                        'maxlength' => '16',
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',

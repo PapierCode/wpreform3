@@ -12,6 +12,7 @@
  * Galerie
  * Image
  * Posts
+ * Formulaire de contact
  * 
  */
 
@@ -1725,6 +1726,139 @@ add_action( 'acf/include_fields', function() {
     
     
     /*=====  FIN Posts  =====*/
+
+    /*=============================================
+    =            Formulaire de contact            =
+    =============================================*/
+    
+    if ( apply_filters( 'pc_filter_add_acf_contact_form_block', true ) ) {
+
+        acf_add_local_field_group( array(
+            'key' => 'group_66a5f79ea51b3',
+            'title' => '[Bloc] Formulaire de contact',
+            'fields' => array(
+                array(
+                    'key' => 'field_66a5f79e9a5cc',
+                    'label' => 'Destinataire',
+                    'name' => 'contact_form_to',
+                    'aria-label' => '',
+                    'type' => 'email',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => '',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-contactform',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'normal',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Formulaire de contact  =====*/
+
+    /*=============================
+    =            Vidéo            =
+    =============================*/
+    
+    if ( apply_filters( 'pc_filter_add_acf_video_block', true ) ) {
+    
+        acf_add_local_field_group( array(
+            'key' => 'group_66a7572e25c80',
+            'title' => '[Bloc] Embed',
+            'fields' => array(
+                array(
+                    'key' => 'field_66a7572ef9623',
+                    'label' => 'Page de la vidéo',
+                    'name' => 'embed_url',
+                    'aria-label' => '',
+                    'type' => 'url',
+                    'instructions' => 'L\'adresse d\'une page Youtube, Dailymotion ou Vimeo.',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                ),
+                array(
+                    'key' => 'field_66a760d1f2fa6',
+                    'label' => 'Aperçu',
+                    'name' => 'embed_img',
+                    'aria-label' => '',
+                    'type' => 'image',
+                    'instructions' => 'S\'affiche avec le chargement de la vidéo.',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'return_format' => 'array',
+                    'library' => 'all',
+                    'min_width' => '',
+                    'min_height' => '',
+                    'min_size' => '',
+                    'max_width' => '',
+                    'max_height' => '',
+                    'max_size' => '',
+                    'mime_types' => 'jpg,jpeg,png,webp',
+                    'preview_size' => 'thumbnail_s',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-embed',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'side',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'field',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Vidéo  =====*/
 
 } );
 

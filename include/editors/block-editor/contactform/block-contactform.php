@@ -1,0 +1,75 @@
+<?php
+$contact_form_fields = array(
+	'prefix'        => 'contact',
+	'fields'        => array(
+		array(
+			'type'      				=> 'text',
+			'id'        				=> 'last-name',
+			'label'     				=> 'Nom',
+			'label-en'     				=> 'Last Name',
+			'attr'						=> 'autocomplete="family-name"',
+			'notification-from-name'	=> true // pour la notification mail
+		),
+		array(
+			'type'      				=> 'text',
+			'id'        				=> 'name',
+			'label'     				=> 'Prénom',
+			'label-en'     				=> 'First Name',
+			'attr'						=> 'autocomplete="given-name"',
+		),
+		array(
+			'type'      				=> 'text',
+			'id'        				=> 'phone',
+			'label'     				=> 'Téléphone',
+			'label-en'     				=> 'Phone',
+			'attr'						=> 'autocomplete="tel"'
+		),
+		array(
+			'type'      				=> 'email',
+			'id'        				=> 'mail',
+			'label'     				=> 'E-mail',
+			'label-en'     				=> 'E-mail',
+			'required' 	    			=> true,
+			'notification-from-email'	=> true, // pour la notification mail
+			'attr'						=> 'autocomplete="email"'
+		),
+		array(
+			'type'      				=> 'textarea',
+			'id'        				=> 'message',
+			'label'     				=> 'Message',
+			'label-en'     				=> 'Message',
+			'attr'						=> 'rows="5"',
+			'required' 	    			=> true
+		)
+	)
+);
+
+$block_form_to = get_field('contact_form_to');
+
+if ( $block_form_to && is_email( $block_form_to ) ) {
+
+	$block_css = array( 'bloc-contactform' );
+	if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }
+	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }	
+	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+
+	if ( class_exists( 'PC_Contact_Form' ) ) {
+		echo '<div '.implode(' ',$block_attrs).'>';
+
+			if ( $is_preview ) { 
+				echo '<p><strong>Formulaire de contact</strong> / '.$block_form_to.'</p>'; 
+			} else {
+				global $post;
+				$contact_form = new PC_Contact_Form( $contact_form_fields, $post, $block_form_to );
+				$contact_form->display_form();
+			}
+
+		echo '</div>';
+	}
+
+} else {
+
+	echo '<p class="bloc-warning">Erreur bloc <em>Formulaire de contact</em> : saisissez un e-mail de destination valide.</p>';
+
+}

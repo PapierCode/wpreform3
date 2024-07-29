@@ -1,21 +1,59 @@
 <?php
-$embed = get_field('_bloc_embed');
+$embed_url = get_field( 'embed_url' );
 
-if ( $embed ) {
+if ( filter_var( $embed_url, FILTER_VALIDATE_URL ) ) {
 
-	$block_css = array( 'bloc-embed' );
-	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
-	if ( 'wide' == get_field('_bloc_size') ) { $block_css[] = 'bloc-wide'; }
-	
-	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+	$providers = array(
+		'YouTube' => 'https://policies.google.com/',
+		'Dailymotion' => 'https://legal.dailymotion.com',
+		'Vimeo' => 'https://vimeo.com/privacy',
+	);
 
-	echo '<div '.implode(' ',$block_attrs).'>';
-		echo $embed;
-	echo '</div>';
+	$wp_oembed = null;
+	if ( is_null( $wp_oembed ) ) { $wp_oembed = new WP_oEmbed(); }
+	$datas = $wp_oembed->get_data($embed_url);
+	// pc_var( $datas );
+
+	$img = get_field( 'embed_img' );
+	$img_url = $img ? $img['sizes']['medium'] : $datas->thumbnail_url;
+
+	if ( $datas && array_key_exists( $datas->provider_name, $providers ) ) {
+
+		$block_css = array( 'bloc-embed' );
+		if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }
+		if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+		
+		$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+		if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+
+
+		echo '<div '.implode( ' ', $block_attrs ).'>';
+
+			if ( !$is_preview ) {
+
+				$iframe_html = $datas->html;
+				$iframe_css = array( 'background-image:url('.$img_url.')' );
+				$iframe_padding = ( $datas->height / $datas->width ) * 100;
+				$iframe_css[] = 'padding-bottom:'.$iframe_padding.'%';
+
+				echo '<div class="iframe" style="'.implode(';',$iframe_css).'">';
+						echo str_replace( 'src', 'data-src', $iframe_html );
+						echo '<div class="iframe-accept">';
+							printf( __('<p class="">En lisant cette vidéo, vous acceptez les <a href="%1s" target="blank" rel="noreferrer">conditions générales d\'utilisation</a> de <strong>%2s</strong>.</p>'), $providers[$datas->provider_name], $datas->provider_name );
+							echo '<button type="button" class="button button--blue-light button--arrow"><span class="ico">'.pc_svg('arrow').'</span><span class="txt">Lire la vidéo</span></button>';
+						echo '</div>';
+				echo '</div>';
+
+			} else { echo '<p><strong>Vidéo '.$datas->provider_name.'</strong> :<br>'.$datas->title.'</p>'; }
+
+		echo '</div>';
+
+	} else { 
+		echo '<p class="bloc-warning">Erreur bloc <em>Vidéo</em> : la vidéo n\'a pas été trouvé, vérifiez l\'adresse de la page.</p>';
+	}
 
 } else if ( $is_preview ) {
 
-	echo '<p class="bloc-warning">Erreur bloc <em>Contenu embarqué</em> : saisissez l\'adresse du contenu.</p>';
+	echo '<p class="bloc-warning">Erreur bloc <em>Vidéo</em> : saisissez l\'adresse d\'une vidéo Youtube, Vimeo ou Dailymotion.</p>';
 
 }

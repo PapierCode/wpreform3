@@ -1,0 +1,19 @@
+{
+    "name": "acf/pc-contactform",
+    "title": "Formulaire de contact",
+    "description": "Affiche le formulaire de contact",
+    "category": "specials",
+    "keywords": [ "formulaire", "contact" ],
+    "icon": "email-alt",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-contactform.php"
+    },
+    "supports": {
+        "anchor": true,
+        "multiple": false,
+        "align": false,
+        "mode": false
+    }
+}

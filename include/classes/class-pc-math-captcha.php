@@ -22,7 +22,7 @@ class PC_MathCaptcha {
     =            Constructeur            =
     ====================================*/
 
-    function __construct( $pass_phrase, $iv, $lang ) {
+    function __construct( $pass_phrase, $iv, $lang = 'fr' ) {
 
 		switch ( $lang ) {
 			case 'fr':

@@ -8,7 +8,14 @@ if ( $img_args ) {
 	$enable_js = get_field('enable_js');
 	$enable_circle = get_field('enable_circle');
     $caption = trim($img_args['caption']);
-    $tag = ( $caption ) ? 'figure' : 'div';
+
+    if ( $caption ) {
+        $tag = 'figure';
+        $tag_attrs = ' role="figure" aria-label="'.$caption.'"';
+    } else {
+        $tag = 'div';
+        $tag_attrs = '';
+    }
 
     $block_css = array( 
         'bloc-image',
@@ -46,10 +53,10 @@ if ( $img_args ) {
 
     if ( in_array( $img_size, ['medium_large_l','medium_large_r'] ) ) { $img_size = 'medium_large'; }
 
-    echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem">';
+    echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem"'.$tag_attrs.'>';
 
         if ( !$is_preview && $enable_js ) { 
-            echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';
+            echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher en plein écran l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';
         } else {
             echo '<div class="bloc-image-container"'.$img_container_style.'>';
         }
