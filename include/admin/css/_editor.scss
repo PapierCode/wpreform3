@@ -23,11 +23,13 @@ a[href*="site-editor"], // lien vers les compositions de blocs et autres ?
 .acf-empty-block-fields // message bloc sans champ (colonne droite)
 { display: none !important; }
 
-// liens d'aide
-#editor {
-	// to check !!!
-	// a[target="_blank"]:not(.button):not([aria-label="Voir la page"]):not([data-name="filename"]),
-	// { display: none !important; }
+// métaboxes
+.edit-post-meta-boxes-area {
+	.postbox-header { background-color: #f6f7f7; }
+	.postbox:not(.acf-postbox) .inside {
+		padding: 0 12px 15px; // valeurs ACF
+		margin:0;
+	}
 }
 
 // champ ACF message d'alerte
