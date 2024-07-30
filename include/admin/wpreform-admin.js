@@ -3,20 +3,24 @@ document.addEventListener( 'DOMContentLoaded', function () {
     
     /*----------  Compteurs texte  ----------*/
             
-    const pCounters = document.querySelectorAll( '.pc-txt-length-counter' );
+    const pcCounters = document.querySelectorAll( '.pc-txt-length-counter' );
     
-    if ( pCounters.length > 0 ) {
+    if ( pcCounters.length > 0 ) {
 
-        pCounters.forEach( (counter) => {
+        const updatePcCounter = ( counter, max, length, value ) =>   {          
+            value.textContent = length;
+            if ( length > max ) { counter.style.color = 'red'; }
+            else { counter.removeAttribute('style'); }
+        };
+
+        pcCounters.forEach( (counter) => {
             const max = counter.dataset.size;
             const value = counter.querySelector('.pc-txt-length-value');
-            const field = counter.closest('.acf-input').querySelector('input,textarea')
-            field.addEventListener( 'input', (event) => {
-                let lengthCurrent = event.currentTarget.value.length;
-                value.textContent = lengthCurrent;
-                if ( lengthCurrent > max ) { counter.style.color = 'red'; }
-                else { counter.removeAttribute('style'); }
-            });
+            const field = counter.closest('.acf-input').querySelector('input,textarea');
+            updatePcCounter( counter, max, field.value.length, value );
+            field.addEventListener( 'input', (event) => { 
+                updatePcCounter( counter, max, event.currentTarget.value.length, value );
+            } );
         });
 
     }
