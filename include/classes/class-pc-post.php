@@ -197,16 +197,22 @@ class PC_Post {
 		$image = $this->thumbnail;
 
 		if ( $image ) {
-			
-			$sizes = $image['sizes'];
+
 			$args = array( 
 				'alt' => $image['alt'],
-				'sizes' => apply_filters( 'pc_filter_post_card_thumbnail_sizes_values', array(
-					'400' => [ $sizes['card-s'], $sizes['card-s-width'], $sizes['card-s-height'] ],
-					'500' => [ $sizes['card-m'], $sizes['card-m-width'], $sizes['card-m-height'] ],
-					'700' => [ $sizes['card-l'], $sizes['card-l-width'], $sizes['card-l-height'] ]
-				), $this->thumbnail, $this )
+				'sizes' => array()
 			);
+			
+			$sizes_list = apply_filters( 'pc_filter_post_card_thumbnail_sizes_values', array(
+				'400' => 'card-s',
+				'500' => 'card-m',
+				'700' => 'card-l'
+			), $this->thumbnail, $this );
+
+			$sizes = $image['sizes'];
+			foreach ( $sizes_list as $size => $key ) {
+				$args['sizes'][$key] = [ $sizes[$key], $sizes[$key.'-width'], $sizes[$key.'-height'] ];
+			}
 		
 		} else {
 
@@ -310,7 +316,7 @@ class PC_Post {
 	
 				// title
 				echo '<h'.$title_level.' class="card-title">';
-						echo $link_tag_start.$title.'</a>';
+					echo apply_filters( 'pc_filter_card_title_link', true ) ? '<a href="'.$href.'" class="card-link" title="Lire la suite de : '.$title.'">'.$title.'</a>' : $title;
 				echo '</h'.$title_level.'>';	
 	
 				// hook	
