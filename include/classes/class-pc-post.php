@@ -154,7 +154,7 @@ class PC_Post {
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = isset( $metas['post_short_title'] ) && trim( $metas['post_short_title'] ) ? trim( esc_html( $metas['post_short_title'] ) ) : get_the_title( $this->id );
+		$title = isset( $metas['post_short_title'] ) && trim( $metas['post_short_title'] ) ? trim( wp_strip_all_tags( $metas['post_short_title'] ) ) : get_the_title( $this->id );
 
 		return pc_get_text_cut(
 			apply_filters( 'pc_filter_post_card_title', $title, $this ),
@@ -174,7 +174,7 @@ class PC_Post {
 	public function get_card_description() {
 
 		$metas = $this->metas;
-		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( esc_html( $metas['post_excerpt'] ) ) : get_the_excerpt( $this->id );
+		$description = isset( $metas['post_excerpt'] ) && trim( $metas['post_excerpt'] ) ? trim( wp_strip_all_tags( $metas['post_excerpt'] ) ) : get_the_excerpt( $this->id );
 	
 		return pc_get_text_cut( 
 			apply_filters( 'pc_filter_post_card_description', $description, $this ), 
