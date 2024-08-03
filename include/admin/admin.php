@@ -95,7 +95,7 @@ if ( function_exists('acf_add_options_page') ) {
         'page_title'    => 'Paramètres du site',
         'menu_title'    => 'Paramètres',
         'menu_slug'     => 'site-settings',
-        'capability'    => 'edit_posts',
+        'capability'    => 'edit_pages',
         'update_button' => 'Mettre à jour',
         'autoload'      => true,
         'position'      => 99,
