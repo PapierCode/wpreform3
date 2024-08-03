@@ -21,8 +21,8 @@ add_filter( 'admin_body_class', 'pc_admin_body_class' );
 	function pc_admin_body_class( $classes ) {
 
 		$current_user_role = wp_get_current_user();
-		if ( in_array( $current_user_role->roles[0], array( 'editor', 'shop_manager' ) ) ) {
-			$classes .= ' user-is-editor';
+		if ( in_array( $current_user_role->roles[0], array( 'editor', 'shop_manager', 'author' ) ) ) {
+			$classes .= ' user-is-'.$current_user_role->roles[0];
 		}
 
 		if ( get_the_id() == get_option('page_on_front') ) {
