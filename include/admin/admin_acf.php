@@ -17,7 +17,7 @@ add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 
 function pc_admin_acf_validate_phone( $valid, $value, $field, $input_name ) {
 
-    if ( $field['required'] || $value != '' ) && !preg_match( '/^\d{2} \d{2} \d{2} \d{2} \d{2}$/', $value ) ) {
+    if ( ( $field['required'] || $value != '' ) && !preg_match( '/^\d{2} \d{2} \d{2} \d{2} \d{2}$/', $value ) ) {
 		return 'Le format est incorrect.';
 	}
 
