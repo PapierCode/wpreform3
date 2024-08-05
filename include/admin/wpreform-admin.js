@@ -1,38 +1,73 @@
 
 document.addEventListener( 'DOMContentLoaded', function () {
     
-    /*----------  Compteurs texte  ----------*/
+    /*----------  ACF text & textarea  ----------*/
             
-    const pcCounters = document.querySelectorAll( '.pc-txt-length-counter' );
+    const acfFields = document.querySelectorAll( '.acf-field-text:has(.pc-txt-length-counter), .acf-field-textarea:has(.pc-txt-length-counter)' );
     
-    if ( pcCounters.length > 0 ) {
+    if ( acfFields.length > 0 ) {
 
         const updatePcCounter = ( counter, max, txt, display ) => {   
-            txt = txt.replace(/\[{1,}([ a-z0-9]+)\]{1,}/img, '$1');
-            txt = txt.replace(/\{{1,}([ a-z0-9]+)\}{1,}/img, '$1');
-            txt = txt.replace(/\{|\}|\[|\]/g, '');                                   
+            txt = txt.replace(/\[{1,}([ a-z0-9]+)\]{1,}/img, '$1'); // [strong]
+            txt = txt.replace(/\{{1,}([ a-z0-9]+)\}{1,}/img, '$1'); // {em}
+            txt = txt.replace(/\{|\}|\[|\]/g, '');                               
             display.textContent = txt.length;
-            if ( length > max ) { counter.style.color = 'red'; }
+            if ( txt.length > max ) { counter.style.color = 'red'; }
             else { counter.removeAttribute('style'); }
         };
 
-        pcCounters.forEach( (counter) => {
-            const max = counter.dataset.size;
+        acfFields.forEach( (acfField) => {
+            const counter = acfField.querySelector('.pc-txt-length-counter')
             const display = counter.querySelector('.pc-txt-length-value');
-            const field = counter.closest('.acf-input').querySelector('input,textarea');
+            const max = counter.dataset.size;
+            const field = acfField.querySelector('input,textarea');
             updatePcCounter( counter, max, field.value, display );
             field.addEventListener( 'input', (event) => { 
                 updatePcCounter( counter, max, event.currentTarget.value, display );
             } );
         });
 
-        // acf.add_action('wysiwyg_tinymce_init', function( ed, id, mceInit, field ){
-        //     const counter = field[0].querySelector('.pc-txt-length-counter');
-        //     const value = counter.querySelector('.pc-txt-length-value');
-        //     updatePcCounter( counter, 300, ed.getBody().textContent.length, value );
-        //     ed.on('change', (event)=> { updatePcCounter( counter, 300, ed.getBody().textContent.length, value ); });
-        // });
+        
+        
 
     }
+
+    /*----------  Tinymce settings  ----------*/
+
+    const updatePcWysiCounter = ( counter, max, txt, display ) => {                                                          
+        display.textContent = txt.length;
+        if ( txt.length > max ) { counter.style.color = 'red'; }
+        else { counter.removeAttribute('style'); }
+    };
+
+    acf.add_action('wysiwyg_tinymce_init', function( editor, id, mceInit, field ){
+
+        // ajustement hauteur zone de saisie
+        const iframe = editor.getContentAreaContainer().children[0];
+        iframe.style.minHeight = '0';
+        editor.settings.autoresize_min_height = 90;        
+
+        // compteur
+        const counter = field[0].querySelector('.pc-txt-length-counter');
+        if ( counter ) {           
+            const display = counter.querySelector('.pc-txt-length-value');
+            updatePcWysiCounter( counter, 300, editor.getBody().textContent, display );
+            editor.on('change', (event)=> { updatePcWysiCounter( counter, 300, editor.getBody().textContent, display ); });
+        }
+    });
+    
+    acf.add_filter( 'wysiwyg_tinymce_settings', function( mceInit, id ) {
+        
+        // Visualisation des blocs
+        mceInit.plugins = mceInit.plugins + ',visualblocks';
+        mceInit.visualblocks_default_state = true;
+        // nettoyage texte copié
+        mceInit.paste_as_text = true;
+        // ajustement hauteur zone de saisie
+        mceInit.wp_autoresize_on = true;
+        
+        return mceInit;
+                
+    } );
 
 });
