@@ -117,15 +117,18 @@ function pc_get_textarea_to_paragraphs( $txt ) {
 
 /**
  * 
- * @param string    $txt		Texte où remplace [] et {}
+ * @param string    $txt			Texte où remplace [] et {}
+ * @param bool    	$remove_all		Supprime tous les [] et {}
  * 
  */
 
-function pc_markdown( $txt ) {
+function pc_markdown( $txt, $remove_all = false ) {
 
-	$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); // [strong]
-	$txt = preg_replace( '/\{+(\w+)\}+/u', '<em>$1</em>', $txt ); ; // {em}
-	$txt = preg_replace( '/\{|\}|\[|\]/u', '', $txt );  
+	if ( !$remove_all ) {
+		$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); // [strong]
+		$txt = preg_replace( '/\{+(\w+)\}+/u', '<em>$1</em>', $txt ); ; // {em}
+	}
+	$txt = preg_replace( '/\{+|\}+|\[+|\]+/u', '', $txt );  
 	return $txt;
 
 }
