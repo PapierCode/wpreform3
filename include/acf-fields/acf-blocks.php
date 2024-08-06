@@ -1611,11 +1611,11 @@ add_action( 'acf/include_fields', function() {
     =            Posts            =
     =============================*/
 
-    if ( apply_filters( 'pc_filter_add_acf_posts_block', true ) ) {
+    if ( apply_filters( 'pc_filter_add_acf_subpages_block', true ) ) {
 
         acf_add_local_field_group( array(
             'key' => 'group_664ca4062483d',
-            'title' => 'Posts',
+            'title' => 'Sous-pages',
             'fields' => array(
                 array(
                     'key' => 'field_664ca406eaec7',
@@ -1640,74 +1640,13 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-                array(
-                    'key' => 'field_665c1bb23d84a',
-                    'label' => 'Type',
-                    'name' => 'type',
-                    'aria-label' => '',
-                    'type' => 'button_group',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'choices' => array(
-                        'subpages' => 'Sous-pages',
-                        'selection' => 'Sélection',
-                    ),
-                    'default_value' => 'subpages',
-                    'return_format' => 'value',
-                    'allow_null' => 0,
-                    'layout' => 'horizontal',
-                ),
-                array(
-                    'key' => 'field_665c1c023d84b',
-                    'label' => 'Sélection',
-                    'name' => 'selection',
-                    'aria-label' => '',
-                    'type' => 'post_object',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => array(
-                        array(
-                            array(
-                                'field' => 'field_665c1bb23d84a',
-                                'operator' => '==',
-                                'value' => 'selection',
-                            ),
-                        ),
-                    ),
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'post_type' => array(
-                        0 => 'page',
-                        1 => NEWS_POST_SLUG
-                    ),
-                    'post_status' => array(
-                        0 => 'publish',
-                    ),
-                    'taxonomy' => '',
-                    'return_format' => 'id',
-                    'multiple' => 1,
-                    'allow_null' => 0,
-                    'bidirectional' => 0,
-                    'ui' => 1,
-                    'bidirectional_target' => array(
-                    ),
-                ),
             ),
             'location' => array(
                 array(
                     array(
                         'param' => 'block',
                         'operator' => '==',
-                        'value' => 'acf/pc-posts',
+                        'value' => 'acf/pc-subpages',
                     ),
                 ),
             ),
