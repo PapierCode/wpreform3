@@ -7,6 +7,7 @@
  * pc_svg
  * pc_get_text_cut
  * pc_get_textarea_to_paragraphs
+ * pc_markdown
  * pc_get_phone_format
  * pc_display_message
  * 
@@ -110,9 +111,31 @@ function pc_get_textarea_to_paragraphs( $txt ) {
 
 /*=====  FIN Textarea to paragraphes  =====*/
 
-/*=========================================================
+/*================================
+=            Markdown            =
+================================*/
+
+/**
+ * 
+ * @param string    $txt		Texte où remplace [] et {}
+ * 
+ */
+
+function pc_markdown( $txt ) {
+
+	$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); // [strong]
+	$txt = preg_replace( '/\{+(\w+)\}+/u', '<em>$1</em>', $txt ); ; // {em}
+	$txt = preg_replace( '/\{|\}|\[|\]/u', '', $txt );  
+	return $txt;
+
+}
+
+
+/*=====  FIN Markdown  =====*/
+
+/*========================================
 =            Format téléphone            =
-=========================================================*/
+========================================*/
 
 /**
  * 

@@ -1,5 +1,24 @@
 <?php
 
+// position instruction ??
+
+// add_filter( 'acf/load_field', 'tweak_repeater_instructions' );
+// function tweak_repeater_instructions( $field ) {
+
+// 	$field['instructions_below'] = $field['instructions'];
+
+// 	return $field;
+// }
+
+// add_filter( 'acf/render_field', 'position_repeater_instructions' );
+// function position_repeater_instructions( $field ) {
+
+// 	if ( ! isset( $field['instructions_below'] ) ) return;
+
+// 	echo '<p class="description">'.$field['instructions_below'].'</p>';
+// }
+
+
 /*----------  Google Map API key  ----------*/
 
 add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
