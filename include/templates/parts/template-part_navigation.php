@@ -137,7 +137,8 @@ function pc_display_breadcrumb() {
 			array(
 				'name' => 'Accueil',
 				'ico' => pc_svg('house'),
-				'permalink' => get_bloginfo('url')
+				'permalink' => get_bloginfo('url'),
+				'aria-label' => 'Accueil'
 			)
 		)
 	);
@@ -299,7 +300,8 @@ function pc_display_breadcrumb() {
 		foreach ( $links as $key => $link ) {
 
 			$current = ( $key == ( count($links) - 1 ) ) ? ' aria-current="page"' : '';
-			echo '<li class="breadcrumb-item">'.$separator.'<a class="breadcrumb-link" href="'.$link['permalink'].'"'.$current.'>';
+			$aria_label = ( isset( $link['aria-label'] ) ) ? ' aria-label="'.$link['aria-label'].'"' : '';
+			echo '<li class="breadcrumb-item">'.$separator.'<a class="breadcrumb-link" href="'.$link['permalink'].'"'.$current.$aria_label.'>';
 				echo isset( $link['ico'] ) && $link['ico'] ? $link['ico'] : $link['name'];
 			echo '</a></li>';
 
