@@ -268,7 +268,7 @@ class PC_Post {
 	
 	/**
 	 * 
-	 * [CARD] Display
+	 * [CARD] Display front
 	 * 
 	 * @param	int		$title_level	Title level
 	 * @param	string	$classes_css	CSS
@@ -278,8 +278,6 @@ class PC_Post {
 	 */
 
 	public function display_card( $title_level = 2, $classes_css = array(), $params = array() ) {
-
-		$metas = $this->metas;
 	
 		// title
 		$title = $this->get_card_title();
@@ -347,6 +345,45 @@ class PC_Post {
 			
 				// hook
 				do_action( 'pc_post_card_before_end', $this, $params );
+		
+		echo '</article>';
+		
+	}	
+	
+	/**
+	 * 
+	 * [CARD] Display BLock Editor
+	 * 
+	 * @param	int		$title_level	Title level
+	 * @param	string	$classes_css	CSS
+	 * 
+	 * @return	string	HTML
+	 * 
+	 */
+
+	public function display_card_block_editor( $title_level = 2, $classes_css = array() ) {
+	
+		// title
+		$title = $this->get_card_title();
+		
+		// css
+		$classes_css = array_merge( array( 'card' ), $classes_css );
+
+		echo '<article class="'.implode( ' ', $classes_css ).'">';
+			
+				// visual
+				echo '<figure class="card-figure">';
+					$this->display_card_image();				
+				echo '</figure>';
+	
+				// title
+				echo '<h'.$title_level.' class="card-title">'.$title.'</h'.$title_level.'>';	
+				
+				// description
+				$description = $this->get_card_description();	
+				if ( $description ) {
+					echo '<p class="card-desc">'.$description.'</p>';
+				}
 		
 		echo '</article>';
 		

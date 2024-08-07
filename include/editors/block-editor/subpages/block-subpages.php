@@ -24,7 +24,11 @@ if ( !empty( $subpages ) ) {
     foreach ( $subpages as $page ) {
         $pc_post_page = new PC_Post( $page );
         echo '<li class="card-list-item">';
-            $pc_post_page->display_card(get_field('title_level'));
+            if ( $is_preview ) {
+                $pc_post_page->display_card_block_editor( get_field('title_level'), ['card--page'] );
+            } else {
+                $pc_post_page->display_card( get_field('title_level'), ['card--page'] );
+            }
         echo '</li>';
     }
     echo '</ul>';
