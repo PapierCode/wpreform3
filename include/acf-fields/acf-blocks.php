@@ -1635,7 +1635,7 @@ add_action( 'acf/include_fields', function() {
                         2 => 'H2',
                         3 => 'H3',
                     ),
-                    'default_value' => 'h2',
+                    'default_value' => '2',
                     'return_format' => 'value',
                     'allow_null' => 0,
                     'layout' => 'horizontal',

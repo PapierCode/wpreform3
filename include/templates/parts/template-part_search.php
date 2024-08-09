@@ -15,25 +15,25 @@
 =            Formulaire            =
 ==================================*/
 
-function pc_display_form_search( $context ) {
+function pc_display_form_search( $css_suffix, $post_type = null ) {
 
-		$txts = apply_filters( 'pc_filter_search_form_txts', array(
-			'form-aria-label' => 'Formulaire de recherche',
-			'input-label' => 'Mots-clés',
-			'input-placeholder' => '',
-			'submit-title' => 'Rechercher ces mots-clés',
-			'submit-txt' => 'Rechercher'
-		), $context);
+	$args = array(
+        'form_id' => $css_suffix.'-form-search',
+        'form_class' => [ 'form-search', 'form-search--'.$css_suffix, 'no-print' ],
+        'submit_class' => [ 'reset-btn', 'form-search-submit', 'button' ],
+		'submit_ico' => pc_svg('zoom')
+    );
+    $args = apply_filters( 'pc_edit_form_search_args', $args, $css_suffix, $post_type );
 
-		$ico = apply_filters( 'pc_filter_search_form_submit_ico', pc_svg('zoom'), $context );
-
-		echo '<form id="form-search-'.$context.'" class="form-search form-search--'.$context.'" method="get" role="search" aria-label="'.$txts['form-aria-label'].'" action="'.get_bloginfo('url').'">';
-			echo '<label class="form-search-label" for="form-search-input">'.$txts['input-label'].'</label>';
-			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" required  aria-invalid="false" autocomplete="off" placeholder="'.$txts['input-placeholder'].'">';
-			echo '<button type="submit" class="form-search-submit button" title="'.$txts['submit-title'].'"><span class="ico">'.$ico.'</span><span class="txt">'.$txts['submit-txt'].'</span></button>';
-		echo '</form>';
+    echo '<form id="'.$args['form_id'].'" class="'.implode(' ',$args['form_class']).'" method="get" role="search" action="'.get_bloginfo('url').'"><div class="form-search-inner">';
+        echo '<label class="visually-hidden" for="'.$args['form_id'].'-input">Recherche</label>';
+        echo '<input type="search" class="form-search-input" name="s" id="'.$args['form_id'].'-input" value="'.esc_html( get_search_query() ).'" placeholder="Recherche" title="Recherche" aria-invalid="false" autocomplete="off">';
+        if ( $post_type ) { echo '<input type="hidden" name="cpt" value="'.$post_type.'">'; }
+        echo '<button type="submit" class="'.implode(' ',$args['submit_class']).'" title="Effectuer la recherche" aria-label="Effectuer la recherche"><span class="ico">'.$args['submit_ico'].'</span></button>';
+    echo '</div></form>';
 
 }
+
 
 
 /*=====  FIN Formulaire  =====*/

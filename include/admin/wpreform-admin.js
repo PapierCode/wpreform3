@@ -27,47 +27,49 @@ document.addEventListener( 'DOMContentLoaded', function () {
             } );
         });
 
-        
-        
-
     }
 
     /*----------  Tinymce settings  ----------*/
-
-    const updatePcWysiCounter = ( counter, max, txt, display ) => {                                                          
-        display.textContent = txt.length;
-        if ( txt.length > max ) { counter.style.color = 'red'; }
-        else { counter.removeAttribute('style'); }
-    };
-
-    acf.add_action('wysiwyg_tinymce_init', function( editor, id, mceInit, field ){
-
-        // ajustement hauteur zone de saisie
-        const iframe = editor.getContentAreaContainer().children[0];
-        iframe.style.minHeight = '0';
-        editor.settings.autoresize_min_height = 90;        
-
-        // compteur
-        const counter = field[0].querySelector('.pc-txt-length-counter');
-        if ( counter ) {           
-            const display = counter.querySelector('.pc-txt-length-value');
-            updatePcWysiCounter( counter, 300, editor.getBody().textContent, display );
-            editor.on('change', (event)=> { updatePcWysiCounter( counter, 300, editor.getBody().textContent, display ); });
-        }
-    });
     
-    acf.add_filter( 'wysiwyg_tinymce_settings', function( mceInit, id ) {
+    if ( typeof acf !== 'undefined' ) {
+
+        const updatePcWysiCounter = ( counter, max, txt, display ) => {                                                          
+            display.textContent = txt.length;
+            if ( txt.length > max ) { counter.style.color = 'red'; }
+            else { counter.removeAttribute('style'); }
+        };
+
+        acf.add_action('wysiwyg_tinymce_init', function( editor, id, mceInit, field ){
+
+            // ajustement hauteur zone de saisie
+            const iframe = editor.getContentAreaContainer().children[0];
+            iframe.style.minHeight = '0';
+            editor.settings.autoresize_min_height = 90;        
+
+            // compteur
+            const counter = field[0].querySelector('.pc-txt-length-counter');
+            if ( counter ) {           
+                const display = counter.querySelector('.pc-txt-length-value');
+                updatePcWysiCounter( counter, 300, editor.getBody().textContent, display );
+                editor.on('change', (event)=> { updatePcWysiCounter( counter, 300, editor.getBody().textContent, display ); });
+            }
+
+        });
         
-        // Visualisation des blocs
-        mceInit.plugins = mceInit.plugins + ',visualblocks';
-        mceInit.visualblocks_default_state = true;
-        // nettoyage texte copié
-        mceInit.paste_as_text = true;
-        // ajustement hauteur zone de saisie
-        mceInit.wp_autoresize_on = true;
-        
-        return mceInit;
-                
-    } );
+        acf.add_filter( 'wysiwyg_tinymce_settings', function( mceInit, id ) {
+            
+            // Visualisation des blocs
+            mceInit.plugins = mceInit.plugins + ',visualblocks';
+            mceInit.visualblocks_default_state = true;
+            // nettoyage texte copié
+            mceInit.paste_as_text = true;
+            // ajustement hauteur zone de saisie
+            mceInit.wp_autoresize_on = true;
+            
+            return mceInit;
+                    
+        } );
+
+    }
 
 });
