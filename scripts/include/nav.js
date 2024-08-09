@@ -228,7 +228,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     const btnBurgerTitleOpen = btnBurger.getAttribute('title');
     const btnBurgerTitleClose = btnBurger.dataset.title;
     
-    const nav = btnBurger.nextSibling;
+    const nav = document.querySelector( '.h-nav' );
     const liParents = nav.querySelectorAll( '.h-p-nav-item--l1.is-parent' );
     
     let btnBurgerIsVisible = btnBurgerVisibility();
