@@ -19,6 +19,8 @@
 
 .notice, div.updated, div.error { 
     border: none;
+
+    a, a:visited, a:hover, button, .notice-dismiss::before, .notice-dismiss:hover::before { color: currentColor; }
 }
 .notice-info {
     background-color: #72AEE6;

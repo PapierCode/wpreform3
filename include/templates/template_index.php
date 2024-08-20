@@ -20,20 +20,20 @@ add_action( 'pc_action_template_index', 'pc_display_main_start', 10 ); // templa
 	add_action( 'pc_action_template_index', 'pc_display_main_header_start', 20 ); // template-part_layout.php
 		add_action( 'pc_action_template_index', 'pc_display_breadcrumb', 30 ); // template-part_navigation.php
 		add_action( 'pc_action_template_index', 'pc_display_single_main_title', 40 );
-	add_action( 'pc_action_template_index', 'pc_display_main_header_end', 60 ); // template-part_layout.php
+	add_action( 'pc_action_template_index', 'pc_display_main_header_end', 50 ); // template-part_layout.php
 
 	// content
-	add_action( 'pc_action_template_index', 'pc_display_main_content_start', 70 ); // template-part_layout.php
-		add_action( 'pc_action_template_index', 'pc_display_single_content', 80 );
-	add_action( 'pc_action_template_index', 'pc_display_main_content_end', 90 ); // template-part_layout.php
+	add_action( 'pc_action_template_index', 'pc_display_main_content_start', 60 ); // template-part_layout.php
+		add_action( 'pc_action_template_index', 'pc_display_single_content', 70 );
+	add_action( 'pc_action_template_index', 'pc_display_main_content_end', 80 ); // template-part_layout.php
 
 	// footer
-	add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 100 ); // template-part_layout.php
-		add_action( 'pc_action_template_index', 'pc_display_share_links', 110 ); // template-part_social.php
-	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 120 ); // template-part_layout.php
+	add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 90 ); // template-part_layout.php
+		add_action( 'pc_action_template_index', 'pc_display_share_links', 100 ); // template-part_social.php
+	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 110 ); // template-part_layout.php
 
 // main end
-add_action( 'pc_action_template_index', 'pc_display_main_end', 130 ); // template-part_layout.php
+add_action( 'pc_action_template_index', 'pc_display_main_end', 120 ); // template-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/

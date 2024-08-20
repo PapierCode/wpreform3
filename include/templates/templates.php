@@ -33,6 +33,8 @@ include 'parts/template-part_search.php';
 include 'parts/template-part_page.php';
 // Actualités
 include 'parts/template-part_news.php';
+// Événements
+include 'parts/template-part_events.php';
 
 
 /*----------  Spécifiques  ----------*/

@@ -18,11 +18,11 @@ function pc_admin_wpr_settings_acf_include_fields() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
 	acf_add_local_field_group( array(
-        'key' => 'group_664db0c1e77e1',
+        'key' => 'group_wpr_settings',
         'title' => '[Paramètres] WPreform',
         'fields' => array(
             array(
-                'key' => 'field_664db0c2f83b7',
+                'key' => 'field_wpr_dev',
                 'label' => 'Version de développement',
                 'name' => 'wpr_dev',
                 'aria-label' => '',
@@ -42,7 +42,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'ui' => 1,
             ),
             array(
-                'key' => 'field_664de628f462d',
+                'key' => 'field_wpr_matomo',
                 'label' => 'Identifiant Matomo',
                 'name' => 'wpr_matomo',
                 'aria-label' => '',
@@ -66,7 +66,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_664dee487f253',
+                        'key' => 'field_wpr_matomo_id',
                         'label' => 'Identifiant',
                         'name' => 'id',
                         'aria-label' => '',
@@ -88,7 +88,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664dee5e7f254',
+                        'key' => 'field_wpr_matomo_url',
                         'label' => 'URL',
                         'name' => 'url',
                         'aria-label' => '',
@@ -107,7 +107,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 ),
             ),
             array(
-                'key' => 'field_664db1c475ebf',
+                'key' => 'field_wpr_captcha',
                 'label' => 'Captcha',
                 'name' => 'wpr_captcha',
                 'aria-label' => '',
@@ -123,7 +123,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_664db63dc9425',
+                        'key' => 'field_wpr_captcha_type',
                         'label' => 'Type',
                         'name' => 'type',
                         'aria-label' => '',
@@ -146,7 +146,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'layout' => 'horizontal',
                     ),
                     array(
-                        'key' => 'field_664db22c75ec0',
+                        'key' => 'field_wpr_captcha_site_key',
                         'label' => 'Clé du site',
                         'name' => 'site_key',
                         'aria-label' => '',
@@ -174,7 +174,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db24475ec1',
+                        'key' => 'field_wpr_captcha_secret_key',
                         'label' => 'Clé secrète',
                         'name' => 'secret_key',
                         'aria-label' => '',
@@ -202,7 +202,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db6c1c9426',
+                        'key' => 'field_wpr_captcha_password',
                         'label' => 'Mot de passe',
                         'name' => 'password',
                         'aria-label' => '',
@@ -230,7 +230,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db6e8c9427',
+                        'key' => 'field_wpr_captcha_vector',
                         'label' => 'Vecteur',
                         'name' => 'vector',
                         'aria-label' => '',
@@ -260,7 +260,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 ),
             ),
             array(
-                'key' => 'field_664db26275ec2',
+                'key' => 'field_wpr_google',
                 'label' => 'Google',
                 'name' => 'wpr_google',
                 'aria-label' => '',
@@ -276,7 +276,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_664db28175ec3',
+                        'key' => 'field_wpr_google_map_api_key',
                         'label' => 'Clé API Map',
                         'name' => 'api_map_key',
                         'aria-label' => '',
@@ -298,7 +298,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 ),
             ),
             array(
-                'key' => 'field_664db2e675d4a',
+                'key' => 'field_wpr_smtp',
                 'label' => 'SMTP',
                 'name' => 'wpr_smtp',
                 'aria-label' => '',
@@ -314,7 +314,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_664db2f475d4b',
+                        'key' => 'field_wpr_smtp_enabled',
                         'label' => 'Activé',
                         'name' => 'enabled',
                         'aria-label' => '',
@@ -334,7 +334,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'ui' => 1,
                     ),
                     array(
-                        'key' => 'field_664db30f75d4c',
+                        'key' => 'field_wpr_smtp_server',
                         'label' => 'Serveur',
                         'name' => 'server',
                         'aria-label' => '',
@@ -354,7 +354,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db35075d4d',
+                        'key' => 'field_wpr_smtp_type',
                         'label' => 'Authentification : type',
                         'name' => 'authentication_type',
                         'aria-label' => '',
@@ -377,7 +377,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'layout' => 'horizontal',
                     ),
                     array(
-                        'key' => 'field_664db3a275d4e',
+                        'key' => 'field_wpr_smtp_port',
                         'label' => 'Authentification : port',
                         'name' => 'authentication_port',
                         'aria-label' => '',
@@ -399,7 +399,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db3ce75d4f',
+                        'key' => 'field_wpr_smtp_user',
                         'label' => 'Authentification : utilisateur',
                         'name' => 'authentication_user',
                         'aria-label' => '',
@@ -419,7 +419,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db40375d50',
+                        'key' => 'field_wpr_smtp_password',
                         'label' => 'Authentification : mot de passe',
                         'name' => 'authentication_password',
                         'aria-label' => '',
@@ -439,7 +439,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db45c75d51',
+                        'key' => 'field_wpr_smtp_mail',
                         'label' => 'Expéditeur : e-mail',
                         'name' => 'from_mail',
                         'aria-label' => '',
@@ -459,7 +459,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_664db49675d52',
+                        'key' => 'field_wpr_smtp_name',
                         'label' => 'Expéditeur : nom',
                         'name' => 'from_name',
                         'aria-label' => '',
@@ -481,7 +481,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 ),
             ),
             array(
-                'key' => 'field_665c7f4b36868',
+                'key' => 'field_wpr_news',
                 'label' => 'Actualités/Blog',
                 'name' => 'news',
                 'aria-label' => '',
@@ -497,7 +497,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_665d64a18cefe',
+                        'key' => 'field_wpr_news_enabled',
                         'label' => 'Activé',
                         'name' => 'enabled',
                         'aria-label' => '',
@@ -517,7 +517,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'ui' => 1,
                     ),
                     array(
-                        'key' => 'field_665c7f6136869',
+                        'key' => 'field_wpr_news_type',
                         'label' => 'Type',
                         'name' => 'type',
                         'aria-label' => '',
@@ -548,7 +548,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'layout' => 'horizontal',
                     ),
                     array(
-                        'key' => 'field_6677fdf406a4a',
+                        'key' => 'field_wpr_news_categories',
                         'label' => 'Catégories',
                         'name' => 'tax',
                         'aria-label' => '',
@@ -576,7 +576,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'ui' => 1,
                     ),
                     array(
-                        'key' => 'field_6677fdca06a49',
+                        'key' => 'field_wpr_news_to_pages',
                         'label' => 'Associer aux pages',
                         'name' => 'pages',
                         'aria-label' => '',
@@ -605,6 +605,44 @@ function pc_admin_wpr_settings_acf_include_fields() {
                     ),
                 ),
             ),
+            array(
+                'key' => 'field_wpr_events',
+                'label' => 'Événements',
+                'name' => 'events',
+                'aria-label' => '',
+                'type' => 'group',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'layout' => 'row',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_wpr_events_enabled',
+                        'label' => 'Activé',
+                        'name' => 'enabled',
+                        'aria-label' => '',
+                        'type' => 'true_false',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'message' => '',
+                        'default_value' => 0,
+                        'ui_on_text' => '',
+                        'ui_off_text' => '',
+                        'ui' => 1,
+                    )
+                ),
+            ),
         ),
         'location' => array(
             array(
@@ -617,7 +655,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
         ),
         'menu_order' => 0,
         'position' => 'normal',
-        'style' => 'default',
+        'style' => 'seamless',
         'label_placement' => 'left',
         'instruction_placement' => 'field',
         'hide_on_screen' => '',

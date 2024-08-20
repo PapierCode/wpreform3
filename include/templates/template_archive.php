@@ -69,17 +69,25 @@ function pc_display_archive_main_header_content( $settings ) {
 =======================================*/
 
 function pc_display_archive_list_start() {
-    echo '<ul class="card-list card-list--news">';
+
+    global $wp_query;
+    echo '<ul class="card-list card-list--'.$wp_query->get( 'post_type' ).'">';
+
 }
+
 function pc_display_archive_list_end() {
+
     echo '</ul>';
+
 }
 
 function pc_display_archive_posts_list( $post ) {
 
+    global $wp_query;
     $pc_post = new PC_Post( $post );
-    echo '<li class="card-list-item card-list-item--news">';
-        $pc_post->display_card(2);
+
+    echo '<li class="card-list-item">';
+        $pc_post->display_card( 2, [ 'card--'.$wp_query->get( 'post_type' ) ] );
     echo '</li>';
 
 }

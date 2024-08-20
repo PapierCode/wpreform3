@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * ACF : Actualités/BLog
+ * ACF : Actualités/Blog
  * 
  * Visuel
  * Catégories
@@ -22,11 +22,11 @@ function pc_admin_news_acf_include_fields() {
     ============================*/
 
     $args = array(
-        'key' => 'group_665d740171b6b',
-        'title' => 'Propriétés de l\'actualité',
+        'key' => 'group_pc_news_fields',
+        'title' => 'Propriétés de la publication',
         'fields' => array(
             array(
-                'key' => 'field_6677ec2ef197b',
+                'key' => 'field_pc_news_thumbnail',
                 'label' => 'Image à la une',
                 'name' => '_thumbnail_id',
                 'aria-label' => '',
@@ -51,7 +51,7 @@ function pc_admin_news_acf_include_fields() {
                 'preview_size' => 'medium',
             ),
             array(
-                'key' => 'field_2356e4zbctam3',
+                'key' => 'field_pc_news_short_title',
                 'label' => 'Titre court',
                 'name' => 'post_short_title',
                 'aria-label' => '',
@@ -71,7 +71,7 @@ function pc_admin_news_acf_include_fields() {
                 'new_lines' => '',
             ),
             array(
-                'key' => 'field_6137f42b4tc03',
+                'key' => 'field_pc_news_excerpt',
                 'label' => 'Description courte',
                 'name' => 'post_excerpt',
                 'aria-label' => '',
@@ -95,7 +95,7 @@ function pc_admin_news_acf_include_fields() {
                 array(
                     'param' => 'post_type',
                     'operator' => '==',
-                    'value' => 'newspost',
+                    'value' => NEWS_POST_SLUG,
                 ),
             ),
         ),
@@ -115,7 +115,7 @@ function pc_admin_news_acf_include_fields() {
     if ( get_option('options_news_tax') ) {
 
         $args['fields'][] = array(
-            'key' => 'field_6677ecfed8780',
+            'key' => 'field_pc_news_categories',
             'label' => 'Catégorie(s)',
             'name' => '_news_categories',
             'aria-label' => '',
@@ -128,7 +128,7 @@ function pc_admin_news_acf_include_fields() {
                 'class' => '',
                 'id' => '',
             ),
-            'taxonomy' => 'newstax',
+            'taxonomy' => NEWS_TAX_SLUG,
             'add_term' => 1,
             'save_terms' => 1,
             'load_terms' => 1,
@@ -148,7 +148,7 @@ function pc_admin_news_acf_include_fields() {
     if ( get_option('options_news_pages') ) {
 
         $args['fields'][] = array(
-            'key' => 'field_665d7401032c3',
+            'key' => 'field_pc_news_pages_related',
             'label' => 'Page(s) associée(s)',
             'name' => '_news_pages_related',
             'aria-label' => '',
@@ -188,16 +188,16 @@ function pc_admin_news_acf_include_fields() {
     =            Settings            =
     ================================*/
 
-    $group_intro_title = get_option('options_news_type') == 'news' ? 'Archive des actualités' : 'Archive du blog';
+    $group_intro_title = get_option('options_news_type') == 'news' ? 'Toutes les actualités' : 'Tout le blog';
     
     acf_add_local_field_group( array(
-        'key' => 'group_66607df2e0a0b',
+        'key' => 'group_pc_news_settings_archive',
         'title' => $group_intro_title,
         'fields' => array(
             array(
-                'key' => 'field_66607df3b5a18',
+                'key' => 'field_pc_news_archive_intro',
                 'label' => 'Introduction',
-                'name' => 'wpr_newspost_archive',
+                'name' => 'wpr_'.NEWS_POST_SLUG.'_archive',
                 'aria-label' => '',
                 'type' => 'group',
                 'instructions' => '',
@@ -211,7 +211,7 @@ function pc_admin_news_acf_include_fields() {
                 'layout' => 'row',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_66607e99b5a19',
+                        'key' => 'field_pc_news_archive_title',
                         'label' => 'Titre',
                         'name' => 'title',
                         'aria-label' => '',
@@ -231,7 +231,7 @@ function pc_admin_news_acf_include_fields() {
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_66607fcb88094',
+                        'key' => 'field_pc_news_archive_desc',
                         'label' => 'Description',
                         'name' => 'desc',
                         'aria-label' => '',

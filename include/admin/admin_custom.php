@@ -86,7 +86,15 @@ add_action( 'admin_init', 'pc_admin_init' );
 
 function pc_admin_menu_metaboxes_archive_content() {
 
-	$default = get_option('options_news_enabled') ? [ 1 => [ NEWS_POST_SLUG, get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' ] ] : array();
+	$default = array();
+	if ( get_option('options_news_enabled') ) {
+		$default_index = empty($default) ? 1 : 2;
+		$default[$default_index] = [ NEWS_POST_SLUG, get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' ];
+	}
+	if ( get_option('options_events_enabled') ) {
+		$default_index = empty($default) ? 1 : 2;
+		$default[$default_index] = [ EVENT_POST_SLUG, 'Événements' ];
+	}
 	$archives = apply_filters( 'pc_filter_admin_menu_metaboxe_archive_list', $default );
 
 	echo '<div id="posttype-archives" class="posttypediv"><div id="tab-posttype-archives" class="tabs-panel tabs-panel-active"><ul id ="list-posttype-archives" class="categorychecklist form-no-clear">';

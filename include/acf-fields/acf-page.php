@@ -15,11 +15,11 @@ function pc_admin_page_acf_include_fields() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
 	acf_add_local_field_group( array(
-        'key' => 'group_665c8549c226c',
-        'title' => 'Propriétés de la page',
+        'key' => 'group_pc_page_fields',
+        'title' => 'Propriétés de la publication',
         'fields' => array(
             array(
-                'key' => 'field_6672e44f112f6',
+                'key' => 'field_pc_page_thumbnail',
                 'label' => 'Image à la une',
                 'name' => '_thumbnail_id',
                 'aria-label' => '',
@@ -44,7 +44,7 @@ function pc_admin_page_acf_include_fields() {
                 'preview_size' => 'medium',
             ),
             array(
-                'key' => 'field_6677e014751e4',
+                'key' => 'field_pc_page_parent',
                 'label' => 'Page parent',
                 'name' => 'post_parent',
                 'aria-label' => '',
@@ -73,7 +73,7 @@ function pc_admin_page_acf_include_fields() {
                 ),
             ),
             array(
-                'key' => 'field_6486ettbct4h6',
+                'key' => 'field_pc_page_short_title',
                 'label' => 'Titre court',
                 'name' => 'post_short_title',
                 'aria-label' => '',
@@ -93,7 +93,7 @@ function pc_admin_page_acf_include_fields() {
                 'new_lines' => '',
             ),
             array(
-                'key' => 'field_5137f4xb4tz96',
+                'key' => 'field_pc_page_excerpt',
                 'label' => 'Description courte',
                 'name' => 'post_excerpt',
                 'aria-label' => '',
