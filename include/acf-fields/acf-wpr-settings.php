@@ -52,7 +52,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_664db0c2f83b7',
+                            'field' => 'field_wpr_dev',
                             'operator' => '!=',
                             'value' => '1',
                         ),
@@ -156,7 +156,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_664db63dc9425',
+                                    'field' => 'field_wpr_captcha_type',
                                     'operator' => '==',
                                     'value' => 'hcaptcha',
                                 ),
@@ -184,7 +184,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_664db63dc9425',
+                                    'field' => 'field_wpr_captcha_type',
                                     'operator' => '==',
                                     'value' => 'hcaptcha',
                                 ),
@@ -212,7 +212,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_664db63dc9425',
+                                    'field' => 'field_wpr_captcha_type',
                                     'operator' => '==',
                                     'value' => 'calcul',
                                 ),
@@ -240,7 +240,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_664db63dc9425',
+                                    'field' => 'field_wpr_captcha_type',
                                     'operator' => '==',
                                     'value' => 'calcul',
                                 ),
@@ -341,7 +341,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -361,7 +369,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'button_group',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -384,7 +400,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'number',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -406,7 +430,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -426,7 +458,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -446,7 +486,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -466,7 +514,15 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_wpr_smtp_enabled',
+                                    'operator' => '==',
+                                    'value' => '1',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -527,7 +583,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_665d64a18cefe',
+                                    'field' => 'field_wpr_news_enabled',
                                     'operator' => '==',
                                     'value' => '1',
                                 ),
@@ -558,7 +614,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_665d64a18cefe',
+                                    'field' => 'field_wpr_news_enabled',
                                     'operator' => '==',
                                     'value' => '1',
                                 ),
@@ -586,7 +642,7 @@ function pc_admin_wpr_settings_acf_include_fields() {
                         'conditional_logic' => array(
                             array(
                                 array(
-                                    'field' => 'field_665d64a18cefe',
+                                    'field' => 'field_wpr_news_enabled',
                                     'operator' => '==',
                                     'value' => '1',
                                 ),
