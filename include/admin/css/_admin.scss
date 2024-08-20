@@ -17,6 +17,27 @@
 
 #wpfooter { display: none; }
 
+.notice, div.updated, div.error { 
+    border: none;
+}
+.notice-info {
+    background-color: #72AEE6;
+    color: #1D2327
+}
+.notice-warning {
+    background-color: #fda03d;
+    color: #1D2327
+}
+.notice-success, div.updated { 
+    background-color: #008A23;
+    color: white;
+    
+}
+.notice-error, div.error { 
+    background-color: #d63638;
+    color: white;
+}
+
 
 /*=====  FIN Global  =====*/
 

@@ -55,6 +55,20 @@ add_filter( 'wp_untrash_post_status', 'pc_admin_untrash_post_status', 10, 3 );
 
     }
 
+/*----------  Messages  ----------*/
+
+add_action( 'admin_notices', 'crea_movie_imported_notice' );
+
+    function crea_movie_imported_notice() {
+
+        global $pagenow;
+
+        if ( 'nav-menus.php' == $pagenow ) {
+            echo '<div class="notice notice-error"><p>Attention la mise en page du site peut limiter le nombre d\'éléments dans un menu ! Vérifiez avec différentes tailles d\'écrans (responsive design).</p></div>';
+        }
+
+    }
+
 
 /*=====  FIN Communs  =====*/
 
