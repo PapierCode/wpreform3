@@ -29,8 +29,9 @@ add_action( 'pc_action_template_index', 'pc_display_main_start', 10 ); // templa
 
 	// footer
 	add_action( 'pc_action_template_index', 'pc_display_main_footer_start', 90 ); // template-part_layout.php
-		add_action( 'pc_action_template_index', 'pc_display_share_links', 100 ); // template-part_social.php
-	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 110 ); // template-part_layout.php
+		add_action( 'pc_action_template_index', 'pc_display_main_footer_backlink', 100 );
+		add_action( 'pc_action_template_index', 'pc_display_share_links', 110 ); // template-part_social.php
+	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 120 ); // template-part_layout.php
 
 // main end
 add_action( 'pc_action_template_index', 'pc_display_main_end', 120 ); // template-part_layout.php
@@ -79,3 +80,40 @@ function pc_display_single_content( $pc_post ) {
 
 
 /*=====  FIN Éditeur  =====*/
+
+/*===================================
+=            Lien retour            =
+===================================*/
+
+function pc_display_main_footer_backlink( $pc_post ) {
+
+	if ( ( is_page() && $pc_post->parent > 0 ) || is_single() ) {
+
+		$wp_referer = wp_get_referer();
+		
+		if ( $wp_referer ) {
+			$back_link = $wp_referer;
+			$back_title = 'Page précédente';
+			$back_txt = 'Page précédente';
+			$back_ico = 'arrow';
+		} else if ( is_page() ) {
+			$back_link = get_the_permalink( $pc_post->parent );
+			$back_title = 'En savoir plus';
+			$back_txt = 'En savoir plus';
+			$back_ico = 'more';
+		} else {
+			$post_object = get_post_type_object( $pc_post->type );
+			$back_link = get_post_type_archive_link( $pc_post->type );
+			$back_title = $post_object->labels->all_items;
+			$back_txt = apply_filters( 'pc_filter_backlink_text', 'd\''.$post_object->labels->name, $pc_post );
+			$back_ico = 'more';
+		}
+
+		echo '<nav class="main-footer-prev" role="navigation"><a href="'.$back_link.'" class="button" title="'.$back_title.'"><span class="ico">'.pc_svg($back_ico).'</span><span class="txt">'.$back_txt.'</span></a></nav>';
+
+	}
+
+}
+
+
+/*=====  FIN Lien retour  =====*/

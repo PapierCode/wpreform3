@@ -428,7 +428,7 @@ function pc_admin_avents_acf_include_fields() {
             ),
             array(
                 'key' => 'field_pc_event_performer',
-                'label' => 'Interprète',
+                'label' => 'Intervenant/Intervenante',
                 'name' => 'event_performer',
                 'aria-label' => '',
                 'type' => 'text',

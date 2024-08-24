@@ -6,7 +6,7 @@
  * Hooks
  * Entête
  * Liste des posts
- * Pagination
+ * Pied de page (main)
  * 
  */
 
@@ -36,9 +36,9 @@ add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 30 ); // 
 
 /*=====  FIN Hooks  =====*/
 
-/*===================================
+/*==============================
 =            Entête            =
-===================================*/
+==============================*/
 
 function pc_display_archive_main_header_content( $settings ) {
 	
@@ -95,24 +95,18 @@ function pc_display_archive_posts_list( $post ) {
 
 /*=====  FIN Liste des posts  =====*/
 
-/*==================================
-=            Pagination            =
-==================================*/
+/*===========================================
+=            Pied de page (main)            =
+===========================================*/
 
 function pc_display_archive_footer() {
-
-	global $wp_query;
-
-    // TODO liens de partage
-	if ( $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
 		
-		pc_display_main_footer_start(); // template-part_layout.php
-			pc_display_pager();  // template-part_navigation.php
-		pc_display_main_footer_end(); // template-part_layout.php
-
-	}
+    pc_display_main_footer_start(); // template-part_layout.php
+        pc_display_pager();  // template-part_navigation.php
+        pc_display_share_links(); // template-part_social.php
+    pc_display_main_footer_end(); // template-part_layout.php
 
 }
 
 
-/*=====  FIN Pagination  =====*/
+/*=====  FIN Pied de page (main)  =====*/

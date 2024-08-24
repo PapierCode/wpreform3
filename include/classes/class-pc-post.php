@@ -330,8 +330,8 @@ class PC_Post {
 				$ico_more = apply_filters( 'pc_filter_card_ico_more', pc_svg( 'arrow' ), $this );	
 				if ( $description ) {
 					echo '<p class="card-desc">';
-						echo $description;
-						if ( $ico_more ) { echo ' <span class="card-desc-ico">'.$ico_more.'</span>'; }	
+						echo $description;	
+						if ( $ico_more ) { echo '<span class="card-desc-ico">&nbsp;<span class="ico">'.pc_svg('arrow').'</span></span>'; }	
 					echo '</p>';
 				}
 

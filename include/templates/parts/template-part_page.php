@@ -34,25 +34,6 @@ add_filter( 'pc_filter_display_date_modified', 'pc_edit_display_cgu_type', 10, 2
 
 /*=====  FIN Date CGU  =====*/
 
-/*==============================================
-=            Lien retour sous-pages            =
-==============================================*/
-
-add_action( 'pc_action_template_index', 'pc_display_subpage_backlink', 99 );
-
-	function pc_display_subpage_backlink( $pc_post ) {
-
-		if ( is_page() && $pc_post->parent > 0 ) {
-
-			echo '<nav class="main-footer-prev" role="navigation" aria-label="Retour à la page parente"><a href="'.get_the_permalink($pc_post->parent).'" class="button" title="'.get_the_title($pc_post->parent).'"><span class="ico">'.pc_svg('arrow').'</span><span class="txt">Retour</span></a></nav>';
-
-		}
-
-	}
-
-
-/*=====  FIN Lien retour sous-pages  =====*/
-
 /*===================================================
 =            Protection par mot de passe            =
 ===================================================*/
@@ -114,7 +95,10 @@ add_action( 'pc_action_template_index', 'pc_page_aside_news', 125 );
 
 			if ( !empty( $get_news ) ) {
 				echo '<aside class="aside aside--news">';
-					echo '<h2 class="aside-title aside-title--news">'.apply_filters( 'pc_filter_aside_news_title', 'Actualités' ).'</h2>';
+					echo '<div class="aside-card-title">';
+						echo '<h2 class="aside-title aside-title--news">'.apply_filters( 'pc_filter_aside_news_title', 'Actualités associées' ).'</h2>';
+						echo '<a href="'.get_post_type_archive_link( NEWS_POST_SLUG ).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">Toutes les actualités</span></a>';
+					echo '</div>';
 					echo '<ul class="card-list card-list--news">';
 						foreach ( $get_news as $news ) {
 							$pc_news = new PC_Post( $news );
