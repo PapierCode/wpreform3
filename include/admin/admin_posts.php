@@ -97,7 +97,7 @@ add_action( 'admin_head-nav-menus.php', 'pc_admin_nav_menu_remove_article_metabo
 
 /*----------  Sélection parent  ----------*/
 
-add_filter('acf/fields/post_object/query/key=field_6677e014751e4', 'pc_admin_page_parent_field_query', 10, 3);
+add_filter('acf/fields/post_object/query/key=field_pc_page_parent', 'pc_admin_page_parent_field_query', 10, 3);
 
 	function pc_admin_page_parent_field_query( $args, $field, $post_id ) {
 
@@ -111,14 +111,14 @@ add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 
     function pc_admin_page_parent_field_save( $post_id, $post ) {
 
-        if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' && isset($_POST['acf']['field_6677e014751e4']) ) {
+        if ( !wp_is_post_revision( $post_id ) && $post->post_type == 'page' && isset($_POST['acf']['field_pc_page_parent']) ) {
 
             // prévention contre une boucle infinie 1/2
 			remove_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );
 			// mise à jour post
 			wp_update_post( array(
 				'ID' => $post_id,
-				'post_parent' => $_POST['acf']['field_6677e014751e4']
+				'post_parent' => $_POST['acf']['field_pc_page_parent']
 			));
 			// prévention contre une boucle infinie 2/2
 			add_action( 'save_post', 'pc_admin_page_parent_field_save', 10, 2 );

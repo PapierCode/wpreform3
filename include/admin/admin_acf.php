@@ -66,10 +66,10 @@ add_filter( 'acf/load_field/type=gallery', 'pc_admin_acf_image_mimes' );
 
 /*----------  Résumé, compteur titre & description  ----------*/
 
-add_filter( 'acf/load_field/name=post_short_title', 'pc_admin_acf_' );
-add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_' );
+add_filter( 'acf/load_field/name=post_short_title', 'pc_admin_acf_characters_counter' );
+add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_characters_counter' );
 
-	function pc_admin_acf_( $field ) {
+	function pc_admin_acf_characters_counter( $field ) {
 
         switch ( $field['name'] ) {
             case 'post_short_title':
@@ -85,19 +85,5 @@ add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_' );
 		$field['instructions'] = $for.'<br><span class="pc-txt-length-counter" data-size="'.$length.'"><span class="pc-txt-length-value">0</span> / '.$length.' caractères conseillés.</span>';
 
 		return $field;
-
-	}
-
-
-/*----------  Page parent  ----------*/
-
-add_filter( 'acf/fields/post_object/query/key=field_665c1c023d84b', 'pc_admin_filter_block_posts_selection', 10, 3);
-
-	function pc_admin_filter_block_posts_selection( $args, $field, $post_id ) {
-
-		$args['post_parent'] = 0;
-		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
-
-		return $args;
 
 	}

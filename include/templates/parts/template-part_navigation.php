@@ -31,9 +31,9 @@ add_action( 'after_setup_theme', 'pc_preform_register_nav_menus' );
 
 /*=====  FIN Emplacement menus  =====*/
 
-/*=====================================================
-=            Item parent actif (sous-page)            =
-=====================================================*/
+/*=========================================
+=            Item parent actif            =
+=========================================*/
 
 add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 
@@ -41,77 +41,31 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 
 		if ( $args->theme_location == 'nav-header' ) {
 
-			global $post;
-            $all_items_ancestor = array();
+			if ( is_single() ) {
 
-            $pc_items = array();
-            foreach ( $items as $item ) { $pc_items[$item->ID] = $item; }
-
-			if ( is_singular( array( 'page' ) ) ) {
-
-				if ( $post->post_parent ) {
-
-					$page_parent_ids = array();
-					$parent_id = wp_get_post_parent_id( $post );
-
-					if ( $parent_id ) {
-						
-						// toutes les pages parentes de la page courante
-						$page_parent_ids[] = $parent_id;
-						while ( $parent_id ) {
-							$sup_parent_id = wp_get_post_parent_id( $parent_id );
-							if ( $sup_parent_id ) { $page_parent_ids[] = $sup_parent_id; }
-							$parent_id = $sup_parent_id;
-						}
-						
-						// recherche des pages parentes dans le menu
-						// et recherche des ancêtres des items associés à ces pages parentes
-						foreach ( $pc_items as $id => $item ) {
-							if ( in_array( $item->object_id, $page_parent_ids ) && !in_array( $item->menu_item_parent, $all_items_ancestor ) ) {
-								$all_items_ancestor[] = $id;
-								$ancestor_id = $item->menu_item_parent;
-								while ( $ancestor_id ) {
-									$ancestor_id = $pc_items[$ancestor_id]->menu_item_parent;
-									if ( $ancestor_id && !in_array( $ancestor_id, $all_items_ancestor ) ) {
-										$all_items_ancestor[] = $ancestor_id;
-									}
-								}
-							}
-						}
-
+				// active l'item archive
+				global $ancestor;
+				$ancestor = null;
+				array_walk( $items, function( $item ) {
+					global $pc_post, $ancestor;
+					if ( $item->type == 'post_type_archive' && $item->object == $pc_post->type ) {
+						$item->classes[] = 'current-'.$item->object.'-ancestor';
+						$ancestor = $item->menu_item_parent;
 					}
-
+				} );
+				
+				// active les items parents
+				while ( $ancestor ) {
+					array_walk( $items, function( $item ) {
+						global $ancestor;
+						if ( $item->ID == $ancestor ) {
+							$item->classes[] = 'current-'.$item->object.'-ancestor';
+							$ancestor = $item->menu_item_parent;
+						}
+					} );
 				}
 
-			} // FIN if parent
-            
-			if ( is_singular( array( 'page', NEWS_POST_SLUG ) ) ) {
-
-                foreach ( $items as $key => $item ) {
-                    if ( $item->type == 'post_type_archive' && $item->object == $post->post_type ) {
-                        if ( !in_array( 'current-menu-ancestor', $item->classes ) ) {
-                            $items[$key]->classes[] = 'current-menu-ancestor';
-                        }
-                        $item_ancestor = $item->menu_item_parent;
-                        while ( $item_ancestor ) {
-                            if ( !in_array( $item_ancestor, $all_items_ancestor ) ) {
-                                $all_items_ancestor[] = $item_ancestor;
-                                $item_ancestor = $pc_items[$item_ancestor]->menu_item_parent;
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            // active les ancêtres
-            if ( !empty( $all_items_ancestor ) ) {
-                foreach ( $items as $key => $item ) {
-                    if ( in_array( $item->ID, $all_items_ancestor ) && !in_array( 'current-menu-ancestor', $item->classes ) ) {
-                        $items[$key]->classes[] = 'current-menu-ancestor';
-                    }
-                }
-            }
+			} // FIN is_single
 
 		}
 
@@ -120,7 +74,7 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 	};
 
 
-/*=====  FIN Item parent actif (sous-page)  ======*/
+/*=====  FIN Item parent actif  ======*/
 
 /*====================================
 =            Fil d'ariane            =
