@@ -10,11 +10,15 @@
  */
 
 
-define( 'NEWS_POST_SLUG', 'newspost' );
-define( 'NEWS_TAX_SLUG', 'newstax' );
+if ( get_option('options_news_enabled') ) {
+    define( 'NEWS_POST_SLUG', 'newspost' );
+    define( 'NEWS_TAX_SLUG', 'newstax' );
+}
 
-define( 'EVENT_POST_SLUG', 'eventpost' );
-define( 'EVENT_TAX_SLUG', 'eventtax' );
+if ( get_option('options_events_enabled') ) {
+    define( 'EVENT_POST_SLUG', 'eventpost' );
+    define( 'EVENT_TAX_SLUG', 'eventtax' );
+}
 
 
 /*========================================

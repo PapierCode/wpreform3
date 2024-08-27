@@ -35,13 +35,13 @@ add_filter( 'pc_filter_post_card_taxonomy_slug', 'pc_edit_news_taxonomy_slug', 1
 
     }
 
-add_action( 'pc_action_template_index', 'pc_display_news_date_and_terms', 55 );
+add_action( 'pc_action_template_index', 'pc_display_news_date_and_terms', 45 );
 
     function pc_display_news_date_and_terms( $pc_post ) {
 
-        if ( $pc_post->type == NEWS_POST_SLUG ) { 
+        if ( $pc_post->type == NEWS_POST_SLUG && get_option('options_news_enabled')  ) { 
             $pc_post->display_date( 'single-date' );
-            $pc_post->display_terms( 'single-terms' );
+            if ( get_option('options_news_tax') ) { $pc_post->display_terms( 'single-terms' ); }
         }
 
     }
@@ -57,7 +57,7 @@ add_action( 'pre_get_posts', 'pc_news_pre_get_posts' );
 
     function pc_news_pre_get_posts( $query ) {
 
-        if ( !is_admin() && $query->is_main_query() && $query->is_archive(NEWS_POST_SLUG) && get_query_var('term') ) {
+        if ( get_option('options_news_tax') && !is_admin() && $query->is_main_query() && $query->is_archive(NEWS_POST_SLUG) && get_query_var('term') ) {
             $query->set( 'tax_query', array(
                 array(
                     'taxonomy' => NEWS_TAX_SLUG,

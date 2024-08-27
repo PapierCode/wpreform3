@@ -125,8 +125,8 @@ function pc_get_textarea_to_paragraphs( $txt ) {
 function pc_markdown( $txt, $remove_all = false ) {
 
 	if ( !$remove_all ) {
-		$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); // [strong]
-		$txt = preg_replace( '/\{+(\w+)\}+/u', '<em>$1</em>', $txt ); ; // {em}
+		$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); 
+		$txt = preg_replace( '/\{+(\w+)\}+/u', '<em>$1</em>', $txt );
 	}
 	$txt = preg_replace( '/\{+|\}+|\[+|\]+/u', '', $txt );  
 	return $txt;
