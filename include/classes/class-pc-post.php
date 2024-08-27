@@ -90,10 +90,13 @@ class PC_Post {
 
 		$modified = apply_filters( 'pc_filter_post_display_date_modified', false, $this );		
 		$format = apply_filters( 'pc_filter_post_display_date_format', 'j F Y', $this );		
-		$prefix = apply_filters( 'pc_filter_post_date_prefix', pc_svg('calendar'), $this );
+		$prefix = apply_filters( 'pc_filter_post_date_prefix', '<span class="ico">'.pc_svg('calendar').'<span>', $this );
 
 		$label = !$modified ? 'publication' : 'modification';
-		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">'.$prefix.'<span>'.$this->get_date( $format, $modified ).'</span></time>';
+		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">';
+			if ( $prefix ) { echo $prefix; }
+			echo '<span class="txt">'.$this->get_date( $format, $modified ).'</span>';
+		echo '</time>';
 
 	}
 	
@@ -322,7 +325,7 @@ class PC_Post {
 
 				// date
 				if ( apply_filters( 'pc_filter_display_default_card_date', false, $this ) ) {
-					$this->display_date( 'card-date' );		
+					$this->display_date( 'date date--card' );		
 				}
 				
 				// description

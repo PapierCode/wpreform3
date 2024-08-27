@@ -40,7 +40,7 @@ add_action( 'pc_action_template_index', 'pc_display_news_date_and_terms', 45 );
     function pc_display_news_date_and_terms( $pc_post ) {
 
         if ( $pc_post->type == NEWS_POST_SLUG && get_option('options_news_enabled')  ) { 
-            $pc_post->display_date( 'single-date' );
+            $pc_post->display_date( 'date date--single' );
             if ( get_option('options_news_tax') ) { $pc_post->display_terms( 'single-terms' ); }
         }
 
