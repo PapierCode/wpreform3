@@ -109,7 +109,7 @@ function pc_display_main_footer_backlink( $pc_post ) {
 			$back_ico = 'more';
 		}
 
-		echo '<nav class="main-footer-prev" role="navigation"><a href="'.$back_link.'" class="button" title="'.$back_title.'"><span class="ico">'.pc_svg($back_ico).'</span><span class="txt">'.$back_txt.'</span></a></nav>';
+		echo '<a href="'.$back_link.'" class="button button--previous" title="'.$back_title.'"><span class="ico">'.pc_svg($back_ico).'</span><span class="txt">'.$back_txt.'</span></a>';
 
 	}
 
