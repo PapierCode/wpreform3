@@ -80,7 +80,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_news', 125 );
 
 	function pc_page_aside_news( $pc_post ) {
 
-		if ( is_page() && get_option('options_news_enabled') ) {
+		if ( get_option('options_news_enabled') && is_page() ) {
 
 			$metas = $pc_post->metas;
 			$get_news_args = array(

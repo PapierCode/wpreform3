@@ -14,6 +14,8 @@
 
 function pc_display_event_date( $pc_post, $context = 'single' ) {
 
+    if ( !get_option('options_events_enabled') && $pc_post->type != EVENT_POST_SLUG ) { return; }
+
     $metas = $pc_post->metas;
 
     if ( $metas['event_canceled'] ) {
@@ -79,7 +81,7 @@ add_action( 'pc_post_card_after_title', 'pc_display_event_card_date', 10 );
 
     function pc_display_event_card_date( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_enabled') ) { pc_display_event_date( $pc_post, 'card' ); }
+        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'card' ); }
 
     }
 
@@ -90,7 +92,7 @@ add_action( 'pc_action_template_index', 'pc_display_event_single_date', 45 );
 
     function pc_display_event_single_date( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_enabled') ) { pc_display_event_date( $pc_post, 'single' ); }
+        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'single' ); }
 
     }
 
