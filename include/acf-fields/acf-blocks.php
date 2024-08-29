@@ -29,7 +29,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_660c2d76d2465',
             'title' => '2 colonnes',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_columns_block_fields', array(
                 array(
                     'key' => 'field_663f9864c9661',
                     'label' => 'Attention !',
@@ -208,7 +208,7 @@ add_action( 'acf/include_fields', function() {
                     'ui_off_text' => '',
                     'ui' => 1,
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -236,7 +236,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_66472fada8bcb',
             'title' => 'Colonne',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_column_block_fields', array(
                 array(
                     'key' => 'field_66472fadbf730',
                     'label' => 'Style',
@@ -261,7 +261,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -284,12 +284,12 @@ add_action( 'acf/include_fields', function() {
 
     }
 
-    if ( apply_filters( 'pc_filter_add_acf_image-column_block', true ) ) {
+    if ( apply_filters( 'pc_filter_add_acf_image_column_block', true ) ) {
 
         acf_add_local_field_group( array(
             'key' => 'group_665b2a83ac9c5',
             'title' => 'Image colonne',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_image_column_block_fields', array(
                 array(
                     'key' => 'field_665b2a83b7bc9',
                     'label' => 'Image',
@@ -528,7 +528,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -586,7 +586,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_66572e5e39313',
             'title' => 'Boutons',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_buttons_block_fields', array(
                 array(
                     'key' => 'field_66572e5e1caad',
                     'label' => 'Alignement horizontal des boutons',
@@ -611,7 +611,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -646,7 +646,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_666423b2693a3',
             'title' => 'Citation',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_quote_block_fields', array(
                 array(
                     'key' => 'field_666423b250dd1',
                     'label' => 'Alignement horizontal du bloc',
@@ -671,7 +671,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -706,7 +706,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_628cdbe86abd1',
             'title' => 'Embed',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_embed_block_fields', array(
                 array(
                     'key' => 'field_628cdc01d84ae',
                     'label' => 'Adresse de la page',
@@ -724,7 +724,7 @@ add_action( 'acf/include_fields', function() {
                     'default_value' => '',
                     'placeholder' => '',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -759,7 +759,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_66433b5a72788',
             'title' => 'Encadré',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_frame_block_fields', array(
                 array(
                     'key' => 'field_66433b5a0dfcb',
                     'label' => 'Style',
@@ -808,7 +808,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -831,12 +831,12 @@ add_action( 'acf/include_fields', function() {
 
     }
 
-    if ( apply_filters( 'pc_filter_add_acf_image-frame_block', true ) ) {
+    if ( apply_filters( 'pc_filter_add_acf_image_frame_block', true ) ) {
 
         acf_add_local_field_group( array(
             'key' => 'group_665db297449cd',
             'title' => 'Image encadré',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_image_frame_block_fields', array(
                 array(
                     'key' => 'field_665db2974dabb',
                     'label' => 'Image',
@@ -1055,7 +1055,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1113,7 +1113,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_663b56252a21c',
             'title' => 'Espace',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_spacer_block_fields', array(
                 array(
                     'key' => 'field_663b56253dc02',
                     'label' => 'Espace',
@@ -1138,7 +1138,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1173,7 +1173,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_627b645eb8209',
             'title' => 'Galerie images',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_gallery_block_fields', array(
                 array(
                     'key' => 'field_627b64719f534',
                     'label' => 'Images',
@@ -1242,7 +1242,7 @@ add_action( 'acf/include_fields', function() {
                     'ui_off_text' => '',
                     'ui' => 1,
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1277,7 +1277,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_665976c8baafc',
             'title' => 'Image',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_image_block_fields', array(
                 array(
                     'key' => 'field_665976c86609c',
                     'label' => 'Image',
@@ -1558,7 +1558,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1616,7 +1616,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_664ca4062483d',
             'title' => 'Sous-pages',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_subpages_block_fields', array(
                 array(
                     'key' => 'field_664ca406eaec7',
                     'label' => 'Niveau des titres',
@@ -1640,7 +1640,7 @@ add_action( 'acf/include_fields', function() {
                     'allow_null' => 0,
                     'layout' => 'horizontal',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1675,7 +1675,7 @@ add_action( 'acf/include_fields', function() {
         acf_add_local_field_group( array(
             'key' => 'group_66a5f79ea51b3',
             'title' => '[Bloc] Formulaire de contact',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_contact_form_block_fields', array(
                 array(
                     'key' => 'field_66a5f79e9a5cc',
                     'label' => 'Destinataire',
@@ -1695,7 +1695,7 @@ add_action( 'acf/include_fields', function() {
                     'prepend' => '',
                     'append' => '',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
@@ -1725,12 +1725,12 @@ add_action( 'acf/include_fields', function() {
     =            Vidéo            =
     =============================*/
     
-    if ( apply_filters( 'pc_filter_add_acf_video_block', true ) ) {
+    if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) {
     
         acf_add_local_field_group( array(
             'key' => 'group_66a7572e25c80',
             'title' => '[Bloc] Embed',
-            'fields' => array(
+            'fields' => apply_filters( 'pc_filter_acf_embed_block_fields', array(
                 array(
                     'key' => 'field_66a7572ef9623',
                     'label' => 'Page de la vidéo',
@@ -1773,7 +1773,7 @@ add_action( 'acf/include_fields', function() {
                     'mime_types' => 'jpg,jpeg,png,webp',
                     'preview_size' => 'thumbnail_s',
                 ),
-            ),
+            )),
             'location' => array(
                 array(
                     array(
