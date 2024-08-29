@@ -1,5 +1,5 @@
 <?php
-$allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-column', 'acf/pc-buttons' ];
+$allowedBlocks = apply_filters( 'pc_filter_block_column_allowed', [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-column', 'acf/pc-buttons' ] );
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array( 'bloc-column' );

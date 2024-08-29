@@ -1,6 +1,6 @@
 <?php
 
-$allowedBlocks = [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-frame', 'acf/pc-buttons' ];
+$allowedBlocks = apply_filters( 'pc_filter_block_frame_allowed', [ 'core/paragraph', 'core/heading', 'core/list', 'acf/pc-image-frame', 'acf/pc-buttons' ] );
 $template =  [ ['core/paragraph'] ];
 
 $block_css = array(
