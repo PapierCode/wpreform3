@@ -10,15 +10,13 @@ $block_css = array(
 );
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
-$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+$block_attrs = array( 'class' => implode( ' ', $block_css ) );
+if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
 
-?>
+$block_attrs = apply_filters( 'pc_filter_acf_block_frame_attrs', $block_attrs, $block, $is_preview );
 
-<div <?= implode(' ',$block_attrs); ?>><div class="bloc-frame-inner">
-    <InnerBlocks 
-        template="<?php echo esc_attr( wp_json_encode( $template ) ) ?>" 
-        allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowedBlocks ) )  ?>" 
-        lock="<?= esc_attr( wp_json_encode( ['remove'=>false,'move'=>true] ) )  ?>" 
-    />
-</div></div>
+echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><div class="bloc-frame-inner">';
+    do_action( 'pc_action_acf_block_frame_start', $block, $is_preview );
+    echo '<InnerBlocks template="'.esc_attr( wp_json_encode( $template ) ).'" allowedBlocks="'.esc_attr( wp_json_encode( $allowedBlocks ) ).'" lock="'.esc_attr( wp_json_encode( ['remove'=>false,'move'=>true] ) ).'"/>';
+    do_action( 'pc_action_acf_block_frame_end', $block, $is_preview );
+echo '</div></div>';

@@ -7,9 +7,10 @@
  * pc_svg
  * pc_get_text_cut
  * pc_get_textarea_to_paragraphs
- * pc_markdown
+ * pc_get_markdown
  * pc_get_phone_format
  * pc_display_message
+ * pc_get_attrs_to_string
  * 
  */
 
@@ -122,7 +123,7 @@ function pc_get_textarea_to_paragraphs( $txt ) {
  * 
  */
 
-function pc_markdown( $txt, $remove_all = false ) {
+function pc_get_markdown( $txt, $remove_all = false ) {
 
 	if ( !$remove_all ) {
 		$txt = preg_replace( '/\[+(\w+)\]+/u', '<strong>$1</strong>', $txt ); 
@@ -199,3 +200,28 @@ function pc_markdown( $txt, $remove_all = false ) {
 
 
 /*=====  FIN Message  =====*/
+
+/*===================================================================
+=            Tableau d'attributs en chaine de caractères            =
+===================================================================*/
+
+/**
+ * 
+ * @param array		$attrs		Tableau associatif à convertir
+ * 
+ */
+
+function pc_get_attrs_to_string( $attrs ) {
+
+	$attrs = array_map(
+		function( $k, $v ) { return $k.'="'.$v.'"'; }, 
+		array_keys( $attrs ),
+		array_values( $attrs )
+	);
+
+	return implode( ' ', $attrs );
+
+}
+
+
+/*=====  FIN Tableau d'attributs en chaine de caractères  =====*/

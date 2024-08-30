@@ -17,10 +17,13 @@ if ( !empty( $subpages ) ) {
         'card-list--pages'
     );
     if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }	
-    $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-    if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-    echo '<ul '.implode(' ',$block_attrs).'>';
+    $block_attrs = array( 'class' => implode( ' ', $block_css ) );
+    if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
+
+    $block_attrs = apply_filters( 'pc_filter_acf_block_subpages_attrs', $block_attrs, $block, $is_preview );
+
+    echo '<ul '.pc_get_attrs_to_string( $block_attrs ).'>';
     foreach ( $subpages as $page ) {
         $pc_post_page = new PC_Post( $page );
         echo '<li class="card-list-item">';

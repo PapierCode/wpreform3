@@ -22,12 +22,12 @@ if ( filter_var( $embed_url, FILTER_VALIDATE_URL ) ) {
 		$block_css = array( 'bloc-embed' );
 		if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }
 		if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
-		
-		$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-		if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
+		$block_attrs = array( 'class' => implode( ' ', $block_css ) );
+		if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
 
-		echo '<div '.implode( ' ', $block_attrs ).'>';
+		$block_attrs = apply_filters( 'pc_filter_acf_block_embed_attrs', $block_attrs, $block, $is_preview );
+		echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
 
 			if ( !$is_preview ) {
 

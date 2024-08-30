@@ -16,11 +16,12 @@ if ( $img_ids && count( $img_ids ) >= 2 ) {
 	);
 	if ( !$is_preview && $enable_js ) { $block_css[] = 'diaporama'; }
 	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
-	
-	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list">';
+	$block_attrs = array( 'class' => implode( ' ', $block_css ) );
+	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
+
+	$block_attrs = apply_filters( 'pc_filter_acf_block_gallery_attrs', $block_attrs, $block, $is_preview );
+	echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><ul class="gallery-list">';
 
 	foreach ( $img_ids as $img ) {
 

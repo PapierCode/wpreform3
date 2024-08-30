@@ -48,12 +48,14 @@ if ( $img_args ) {
 	    $img_container_style = ' style="max-width:'.($img_args['sizes'][$img_size.'-'.$circle_direction]/16).'rem"';
     } else { $img_container_style = ''; }
 
-    $block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-    if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+    $block_attrs = array( 'class' => implode( ' ', $block_css ) );
+    if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
 
     if ( in_array( $img_size, ['medium_large_l','medium_large_r'] ) ) { $img_size = 'medium_large'; }
 
-    echo '<div '.implode(' ',$block_attrs).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem"'.$tag_attrs.'>';
+    $block_attrs = apply_filters( 'pc_filter_acf_block_frame_attrs', $block_attrs, $block, $is_preview );
+
+    echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem"'.$tag_attrs.'>';
 
         if ( !$is_preview && $enable_js ) { 
             echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher en plein écran l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';

@@ -51,11 +51,13 @@ if ( $block_form_to && is_email( $block_form_to ) ) {
 	$block_css = array( 'bloc-contactform' );
 	if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }
 	if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }	
-	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
-	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+	
+	$block_attrs = array( 'class' => implode( ' ', $block_css ) );
+	if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
 
 	if ( class_exists( 'PC_Contact_Form' ) ) {
-		echo '<div '.implode(' ',$block_attrs).'>';
+		$block_attrs = apply_filters( 'pc_filter_acf_block_contact_form_attrs', $block_attrs, $block, $is_preview );
+		echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
 
 			if ( $is_preview ) { 
 				echo '<p><strong>Formulaire de contact</strong> / '.$block_form_to.'</p>'; 
