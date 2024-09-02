@@ -167,7 +167,7 @@ add_action( 'pre_get_posts', 'pc_archive_pre_get_posts' );
 
     function pc_archive_pre_get_posts( $query ) {
 
-        if ( ( !get_option('options_news_enabled') && get_option('options_news_tax') ) || ( !get_option('options_events_enabled') && get_option('options_events_tax') ) ) { return; }
+        if ( ( !get_option('options_news_enabled') && !get_option('options_news_tax') ) || ( !get_option('options_events_enabled') && !get_option('options_events_tax') ) ) { return; }
         
         if ( !is_admin() && $query->is_main_query() && $query->is_archive(get_query_var('post_type')) && get_query_var('term') ) {
             $query->set( 'tax_query', array(

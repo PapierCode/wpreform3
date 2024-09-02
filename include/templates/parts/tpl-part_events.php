@@ -79,7 +79,7 @@ add_action( 'pc_post_card_after_title', 'pc_display_event_card_date', 10 );
 
     function pc_display_event_card_date( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_enabled') ) { pc_display_event_date( $pc_post, 'card' ); }
+        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'card' ); }
 
     }
 
@@ -90,7 +90,7 @@ add_action( 'pc_action_template_index', 'pc_display_event_single_date', 45 );
 
     function pc_display_event_single_date( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_enabled') ) { pc_display_event_date( $pc_post, 'single' ); }
+        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'single' ); }
 
     }
 
@@ -105,7 +105,7 @@ add_filter( 'pc_filter_display_card_terms', 'pc_edit_display_event_card_terms', 
 
     function pc_edit_display_event_card_terms( $display, $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_news_enabled') && get_option('options_events_tax') ) { $display = true; }
+        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) { $display = true; }
         return $display;
 
     }
@@ -114,7 +114,7 @@ add_filter( 'pc_filter_post_card_taxonomy_slug', 'pc_edit_event_taxonomy_slug', 
 
     function pc_edit_event_taxonomy_slug( $slug, $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_news_enabled') && get_option('options_events_tax') ) {
+        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
             $slug = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
         }
         return $slug;
@@ -125,7 +125,7 @@ add_action( 'pc_action_template_index', 'pc_display_single_event_terms', 45 );
 
     function pc_display_single_event_terms( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_news_enabled') && get_option('options_events_tax') ) {
+        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
             $pc_post->display_terms( 'single-terms' );
         }
 
