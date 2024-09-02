@@ -127,7 +127,7 @@ function pc_admin_avents_acf_include_fields() {
                 'class' => '',
                 'id' => '',
             ),
-            'taxonomy' => EVENT_TAX_SLUG,
+            'taxonomy' => get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG,
             'add_term' => 1,
             'save_terms' => 1,
             'load_terms' => 1,
@@ -136,8 +136,42 @@ function pc_admin_avents_acf_include_fields() {
             'allow_null' => 0,
             'bidirectional' => 0,
             'multiple' => 0,
-            'bidirectional_target' => array(
+            'bidirectional_target' => array(),
+        );
+
+    }
+
+    /*----------  Relation page  ----------*/
+        
+    if ( get_option('options_events_pages') ) {
+
+        $args_post['fields'][] = array(
+            'key' => 'field_pc_event_pages_related',
+            'label' => 'Page(s) associée(s)',
+            'name' => '_event_pages_related',
+            'aria-label' => '',
+            'type' => 'post_object',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
             ),
+            'post_type' => array(
+                0 => 'page',
+            ),
+            'post_status' => array(
+                0 => 'publish',
+            ),
+            'taxonomy' => '',
+            'return_format' => 'id',
+            'multiple' => 1,
+            'allow_null' => 0,
+            'bidirectional' => 0,
+            'ui' => 1,
+            'bidirectional_target' => array(),
         );
 
     }
@@ -229,7 +263,7 @@ function pc_admin_avents_acf_include_fields() {
     ) );
 
 
-    /*----------  Dates événement  ----------*/  
+    /*----------  Lieu événement  ----------*/  
 
     acf_add_local_field_group( array(
         'key' => 'group_pc_event_place',

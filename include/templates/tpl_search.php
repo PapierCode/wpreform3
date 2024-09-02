@@ -16,24 +16,24 @@
 =============================*/
 
 // main start
-add_action( 'pc_action_template_search', 'pc_display_main_start', 10 ); // template-part_layout.php
+add_action( 'pc_action_template_search', 'pc_display_main_start', 10 ); // tpl-part_layout.php
 
 	// header
-	add_action( 'pc_action_template_search', 'pc_display_main_header_start', 20 ); // template-part_layout.php
-		add_action( 'pc_action_template_search', 'pc_display_breadcrumb', 30 ); // template-part_navigation.php
+	add_action( 'pc_action_template_search', 'pc_display_main_header_start', 20 ); // tpl-part_layout.php
+		add_action( 'pc_action_template_search', 'pc_display_breadcrumb', 30 ); // tpl-part_navigation.php
 		add_action( 'pc_action_template_search', 'pc_display_search_main_title', 40 );
-	add_action( 'pc_action_template_search', 'pc_display_main_header_end', 50 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_main_header_end', 50 ); // tpl-part_layout.php
 
 	// content
-	add_action( 'pc_action_template_search', 'pc_display_main_content_start', 60 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_main_content_start', 60 ); // tpl-part_layout.php
 		add_action( 'pc_action_template_search', 'pc_display_search_results_content', 70 );
-	add_action( 'pc_action_template_search', 'pc_display_main_content_end', 80 ); // template-part_layout.php
+	add_action( 'pc_action_template_search', 'pc_display_main_content_end', 80 ); // tpl-part_layout.php
 
 	// footer
 	add_action( 'pc_action_template_search', 'pc_display_search_footer', 90 );
 
 // main end
-add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // template-part_layout.php
+add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // tpl-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/
@@ -118,9 +118,9 @@ function pc_display_search_footer() {
 	if ( get_search_query() && $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
 		
 		// TODO liens de partage
-		pc_display_main_footer_start(); // template-part_layout.php
-			pc_display_pager();  // template-part_navigation.php
-		pc_display_main_footer_end(); // template-part_layout.php
+		pc_display_main_footer_start(); // tpl-part_layout.php
+			pc_display_pager();  // tpl-part_navigation.php
+		pc_display_main_footer_end(); // tpl-part_layout.php
 
 	}
 

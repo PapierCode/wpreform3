@@ -137,8 +137,7 @@ function pc_admin_news_acf_include_fields() {
             'allow_null' => 0,
             'bidirectional' => 0,
             'multiple' => 0,
-            'bidirectional_target' => array(
-            ),
+            'bidirectional_target' => array(),
         );
 
     }
@@ -173,8 +172,7 @@ function pc_admin_news_acf_include_fields() {
             'allow_null' => 0,
             'bidirectional' => 0,
             'ui' => 1,
-            'bidirectional_target' => array(
-            ),
+            'bidirectional_target' => array(),
         );
 
     }

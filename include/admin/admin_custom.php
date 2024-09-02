@@ -68,7 +68,7 @@ add_action( 'admin_init', 'pc_admin_init' );
 		remove_filter( 'update_footer', 'core_update_footer' );
 
 		// métaboxe archive
-		$menu_metabox_archive_active = get_option('options_news_enabled') ? true : false;
+		$menu_metabox_archive_active = get_option('options_news_enabled') || get_option('options_events_enabled') ? true : false;
 		if ( apply_filters( 'pc_admin_menu_metabox_archive_active', $menu_metabox_archive_active ) ) {
 			add_meta_box(
 				'sol_archive_links',

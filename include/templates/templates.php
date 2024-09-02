@@ -16,41 +16,41 @@
 /*----------  Communs  ----------*/
 
 // images
-include 'parts/template-part_images.php';
+include 'parts/tpl-part_images.php';
 // navigation
-include 'parts/template-part_navigation.php';
+include 'parts/tpl-part_navigation.php';
 // Données structurées
-include 'parts/template-part_schemas.php';
+include 'parts/tpl-part_schemas.php';
 // liens réseaux sociaux & partage
-include 'parts/template-part_social.php';
+include 'parts/tpl-part_social.php';
 // layout global
-include 'parts/template-part_main.php';
+include 'parts/tpl-part_main.php';
 // contenu de l'entête (head)
-include 'parts/template-part_head.php';
+include 'parts/tpl-part_head.php';
 // recherche
-include 'parts/template-part_search.php';
+include 'parts/tpl-part_search.php';
 // Pages
-include 'parts/template-part_page.php';
+include 'parts/tpl-part_page.php';
 // Actualités
-include 'parts/template-part_news.php';
+include 'parts/tpl-part_news.php';
 // Événements
-include 'parts/template-part_events.php';
+include 'parts/tpl-part_events.php';
 
 
 /*----------  Spécifiques  ----------*/
 
 // entête (header)
-include 'template_header.php';
+include 'tpl_header.php';
 // Pied de page (footer)
-include 'template_footer.php';
+include 'tpl_footer.php';
 // single
-include 'template_index.php';
+include 'tpl_index.php';
 // archive
-include 'template_archive.php';
+include 'tpl_archive.php';
 // recherche
-include 'template_search.php';
+include 'tpl_search.php';
 // 404
-include 'template_404.php';
+include 'tpl_404.php';
 
 
 /*=====  FIN Includes  =====*/

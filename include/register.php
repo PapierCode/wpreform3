@@ -119,6 +119,45 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 
                 register_taxonomy( NEWS_TAX_SLUG, array( NEWS_POST_SLUG ), $tax_news_args );
 
+
+            /*----------  Taxonomie  ----------*/     
+            
+            if ( get_option('options_news_tax') ) {
+
+                $tax_news_labels = array(
+                    'name'                          => 'Catégories',
+                    'singular_name'                 => 'Catégorie',
+                    'menu_name'                     => 'Catégories',
+                    'all_items'                     => 'Toutes les catégories',
+                    'edit_item'                     => 'Modifier la catégorie',
+                    'view_item'                     => 'Voir la catégorie',
+                    'update_item'                   => 'Mettre à jour la catégorie',
+                    'new_item_name'                 => 'Ajouter une catégorie',
+                    'add_new_item'                  => 'Ajouter une catégorie',
+                    'search_items'                  => 'Rechercher une catégorie',
+                    'popular_items'                 => 'Catégories les plus utilisés',
+                    'separate_items_with_commas'    => 'Séparer les catégories avec une virgule',
+                    'add_or_remove_items'           => 'Ajouter/supprimer une catégorie',
+                    'choose_from_most_used'         => 'Choisir parmis les plus utilisées',
+                    'not_found'                     => 'Aucune catégorie définie',
+                    'name_field_description'        => '',
+                    'slug_field_description'        => 'Le "slug" est la version du nom avec uniquement des lettres, des chiffres et des traits d’union.'
+
+                );
+
+                $tax_news_args = array(		
+                    'labels'			    => $tax_news_labels,
+                    'hierarchical'		    => false,
+                    'show_in_nav_menus'     => false,
+                    'show_admin_column'	    => true,
+                    'show_in_rest'          => true,
+                    'publicly_queryable'    => false
+                );
+
+                register_taxonomy( NEWS_TAX_SLUG, array( NEWS_POST_SLUG ), $tax_news_args );
+
+            }
+
             }
 
         } // FIN if options_news_enabled
@@ -155,7 +194,29 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 'rewrite'				=> array( 'slug' => 'evenements' )
             );
 
+            if ( get_option('options_events_tax') && get_option('options_events_tax_shared') ) {
+                $post_event_args['taxonomies'] = array( NEWS_TAX_SLUG );
+            }
+
             register_post_type( EVENT_POST_SLUG, $post_event_args );
+
+
+            /*----------  Taxonomie  ----------*/     
+            
+            if ( get_option('options_news_tax') && !get_option('options_events_tax_shared') ) {
+
+                $tax_event_args = array(		
+                    'labels'			    => $tax_news_labels,
+                    'hierarchical'		    => false,
+                    'show_in_nav_menus'     => false,
+                    'show_admin_column'	    => true,
+                    'show_in_rest'          => true,
+                    'publicly_queryable'    => false
+                );
+
+                register_taxonomy( EVENT_TAX_SLUG, array( EVENT_POST_SLUG ), $tax_news_args );
+
+            }
 
         } // FIN if options_events_enabled
 
@@ -210,7 +271,7 @@ if ( function_exists('acf_add_options_page') ) {
             'parent_slug'   => 'edit.php?post_type='.EVENT_POST_SLUG
         ) );
 
-    } // FIN if options_news_enabled
+    } // FIN if options_events_enabled
 
 }
 

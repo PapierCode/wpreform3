@@ -90,7 +90,7 @@ class PC_Post {
 
 		$modified = apply_filters( 'pc_filter_post_display_date_modified', false, $this );		
 		$format = apply_filters( 'pc_filter_post_display_date_format', 'j F Y', $this );		
-		$prefix = apply_filters( 'pc_filter_post_date_prefix', '<span class="ico">'.pc_svg('calendar').'<span>', $this );
+		$prefix = apply_filters( 'pc_filter_post_date_prefix', '<span class="ico">'.pc_svg('calendar').'</span>', $this );
 
 		$label = !$modified ? 'publication' : 'modification';
 		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">';
@@ -300,7 +300,7 @@ class PC_Post {
 		$link_tag_start = '<a href="'.$href.'" class="card-link" title="Lire la suite de : '.$title.'">';
 		
 		// css
-		$classes_css = array_merge( array( 'card' ), $classes_css );
+		$classes_css = array_merge( array( 'card', 'card--'.$this->type ), $classes_css );
 
 		echo '<article class="'.implode( ' ', $classes_css ).'">';
 	
@@ -324,7 +324,7 @@ class PC_Post {
 				do_action( 'pc_post_card_after_title', $this, $params );
 
 				// date
-				if ( apply_filters( 'pc_filter_display_default_card_date', false, $this ) ) {
+				if ( apply_filters( 'pc_filter_display_card_date', false, $this ) ) {
 					$this->display_date( 'date date--card' );		
 				}
 				
@@ -342,7 +342,7 @@ class PC_Post {
 				do_action( 'pc_post_card_after_desc', $this, $params );
 
 				// terms
-				if ( apply_filters( 'pc_filter_display_default_card_terms', false, $this ) ) {
+				if ( apply_filters( 'pc_filter_display_card_terms', false, $this ) ) {
 					$this->display_terms( 'card-terms' );
 				}
 			

@@ -76,38 +76,65 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 =            Actualités associées            =
 ============================================*/
 
-add_action( 'pc_action_template_index', 'pc_page_aside_news', 125 );
+add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 
-	function pc_page_aside_news( $pc_post ) {
+	function pc_page_aside_related( $pc_post ) {
 
-		if ( get_option('options_news_enabled') && is_page() ) {
+		if ( $pc_post->type == 'page' ) {
 
-			$metas = $pc_post->metas;
-			$get_news_args = array(
-				'post_type' => NEWS_POST_SLUG,
-				'post_per_page' => 4,				
-				'meta_key' => '_news_pages_related',
-				'meta_value' => '"'.$pc_post->id.'"',
-				'meta_compare' => 'LIKE'
-			);
+			$cpts = array();
+			if ( get_option('options_news_enabled') && get_option('options_news_pages') ) { 
+				$cpts['news'] = array(
+					'slug' => NEWS_POST_SLUG,
+					'title_txt' => 'Actualités associées',
+					'btn_txt' => 'Toutes les actualités'
+				);
+			}
+			if ( get_option('options_events_enabled') && get_option('options_events_pages') ) { 
+				$cpts['event'] = array(
+					'slug' => EVENT_POST_SLUG,
+					'title_txt' => 'Événements associés',
+					'btn_txt' => 'Tous les événements'
+				);
+			}
 
-			$get_news = get_posts( $get_news_args );
+			if ( !empty( $cpts ) ) {
 
-			if ( !empty( $get_news ) ) {
-				echo '<aside class="aside aside--news">';
-					echo '<div class="aside-card-title">';
-						echo '<h2 class="aside-title aside-title--news">'.apply_filters( 'pc_filter_aside_news_title', 'Actualités associées' ).'</h2>';
-						echo '<a href="'.get_post_type_archive_link( NEWS_POST_SLUG ).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">Toutes les actualités</span></a>';
-					echo '</div>';
-					echo '<ul class="card-list card-list--news">';
-						foreach ( $get_news as $news ) {
-							$pc_news = new PC_Post( $news );
-							echo '<li class="card-list-item">';
-								$pc_news->display_card(3);
-							echo '</li>';
-						}
-					echo '</ul>';
+				echo '<aside class="aside aside--page">';
+
+				$cpts = apply_filters( 'pc_filter_page_aside_related_cpts', $cpts, $pc_post );
+				$metas = $pc_post->metas;
+				foreach ( $cpts as $key => $cpt ) {
+						
+					$get_posts_args = array(
+						'post_type' => $cpt['slug'],
+						'post_per_page' => 2,				
+						'meta_key' => '_'.$key.'_pages_related',
+						'meta_value' => '"'.$pc_post->id.'"',
+						'meta_compare' => 'LIKE'
+					);
+
+					$get_posts = get_posts( $get_posts_args );
+
+					if ( !empty( $get_posts ) ) {
+							echo '<div class="aside-card-title">';
+								echo '<h2 class="aside-title">'.$cpt['title_txt'].'</h2>';
+								echo '<a href="'.get_post_type_archive_link( $cpt['slug'] ).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">'.$cpt['btn_txt'].'</span></a>';
+							echo '</div>';
+							echo '<ul class="card-list card-list--'.$cpt['slug'].'">';
+								foreach ( $get_posts as $post ) {
+									$pc_post_related = new PC_Post( $post );
+									echo '<li class="card-list-item">';
+										$pc_post_related->display_card(3);
+									echo '</li>';
+								}
+							echo '</ul>';
+					}
+
+				}
+				
 				echo '</aside>';
+
 			}
 
 		}
