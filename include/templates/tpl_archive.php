@@ -53,7 +53,7 @@ function pc_display_archive_main_header_content( $settings ) {
     /*----------  Description  ----------*/
     
     if ( !get_query_var('category') && !get_query_var('archive') && isset($settings['desc']) && trim($settings['desc']) ) {
-        echo '<div class="editor">'.wpautop(trim($settings['desc'])).'</div>';
+        echo '<div class="tiny-editor">'.wpautop(trim($settings['desc'])).'</div>';
     }
 
     /*----------  Filtres  ----------*/
