@@ -6,7 +6,7 @@
  * Date
  * Catégories
  * Archives
- * Custom query
+ * Query
  * 
  */
 
@@ -82,7 +82,7 @@ add_action( 'pc_post_card_after_title', 'pc_display_event_card_date', 10 );
 
     function pc_display_event_card_date( $pc_post ) {
 
-        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'card' ); }
+        if ( $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'card' ); }
 
     }
 
@@ -93,7 +93,7 @@ add_action( 'pc_action_template_index', 'pc_display_event_single_date', 45 );
 
     function pc_display_event_single_date( $pc_post ) {
 
-        if ( get_option('options_events_enabled') && $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'single' ); }
+        if ( $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'single' ); }
 
     }
 
@@ -110,7 +110,7 @@ add_filter( 'pc_filter_display_card_terms', 'pc_edit_display_event_card_terms', 
 
     function pc_edit_display_event_card_terms( $display, $pc_post ) {
 
-        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) { $display = true; }
+        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) { $display = true; }
         return $display;
 
     }
@@ -119,7 +119,7 @@ add_filter( 'pc_filter_post_card_taxonomy_slug', 'pc_edit_event_taxonomy_slug', 
 
     function pc_edit_event_taxonomy_slug( $slug, $pc_post ) {
 
-        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
+        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
             $slug = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
         }
         return $slug;
@@ -133,7 +133,7 @@ add_action( 'pc_action_template_index', 'pc_display_single_event_terms', 45 );
 
     function pc_display_single_event_terms( $pc_post ) {
 
-        if ( get_option('options_news_enabled') && $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
+        if ( $pc_post->type == EVENT_POST_SLUG && get_option('options_events_tax') ) {
             $pc_post->display_terms( 'single-terms' );
         }
 
@@ -150,7 +150,7 @@ add_action( 'pc_action_template_archive_after', 'pc_display_event_archive_link',
 
 function pc_display_event_archive_link() {
 
-    if ( get_option('options_events_enabled') && get_query_var('post_type') == EVENT_POST_SLUG ) {
+    if ( get_query_var('post_type') == EVENT_POST_SLUG ) {
         
         $href = get_post_type_archive_link(EVENT_POST_SLUG);
         $txt = 'Événements passés';
@@ -179,11 +179,26 @@ add_action( 'pre_get_posts', 'pc_archive_events_pre_get_posts' );
 
         if ( !is_admin() && $query->is_main_query() && $query->is_archive() && get_query_var('post_type') == EVENT_POST_SLUG ) {
 
-            if ( get_query_var( 'archive' ) == 1 ) {
+            if ( get_query_var( 'archive' ) == 1 ) { // passés
+
                 $meta_compare = '<=';
-            } else {
+
+            } else { // à venir
+
                 $query->set( 'order', 'ASC' );
                 $meta_compare = '>=';
+
+                if ( get_query_var('category') ) {
+                    $taxonomy = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
+                    $query->set( 'tax_query', array(
+                        array(
+                            'taxonomy' => $taxonomy,
+                            'field' => 'term_id',
+                            'terms' => sanitize_key( get_query_var('category') ),
+                        )
+                    ));
+                }
+
             }
 
             $query->set( 'meta_query', array(

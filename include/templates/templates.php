@@ -33,9 +33,9 @@ include 'parts/tpl-part_search.php';
 // Pages
 include 'parts/tpl-part_page.php';
 // Actualités
-include 'parts/tpl-part_news.php';
+if ( get_option('options_news_enabled') ) { include 'parts/tpl-part_news.php'; }
 // Événements
-include 'parts/tpl-part_events.php';
+if ( get_option('options_events_enabled') ) { include 'parts/tpl-part_events.php'; }
 
 
 /*----------  Spécifiques  ----------*/

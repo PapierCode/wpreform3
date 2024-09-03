@@ -14,7 +14,6 @@ add_action( 'acf/include_fields', 'pc_admin_avents_acf_include_fields' );
 function pc_admin_avents_acf_include_fields() {
 
 	if ( !function_exists( 'acf_add_local_field_group' ) ) { return; }
-    if ( !get_option('options_events_enabled') ) { return; }
 
     /*============================
     =            Post            =

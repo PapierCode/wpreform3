@@ -158,39 +158,3 @@ function pc_display_archive_posts_list( $post ) {
 
 
 /*=====  FIN Liste des posts  =====*/
-
-/*==========================================
-=            Filtres catégories            =
-==========================================*/
-    
-add_action( 'pre_get_posts', 'pc_archive_pre_get_posts' );
-
-    function pc_archive_pre_get_posts( $query ) {
-
-        if ( ( !get_option('options_news_enabled') && !get_option('options_news_tax') ) || ( !get_option('options_events_enabled') && !get_option('options_events_tax') ) ) { return; }
-        
-        $post_type = get_query_var('post_type');
-        if ( !is_admin() && $query->is_main_query() && $query->is_archive($post_type) && get_query_var('category') ) {
-            
-            switch ( $post_type ) {
-                case NEWS_POST_SLUG :
-                    $taxonomy = NEWS_TAX_SLUG;
-                    break;
-                case EVENT_POST_SLUG :
-                    $taxonomy = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
-                    break;
-            }
-            $query->set( 'tax_query', array(
-                array(
-                    'taxonomy' => $taxonomy,
-                    'field' => 'term_id',
-                    'terms' => sanitize_key( get_query_var('category') ),
-                )
-            ));
-
-        }
-
-    }
-
-
-/*=====  FIN Filtres catégories  =====*/
