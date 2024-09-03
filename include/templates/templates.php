@@ -4,6 +4,7 @@
  * Templates
  * 
  * Includes
+ * Query vars
  * Objet custom post
  * Résumé auto
  * 
@@ -54,6 +55,21 @@ include 'tpl_404.php';
 
 
 /*=====  FIN Includes  =====*/
+
+/*==================================
+=            Query vars            =
+==================================*/
+
+add_filter( 'query_vars', 'pc_query_vars' );
+	
+	function pc_query_vars( $vars ) {
+		$vars[] = 'archive';
+		$vars[] = 'category';
+		return $vars;
+	}
+
+
+/*=====  FIN Query vars  =====*/
 
 /*=========================================
 =            Objet post custom            =

@@ -9,7 +9,7 @@
  * pc_get_textarea_to_paragraphs
  * pc_get_markdown
  * pc_get_phone_format
- * pc_display_message
+ * pc_get_message
  * pc_get_attrs_to_string
  * 
  */
@@ -183,7 +183,7 @@ function pc_get_markdown( $txt, $remove_all = false ) {
  * 
  */
 
- function pc_display_message( $content, $type = 'default', $bloc = true, $tag = 'p' ) {
+ function pc_get_message( $content, $type = 'default', $bloc = true, $tag = 'p' ) {
 
 	$css = 'msg';
 	$css .= $bloc ? ' msg--block' : '';
