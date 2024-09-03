@@ -3,15 +3,14 @@
  * 
  * Template actualité ou blog
  * 
- * Affichage date & catégories
- * Filtres catégories
+ * Date & catégories
  * 
  */
 
 
-/*===================================================
-=            Affichage date & catégories            =
-===================================================*/
+/*=========================================
+=            Date & catégories            =
+=========================================*/
 
 add_filter( 'pc_filter_display_card_date', 'pc_edit_display_news_card_date', 10, 2 );
 
@@ -52,4 +51,4 @@ add_action( 'pc_action_template_index', 'p_display_index_news_date_and_terms', 4
     }
 
 
-/*=====  FIN Affichage date & catégories  =====*/
+/*=====  FIN Date & catégories  =====*/

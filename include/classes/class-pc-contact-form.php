@@ -538,12 +538,12 @@ class PC_Contact_Form {
 	
 			}
 
-			echo pc_display_message( $message_error, 'error', 'block' );
+			echo pc_get_message( $message_error, 'error', 'block' );
 
 	
 		} else if ( $this->done ) {
 	
-			echo pc_display_message( $texts['msg-done'].'.', 'success', 'block' );
+			echo pc_get_message( $texts['msg-done'].'.', 'success', 'block' );
 	
 		}
 	

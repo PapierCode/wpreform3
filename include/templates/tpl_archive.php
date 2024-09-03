@@ -25,13 +25,16 @@ add_action( 'pc_action_template_archive_before', 'pc_display_main_start', 10 ); 
 
     // content
     add_action( 'pc_action_template_archive_before', 'pc_display_archive_list_start', 60 );
-        add_action( 'pc_action_template_archive_post', 'pc_display_archive_posts_list', 70 );
+        add_action( 'pc_action_template_archive_post', 'pc_display_archive_posts_list', 10 );
     add_action( 'pc_action_template_archive_after', 'pc_display_archive_list_end', 10 );
 
 	// footer
-	add_action( 'pc_action_template_archive_after', 'pc_display_archive_footer', 20 );
+	add_action( 'pc_action_template_archive_after', 'pc_display_main_footer_start', 20 ); // tpl-part_layout.php
+        add_action( 'pc_action_template_archive_after', 'pc_display_pager', 30 ); // tpl-part_navigation.php
+        add_action( 'pc_action_template_archive_after', 'pc_display_share_links', 40 ); // tpl-part_social.php
+    add_action( 'pc_action_template_archive_after', 'pc_display_main_footer_end', 50 ); // tpl-part_layout.php
 
-add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 30 ); // tpl-part_layout.php
+add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 60 ); // tpl-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/
@@ -49,62 +52,75 @@ function pc_display_archive_main_header_content( $settings ) {
 
     /*----------  Description  ----------*/
     
-    if ( !get_query_var('term') && isset($settings['desc']) && trim($settings['desc']) ) {
+    if ( !get_query_var('category') && !get_query_var('archive') && isset($settings['desc']) && trim($settings['desc']) ) {
         echo '<div class="editor">'.wpautop(trim($settings['desc'])).'</div>';
     }
 
     /*----------  Filtres  ----------*/
+
+    if ( !get_query_var('archive') ) {
     
-    // titre de post courant
-    $post_type = get_query_var( 'post_type' );
-    // url de la page courante
-    $post_type_archive_link = get_post_type_archive_link( $post_type );
-    // tous les posts 
-    $post_ids = get_posts([
-        'fields' => 'ids',
-        'post_type' => $post_type,
-        'nopaging' => true,
-    ]);
-    $taxonomies = get_object_taxonomies( $post_type, 'objects' );
-    $terms = get_terms([
-        'post_type' => $post_type,
-        'taxonomy' => array_keys($taxonomies),
-        'object_ids' => $post_ids
-    ]);
-    
-    if ( is_array( $terms ) && !empty( $terms ) ) {
-        echo '<nav class="archive-filters" aria-label="Filtres"><dl class="archive-filters-list">';
-            echo '<dt class="archive-filters-title" aria-hidden="true"><span class="ico">'.pc_svg('tag').'</span><span class="txt">Filtres :</span></dt>';
-            foreach ( $terms as $term ) {
-                $link_attrs = array(
-                    'class' => 'archive-filters-link button',
-                    'rel' => 'nofollow'
-                );
-                if ( get_query_var('term') && get_query_var('term') == $term->term_id ) { 
-                    $link_attrs = array_merge( $link_attrs,
-                        array(
-                            'href' => $post_type_archive_link,
-                            'title' => 'Annuler le filtre '.$term->name,
-                            'aria-label' => 'Annuler le filtre '.$term->name,
-                            'aria-current' => 'page'
-                        )
+        // titre de post courant
+        $post_type = get_query_var( 'post_type' );
+        // url de la page courante
+        $post_type_archive_link = get_post_type_archive_link( $post_type );
+        // tous les posts 
+        $post_ids = get_posts([
+            'fields' => 'ids',
+            'post_type' => $post_type,
+            'nopaging' => true,
+        ]);
+        // taxonomies associées
+        $taxonomies = get_object_taxonomies( $post_type, 'objects' );
+        // termes associés
+        $terms = get_terms([
+            'post_type' => $post_type,
+            'taxonomy' => array_keys($taxonomies),
+            'object_ids' => $post_ids
+        ]);
+        
+        if ( is_array( $terms ) && !empty( $terms ) ) {
+
+            echo '<nav class="archive-filters" aria-label="Filtres"><dl class="archive-filters-list">';
+
+                echo '<dt class="archive-filters-title" aria-hidden="true"><span class="ico">'.pc_svg('tag').'</span><span class="txt">Filtres :</span></dt>';
+
+                foreach ( $terms as $term ) {
+
+                    $link_attrs = array(
+                        'class' => 'archive-filters-link button',
+                        'rel' => 'nofollow'
                     );
-                } else {
-                    $link_attrs = array_merge( $link_attrs,
-                        array(
-                            'href' => $post_type_archive_link.'?term='.$term->term_id,
-                            'title' => 'Filtrer par '.$term->name,
-                            'aria-label' => 'Filtrer par '.$term->name
-                        )
-                    );
+                    if ( get_query_var('category') && get_query_var('category') == $term->term_id ) { 
+                        $link_attrs = array_merge( $link_attrs,
+                            array(
+                                'href' => $post_type_archive_link,
+                                'title' => 'Annuler le filtre '.$term->name,
+                                'aria-label' => 'Annuler le filtre '.$term->name,
+                                'aria-current' => 'page'
+                            )
+                        );
+                    } else {
+                        $link_attrs = array_merge( $link_attrs,
+                            array(
+                                'href' => $post_type_archive_link.'?category='.$term->term_id,
+                                'title' => 'Filtrer par '.$term->name,
+                                'aria-label' => 'Filtrer par '.$term->name
+                            )
+                        );
+                    }
+                    $link_attrs = apply_filters( 'pc_filter_archive_filter_link_attributs', $link_attrs, $term, $post_type_archive_link );
+                    echo '<dd class="archive-filters-item"><a '.pc_get_attrs_to_string( $link_attrs ).'>';
+                        if ( isset( $link_attrs['aria-current'] ) ) { echo '<span class="ico">'.pc_svg('cross').'</span>'; }
+                        echo '<span class="txt">'.$term->name.'</span>';
+                    echo '</a></dd>';
+                    
                 }
-                $link_attrs = apply_filters( 'pc_filter_archive_filter_link_attributs', $link_attrs, $term, $post_type_archive_link );
-                echo '<dd class="archive-filters-item"><a '.pc_get_attrs_to_string( $link_attrs ).'>';
-                    if ( isset( $link_attrs['aria-current'] ) ) { echo '<span class="ico">'.pc_svg('cross').'</span>'; }
-                    echo '<span class="txt">'.$term->name.'</span>';
-                echo '</a></dd>';
-            }
-        echo '</dl></nav>';
+
+            echo '</dl></nav>';
+
+        }
+
     }
 
 }
@@ -143,22 +159,6 @@ function pc_display_archive_posts_list( $post ) {
 
 /*=====  FIN Liste des posts  =====*/
 
-/*===========================================
-=            Pied de page (main)            =
-===========================================*/
-
-function pc_display_archive_footer() {
-		
-    pc_display_main_footer_start(); // tpl-part_layout.php
-        pc_display_pager();  // tpl-part_navigation.php
-        pc_display_share_links(); // tpl-part_social.php
-    pc_display_main_footer_end(); // tpl-part_layout.php
-
-}
-
-
-/*=====  FIN Pied de page (main)  =====*/
-
 /*==========================================
 =            Filtres catégories            =
 ==========================================*/
@@ -170,7 +170,8 @@ add_action( 'pre_get_posts', 'pc_archive_pre_get_posts' );
         if ( ( !get_option('options_news_enabled') && !get_option('options_news_tax') ) || ( !get_option('options_events_enabled') && !get_option('options_events_tax') ) ) { return; }
         
         $post_type = get_query_var('post_type');
-        if ( !is_admin() && $query->is_main_query() && $query->is_archive($post_type) && get_query_var('term') ) {
+        if ( !is_admin() && $query->is_main_query() && $query->is_archive($post_type) && get_query_var('category') ) {
+            
             switch ( $post_type ) {
                 case NEWS_POST_SLUG :
                     $taxonomy = NEWS_TAX_SLUG;
@@ -183,9 +184,10 @@ add_action( 'pre_get_posts', 'pc_archive_pre_get_posts' );
                 array(
                     'taxonomy' => $taxonomy,
                     'field' => 'term_id',
-                    'terms' => sanitize_key( get_query_var('term') ),
-                ),
+                    'terms' => sanitize_key( get_query_var('category') ),
+                )
             ));
+
         }
 
     }

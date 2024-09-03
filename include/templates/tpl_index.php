@@ -34,7 +34,7 @@ add_action( 'pc_action_template_index', 'pc_display_main_start', 10 ); // tpl-pa
 	add_action( 'pc_action_template_index', 'pc_display_main_footer_end', 120 ); // tpl-part_layout.php
 
 // main end
-add_action( 'pc_action_template_index', 'pc_display_main_end', 120 ); // tpl-part_layout.php
+add_action( 'pc_action_template_index', 'pc_display_main_end', 130 ); // tpl-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/

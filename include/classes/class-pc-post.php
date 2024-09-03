@@ -129,7 +129,7 @@ class PC_Post {
 				echo '<p class="'.$css.'">'.pc_svg('tag');	
 					foreach ( $terms as $key => $term ) {	
 						if ( $key > 0 ) { echo ', '; }
-						echo '<a href="'.get_post_type_archive_link( $this->type ).'?term='.$term->term_id.'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
+						echo '<a href="'.get_post_type_archive_link( $this->type ).'?category='.$term->term_id.'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
 					}	
 				echo '</p>';
 	
