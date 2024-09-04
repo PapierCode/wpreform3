@@ -31,7 +31,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
     /*----------  Tinymce settings  ----------*/
     
-    if ( typeof acf !== 'undefined' ) {
+    if ( typeof acf !== 'undefined' ) {        
 
         const updatePcWysiCounter = ( counter, max, txt, display ) => {                                                          
             display.textContent = txt.length;
@@ -39,7 +39,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
             else { counter.removeAttribute('style'); }
         };
 
-        acf.add_action('wysiwyg_tinymce_init', function( editor, id, mceInit, field ){
+        acf.add_action( 'wysiwyg_tinymce_init', function( editor, id, mceInit, field ){
 
             // ajustement hauteur zone de saisie
             const iframe = editor.getContentAreaContainer().children[0];

@@ -9,12 +9,13 @@ if ( $img_args ) {
 	$enable_circle = get_field('enable_circle');
     $caption = trim($img_args['caption']);
 
+    $tag_attrs = array( 'class' => 'bloc-image-inner' );
     if ( $caption ) {
         $tag = 'figure';
-        $tag_attrs = ' role="figure" aria-label="'.$caption.'"';
+        $tag_attrs['role'] = 'figure';
+        $tag_attrs['aria-label'] = $caption;
     } else {
         $tag = 'div';
-        $tag_attrs = '';
     }
 
     $block_css = array( 
@@ -31,12 +32,12 @@ if ( $img_args ) {
         case 'large':
             $block_css[] = 'bloc-inner-align-h--center';
             break;
-        case 'medium_large_l':
-            $block_css[] = 'bloc-inner-align-h--left';
-            break;
-        case 'medium_large_r':
-            $block_css[] = 'bloc-inner-align-h--right';
-            break;
+        // case 'medium_large_l':
+        //     $block_css[] = 'bloc-inner-align-h--left';
+        //     break;
+        // case 'medium_large_r':
+        //     $block_css[] = 'bloc-inner-align-h--right';
+        //     break;
     }
     if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
     if ( get_field( 'enable_cover' ) ) { $block_css[] = 'bloc-image--cover'; }
@@ -52,11 +53,12 @@ if ( $img_args ) {
     $block_attrs = array( 'class' => implode( ' ', $block_css ) );
     if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'] = $block['anchor']; }
 
-    if ( in_array( $img_size, ['medium_large_l','medium_large_r'] ) ) { $img_size = 'medium_large'; }
+    if ( $img_size == 'medium' ) { $img_size = 'medium_large'; }
+    else { $tag_attrs['style'] = 'max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem'; }
 
     $block_attrs = apply_filters( 'pc_filter_acf_block_image_column_attrs', $block_attrs, $block, $is_preview );
 
-    echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><'.$tag.' class="bloc-image-inner" style="max-width:'.($img_args['sizes'][$img_size.'-width']/16).'rem"'.$tag_attrs.'>';
+    echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><'.$tag.' '.pc_get_attrs_to_string($tag_attrs).'>';
 
         if ( !$is_preview && $enable_js ) { 
             echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher en plein écran l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';

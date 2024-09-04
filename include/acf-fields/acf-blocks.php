@@ -458,7 +458,7 @@ add_action( 'acf/include_fields', function() {
                 ),
                 array(
                     'key' => 'field_666318627bd59',
-                    'label' => 'Activer le diaporama',
+                    'label' => 'Activer le bouton plein écran',
                     'name' => 'enable_js',
                     'aria-label' => '',
                     'type' => 'true_false',
@@ -1005,7 +1005,7 @@ add_action( 'acf/include_fields', function() {
                 ),
                 array(
                     'key' => 'field_666318813c7a4',
-                    'label' => 'Activer le diaporama',
+                    'label' => 'Activer le bouton plein écran',
                     'name' => 'enable_js',
                     'aria-label' => '',
                     'type' => 'true_false',
@@ -1204,7 +1204,7 @@ add_action( 'acf/include_fields', function() {
                 ),
                 array(
                     'key' => 'field_63d284b041e44',
-                    'label' => 'Activer le diaporama',
+                    'label' => 'Activer le bouton diaporama',
                     'name' => 'enable_js',
                     'aria-label' => '',
                     'type' => 'true_false',
@@ -1508,7 +1508,7 @@ add_action( 'acf/include_fields', function() {
                 ),
                 array(
                     'key' => 'field_666318976cefa',
-                    'label' => 'Activer le diaporama',
+                    'label' => 'Activer le bouton plein écran',
                     'name' => 'enable_js',
                     'aria-label' => '',
                     'type' => 'true_false',
