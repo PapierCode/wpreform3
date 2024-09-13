@@ -38,7 +38,7 @@ class PC_Post {
 		$this->content 		= $wp_post->post_content;
 
 		// url
-		$this->permalink = get_the_permalink( $wp_post->ID );
+		$this->permalink = apply_filters( 'pc_filter_post_permalink', get_the_permalink( $wp_post->ID ), $this );
 
 		// metas
 		$this->metas = get_fields( $wp_post->ID );
