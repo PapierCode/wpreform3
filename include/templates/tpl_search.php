@@ -67,7 +67,8 @@ function pc_display_search_results_content() {
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
 		$types = apply_filters( 'pc_filter_search_results_post_types', array( 
 			'page' => 'Page',
-			'news' => 'Actualité'
+			NEWS_POST_SLUG => 'Actualité',
+			EVENT_POST_SLUG => 'Événement'
 		) );
 
 		echo '<p class="s-results-infos">'.pc_get_search_count_results( $search_query ).'.</p>';		
