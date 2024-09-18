@@ -286,11 +286,12 @@ document.addEventListener( 'DOMContentLoaded', () => {
         });
 
         // sous-menu retour
-        const btnClose = document.querySelector( '.h-p-nav-sub-back' );
-        if ( btnClose ) {
-            btnClose.addEventListener( 'click', () => { 
-                nav.querySelector('button[aria-expanded="true"]').click();
-            } );
+        const btnClose = document.querySelectorAll( '.h-p-nav-sub-back' );
+        
+        if ( btnClose.length > 0 ) {
+            btnClose.forEach( (btn) => {
+                btn.addEventListener( 'click', () => { nav.querySelector('button[aria-expanded="true"]').click(); } );
+            });
         }
     
     }

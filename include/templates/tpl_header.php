@@ -138,10 +138,7 @@ function pc_display_nav_button_open_close() {
 function pc_display_header_nav() {
 
 	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
-
-		$nav_depth = apply_filters( 'pc_filter_header_nav_depth', 1 );
-		if ( $nav_depth > 1 && apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) { echo '<button type="button" class="h-p-nav-sub-back" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>'; }
-		
+	
 		do_action( 'pc_header_nav_list_before' );
 
 		$nav_args = apply_filters( 'pc_filter_header_nav_list_args', array(
@@ -149,7 +146,7 @@ function pc_display_header_nav() {
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'),
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1',
 			'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
-			'depth'           	=> $nav_depth,
+			'depth'           	=> apply_filters( 'pc_filter_header_nav_depth', 1 ),
 			'container'       	=> '',
 			'item_spacing'		=> 'discard',
 			'fallback_cb'     	=> false,

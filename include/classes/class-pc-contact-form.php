@@ -75,7 +75,7 @@ class PC_Contact_Form {
 
 		$this->notification = array(
 			'to-email' 		=> $to,	// email du destinataire
-			'to-subject' 	=> 'Contact depuis rochefort-ocean-seminaires.com',	// sujet de l'email
+			'to-subject' 	=> 'Contact depuis '.$_SERVER['SERVER_NAME'], // sujet de l'email
 			'from-name'		=> 'Sans nom',	// nom de l'expéditeur
 			'from-email'	=> '',			// email de l'expéditeur
 			'content'		=> ''			// contenu de l'email
