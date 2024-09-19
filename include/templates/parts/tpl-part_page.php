@@ -15,21 +15,13 @@
 =            Date CGU            =
 ================================*/
 
-add_action( 'pc_action_template_index', 'pc_edit_display_cgu_date', 55 );
+add_action( 'pc_action_template_index', 'pc_edit_display_cgu_date', 45 );
 
 	function pc_edit_display_cgu_date( $pc_post ) {
 
-		if ( $pc_post->id == get_option( 'wp_page_for_privacy_policy' ) ) { $pc_post->display_date( 'single-date' ); }
+		if ( $pc_post->id == get_option( 'wp_page_for_privacy_policy' ) ) { $pc_post->display_date( 'date date--single' ); }
 
 	}
-
-add_filter( 'pc_filter_display_date_modified', 'pc_edit_display_cgu_type', 10, 2 );
-
-    function pc_edit_display_cgu_type( $modified, $pc_post ) {
-
-        return $pc_post->id == get_option( 'wp_page_for_privacy_policy' ) ? true : false;
-
-    }
 
 
 /*=====  FIN Date CGU  =====*/
