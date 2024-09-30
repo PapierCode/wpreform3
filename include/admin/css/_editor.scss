@@ -548,11 +548,22 @@ $button-space 	: 10;
 		grid-template-columns: repeat(10,1fr); // var grid ?
 		column-gap: rem($space-max);
 	}
+	.bloc-inner--nogap > .acf-innerblocks-container {
+		column-gap: 0;
+	}
 
 	.bloc-inner-align-v--top > .acf-innerblocks-container { align-items: start; }
 	.bloc-inner-align-v--center > .acf-innerblocks-container { align-items: center; }
 	.bloc-inner-align-v--bottom > .acf-innerblocks-container { align-items: end; }
 	.bloc-inner-align-v--both > .acf-innerblocks-container { align-items: unset; }
+	.bloc-inner-align-v--both > .acf-innerblocks-container:has(.bloc-image--cover:only-child) .wp-block-acf-pc-image-column {
+		height: 100%;
+		* { height: 100%; }
+		img { 
+			object-fit: cover;
+			width: 100%;
+		}
+	}
 
 	.bloc-columns--1-1 > .acf-innerblocks-container > * { grid-column: span 5; }
 	.bloc-columns--1-2 > .acf-innerblocks-container > :nth-child(1),
