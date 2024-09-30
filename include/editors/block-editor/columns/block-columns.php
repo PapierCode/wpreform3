@@ -2,8 +2,6 @@
 $allowedBlocks = [ 'acf/pc-column' ];
 $template = [ ['acf/pc-column' ], ['acf/pc-column' ] ];
 
-// $h_align = get_field('position_h');
-
 $block_css = array(
     'bloc-columns',
 	'bloc-align-h--'.get_field('bloc_align_h'),
@@ -19,6 +17,7 @@ switch ( get_field('bloc_align_h') ) {
 }
 if ( get_field('bloc_style') && get_field('bloc_style') != 'none' ) { $block_css[] = 'bloc-style--'.get_field('bloc_style'); }
 if ( get_field('inner_reverse') ) { $block_css[] = 'bloc-inner--reverse'; }
+if ( !get_field('inner_gap') ) { $block_css[] = 'bloc-inner--nogap'; }
 if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 
 $block_attrs = array( 'class' => implode( ' ', $block_css ) );
