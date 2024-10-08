@@ -203,7 +203,8 @@ class PC_Post {
 
 			$args = array( 
 				'alt' => $image['alt'],
-				'sizes' => array()
+				'sizes' => array(),
+				'default' => false
 			);
 			
 			$sizes_list = apply_filters( 'pc_filter_post_card_thumbnail_sizes_values', array(
@@ -221,7 +222,8 @@ class PC_Post {
 
 			$args = array(
 				'alt' => '',
-				'sizes' => pc_get_default_card_image()
+				'sizes' => pc_get_default_card_image(),
+				'default' => true
 			);
 
 		}
@@ -240,7 +242,7 @@ class PC_Post {
 
 	public function display_card_image() {
 
-		$args = $this->get_card_image_args();
+		$args = $this->get_card_image_args(); 
 		$last_size_key = array_key_last( $args['sizes'] );
 
 		$attrs = array(
@@ -250,6 +252,7 @@ class PC_Post {
 			'alt' => $args['alt'],
 			'loading' => 'lazy'
 		);
+		if ( $args['default'] ) { $attrs['class'] = 'card-image-default'; }
 	
 		if ( count( $args['sizes'] ) > 1 ) {
 			
