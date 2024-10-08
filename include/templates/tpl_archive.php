@@ -151,7 +151,7 @@ function pc_display_archive_posts_list( $post ) {
     $pc_post = new PC_Post( $post );
 
     echo '<li class="card-list-item">';
-        $pc_post->display_card( 2, [ 'card--'.$wp_query->get( 'post_type' ) ] );
+        $pc_post->display_card( 2 );
     echo '</li>';
 
 }

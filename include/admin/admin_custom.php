@@ -161,7 +161,7 @@ function pc_admin_menu() {
 	/*----------  Tous les utilisateurs  ----------*/
 
 	// Articles, supprimer l'item
-	remove_menu_page( 'edit.php' ); 
+	remove_menu_page( 'edit.php' );
 	// Commentaires
 	remove_menu_page( 'edit-comments.php' );
 
