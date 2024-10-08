@@ -66,7 +66,7 @@ function pc_display_single_content( $pc_post ) {
 	// }
 
 	// contenu
-	if ( apply_filters( 'pc_filter_single_content_display', true, $pc_post ) ) {
+	if ( !is_front_page() && apply_filters( 'pc_filter_single_content_display', true, $pc_post ) ) {
 
 		$display_container = apply_filters( 'pc_filter_display_single_content_container', true, $pc_post );
 
