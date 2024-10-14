@@ -58,7 +58,7 @@ function pc_display_archive_main_header_content( $settings ) {
 
     /*----------  Filtres  ----------*/
 
-    if ( !get_query_var('archive') ) {
+    if ( apply_filters( 'pc_display_default_archive_filter', true ) && !get_query_var('archive') ) {
     
         // titre de post courant
         $post_type = get_query_var( 'post_type' );
@@ -81,10 +81,11 @@ function pc_display_archive_main_header_content( $settings ) {
         
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
-            echo '<nav class="archive-filters" aria-label="Filtres"><dl class="archive-filters-list">';
+            echo '<nav class="archive-filters" aria-label="Filtres"><div class="archive-filters-inner">';
 
-                echo '<dt class="archive-filters-title" aria-hidden="true"><span class="ico">'.pc_svg('tag').'</span><span class="txt">Filtres :</span></dt>';
+                echo '<button type="button" class="button js-toggle-display" aria-label="Afficher les filtres" title="Afficher les filtres" data-txt="les filtres" aria-control="archive-filters" aria-expanded="false"><span class="ico">'.pc_svg('settings').'</span><span class="txt">Filtres</span></button>';
 
+                echo '<div id="archive-filters" aria-hidden="true"><ul class="archive-filters-list">';
                 foreach ( $terms as $term ) {
 
                     $link_attrs = array(
@@ -97,7 +98,8 @@ function pc_display_archive_main_header_content( $settings ) {
                                 'href' => $post_type_archive_link,
                                 'title' => 'Annuler le filtre '.$term->name,
                                 'aria-label' => 'Annuler le filtre '.$term->name,
-                                'aria-current' => 'page'
+                                'aria-current' => 'page',
+                                'tabindex' => '-1'
                             )
                         );
                     } else {
@@ -105,19 +107,21 @@ function pc_display_archive_main_header_content( $settings ) {
                             array(
                                 'href' => $post_type_archive_link.'?category='.$term->term_id,
                                 'title' => 'Filtrer par '.$term->name,
-                                'aria-label' => 'Filtrer par '.$term->name
+                                'aria-label' => 'Filtrer par '.$term->name,
+                                'tabindex' => '-1'
                             )
                         );
                     }
                     $link_attrs = apply_filters( 'pc_filter_archive_filter_link_attributs', $link_attrs, $term, $post_type_archive_link );
-                    echo '<dd class="archive-filters-item"><a '.pc_get_attrs_to_string( $link_attrs ).'>';
+                    echo '<li class="archive-filters-item"><a '.pc_get_attrs_to_string( $link_attrs ).'>';
                         if ( isset( $link_attrs['aria-current'] ) ) { echo '<span class="ico">'.pc_svg('cross').'</span>'; }
                         echo '<span class="txt">'.$term->name.'</span>';
-                    echo '</a></dd>';
+                    echo '</a></li>';
                     
                 }
+                echo '</ul></div>';
 
-            echo '</dl></nav>';
+            echo '</div></nav>';
 
         }
 
@@ -147,9 +151,7 @@ function pc_display_archive_list_end() {
 
 function pc_display_archive_posts_list( $post ) {
 
-    global $wp_query;
     $pc_post = new PC_Post( $post );
-
     echo '<li class="card-list-item">';
         $pc_post->display_card( 2 );
     echo '</li>';

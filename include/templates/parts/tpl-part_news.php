@@ -62,7 +62,7 @@ add_action( 'pre_get_posts', 'pc_archive_news_pre_get_posts' );
 
     function pc_archive_news_pre_get_posts( $query ) {
         
-        if ( !is_admin() && $query->is_main_query() && $query->is_archive() && get_query_var('post_type') == NEWS_POST_SLUG &&get_query_var('category') ) {
+        if ( !is_admin() && $query->is_main_query() && $query->is_archive() && get_query_var('post_type') == NEWS_POST_SLUG && get_query_var('category') ) {
 
             $query->set( 'tax_query', array(
                 array(
