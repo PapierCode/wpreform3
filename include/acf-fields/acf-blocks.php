@@ -1819,5 +1819,113 @@ add_action( 'acf/include_fields', function() {
     
     /*=====  FIN Vidéo  =====*/
 
+    /*==================================
+    =            Événements            =
+    ==================================*/
+    
+    if ( get_option('options_events_enabled') && apply_filters( 'pc_filter_add_acf_events_block', true ) ) {
+    
+        acf_add_local_field_group( array(
+            'key' => 'group_670ce31ba53d9',
+            'title' => 'Événements',
+            'fields' => array(
+                array(
+                    'key' => 'field_670ce31b9444d',
+                    'label' => 'Dans ce bloc, Les événements passés sont toujours affichés.',
+                    'name' => '',
+                    'aria-label' => '',
+                    'type' => 'message',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'new_lines' => 'wpautop',
+                    'esc_html' => 0,
+                ),
+                array(
+                    'key' => 'field_670ce6e55c6a4',
+                    'label' => 'Niveau des titres',
+                    'name' => 'title_level',
+                    'aria-label' => '',
+                    'type' => 'button_group',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'choices' => array(
+                        2 => 'H2',
+                        3 => 'H3',
+                    ),
+                    'default_value' => 2,
+                    'return_format' => 'value',
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 0,
+                    'layout' => 'horizontal',
+                ),
+                array(
+                    'key' => 'field_670ce48b9444e',
+                    'label' => 'Sélection',
+                    'name' => 'events',
+                    'aria-label' => '',
+                    'type' => 'post_object',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'eventpost',
+                    ),
+                    'post_status' => array(
+                        0 => 'publish',
+                    ),
+                    'taxonomy' => '',
+                    'return_format' => 'id',
+                    'multiple' => 1,
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 1,
+                    'bidirectional' => 0,
+                    'ui' => 1,
+                    'bidirectional_target' => array(
+                    ),
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-events',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'side',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Événements  =====*/
+
 } );
 

@@ -1,0 +1,18 @@
+{
+    "name": "acf/pc-events",
+    "title": "Événements",
+    "description": "Affiche une sélection d'événements",
+    "category": "specials",
+    "keywords": [ "événement" ],
+    "icon": "calendar-alt",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-events.php",
+        "postTypes": ["page"]
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

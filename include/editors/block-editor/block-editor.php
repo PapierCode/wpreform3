@@ -109,22 +109,25 @@ global $pc_blocks_acf;
 
 // id json => nom du groupe (admin)
 $pc_blocks_acf = array(
-	'quote' => '[Bloc] Citation',
-	'frame' => '[Bloc] Encadré',
-	'columns' => '[Bloc] 2 colonnes',
-	'subpages' => '[Bloc] Sous-pages',
-	'buttons' => '[Bloc] Boutons',
-	'spacer' => '[Bloc] Espace',
-	'image' => '[Bloc] Image',
-	'gallery' => '[Bloc] Galerie images',
-	'image-column' => '[Bloc] Image colonne',
-	'image-frame' => '[Bloc] Image encadré',
-	'embed' => '[Bloc] Embed',
-	'column' => '[Bloc] Colonne',
-	'contactform' => '[Bloc] Formulaire contact'
+	'quote',
+	'frame',
+	'columns',
+	'subpages',
+	'buttons',
+	'spacer',
+	'image',
+	'gallery',
+	'image-column',
+	'image-frame',
+	'embed',
+	'column',
+	'contactform'
 );
 
-foreach ( $pc_blocks_acf as $block_id => $block_name ) {
+// événements
+if ( get_option('options_events_enabled') ) { $pc_blocks_acf[] = 'events'; }
+
+foreach ( $pc_blocks_acf as $block_id ) {
 	if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { register_block_type( __DIR__.'/'.$block_id ); }
 }
 
@@ -149,7 +152,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 		);
 		
 		global $pc_blocks_acf;
-		foreach ( $pc_blocks_acf as $block_id => $block_name ) {
+		foreach ( $pc_blocks_acf as $block_id ) {
 			if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { $blocks[] = 'acf/pc-'.$block_id; }
 		}
 	
