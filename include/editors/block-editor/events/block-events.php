@@ -7,6 +7,7 @@ if ( $event_ids = get_field('events') ) {
         'nopaging' => true,
         'post__in' => $event_ids,
         'orderby' => 'meta_value',
+        'order' => 'ASC',
         'meta_type' => 'DATETIME',
         'meta_key' => 'event_date_end'
     ));
