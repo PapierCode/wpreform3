@@ -242,7 +242,7 @@ class PC_Post {
 
 	public function display_card_image() {
 
-		$args = $this->get_card_image_args(); 
+		$args = $this->get_card_image_args();
 		$last_size_key = array_key_last( $args['sizes'] );
 
 		$attrs = array(
@@ -257,7 +257,7 @@ class PC_Post {
 		if ( count( $args['sizes'] ) > 1 ) {
 			
 			$attr_srcset = array();
-			foreach ( $args['sizes'] as $size => $size_args ) { $attr_srcset[] = $size_args[0].' '.$size.'w'; }
+			foreach ( $args['sizes'] as $size ) { $attr_srcset[] = $size[0].' '.$size[1].'w'; }
 			$attrs['srcset'] = implode( ', ', $attr_srcset );
 
 			$attrs['sizes'] = apply_filters( 'pc_filter_card_thumbnail_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $args, $this );
