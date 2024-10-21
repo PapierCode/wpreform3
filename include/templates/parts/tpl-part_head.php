@@ -93,8 +93,8 @@ add_action( 'wp_head', 'pc_display_css_inline', 7 );
 add_action( 'wp_head', 'pc_display_matomo_tracker', 20 );
 
 	function pc_display_matomo_tracker() {
-
-		if ( !get_option( 'options_wpr_dev' ) && ( $matomo_seetings = get_option( 'options_wpr_matomo' ) ) ) {
+		
+		if ( !get_field( 'wpr_dev', 'option' ) && ( $matomo_seetings = get_field( 'wpr_matomo', 'option' ) ) ) {
 
 			echo '<script>var _paq = window._paq || [];_paq.push(["trackPageView"]);_paq.push(["enableLinkTracking"]);(function(){var u="'.$matomo_seetings['id'].'";_paq.push(["setSecureCookie", true]);_paq.push(["setTrackerUrl", u+"matomo.php"]);_paq.push(["setSiteId", "'.$matomo_seetings['url'].'"]);_paq.push(["HeatmapSessionRecording::disable"]);var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"matomo.js"; s.parentNode.insertBefore(g,s);})();</script>';
 
