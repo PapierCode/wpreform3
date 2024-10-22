@@ -11,6 +11,7 @@
  * pc_get_phone_format
  * pc_get_message
  * pc_get_attrs_to_string
+ * pc_display_modal
  * 
  */
 
@@ -208,6 +209,7 @@ function pc_get_markdown( $txt, $remove_all = false ) {
 /**
  * 
  * @param array		$attrs		Tableau associatif à convertir
+ * 								attribut => string contenu de l'attribut
  * 
  */
 
@@ -225,3 +227,28 @@ function pc_get_attrs_to_string( $attrs ) {
 
 
 /*=====  FIN Tableau d'attributs en chaine de caractères  =====*/
+
+/*==============================
+=            Modale            =
+==============================*/
+
+/**
+ * 
+ * @param string	$modal		Tableau associatif
+ * 								id => string attribut id
+ * 								label => string attribut aria-label
+ * 								content => string contenu de la modale
+ * 
+ */
+
+function pc_display_modal( $modal ) {
+
+    echo '<dialog id="'.$modal['id'].'" class="modal" autofocus aria-label="'.$modal['label'].'"><div class="modal-inner">';
+        echo '<button type="button" class="modal-btn-close button" title="Fermer la fenêtre" aria-label="Fermer la fenêtre"><span class="ico">'.pc_svg('cross').'</span></button>';
+        echo $modal['content'];
+    echo '</div></dialog>';
+
+}
+
+
+/*=====  FIN Modale  =====*/

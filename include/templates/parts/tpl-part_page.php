@@ -75,17 +75,17 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 		if ( $pc_post->type == 'page' ) {
 
 			$cpts = array();
-			if ( get_option('options_news_enabled') && get_option('options_news_pages') ) { 
+			if ( get_field('news_enabled','option') && get_field('news_pages','option') ) { 
 				$cpts['news'] = array(
 					'slug' => NEWS_POST_SLUG,
-					'title_txt' => 'Actualités associées',
+					'title_txt' => get_field('news_aside_page_title','option'),
 					'btn_txt' => 'Toutes les actualités'
 				);
 			}
-			if ( get_option('options_events_enabled') && get_option('options_events_pages') ) { 
+			if ( get_field('events_enabled','option') && get_field('events_pages','option') ) { 
 				$cpts['event'] = array(
 					'slug' => EVENT_POST_SLUG,
-					'title_txt' => 'Événements associés',
+					'title_txt' => get_field('events_aside_page_title','option'),
 					'btn_txt' => 'Tous les événements'
 				);
 			}
