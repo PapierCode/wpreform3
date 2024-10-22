@@ -100,7 +100,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 						
 					$get_posts_args = array(
 						'post_type' => $cpt['slug'],
-						'post_per_page' => 2,				
+						'posts_per_page' => 2,				
 						'meta_key' => '_'.$key.'_pages_related',
 						'meta_value' => '"'.$pc_post->id.'"',
 						'meta_compare' => 'LIKE'
