@@ -58,6 +58,18 @@ add_action( 'pc_action_template_index', 'p_display_index_news_date_and_terms', 4
 =            Filtres par catégorie            =
 =============================================*/
 
+add_filter( 'pc_filter_archive_main_header_title', 'pc_edit_news_archive_main_header_title', 10, 2 );
+
+function pc_edit_news_archive_main_header_title( $title, $post_type ) {
+
+    if ( $post_type == NEWS_POST_SLUG && get_query_var('category') ) {
+        $category = get_term_by( 'id', get_query_var('category'), NEWS_TAX_SLUG );
+        if ( $category ) { $title .= ', '.$category->name; }
+    }
+    return $title;
+
+}
+
 add_filter( 'pc_filter_archive_main_header_description_display', 'pc_edit_news_archive_main_header_description_display', 10, 2 );
 
     function pc_edit_news_archive_main_header_description_display( $display, $post_type ) {
@@ -71,7 +83,8 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_archive_main_h
 
     function pc_display_news_archive_main_header_filters( $post_type, $settings ) {
 
-        if ( $post_type != NEWS_POST_SLUG && !get_option('options_news_tax') ) { return; }
+        if ( $post_type != NEWS_POST_SLUG ) { return; }
+        if ( !get_option('options_news_tax') ) { return; }
 
         $modal_id = 'modal-news-filters';
         $modal_title = 'Catégories des actualités';
