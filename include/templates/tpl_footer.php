@@ -180,6 +180,37 @@ function pc_display_js_variables_footer() {
 
 function pc_enqueue_scripts() {
 
+	if ( is_singular() ) {
+
+		global $pc_post;
+
+		/*----------  Bloc Carte  ----------*/
+
+		if ( has_block( 'acf/pc-map', $pc_post->wp_post ) ) {
+			
+			$js_leaflet_path = '/scripts/include/leaflet.js';
+			wp_enqueue_script( 
+				'leaflet',
+				get_template_directory_uri().$js_leaflet_path,
+				array(),
+				filemtime(get_template_directory().$js_leaflet_path),
+				array( 'strategy' => 'defer', 'in_footer' => true )
+			);
+			$css_leaflet_path = '/scripts/include/leaflet.css';
+			wp_enqueue_style( 
+				'leaflet', 
+				get_template_directory_uri().$css_leaflet_path, 
+				null, 
+				filemtime(get_template_directory().$css_leaflet_path), 
+				'screen'
+			);
+
+		}
+
+	}
+
+	/*----------  Global  ----------*/
+
 	wp_enqueue_script( 
 		'wpreform',
 		get_template_directory_uri().'/scripts/wpreform-jquery.min.js',

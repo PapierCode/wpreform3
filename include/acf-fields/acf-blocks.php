@@ -1927,5 +1927,61 @@ add_action( 'acf/include_fields', function() {
     
     /*=====  FIN Événements  =====*/
 
+    /*=============================
+    =            Carte            =
+    =============================*/
+    
+    if ( apply_filters( 'pc_filter_add_acf_map_block', true ) ) {
+
+        acf_add_local_field_group( array(
+            'key' => 'group_6719f25d70453',
+            'title' => 'Carte',
+            'fields' => array(
+                array(
+                    'key' => 'field_6719f25d21b4f',
+                    'label' => 'Adresse',
+                    'name' => 'address',
+                    'aria-label' => '',
+                    'type' => 'google_map',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'center_lat' => '46.8518280627862',
+                    'center_lng' => '2.4293935625',
+                    'zoom' => 5,
+                    'height' => 300,
+                    'allow_in_bindings' => 0,
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-map',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'side',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Carte  =====*/
+
 } );
 

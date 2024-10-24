@@ -1,0 +1,18 @@
+{
+    "name": "acf/pc-map",
+    "title": "Carte",
+    "description": "Affiche une carte",
+    "category": "media",
+    "keywords": [ "carte" ],
+    "icon": "location",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-map.php"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "mode": false
+    }
+}

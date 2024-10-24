@@ -88,7 +88,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 					modal.close();
 					btn.focus();
 					body.style.overflow = 'auto';
-				})
+				});
 			});
 		
 			modal.addEventListener('click', (event) => {
@@ -99,6 +99,41 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				}
 			});
 
+		});
+
+	}
+
+	/*----------  Bloc map  ----------*/
+	
+	const mapBlocs = document.querySelectorAll('.bloc-map');
+
+	if ( mapBlocs.length > 0 ) {
+
+		mapBlocs.forEach( ( bloc ) => {
+
+			const container = bloc.querySelector('.map');
+			const args = eval('mapArgs_'+container.id);
+			
+			const center = [args.lat, args.lng];
+			
+			const map = L.map( container.id, {
+				scrollWheelZoom: false,
+				tap: false
+			}).setView( center, 13 );
+
+			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGFwaWVyY29kZSIsImEiOiJja203a3E5N3kweXplMnhuNjBuOTV2bmQ1In0.UtKowadsitAGdxDUpMv5aA', {
+				id: 'mapbox/streets-v11',
+				tileSize: 512,
+				zoomOffset: -1
+			}).addTo( map );
+		
+			const marker = L.marker( center, {
+				icon: L.divIcon({
+					html : args.marker.svg,
+					iconSize: [args.marker.width, args.marker.height],
+					popupAnchor: [0, -0.5*args.height]
+				})
+			}).addTo( map );
 		});
 
 	}

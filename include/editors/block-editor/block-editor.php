@@ -121,7 +121,8 @@ $pc_blocks_acf = array(
 	'image-frame',
 	'embed',
 	'column',
-	'contactform'
+	'contactform',
+	'map'
 );
 
 // événements
