@@ -12,7 +12,7 @@ if ( $address ) {
 
     $block_attrs['aria-hidden'] = 'true';
 
-    $block_attrs = apply_filters( 'pc_filter_acf_block_spacer_attrs', $block_attrs, $block, $is_preview );
+    $block_attrs = apply_filters( 'pc_filter_acf_block_map_attrs', $block_attrs, $block, $is_preview );
     echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
 
         $map_json = array(

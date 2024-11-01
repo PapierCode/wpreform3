@@ -96,7 +96,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_archive_main_h
 
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
-            echo '<div class="filters">';
+            echo '<div class="filters filters--news">';
                 echo '<button type="button" class="button modal-btn-open" title="Boite de dialogue" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">Catégories</span></button>';
                 if ( get_query_var('category') ) {
                     $current_term = get_term_by( 'id', get_query_var('category'), NEWS_TAX_SLUG );
