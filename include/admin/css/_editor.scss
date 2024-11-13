@@ -371,9 +371,9 @@ $button-space 	: 10;
 
 /*----------  Paramètres  ----------*/
 
-.block-library-heading-level-dropdown [role="menu"] :nth-child(1), // H1
-.block-library-heading-level-dropdown [role="menu"] :nth-child(n+4) // H4, H5, H6
-{ display: none; }
+// .block-library-heading-level-dropdown [role="menu"] :nth-child(1), // H1
+// .block-library-heading-level-dropdown [role="menu"] :nth-child(n+4) // H4, H5, H6
+// { display: none; }
 
 
 /*=====  FIN Titres  =====*/

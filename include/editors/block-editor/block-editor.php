@@ -121,6 +121,7 @@ $pc_blocks_acf = array(
 	'image-frame',
 	'embed',
 	'column',
+	// 'contact',
 	'contactform',
 	'map'
 );
@@ -163,6 +164,27 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 
 
 /*=====  FIN Blocs disponibles  =====*/
+
+/*====================================
+=            Blocs natifs            =
+====================================*/
+
+/*----------  Titre  ----------*/
+
+add_filter( 'register_block_type_args', 'pc_block_title_attributs', 10, 2 );
+
+	function pc_block_title_attributs( $args, $block_type ) {
+		
+		if ( 'core/heading' !== $block_type ) { return $args; }
+		$args['attributes']['levelOptions']['default'] = [ 2, 3 ];
+		
+		return $args;
+		
+	}
+
+
+
+/*=====  FIN Blocs natifs  =====*/
 
 /*=======================================
 =            Rendu des blocs            =
