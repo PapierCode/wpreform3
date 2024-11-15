@@ -112,7 +112,7 @@ function pc_display_footer_contact() {
 		echo '<dt class="coord-item coord-item--logo">'.$dt.'</dt>';
 		foreach ($dd['list'] as $id => $content) {
 			echo '<dd class="coord-item coord-item--'.$id.'">';
-				if ( $dd['with-icons'] ) { echo '<span class="coord-ico">'.pc_svg($content['ico']).'</span>'; }
+				if ( $dd['with-icons'] && isset($content['ico']) ) { echo '<span class="coord-ico">'.pc_svg($content['ico']).'</span>'; }
 				echo '<span class="coord-txt">'.$content['txt'].'</span>';
 			echo '</dd>';
 		}
