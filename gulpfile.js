@@ -43,9 +43,6 @@ var postCssPlugins = [
 	mqcombine(),
 	cssnano({ preset: ['default', { calc: false }] })
 ];
-
-
-/*----------  Fonctions  ----------*/
 	
 function cssAdmin() {
     
@@ -64,39 +61,11 @@ function cssAdmin() {
 =            Tâche JS            =
 ================================*/
 
-js_src = [
-	'scripts/include/jquery-gallery.js',
-	'scripts/include/nav.js',
-	'scripts/wpreform.js'
-];
-
-js_src_all = [
-	'scripts/include/jquery-3.6.0.min.js'
-].concat(js_src);
-
-
-/*----------  Fonctions  ----------*/
-
-function js_hint() {
-
-	return src( js_src )
-		.pipe(jshint( { esnext:true, browser:true } ))
-        .pipe(jshint.reporter( 'default' ));
-
-}
-
-function js_jquery() {
-
-    return src( js_src_all )
-        .pipe(concat( 'wpreform-jquery.min.js' ))
-        .pipe(terser())
-        .pipe(dest( 'scripts/' ));
-
-}
-
 function js() {
 
-    return src( js_src )
+    return src( [ 'scripts/include/nav.js', 'scripts/wpreform.js' ] )
+        .pipe(jshint( { esnext:true, browser:true } ))
+        .pipe(jshint.reporter( 'default' ))
         .pipe(concat( 'wpreform.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
@@ -113,7 +82,7 @@ function js() {
 exports.watch = function() {
 
     watch( 'include/admin/css/**/*.scss', series( cssAdmin ) )
-	watch( [ 'scripts/**/*.js', '!scripts/wpreform.min.js', '!scripts/wpreform-jquery.min.js' ], series( js_hint, js_jquery, js )  )
+	watch( [ 'scripts/**/*.js', '!scripts/wpreform.min.js' ], series( js )  )
 };
 
 
