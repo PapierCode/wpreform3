@@ -1,14 +1,3 @@
-/*
-
-    jQuery Gallery by Julien S.
-    ---------------------------
-
-    Updates
-    -------
-    15/12/2015 : first version on production
-
-*/
-
 (function($) {
 
     // plugin constructor (class)
@@ -138,7 +127,6 @@
 
                 // numbers of images
                 imgNb = imgUrls.length;
-                console.log($itemLinks);
                 // add gallery
                 addStructure();
                 // indicates activation
@@ -554,3 +542,19 @@
     /*=====  End of Add the plugin to the jQuery.fn object  ======*/
 
 })(jQuery);
+
+jQuery(document).ready(function($){
+
+	$('.diaporama').gallery({
+		btnNextInner:sprite.arrow,
+		btnPrevInner:sprite.arrow,
+		btnCloseInner:sprite.cross,
+		moveDuration:500,
+		responsiveImg:true
+	});
+
+	$('.gallery-play').click(function() {
+		$(this).parents('ul').find('>:first-child').children('a').click();
+	});
+
+});

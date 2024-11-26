@@ -139,21 +139,3 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	}
 
 });
-
-/*----------  Galerie jQuery  ----------*/
-
-jQuery(document).ready(function($){
-
-	$('.diaporama').gallery({
-		btnNextInner:sprite.arrow,
-		btnPrevInner:sprite.arrow,
-		btnCloseInner:sprite.cross,
-		moveDuration:500,
-		responsiveImg:true
-	});
-
-	$('.gallery-play').click(function() {
-		$(this).parents('ul').find('>:first-child').children('a').click();
-	});
-
-});
