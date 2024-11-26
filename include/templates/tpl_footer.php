@@ -164,25 +164,50 @@ function pc_display_footer_nav() {
 
 function pc_display_js_variables_footer() {
 
+	global $pc_post;
+
 	/*----------  Sprite to JS  ----------*/
 	
-	$sprite_selection = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
-	if ( !empty( $sprite_selection ) ) {
-		$sprite_to_json = array();
-		foreach ( $sprite_selection as $id ) {
-			$sprite_to_json[$id] = pc_svg($id);
+	if ( has_block( 'acf/pc-gallery', $pc_post->wp_post ) ) {
+		$sprite_selection = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
+		if ( !empty( $sprite_selection ) ) {
+			$sprite_to_json = array();
+			foreach ( $sprite_selection as $id ) {
+				$sprite_to_json[$id] = pc_svg($id);
+			}
 		}
+		echo '<script>const sprite='.json_encode( $sprite_to_json ).'</script>';
 	}
-
-	echo '<script>const sprite='.json_encode( $sprite_to_json ).'</script>';
 
 }
 
 function pc_enqueue_scripts() {
+	
+	// Jquery in footer
+	if ( !is_admin() ) {
+		wp_scripts()->add_data( 'jquery', 'group', 1 );
+		wp_scripts()->add_data( 'jquery-core', 'group', 1 );
+		wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
+	}
 
 	if ( is_singular() ) {
 
 		global $pc_post;
+
+		/*----------  Bloc galerie  ----------*/
+		
+		if ( has_block( 'acf/pc-gallery', $pc_post->wp_post ) ) {
+
+			$js_gallery_path = '/scripts/include/gallery.min.js';
+			wp_enqueue_script( 
+				'gallery',
+				get_template_directory_uri().$js_gallery_path,
+				array( 'jquery' ),
+				filemtime(get_template_directory().$js_gallery_path),
+				array( 'strategy' => 'defer', 'in_footer' => true )
+			);
+
+		}
 
 		/*----------  Bloc Carte  ----------*/
 
@@ -196,11 +221,12 @@ function pc_enqueue_scripts() {
 				filemtime(get_template_directory().$js_leaflet_path),
 				array( 'strategy' => 'defer', 'in_footer' => true )
 			);
+
 			$css_leaflet_path = '/scripts/include/leaflet.css';
 			wp_enqueue_style( 
 				'leaflet', 
 				get_template_directory_uri().$css_leaflet_path, 
-				null, 
+				NULL, 
 				filemtime(get_template_directory().$css_leaflet_path), 
 				'screen'
 			);
@@ -211,11 +237,12 @@ function pc_enqueue_scripts() {
 
 	/*----------  Global  ----------*/
 
+	$js_preform_path = '/scripts/wpreform.min.js';
 	wp_enqueue_script( 
 		'wpreform',
-		get_template_directory_uri().'/scripts/wpreform-jquery.min.js',
+		get_template_directory_uri().'/scripts/wpreform.min.js',
 		array(),
-		filemtime(get_template_directory().'/scripts/wpreform-jquery.min.js'),
+		filemtime(get_template_directory().$js_preform_path),
 		array( 'strategy' => 'defer', 'in_footer' => true )
 	);
 
