@@ -1741,6 +1741,66 @@ add_action( 'acf/include_fields', function() {
     
     /*=====  FIN Formulaire de contact  =====*/
 
+    /*=====================================
+    =            Gravity Forms            =
+    =====================================*/
+
+    if ( apply_filters( 'pc_filter_add_acf_gravityforms_block', true ) ) {
+    
+        acf_add_local_field_group( array(
+            'key' => 'group_673efa21aa943',
+            'title' => '[Bloc] Gravity Forms',
+            'fields' => array(
+                array(
+                    'key' => 'field_673efa21a7cf4',
+                    'label' => 'Formulaire',
+                    'name' => 'form_id',
+                    'aria-label' => '',
+                    'type' => 'select',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'choices' => '',
+                    'default_value' => false,
+                    'return_format' => 'value',
+                    'multiple' => 0,
+                    'allow_null' => 1,
+                    'allow_in_bindings' => 0,
+                    'ui' => 1,
+                    'ajax' => 0,
+                    'placeholder' => '',
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-gravityforms',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'side',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'field',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Gravity Forms  =====*/
+
     /*=============================
     =            Vidéo            =
     =============================*/

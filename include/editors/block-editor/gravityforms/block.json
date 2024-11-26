@@ -1,0 +1,19 @@
+{
+    "name": "acf/pc-gravityforms",
+    "title": "Formulaire",
+    "description": "Affiche un formulaire",
+    "category": "specials",
+    "keywords": [ "formulaire" ],
+    "icon": "email-alt",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-gravityforms.php",
+        "postTypes": ["page","newspost","eventpost"]
+    },
+    "supports": {
+        "multiple": false,
+        "anchor": true,
+        "align": false
+    }
+}

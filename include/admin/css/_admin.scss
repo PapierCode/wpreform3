@@ -11,42 +11,13 @@
 **/
 
 
+.user-is-editor, .user-is-author {
+
 /*==============================
 =            Global            =
 ==============================*/
 
 #wpfooter { display: none; }
-
-.notice, div.updated, div.error { 
-    border: none;
-
-    a, a:visited, a:hover, button, .notice-dismiss::before, .notice-dismiss:hover::before { color: currentColor; }
-}
-.notice-info {
-    background-color: #72AEE6;
-    color: #1D2327
-}
-.notice-warning {
-    background-color: #fda03d;
-    color: #1D2327
-}
-.notice-success, div.updated { 
-    background-color: #008A23;
-    color: white;
-    
-}
-.notice-error, div.error { 
-    background-color: #d63638;
-    color: white;
-}
-
-
-/*=====  FIN Global  =====*/
-
-/*===============================================
-=            Personnaliser en direct            =
-===============================================*/
-
 a[href*="customize.php"] { display:none !important; }
 
 
@@ -94,9 +65,7 @@ table.wp-list-table .column-thumb {
     div.gmnoprint:has(button[title*="plan de ville"]),
     button.gm-fullscreen-control,
     button[title*="Pegman"] 
-    {
-        display: none;
-    }
+    { display: none; }
 }
 
 
@@ -200,6 +169,8 @@ table.wp-list-table .column-thumb {
     .uploaded-to { display:none; }
     // aide saisie texte alternatif
     #alt-text-description { display: none; }
+    // champ title
+    [data-setting="title"] {display:none; }
     // champ description
     [data-setting="description"] {display:none; }
     // champ url + copier
@@ -222,81 +193,135 @@ table.wp-list-table .column-thumb {
 
 /*=====  FIN Médias  =====*/
 
-.user-is-editor, .user-is-author {
+/*=================================
+=            Rank Math            =
+=================================*/
 
-    /*=================================
-    =            Rank Math            =
-    =================================*/
+.rank-math-tooltip:has([href*="score-100-in-tests"]), // aide mots clés
+.components-base-control:has([href*="pillar-content-internal-linking"]),
+.components-notice:has([href*="score-100-in-tests"]), // lien aide score 100
+a[href*="rankmath.com"] // liens en général
+{ display: none; }
 
-    .rank-math-tooltip:has([href*="score-100-in-tests"]), // aide mots clés
-    .components-base-control:has([href*="pillar-content-internal-linking"]),
-    .components-notice:has([href*="score-100-in-tests"]), // lien aide score 100
-    a[href*="rankmath.com"] // liens en général
-    { 
-        display: none;
-    }
-
-    .rank-math-focus-keyword .tagify__input::before { content: "Mot-clé"; }
-    .rank-math-focus-keyword .tagify__input:not(:only-child)::before { content: ""; }
-
-
-    /*=====  FIN Rank Math  =====*/
-
-    /*======================================
-    =            Matomo widgets            =
-    ======================================*/
-
-    label[for="WP_Piwik-Widget-Browsers-hide"], #WP_Piwik-Widget-Browsers,
-    label[for="WP_Piwik-Widget-BrowserDetails-hide"], #WP_Piwik-Widget-BrowserDetails,
-    label[for="WP_Piwik-Widget-Screens-hide"], #WP_Piwik-Widget-Screens,
-    label[for="WP_Piwik-Widget-Models-hide"], #WP_Piwik-Widget-Models,
-    label[for="WP_Piwik-Widget-Systems-hide"], #WP_Piwik-Widget-Systems,
-    label[for="WP_Piwik-Widget-SystemDetails-hide"], #WP_Piwik-Widget-SystemDetails,
-    label[for="WP_Piwik-Widget-City-hide"], #WP_Piwik-Widget-City,
-    label[for="WP_Piwik-Widget-Keywords-hide"], #WP_Piwik-Widget-Keywords,
-    label[for="WP_Piwik-Widget-Plugins-hide"], #WP_Piwik-Widget-Plugins,
-    label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
-    {
-        display: none;
-    }
-
-
-    /*=====  FIN Matomo widgets  =====*/
-
-    /*==============================
-    =            Profil            =
-    ==============================*/
-    
-    // option Désactiver l’éditeur visuel pour écrire
-    .user-rich-editing-wrap,
-    // option Désactiver le surlignage syntaxique lors de l’édition de code 
-    .user-syntax-highlighting-wrap,
-    // option Activer les raccourcis clavier pour la modération de commentaires
-    .user-comment-shortcuts-wrap,
-    // champ Pseudonyme 
-    .user-nickname-wrap,
-    // champ Nom à afficher publiquement 
-    .user-display-name-wrap,
-    // champ Site web + rank math
-    .user-email-wrap ~ *,
-    // titre & champs À propos de vous
-    #your-profile h2:nth-of-type(4),
-    #your-profile table:nth-of-type(4),
-    // mots de passe d'application
-    .application-passwords
-    {
-        display: none !important;
-    }
-    
-    
-    /*=====  FIN Profil  =====*/
-
-} // FIN .user-is-editor
-
-/*----------  Rank Math  ----------*/
+.rank-math-focus-keyword .tagify__input::before { content: "Mot-clé"; }
+.rank-math-focus-keyword .tagify__input:not(:only-child)::before { content: ""; }
 
 .page-is-front-page {
     // tests
     .rank-math-focus-keyword,
-    .rank-math-checklist { display: none; }
+    .rank-math-checklist 
+    { display: none; }
 }
+
+
+/*=====  FIN Rank Math  =====*/
+
+/*======================================
+=            Matomo widgets            =
+======================================*/
+
+label[for="WP_Piwik-Widget-Browsers-hide"], #WP_Piwik-Widget-Browsers,
+label[for="WP_Piwik-Widget-BrowserDetails-hide"], #WP_Piwik-Widget-BrowserDetails,
+label[for="WP_Piwik-Widget-Screens-hide"], #WP_Piwik-Widget-Screens,
+label[for="WP_Piwik-Widget-Models-hide"], #WP_Piwik-Widget-Models,
+label[for="WP_Piwik-Widget-Systems-hide"], #WP_Piwik-Widget-Systems,
+label[for="WP_Piwik-Widget-SystemDetails-hide"], #WP_Piwik-Widget-SystemDetails,
+label[for="WP_Piwik-Widget-City-hide"], #WP_Piwik-Widget-City,
+label[for="WP_Piwik-Widget-Keywords-hide"], #WP_Piwik-Widget-Keywords,
+label[for="WP_Piwik-Widget-Plugins-hide"], #WP_Piwik-Widget-Plugins,
+label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
+
+{ display: none; }
+
+
+/*=====  FIN Matomo widgets  =====*/
+
+/*==============================
+=            Profil            =
+==============================*/
+
+.user-rich-editing-wrap, // option Désactiver l’éditeur visuel pour écrire 
+.user-syntax-highlighting-wrap, // option Désactiver le surlignage syntaxique lors de l’édition de code
+.user-comment-shortcuts-wrap, // option Activer les raccourcis clavier pour la modération de commentaires
+.user-nickname-wrap, // champ Pseudonyme 
+.user-display-name-wrap, // champ Nom à afficher publiquement 
+.user-email-wrap ~ *, // champ Site web + rank math
+#your-profile h2:nth-of-type(4), // titre À propos de vous
+#your-profile table:nth-of-type(4), // hamps À propos de vous
+.application-passwords // mots de passe d'application
+
+{ display: none !important; }
+
+/*=====  FIN Profil  =====*/
+
+/*=====================================
+=            Gravity Forms            =
+=====================================*/
+
+.gform-admin-screen {
+
+    .preview-form, // lien aperçu
+    button[data-js="embed-flyout-trigger"], // option embed to post
+    { display: none !important; }
+
+    /*----------  Pagination   ----------*/
+    
+    #percentage_style_setting // couleur barre de progression
+    { display: none !important; }
+    
+    .previous_button_setting,
+    .next_button_setting,
+    .last_pagination_setting {
+        > fieldset > div { display: none !important; } // choix txt ou image
+        > fieldset legend {
+            margin:0;
+            font-weight: 500;
+        }
+        > #last_page_button_text_container { margin-top: 5px !important; }
+    }
+
+    /*----------  Media modale  ----------*/
+
+    .media-frame-menu-heading, // menu de gauche
+    .media-frame-menu, // titre menu de gauche
+
+    .media-modal .uploaded-to, /* téléversé dans */
+    .media-modal #alt-text-description, /* aide champ texte alternatif */
+    .media-modal [data-setting="title"], /* champ titre */
+    .media-modal [data-setting="url"], /* champ url */
+    .media-modal [data-setting="description"], /* champ description */
+    .media-modal:has(.thumbnail-application) [data-setting="caption"], /* champ légende si pdf */
+
+    .media-modal .attachment-display-settings .align, /* select alignement */
+    .media-modal .attachment-display-settings .setting:has(label[for="attachment-display-settings-alignment"]), /* select alignement */
+    .media-modal .attachment-display-settings .setting:has(label[for="attachment-display-settings-link-to"]), /* select attaché a */
+    .media-modal .actions a, /* Options media 	: liens vers la page du fichier joint & plus de détails */
+
+    .media-modal .media-types-required-info, /* mention champs obligatoires */
+
+    .media-modal .gallery-settings, /* options galerie */
+
+    .media-modal .advanced-section, /* modification d'une image insérée, options avancées */
+    .media-modal .setting-group, /* modification d'une image insérée, alignement */
+    .media-modal .link-to /* modification d'une image insérée, lier à */
+
+    { display:none !important; }
+    
+    .media-frame-title,
+    .media-frame-router,
+    .media-frame-content
+    { left: 0; }
+
+
+    /*----------  Icônes au clic sur une image dans le WYSIWYG  ----------*/
+
+    .mce-inline-toolbar-grp [aria-label*="Align"],
+    .mce-inline-toolbar-grp [aria-label="No alignment"]
+    { display:none !important; }
+
+}
+
+
+/*=====  FIN Gravity Forms  =====*/
+
+} // FIN .user-is-editor && .user-is-author

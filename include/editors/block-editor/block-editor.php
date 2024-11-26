@@ -121,13 +121,13 @@ $pc_blocks_acf = array(
 	'image-frame',
 	'embed',
 	'column',
-	// 'contact',
-	'contactform',
 	'map'
 );
 
-// événements
+// Événements
 if ( get_option('options_events_enabled') ) { $pc_blocks_acf[] = 'events'; }
+// Formulaires
+$pc_blocks_acf[] = is_plugin_active( 'gravityforms/gravityforms.php' ) ? 'gravityforms' : 'contactform';
 
 foreach ( $pc_blocks_acf as $block_id ) {
 	if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { register_block_type( __DIR__.'/'.$block_id ); }
@@ -150,7 +150,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 			'core/heading',
 			'core/list',
 			'core/list-item',
-			'core/button'
+			'core/button',
 		);
 		
 		global $pc_blocks_acf;
@@ -299,6 +299,5 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 		return $content;
 
 	}
-
 
 /*=====  FIN Rendu des blocs  =====*/

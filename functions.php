@@ -23,6 +23,8 @@ include 'include/acf-fields/acf-page.php';
 if ( get_option('options_news_enabled') ) { include 'include/acf-fields/acf-news.php'; }
 if ( get_option('options_events_enabled') ) { include 'include/acf-fields/acf-events.php'; }
 
+if ( is_plugin_active( 'gravityforms/gravityforms.php' ) ) { include 'include/gravityforms.php'; }
+
 include 'include/admin/admin.php'; // admin custom
 
 include 'include/templates/templates.php'; // hooks & functions templates

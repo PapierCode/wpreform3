@@ -155,6 +155,11 @@ function pc_admin_menu() {
 			}
 		}
 
+		// Gravity Forms
+		if ( is_plugin_active( 'gravityforms/gravityforms.php' ) ) {
+			remove_submenu_page("gf_edit_forms","gf_help");
+		}
+
 	}
 
 

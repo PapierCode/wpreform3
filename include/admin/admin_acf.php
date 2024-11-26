@@ -87,3 +87,4 @@ add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_characters_counter
 		return $field;
 
 	}
+
