@@ -142,7 +142,7 @@ function pc_admin_gravityforms_confirmation_settings_fields( $fields ) {
 
 add_filter( 'gform_notification_settings_fields', 'pc_admin_gravityforms_notification_settings_fields' );
 
-function pc_admin_gravityforms_notification_settings_fields( $fields, $notification, $form ) {
+function pc_admin_gravityforms_notification_settings_fields( $fields ) {
 
     if ( !current_user_can( 'administrator' ) ) {
         unset( $fields[0]['fields'][14] ); // formatage auto
