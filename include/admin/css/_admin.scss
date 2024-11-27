@@ -11,8 +11,6 @@
 **/
 
 
-.user-is-editor, .user-is-author {
-
 /*==============================
 =            Global            =
 ==============================*/
@@ -193,6 +191,8 @@ table.wp-list-table .column-thumb {
 
 /*=====  FIN Médias  =====*/
 
+.user-is-editor, .user-is-author {
+
 /*=================================
 =            Rank Math            =
 =================================*/
@@ -258,10 +258,15 @@ label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
 =            Gravity Forms            =
 =====================================*/
 
-.gform-admin-screen {
+&.gform-admin-screen {
 
     .preview-form, // lien aperçu
-    button[data-js="embed-flyout-trigger"], // option embed to post
+    button[data-js="embed-flyout-trigger"] // option embed to post
+    { display: none !important; }
+
+    /*----------  Champs  ----------*/
+    
+    .placeholder_setting
     { display: none !important; }
 
     /*----------  Pagination   ----------*/

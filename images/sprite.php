@@ -53,6 +53,8 @@ $sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'download' => '<svg width="20" height="20" viewBox="0 0 20 20"><polygon points="20 20 0 20 0 12.5 3 12.5 3 17 17 17 17 12.5 20 12.5 20 20"/><polygon points="13.88 6.59 11.5 8.97 11.5 0 8.5 0 8.5 8.97 6.12 6.59 4 8.71 10 14.71 16 8.71 13.88 6.59"/></svg>',
 
+	'upload' => '<svg width="20" height="20" viewbox="0 0 20 20"><path d="M20 20H0v-7.5h3V17h14v-4.5h3V20Z"/><path d="M6.12 8.12 8.5 5.74v8.97h3V5.74l2.38 2.38L16 6l-6-6-6 6 2.12 2.12Z"/></svg>',
+
 	'external' => '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M20 12.999V20H0V0h7.001v3H3v14h14v-4.001h3Z"/><path d="m16.996 5.125-7.935 7.936-2.122-2.122 7.936-7.935L11 3.01V0h9v9h-3.01l.006-3.875Z"/></svg>',
 
 	'house' => '<svg width="16" height="16" viewBox="0 0 16 16"><path d="M1.781 7.094.004 8.474V6.236l8-6.222 8 6.222-.001 2.251-1.778-1.382v8.908H9.781V10.68H6.226v5.333H1.781V7.094Z"/></svg>'

@@ -138,4 +138,27 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 	}
 
+	/*----------  Formulaires  ----------*/
+	
+	const inputFiles = document.querySelectorAll('input[type="file"');
+
+	if ( inputFiles.length > 0 ) {
+
+		inputFiles.forEach( (inputFile) => {
+
+			let btn = inputFile.parentElement.querySelector('.input-file-btn');
+			let msg = inputFile.parentElement.querySelector('.input-file-msg');
+			
+			btn.addEventListener( 'click', () => { inputFile.click(); });
+
+			inputFile.addEventListener( 'change', (event) => {
+				let val = event.currentTarget.value;				
+				if ( val.includes('fakepath') ) { val = val.substring(12); }				
+				msg.textContent = val;
+			});
+
+		});
+
+	}
+
 });

@@ -14,7 +14,7 @@ add_action( 'admin_init', 'pc_admin_gravityforms_editor_capabilities' );
 
     function pc_admin_gravityforms_editor_capabilities() {
 
-        // https://docs.gravityforms.com/role-management-guide/
+        // cf. https://docs.gravityforms.com/role-management-guide/
         $role = get_role( 'editor' );
         $role->add_cap( 'gravityforms_edit_forms' );
         $role->add_cap( 'gravityforms_create_form' );
@@ -327,6 +327,20 @@ add_filter( 'gform_phone_formats', 'pc_admin_gravityforms_phone_format' );
 
     }
 
+/*----------  Fichier  ----------*/
+
+add_filter( 'gform_field_content', 'pc_gravityforms_fileupload_html', 10, 2 );
+
+    function pc_gravityforms_fileupload_html( $field_content, $field ) {
+
+        if ( $field->type == 'fileupload' ) {
+            $new = '<div class="input-file"><button type="button" class="input-file-btn">'.pc_svg('upload').'</button><div class="input-file-msg">Aucun fichier sélectionné.</div></div>';
+            $field_content = preg_replace( '/'.preg_quote('<input').'/', $new.'<input', $field_content, 1 );
+        }
+        return $field_content;
+
+    }
+
 
 /*=====  FIN Champs customs  =====*/
 
@@ -371,11 +385,11 @@ add_action( "gform_editor_js", "pc_admin_gravityforms_editor_js" );
                 fieldSettings['website'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .duplicate_setting, .default_value_setting, .description_setting';
                 // .css_class_setting, .visibility_setting, .label_placement_setting, .size_setting, .placeholder_setting
 
-                fieldSettings['email'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .email_confirm_setting, .admin_label_setting, .rules_setting, .duplicate_setting, .default_value_setting, .description_setting, .autocomplete_setting';
-                // .css_class_setting, .visibility_setting, .label_placement_setting, .size_setting, .placeholder_setting
+                fieldSettings['email'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .duplicate_setting, .default_value_setting, .description_setting, .autocomplete_setting';
+                // .css_class_setting, .visibility_setting, .label_placement_setting, .size_setting, .placeholder_setting, .email_confirm_setting
 
-                fieldSettings['fileupload'] = '.conditional_logic_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .file_extensions_setting, .file_size_setting, .multiple_files_setting, .description_setting';
-                // .css_class_setting, .visibility_setting, .label_placement_setting
+                fieldSettings['fileupload'] = '.conditional_logic_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .file_extensions_setting, .file_size_setting, .description_setting';
+                // .css_class_setting, .visibility_setting, .label_placement_setting, .multiple_files_setting
 
                 fieldSettings['list'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .rules_setting, .description_setting';
                 // .css_class_setting, .visibility_setting, .label_placement_setting, .add_icon_url_setting, .delete_icon_url_setting, .columns_setting, .maxrows_setting
@@ -488,7 +502,31 @@ add_filter( 'img_caption_shortcode', 'pc_admin_gravityforms_img_caption_shortcod
 =            Front            =
 =============================*/
 
-add_filter( 'gform_disable_form_theme_css', '__return_true' );
+/*----------  Submmit, nput to button   ----------*/
+
+// cf. https://docs.gravityforms.com/gform_submit_button/
+
+add_filter( 'gform_next_button', 'pc_gravityforms_input_to_button', 10, 2 );
+add_filter( 'gform_previous_button', 'pc_gravityforms_input_to_button', 10, 2 );
+add_filter( 'gform_submit_button', 'pc_gravityforms_input_to_button', 10, 2 );
+
+    function pc_gravityforms_input_to_button( $button, $form ) {
+
+        $fragment = WP_HTML_Processor::create_fragment( $button );
+        $fragment->next_token();
+    
+        $attributes = array( 'id', 'type', 'class', 'onclick' );
+        $new_attributes = array();
+        foreach ( $attributes as $attribute ) {
+            $value = $fragment->get_attribute( $attribute );
+            if ( ! empty( $value ) ) {
+                $new_attributes[] = sprintf( '%s="%s"', $attribute, esc_attr( $value ) );
+            }
+        }
+    
+        return sprintf( '<button %s>%s</button>', implode( ' ', $new_attributes ), esc_html( $fragment->get_attribute( 'value' ) ) );
+
+    }
 
 
 /*=====  FIN Front  =====*/
