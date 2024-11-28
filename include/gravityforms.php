@@ -124,14 +124,14 @@ add_filter( 'gform_form_list_columns', 'pc_admin_gravityforms_form_list_columns'
 
 add_filter( 'gform_confirmation_settings_fields', 'pc_admin_gravityforms_confirmation_settings_fields' );
 
-function pc_admin_gravityforms_confirmation_settings_fields( $fields ) {
+    function pc_admin_gravityforms_confirmation_settings_fields( $fields ) {
 
-    if ( !current_user_can( 'administrator' ) ) { 
-        unset( $fields[0]['fields'][4] ); // formatage auto
+        if ( !current_user_can( 'administrator' ) ) { 
+            unset( $fields[0]['fields'][4] ); // formatage auto
+        }
+        return $fields;
+
     }
-    return $fields;
-
-}
 
 
 /*=====  FIN Confirmation  =====*/
@@ -142,14 +142,14 @@ function pc_admin_gravityforms_confirmation_settings_fields( $fields ) {
 
 add_filter( 'gform_notification_settings_fields', 'pc_admin_gravityforms_notification_settings_fields' );
 
-function pc_admin_gravityforms_notification_settings_fields( $fields ) {
+    function pc_admin_gravityforms_notification_settings_fields( $fields ) {
 
-    if ( !current_user_can( 'administrator' ) ) {
-        unset( $fields[0]['fields'][14] ); // formatage auto
+        if ( !current_user_can( 'administrator' ) ) {
+            unset( $fields[0]['fields'][14] ); // formatage auto
+        }
+        return $fields;
+
     }
-    return $fields;
-
-}
 
 
 /*=====  FIN Notification  =====*/
@@ -356,9 +356,9 @@ add_action( "gform_editor_js", "pc_admin_gravityforms_editor_js" );
 
             <script type="text/javascript">
 
-                console.log(fieldSettings);
+                // console.log(fieldSettings);
 
-                fieldSettings['text'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .input_mask_setting, .maxlen_setting .rules_setting, .duplicate_setting, .default_value_setting, .description_setting, .autocomplete_setting';
+                fieldSettings['text'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .input_mask_setting, .maxlen_setting, .rules_setting, .duplicate_setting, .default_value_setting, .description_setting, .autocomplete_setting';
                 // .label_placement_setting, .visibility_setting, .css_class_setting, .size_setting, .placeholder_setting, .password_field_setting,
 
                 fieldSettings['textarea'] = '.conditional_logic_field_setting, .prepopulate_field_setting, .error_message_setting, .label_setting, .admin_label_setting, .maxlen_setting, .size_setting, .rules_setting, .duplicate_setting, .default_value_textarea_setting, .description_setting';
