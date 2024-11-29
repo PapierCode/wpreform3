@@ -190,7 +190,7 @@ add_action( 'gform_after_save_form', 'pc_admin_gravityforms_notification_setting
             foreach ( $form['notifications'] as &$notification ) {
                 $current_user = wp_get_current_user();
                 $notification['to'] = $current_user->user_email;
-                $notification['fromName'] = get_field( 'coord_name', 'option' );
+                $notification['fromName'] = get_field( 'coord_name', 'option' ) ?? get_bloginfo('name');
             }     
             GFAPI::update_form( $form );
         }
