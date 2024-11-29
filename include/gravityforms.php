@@ -118,6 +118,32 @@ add_filter( 'gform_form_list_columns', 'pc_admin_gravityforms_form_list_columns'
 
 /*=====  FIN Liste des formulaires  =====*/
 
+/*===============================
+=            Erreurs            =
+===============================*/
+
+add_filter( 'gform_validation_message', function ( $message, $form ) {
+    if ( gf_upgrade()->get_submissions_block() ) {
+        return $message;
+    }
+ 
+    $message = "<p>Le formulaire contient des erreurs&nbsp;:</p>";
+    $message .= '<ul>';
+ 
+    foreach ( $form['fields'] as $field ) {
+        if ( $field->failed_validation ) {
+            $message .= sprintf( '<li>%s - %s</li>', GFCommon::get_label( $field ), $field->validation_message );
+        }
+    }
+ 
+    $message .= '</ul>';
+ 
+    return $message;
+}, 10, 2 );
+
+
+/*=====  FIN Erreurs  =====*/
+
 /*====================================
 =            Confirmation            =
 ====================================*/
@@ -127,7 +153,9 @@ add_filter( 'gform_confirmation_settings_fields', 'pc_admin_gravityforms_confirm
     function pc_admin_gravityforms_confirmation_settings_fields( $fields ) {
 
         if ( !current_user_can( 'administrator' ) ) { 
-            unset( $fields[0]['fields'][4] ); // formatage auto
+            foreach ( $fields[0]['fields'] as $key => $field ) {
+                if ( rgar( $field, 'name' ) == 'disableAutoformat' ) { unset( $fields[0]['fields'][$key]); }
+            }
         }
         return $fields;
 
@@ -145,9 +173,27 @@ add_filter( 'gform_notification_settings_fields', 'pc_admin_gravityforms_notific
     function pc_admin_gravityforms_notification_settings_fields( $fields ) {
 
         if ( !current_user_can( 'administrator' ) ) {
-            unset( $fields[0]['fields'][14] ); // formatage auto
+            foreach ( $fields[0]['fields'] as $key => $field ) {
+                if ( rgar( $field, 'name' ) == 'disableAutoformat' ) { unset( $fields[0]['fields'][$key]); }
+                if ( rgar( $field, 'name' ) == 'from' ) { unset( $fields[0]['fields'][$key]); }
+            }
         }
         return $fields;
+
+    }
+
+add_action( 'gform_after_save_form', 'pc_admin_gravityforms_notification_settings_default', 10, 2 );
+
+    function pc_admin_gravityforms_notification_settings_default( $form, $is_new ) {
+
+        if ( $is_new ) {    
+            foreach ( $form['notifications'] as &$notification ) {
+                $current_user = wp_get_current_user();
+                $notification['to'] = $current_user->user_email;
+                $notification['fromName'] = get_field( 'coord_name', 'option' );
+            }     
+            GFAPI::update_form( $form );
+        }
 
     }
 
@@ -333,7 +379,7 @@ add_filter( 'gform_field_content', 'pc_gravityforms_fileupload_html', 10, 2 );
 
     function pc_gravityforms_fileupload_html( $field_content, $field ) {
 
-        if ( $field->type == 'fileupload' ) {
+        if ( !is_admin() && $field->type == 'fileupload' ) {
             $new = '<div class="input-file"><button type="button" class="input-file-btn">'.pc_svg('upload').'</button><div class="input-file-msg">Aucun fichier sélectionné.</div></div>';
             $field_content = preg_replace( '/'.preg_quote('<input').'/', $new.'<input', $field_content, 1 );
         }
