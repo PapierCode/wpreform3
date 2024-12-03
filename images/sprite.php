@@ -17,7 +17,7 @@ $sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'logout' => '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M16.53,9V6.57a6.53,6.53,0,0,0-13,0V9H1V20H19V9Zm-10-2.43a3.53,3.53,0,0,1,7,0V9h-7ZM11,14.72V18H9V14.72A2,2,0,1,1,12,13,2,2,0,0,1,11,14.72Z"/></svg>',
 
-	'msg' => '<svg width="4" height="19" viewBox="0 0 4 19"><rect y="15" width="4" height="4"/><rect width="4" height="12"/></svg>',
+	'msg' => '<svg width="4" height="20" viewbox="0 0 4 20"><path d="M0 16h4v4H0z"/><path d="M0 0h4v12H0z"/></svg>',
 
 	'phone' => '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M15.69,20a8.26,8.26,0,0,1-2.84-.61,21.79,21.79,0,0,1-7.25-5,22,22,0,0,1-5-7.18c-.85-2.19-.84-4,0-4.91L3,0,7.45,4.49,5.1,6.83l.51.78A24.78,24.78,0,0,0,8.7,11.36a24.48,24.48,0,0,0,3.67,3l.78.52,2.36-2.36L20,17l-2.26,2.25A2.79,2.79,0,0,1,15.69,20Z"/></svg>',
 

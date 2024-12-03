@@ -29,6 +29,35 @@ add_action( 'admin_init', 'pc_admin_gravityforms_editor_capabilities' );
 
 /*=====  FIN Droits éditeurs  =====*/
 
+/*=============================================
+=            Liste des formulaires            =
+=============================================*/
+
+add_action( 'gform_form_actions', 'pc_admin_gravityforms_form_actions' );
+
+function pc_admin_gravityforms_form_actions( $actions ) {
+
+    if ( !current_user_can( 'administrator' ) ) { 
+        unset( $actions['preview']); // lien aperçu
+    }
+    return $actions;
+
+}
+
+add_filter( 'gform_form_list_columns', 'pc_admin_gravityforms_form_list_columns' );
+
+function pc_admin_gravityforms_form_list_columns( $columns ){
+
+    if ( !current_user_can( 'administrator' ) ) {
+        unset( $columns['conversion'] ); // colonne conversion
+    }
+    return $columns;
+
+}
+
+
+/*=====  FIN Liste des formulaires  =====*/
+
 /*==============================================
 =            Paramètres formulaires            =
 ==============================================*/
@@ -81,7 +110,14 @@ add_action( 'gform_after_save_form', 'pc_admin_gravity_forms_after_save_form', 1
             $form['personalData']['preventIP'] = true; // ne pas sauvegarder l'ip de l'internaute
             $form['personalData']['retention']['policy'] = 'delete'; // toujours supprimer
             $form['personalData']['retention']['retain_entries_days'] = 200; // supprimer au bout de X jours
+            $form ['is_active'] = true;
             GFAPI::update_form( $form );
+        } else {
+            if ( is_array( $form['pagination'] ) ) {
+                $form['pagination']['display_progressbar_on_confirmation'] = true; // commence à 0
+                $form ['is_active'] = true;
+                GFAPI::update_form( $form );
+            }
         }
 
     }
@@ -89,64 +125,37 @@ add_action( 'gform_after_save_form', 'pc_admin_gravity_forms_after_save_form', 1
 
 /*=====  FIN Paramètres formulaires  =====*/
 
-/*=============================================
-=            Liste des formulaires            =
-=============================================*/
+/*========================================================
+=            Formulaire paramétres par défaut            =
+========================================================*/
 
-add_action( 'gform_form_actions', 'pc_admin_gravityforms_form_actions' );
+add_action( 'gform_after_save_form', 'pc_admin_gravityforms_notification_settings_default', 10, 2 );
 
-    function pc_admin_gravityforms_form_actions( $actions ) {
+    function pc_admin_gravityforms_notification_settings_default( $form, $is_new ) {
 
-        if ( !current_user_can( 'administrator' ) ) { 
-            unset( $actions['preview']); // lien aperçu
+        if ( $is_new ) {    
+            foreach ( $form['notifications'] as &$notification ) {
+                $current_user = wp_get_current_user();
+                $notification['to'] = $current_user->user_email;
+                $notification['fromName'] = get_field( 'coord_name', 'option' ) ?? get_bloginfo('name');
+                $notification['disableAutoformat'] = true;
+            }   
+            foreach ( $form['confirmations'] as &$confirmation ) {
+                $confirmation['disableAutoformat'] = true;
+            }     
+            GFAPI::update_form( $form );
         }
-        return $actions;
-
-    }
-
-add_filter( 'gform_form_list_columns', 'pc_admin_gravityforms_form_list_columns' );
-
-    function pc_admin_gravityforms_form_list_columns( $columns ){
-
-        if ( !current_user_can( 'administrator' ) ) {
-            unset( $columns['conversion'] ); // colonne conversion
-        }
-        return $columns;
 
     }
 
 
-/*=====  FIN Liste des formulaires  =====*/
-
-/*===============================
-=            Erreurs            =
-===============================*/
-
-add_filter( 'gform_validation_message', function ( $message, $form ) {
-    if ( gf_upgrade()->get_submissions_block() ) {
-        return $message;
-    }
- 
-    $message = "<p>Le formulaire contient des erreurs&nbsp;:</p>";
-    $message .= '<ul>';
- 
-    foreach ( $form['fields'] as $field ) {
-        if ( $field->failed_validation ) {
-            $message .= sprintf( '<li>%s - %s</li>', GFCommon::get_label( $field ), $field->validation_message );
-        }
-    }
- 
-    $message .= '</ul>';
- 
-    return $message;
-}, 10, 2 );
-
-
-/*=====  FIN Erreurs  =====*/
+/*=====  FIN Formulaire paramétres par défaut  =====*/
 
 /*====================================
 =            Confirmation            =
 ====================================*/
+
+add_filter( 'gform_confirmation_anchor', '__return_true' ); // scrollto
 
 add_filter( 'gform_confirmation_settings_fields', 'pc_admin_gravityforms_confirmation_settings_fields' );
 
@@ -159,6 +168,14 @@ add_filter( 'gform_confirmation_settings_fields', 'pc_admin_gravityforms_confirm
         }
         return $fields;
 
+    }
+
+add_filter( 'gform_confirmation', 'custom_confirmation', 10, 4 );
+    function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
+        if ( !is_array($confirmation) ) {
+            $confirmation = wpautop($confirmation);
+        }
+        return $confirmation;
     }
 
 
@@ -179,21 +196,6 @@ add_filter( 'gform_notification_settings_fields', 'pc_admin_gravityforms_notific
             }
         }
         return $fields;
-
-    }
-
-add_action( 'gform_after_save_form', 'pc_admin_gravityforms_notification_settings_default', 10, 2 );
-
-    function pc_admin_gravityforms_notification_settings_default( $form, $is_new ) {
-
-        if ( $is_new ) {    
-            foreach ( $form['notifications'] as &$notification ) {
-                $current_user = wp_get_current_user();
-                $notification['to'] = $current_user->user_email;
-                $notification['fromName'] = get_field( 'coord_name', 'option' ) ?? get_bloginfo('name');
-            }     
-            GFAPI::update_form( $form );
-        }
 
     }
 
@@ -443,6 +445,14 @@ add_action( "gform_editor_js", "pc_admin_gravityforms_editor_js" );
                 fieldSettings['submit'] = '.conditional_logic_submit_setting, .submit_text_setting, .submit_width_setting, .submit_location_setting';
                 // .submit_type_setting, .submit_image_setting
 
+                // selecteur étape / barre de prgression
+                jQuery('[name="pagination_type"]').change(function() {
+                    if ( jQuery(this).val() == 'percentage' ) {
+                        jQuery('#percentage_confirmation_display').prop('checked',true);
+                        jQuery('.percentage_confirmation_page_name_setting').show();
+                    }
+                });
+
             </script>
 
         <?php } 
@@ -489,10 +499,10 @@ add_filter( 'tiny_mce_before_init', 'pc_admin_gravityforms_tiny_mce_before_init'
 
         if ( $editor_id == '_gform_setting_message' ) {
 
-            $settings['toolbar1'] = 'fullscreen,undo,redo,removeformat,|,formatselect,bullist,numlist,|,bold,italic,strikethrough,superscript,charmap,|,alignleft,aligncenter,|,link,unlink';
+            $settings['toolbar1'] = 'undo,redo,removeformat,|,formatselect,bullist,numlist,|,bold,italic,|,alignleft,aligncenter,|,link,unlink';
             $settings['toolbar2'] = '';
             $settings['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3';
-            // $settings['visualblocks_default_state'] = true;
+            $settings['visualblocks_default_state'] = true;
             $settings['paste_as_text'] = true;
 
         }
@@ -513,34 +523,6 @@ add_filter( 'wp_editor_settings', 'pc_admin_gravityforms_editor_settings', 10, 2
 
     }
 
-add_action( 'after_setup_theme', 'pc_admin_gravityforms_after_setup_theme' );
-
-    function pc_admin_gravityforms_after_setup_theme() {
-
-        update_option( 'image_default_size', 'thumbnail_s' ); // taille d'image sélectionnée par défaut dans la modale
-
-    }
-
-add_filter( 'image_size_names_choose', 'pc_admin_gravityforms_image_size_name_choose' );
-
-    function pc_admin_gravityforms_image_size_name_choose( $sizes ) {
-
-        return array( // options select taille à insérer
-            'thumbnail_s' => '1/4',
-            'thumbnail' => '1/2',
-            'medium'    => '1'
-        );
-        
-    }
-
-add_filter( 'img_caption_shortcode', 'pc_admin_gravityforms_img_caption_shortcode', 10, 3 );
-
-    function pc_admin_gravityforms_img_caption_shortcode( $empty, $attr, $content ) {
-
-        // html si légende
-        return '<figure class="wp-caption '.$attr['align'].'">'.$content.'<figcaption style="max-width:'.$attr['width'].'px">'.$attr['caption'].'</figcaption></figure>';
-
-    }
 
 /*=====  FIN Tiny MCE  =====*/
 
@@ -548,7 +530,7 @@ add_filter( 'img_caption_shortcode', 'pc_admin_gravityforms_img_caption_shortcod
 =            Front            =
 =============================*/
 
-/*----------  Submmit, nput to button   ----------*/
+/*----------  Submit, input to button   ----------*/
 
 // cf. https://docs.gravityforms.com/gform_submit_button/
 
@@ -573,6 +555,33 @@ add_filter( 'gform_submit_button', 'pc_gravityforms_input_to_button', 10, 2 );
         return sprintf( '<button %s>%s</button>', implode( ' ', $new_attributes ), esc_html( $fragment->get_attribute( 'value' ) ) );
 
     }
+
+
+/*----------  Validation  ----------*/
+
+add_filter( 'gform_validation_message', 'pc_gravityform_validation_message', 10, 2 );
+
+    function pc_gravityform_validation_message( $message, $form ) {
+
+        if ( gf_upgrade()->get_submissions_block() ) {
+            return $message;
+        }
+    
+        $message = '<div class="ico">'.pc_svg('msg').'</div>';
+        $message .= '<p>Le formulaire contient des erreurs&nbsp;:</p>';
+        $message .= '<ul>';    
+            foreach ( $form['fields'] as $field ) {
+                if ( $field->failed_validation ) {
+                    $message .= sprintf( '<li>%s - %s</li>', GFCommon::get_label( $field ), $field->validation_message );
+                }
+            }
+        $message .= '</ul>';
+    
+        return $message;
+        
+    };
+
+
 
 
 /*=====  FIN Front  =====*/

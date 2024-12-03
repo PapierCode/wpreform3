@@ -261,7 +261,8 @@ label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
 &.gform-admin-screen {
 
     .preview-form, // lien aperçu
-    button[data-js="embed-flyout-trigger"] // option embed to post
+    button[data-js="embed-flyout-trigger"], // option embed to post
+    #insert-media-button // confirmation/notification
     { display: none !important; }
 
     /*----------  Champs  ----------*/
@@ -271,7 +272,9 @@ label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
 
     /*----------  Pagination   ----------*/
     
-    #percentage_style_setting // couleur barre de progression
+    #percentage_style_setting, // couleur barre de progression
+    #percentage_confirmation_display_setting, // commence à 0%
+    #percentage_confirmation_page_name_setting ~ #choice_options // legend de fieldset vide
     { display: none !important; }
     
     .previous_button_setting,
@@ -285,44 +288,15 @@ label[for="WP_Piwik-Widget-Search-hide"], #WP_Piwik-Widget-Search
         > #last_page_button_text_container { margin-top: 5px !important; }
     }
 
-    /*----------  Media modale  ----------*/
-
-    .media-frame-menu-heading, // menu de gauche
-    .media-frame-menu, // titre menu de gauche
-
-    .media-modal .uploaded-to, /* téléversé dans */
-    .media-modal #alt-text-description, /* aide champ texte alternatif */
-    .media-modal [data-setting="title"], /* champ titre */
-    .media-modal [data-setting="url"], /* champ url */
-    .media-modal [data-setting="description"], /* champ description */
-    .media-modal:has(.thumbnail-application) [data-setting="caption"], /* champ légende si pdf */
-
-    .media-modal .attachment-display-settings .align, /* select alignement */
-    .media-modal .attachment-display-settings .setting:has(label[for="attachment-display-settings-alignment"]), /* select alignement */
-    .media-modal .attachment-display-settings .setting:has(label[for="attachment-display-settings-link-to"]), /* select attaché a */
-    .media-modal .actions a, /* Options media 	: liens vers la page du fichier joint & plus de détails */
-
-    .media-modal .media-types-required-info, /* mention champs obligatoires */
-
-    .media-modal .gallery-settings, /* options galerie */
-
-    .media-modal .advanced-section, /* modification d'une image insérée, options avancées */
-    .media-modal .setting-group, /* modification d'une image insérée, alignement */
-    .media-modal .link-to /* modification d'une image insérée, lier à */
-
-    { display:none !important; }
+    /*----------  Confirmation/notification  ----------*/
     
-    .media-frame-title,
-    .media-frame-router,
-    .media-frame-content
-    { left: 0; }
-
-
-    /*----------  Icônes au clic sur une image dans le WYSIWYG  ----------*/
-
-    .mce-inline-toolbar-grp [aria-label*="Align"],
-    .mce-inline-toolbar-grp [aria-label="No alignment"]
-    { display:none !important; }
+    .wp-media-buttons .all-merge-tags {
+        position: absolute;
+        top: -1.9rem;
+    }
+    div#wpwrap div#wpcontent div#wpbody div#wpbody-content div.wrap div#tab_notification div.wp-editor-wrap,
+    .wp-editor-tabs
+    { margin-top:0 !important; }
 
 }
 
