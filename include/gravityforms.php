@@ -499,9 +499,8 @@ add_filter( 'tiny_mce_before_init', 'pc_admin_gravityforms_tiny_mce_before_init'
 
         if ( $editor_id == '_gform_setting_message' ) {
 
-            $settings['toolbar1'] = 'undo,redo,removeformat,|,formatselect,bullist,numlist,|,bold,italic,|,alignleft,aligncenter,|,link,unlink';
+            $settings['toolbar1'] = 'undo,redo,removeformat,|,bullist,numlist,|,bold,italic,|,alignleft,aligncenter,|,link,unlink';
             $settings['toolbar2'] = '';
-            $settings['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3';
             $settings['visualblocks_default_state'] = true;
             $settings['paste_as_text'] = true;
 
