@@ -47,7 +47,7 @@ var postCssPlugins = [
 function cssAdmin() {
     
     return src( ['include/admin/css/use.scss'] )
-        .pipe(sass({ precision: 3 }))
+        .pipe(sass({ silenceDeprecations: ['legacy-js-api'], precision: 3 }))
         .pipe(postcss( postCssPlugins ))
 		.pipe(rename( 'wpreform-admin.css' ))
         .pipe(dest( 'include/admin/css/' ));
