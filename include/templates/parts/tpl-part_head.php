@@ -47,6 +47,9 @@ add_action( 'wp_enqueue_scripts', 'pc_head_remove_default_block_editor_css', 666
 		
 	}
 
+// Inline CSS
+add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
+
 
 /*=====  FIN Nettoyage  =====*/
 
