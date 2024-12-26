@@ -80,7 +80,7 @@ if ( function_exists('acf_add_options_page') ) {
      
     acf_add_options_page( array(
         'page_title'    => 'Paramètres du thème WPreform',
-        'menu_title'    => 'WPreform',
+        'menu_title'    => 'WPréform',
         'menu_slug'     => 'wpreform-settings',
         'capability'    => 'manage_options',
         'update_button' => 'Mettre à jour',
