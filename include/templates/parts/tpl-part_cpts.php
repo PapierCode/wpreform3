@@ -289,6 +289,8 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
     function pc_display_news_events_archive_main_header_filters( $post_type ) {
 
+        global $wp_query;
+        if ( $wp_query->found_posts == 0 ) { return; }
         if ( !get_option('options_news_tax') || !get_option('options_events_tax') ) { return; }
         if ( !in_array( $post_type, [NEWS_POST_SLUG,EVENT_POST_SLUG] ) ) { return; }
 
