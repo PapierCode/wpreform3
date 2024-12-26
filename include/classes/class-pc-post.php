@@ -117,22 +117,27 @@ class PC_Post {
 
 	public function display_terms( $css ) {
 
-		if ( apply_filters( 'pc_filter_post_card_taxonomy_slug', '', $this ) ) {	
+		$taxonomies = get_post_taxonomies( $this->id );
 
-			$terms = wp_get_post_terms( 
-				$this->id, 
-				apply_filters( 'pc_filter_post_card_taxonomy_slug', '', $this )
-			);
-	
-			if ( is_array( $terms ) && !empty( $terms ) ) {
-	
-				echo '<p class="'.$css.'">'.pc_svg('tag');	
-					foreach ( $terms as $key => $term ) {	
-						if ( $key > 0 ) { echo ', '; }
-						echo '<a href="'.get_post_type_archive_link( $this->type ).'?category='.$term->term_id.'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
-					}	
-				echo '</p>';
-	
+		if ( !empty( $taxonomies ) ) {
+			
+			foreach ( $taxonomies as $taxonomy_slug ) {
+
+				$terms = wp_get_post_terms( $this->id, $taxonomy_slug );
+		
+				if ( is_array( $terms ) && !empty( $terms ) ) {
+		
+					echo '<p class="'.$css.'">'.pc_svg('tag');	
+						foreach ( $terms as $key => $term ) {
+							if ( $key > 0 ) { echo ', '; }
+							$href_args = array( 'category' => $term->term_id );
+							if ( get_query_var( 'archive' ) == 1 ) { $href_args['archive'] = 1; } // événements passés
+							echo '<a href="'.get_post_type_archive_link( $this->type ).'?'.http_build_query($href_args).'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
+						}	
+					echo '</p>';
+		
+				}
+
 			}
 	
 		}

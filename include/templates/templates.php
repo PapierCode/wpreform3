@@ -32,10 +32,10 @@ include 'parts/tpl-part_head.php';
 include 'parts/tpl-part_search.php';
 // Pages
 include 'parts/tpl-part_page.php';
-// Actualités
-if ( get_option('options_news_enabled') ) { include 'parts/tpl-part_news.php'; }
-// Événements
-if ( get_option('options_events_enabled') ) { include 'parts/tpl-part_events.php'; }
+// Actualités/Événements
+if ( get_option('options_news_enabled') || get_option('options_events_enabled') ) { 
+	include 'parts/tpl-part_cpts.php';
+}
 
 
 /*----------  Spécifiques  ----------*/

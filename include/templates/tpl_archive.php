@@ -46,13 +46,17 @@ add_action( 'pc_action_template_archive_after', 'pc_display_main_end', 60 ); // 
 function pc_display_archive_main_header_content( $post_type, $settings ) {
 
     /*----------  Titre  ----------*/    
-    
+
     $title = isset($settings['title']) && trim($settings['title']) ? trim($settings['title']) : post_type_archive_title('',false);
+
 	echo '<h1>'.apply_filters( 'pc_filter_archive_main_header_title', $title, $post_type, $settings ).'</h1>';
+    
 
     /*----------  Description  ----------*/
+
+    $display_desc = get_query_var('paged') > 1 ? false : true;
     
-    if ( apply_filters( 'pc_filter_archive_main_header_description_display', true, $post_type ) && isset($settings['desc']) && trim($settings['desc']) ) {
+    if ( apply_filters( 'pc_filter_archive_main_header_description_display', $display_desc, $post_type ) && isset($settings['desc']) && trim($settings['desc']) ) {
         echo '<div class="tiny-editor">'.wpautop(trim($settings['desc'])).'</div>';
     }
 
