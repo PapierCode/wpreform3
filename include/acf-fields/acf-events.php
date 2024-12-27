@@ -269,6 +269,27 @@ function pc_admin_avents_acf_include_fields() {
         'title' => 'Lieu',
         'fields' => array(
             array(
+                'key' => 'field_pc_event_place_default',
+                'label' => 'Utiliser vos coordonnées',
+                'name' => 'event_place_default',
+                'aria-label' => '',
+                'type' => 'true_false',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'message' => '',
+                'default_value' => 0,
+                'allow_in_bindings' => 0,
+                'ui_on_text' => '',
+                'ui_off_text' => '',
+                'ui' => 1,
+            ),
+            array(
                 'key' => 'field_pc_event_place_name',
                 'label' => 'Nom',
                 'name' => 'event_place_name',
@@ -276,7 +297,15 @@ function pc_admin_avents_acf_include_fields() {
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_pc_event_place_default',
+                            'operator' => '!=',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -296,7 +325,15 @@ function pc_admin_avents_acf_include_fields() {
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_pc_event_place_default',
+                            'operator' => '!=',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -316,7 +353,15 @@ function pc_admin_avents_acf_include_fields() {
                 'type' => 'number',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_pc_event_place_default',
+                            'operator' => '!=',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -338,7 +383,15 @@ function pc_admin_avents_acf_include_fields() {
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_pc_event_place_default',
+                            'operator' => '!=',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -358,7 +411,15 @@ function pc_admin_avents_acf_include_fields() {
                 'type' => 'google_map',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_pc_event_place_default',
+                            'operator' => '!=',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
