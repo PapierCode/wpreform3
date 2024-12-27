@@ -288,16 +288,48 @@ class GF_Field_Pc_Date extends GF_Field {
 
     public function get_field_input( $form, $value = '', $entry = null ) { 
 
-        $id = (int) $this->id;
+        $form_id = (int) $form['id'];
+        $field_id = (int) $this->id;
 
-        // TODO settings
+        $field_attrs = array(
+            'name' => 'input_'.$field_id,
+            'id' => 'input_'.$form_id.'_'.$field_id,
+            'type' => 'date',
+            'aria-invalid' => $this->failed_validation ? 'true' : 'false',
+            'value' => esc_attr( $value )
+        );
+
+        if ( $this->isRequired ) { $field_attrs['aria-required'] = 'true'; }
+        if ( !empty($this->description) ) { $field_attrs['aria-describedby'] = 'gfield_description_'.$form_id.'_'.$field_id; }
 
         if ($this->is_form_editor()) {
-            return '<div class="ginput_container ginput_container_text"><input name="input_'.$id.'" id="input_'.$id.'" type="text" value="" aria-invalid="false" disabled="disabled"></div>';
+            $field_attrs['id'] = 'input_'.$field_id;
+            $field_attrs['disabled'] = 'disabled';
         }
 
-        return '<div class="ginput_container ginput_container_'.$this->type.'"><input name="input_'.$id.'" id="input_'.$id.'" type="date" value="" aria-invalid="false"></div>';
+        return '<div class="ginput_container ginput_container_'.$this->type.'"><input '.pc_get_attrs_to_string($field_attrs).'></div>';
+
      }
+
+     public function validate( $value, $form ) {
+
+         if ( !preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value ) ) {
+             $this->failed_validation = true;
+             $this->validation_message = 'Le format de la date n\'est pas valide';
+         }
+
+     }
+
+     public function get_value_save_entry( $value, $form, $input_name, $lead_id, $lead ) {
+ 
+        if ( preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $value ) ) {
+            $explode = explode( '-', $value );
+            $value = $explode[2].'-'.$explode[1].'-'.$explode[0];
+        }
+     
+        return $value;
+
+    }
  
 }
 
@@ -337,14 +369,36 @@ class GF_Field_Pc_Time extends GF_Field {
 
     public function get_field_input( $form, $value = '', $entry = null ) { 
 
-        $id = (int) $this->id;
+        $form_id = (int) $form['id'];
+        $field_id = (int) $this->id;
 
-        // TODO settings
+        $field_attrs = array(
+            'name' => 'input_'.$field_id,
+            'id' => 'input_'.$form_id.'_'.$field_id,
+            'type' => 'time',
+            'aria-invalid' => $this->failed_validation ? 'true' : 'false',
+            'value' => esc_attr( $value )
+        );
+
+        if ( $this->isRequired ) { $field_attrs['aria-required'] = 'true'; }
+        if ( !empty($this->description) ) { $field_attrs['aria-describedby'] = 'gfield_description_'.$form_id.'_'.$field_id; }
 
         if ($this->is_form_editor()) {
-            return '<div class="ginput_container ginput_container_'.$this->type.'"><input name="input_'.$id.'" id="input_'.$id.'" type="text" value="" aria-invalid="false" disabled="disabled"></div>';
+            $field_attrs['id'] = 'input_'.$field_id;
+            $field_attrs['disabled'] = 'disabled';
         }
-        return '<div class="ginput_container ginput_container_'.$this->type.'"><input name="input_'.$id.'" id="input_'.$id.'" type="time" value="" aria-invalid="false"></div>';
+
+        return '<div class="ginput_container ginput_container_'.$this->type.'"><input '.pc_get_attrs_to_string($field_attrs).'></div>';
+
+    }
+
+    public function validate( $value, $form ) {
+
+        if ( $value !== '' && !preg_match('/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $value ) ) {
+            $this->failed_validation = true;
+            $this->validation_message = 'Le format de l\'heure n\'est pas valide';
+        }
+
     }
  
 }
@@ -395,6 +449,25 @@ add_filter( 'gform_field_content', 'pc_gravityforms_fileupload_html', 10, 2 );
 /*=========================================
 =            Options de champs            =
 =========================================*/
+
+// TODO custom field condition
+/* add_action( 'admin_print_scripts', function () {
+ 
+    if ( method_exists( 'GFForms', 'is_gravity_page' ) && GFForms::is_gravity_page() ) { ?>
+      <script type="text/javascript">
+          gform.addFilter( 'gform_conditional_logic_fields', 'set_conditional_field' );
+          function set_conditional_field( options, form, selectedFieldId ){
+              console.log(options);
+              console.log(form);
+              console.log(selectedFieldId);
+              
+             return options;
+          }
+      </script>
+    <?php }
+   
+  } );
+*/
 
 add_action( "gform_editor_js", "pc_admin_gravityforms_editor_js" );
 
