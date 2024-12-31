@@ -87,18 +87,10 @@ function pc_display_event_date( $pc_post, $context = 'single' ) {
 
     $metas = $pc_post->metas;
 
-    if ( $metas['event_canceled'] ) {
-        echo pc_display_alert_msg(
-            apply_filters( 'pc_filter_event_single_canceled_text', '<strong>Événement annulé</strong>', $pc_post ),
-            'error',
-            'block'
-        );
-    }	
-
     $start = $metas['event_date_start'];
     $end = $metas['event_date_end'];
 
-    $css = [  'date', 'date--'.$context ];
+    $css = [ 'date', 'date--'.$context ];
     if ( $metas['event_date_txt'] ) { $css[] = 'date-custom--'.$context; }
 
     echo '<p class="'.implode(' ',$css).'">';
@@ -170,7 +162,9 @@ add_action( 'pc_post_card_after_title', 'pc_display_event_card_date', 10 );
 
     function pc_display_event_card_date( $pc_post ) {
 
-        if ( $pc_post->type == EVENT_POST_SLUG ) { pc_display_event_date( $pc_post, 'card' ); }
+        if ( $pc_post->type == EVENT_POST_SLUG ) {
+            pc_display_event_date( $pc_post, 'card' );
+        }
 
     }
 
@@ -261,10 +255,11 @@ add_filter( 'pc_filter_archive_main_header_title', 'pc_edit_news_events_archive_
     function pc_edit_news_events_archive_main_header_title( $title, $post_type, $settings ) {
 
         // événements passés
-        if ( $post_type == EVENT_POST_SLUG && get_query_var( 'archive' ) == 1 ) { $title = 'Événements passés'; }
+        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && get_query_var( 'archive' ) == 1 ) { $title = 'Événements passés'; }
 
         // catégorie en cours
-        if ( in_array( $post_type, [NEWS_POST_SLUG,EVENT_POST_SLUG] ) && get_query_var('category') ) {
+        global $wpr_cpts;
+        if ( in_array( $post_type, $wpr_cpts ) && get_query_var('category') ) {
             $category = get_term_by( 'term_taxonomy_id', get_query_var('category') );
             if ( $category ) { $title .= ', '.$category->name; }
         }
@@ -277,7 +272,8 @@ add_filter( 'pc_filter_archive_main_header_description_display', 'pc_edit_news_e
 
     function pc_edit_news_events_main_header_description_display( $display, $post_type ) {
 
-        if ( in_array( $post_type, [NEWS_POST_SLUG,EVENT_POST_SLUG] ) && ( get_query_var('category') || get_query_var( 'archive' ) == 1 ) ) { $display = false; }
+        global $wpr_cpts;
+        if ( in_array( $post_type, $wpr_cpts ) && ( get_query_var('category') || get_query_var( 'archive' ) == 1 ) ) { $display = false; }
 
         return $display;
 
@@ -289,22 +285,19 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
     function pc_display_news_events_archive_main_header_filters( $post_type ) {
 
-        global $wp_query;
+        global $wp_query, $wpr_cpts;
         if ( $wp_query->found_posts == 0 ) { return; }
         if ( !get_option('options_news_tax') || !get_option('options_events_tax') ) { return; }
-        if ( !in_array( $post_type, [NEWS_POST_SLUG,EVENT_POST_SLUG] ) ) { return; }
+        if ( !in_array( $post_type, $wpr_cpts ) ) { return; }
 
-        switch ( $post_type ) {
-            case NEWS_POST_SLUG :
-                $tax_slug = NEWS_TAX_SLUG;
-                $modal_id = 'modal-news-filters';
-                $modal_title = 'Catégories des actualités';
-                break;
-            case EVENT_POST_SLUG :
-                $tax_slug = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
-                $modal_id = 'modal-events-filters';
-                $modal_title = 'Catégories des événements';
-                break;
+        if ( defined('NEWS_POST_SLUG') && $post_type == NEWS_POST_SLUG ) {
+            $tax_slug = NEWS_TAX_SLUG;
+            $modal_id = 'modal-news-filters';
+            $modal_title = 'Catégories des actualités';
+        } else if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG ) {
+            $tax_slug = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
+            $modal_id = 'modal-events-filters';
+            $modal_title = 'Catégories des événements';
         }
 
         $archive_url = get_post_type_archive_link( $post_type );
@@ -321,7 +314,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                 'nopaging' => true,
                 'fields' => 'ids'
             );
-            if ( $post_type == EVENT_POST_SLUG ) {
+            if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG ) {
                 if ( get_query_var( 'archive' ) == 1 ) { // passés
                     $meta_compare = '<=';
                 } else { // à venir

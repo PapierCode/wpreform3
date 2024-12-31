@@ -9,15 +9,19 @@
  * 
  */
 
+global $wpr_cpts;
+$wpr_cpts = array();
 
 if ( get_option('options_news_enabled') ) {
     define( 'NEWS_POST_SLUG', 'newspost' );
     define( 'NEWS_TAX_SLUG', 'newstax' );
+    $wpr_cpts[] = NEWS_POST_SLUG;
 }
 
 if ( get_option('options_events_enabled') ) {
     define( 'EVENT_POST_SLUG', 'eventpost' );
     if ( !get_option('options_events_tax_shared') ) { define( 'EVENT_TAX_SLUG', 'eventtax' ); }
+    $wpr_cpts[] = EVENT_POST_SLUG;
 }
 
 
