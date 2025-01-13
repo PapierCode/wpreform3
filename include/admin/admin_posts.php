@@ -40,7 +40,7 @@ add_action( 'manage_pages_custom_column', 'pc_admin_post_column_thumbnail_popula
 
 		if ( 'thumb' === $column_name ) {
 			$thumb = get_the_post_thumbnail( $post_id, 'thumbnail_gallery' );
-			echo $thumb ? $thumb : '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.png" />';			
+			echo $thumb ? $thumb : '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.png">';			
 		}
 
 	}

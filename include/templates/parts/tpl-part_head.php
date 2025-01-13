@@ -66,7 +66,7 @@ add_action( 'wp_head', 'pc_display_favicon', 6 );
 			'url' => get_bloginfo( 'template_directory' ).'/images/favicon.jpg'
 		) );
 
-		echo '<link rel="icon" type="'.$file['type'].'" href="'.$file['url'].'" />';
+		echo '<link rel="icon" type="'.$file['type'].'" href="'.$file['url'].'">';
 
 	};
 

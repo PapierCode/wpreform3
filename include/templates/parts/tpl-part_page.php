@@ -52,7 +52,7 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 		$output .= '<ul class="form-list">';
 			$output .= '<li class="form-item form-item--password">';
 			$output .= '<label for="post-password" class="form-label">'.__( 'Password:' ).'</label>';
-			$output .= '<div class="form-item-inner"><input name="post_password" id="post-password" type="password" /></div>';
+			$output .= '<div class="form-item-inner"><input name="post_password" id="post-password" type="password"></div>';
 			$output .= '</li>';
 			$output .= '<li class="form-item form-item--submit"><button type="submit" title="'.esc_attr_x( 'Enter', 'post password form' ).'" class="form-submit button"><span class="form-submit-inner">'.esc_attr_x( 'Enter', 'post password form' ).'</span></button></li>';
 		$output .= '</ul></form>';

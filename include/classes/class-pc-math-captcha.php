@@ -72,7 +72,7 @@ class PC_MathCaptcha {
 	
 	public function get_field_inputs() {
 
-		return '<input type="number" id="form-captcha" name="form-captcha" value="" required /><input type="hidden" name="captcha-math" value="'.$this->get_encode_math().'" />';
+		return '<input type="number" id="form-captcha" name="form-captcha" value="" required><input type="hidden" name="captcha-math" value="'.$this->get_encode_math().'">';
 
 	}
 	

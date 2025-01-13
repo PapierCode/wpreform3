@@ -89,7 +89,7 @@ function pc_display_search_results_content() {
 					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'<span class="card-desc-ico">&nbsp;<span class="ico">'.$ico.'</span></span></p>';			
 					if ( $thumb = $pc_post->thumbnail ) {
-						echo '<figure class="s-results-item-img"><img src="'.$thumb['sizes']['thumbnail_gallery'].'" alt="" width="'.$thumb['sizes']['thumbnail_gallery-width'].'" height="'.$thumb['sizes']['thumbnail_gallery-height'].'" /></figure>';
+						echo '<figure class="s-results-item-img"><img src="'.$thumb['sizes']['thumbnail_gallery'].'" alt="" width="'.$thumb['sizes']['thumbnail_gallery-width'].'" height="'.$thumb['sizes']['thumbnail_gallery-height'].'"></figure>';
 					}
 				echo '</li>';
 

@@ -107,7 +107,7 @@ function pc_display_header_logo() {
 
 		$logo_tag = apply_filters(
 			'pc_filter_header_logo_img_tag',
-			'<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />',
+			'<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy">',
 			$logo_datas
 		);
 		
