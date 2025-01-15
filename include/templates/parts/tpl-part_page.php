@@ -74,29 +74,30 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 
 		if ( $pc_post->type == 'page' ) {
 
-			$cpts = array();
+			$active_cpts = array();
+
 			if ( get_field('news_enabled','option') && get_field('news_pages','option') ) { 
-				$cpts['news'] = array(
+				$active_cpts['news'] = array(
 					'slug' => NEWS_POST_SLUG,
 					'title_txt' => get_field('news_aside_page_title','option'),
 					'btn_txt' => 'Toutes les actualités'
 				);
 			}
+
 			if ( get_field('events_enabled','option') && get_field('events_pages','option') ) { 
-				$cpts['event'] = array(
+				$active_cpts['event'] = array(
 					'slug' => EVENT_POST_SLUG,
 					'title_txt' => get_field('events_aside_page_title','option'),
 					'btn_txt' => 'Tous les événements'
 				);
 			}
 
-			if ( !empty( $cpts ) ) {
+			$active_cpts = apply_filters( 'pc_filter_page_aside_related_cpts', $active_cpts, $pc_post );
 
-				echo '<aside class="aside aside--page">';
+			if ( !empty( $active_cpts ) ) {
 
-				$cpts = apply_filters( 'pc_filter_page_aside_related_cpts', $cpts, $pc_post );
-				$metas = $pc_post->metas;
-				foreach ( $cpts as $key => $cpt ) {
+				$display = false;
+				foreach ( $active_cpts as $key => $cpt ) {
 						
 					$get_posts_args = array(
 						'post_type' => $cpt['slug'],
@@ -109,23 +110,42 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 					$get_posts = get_posts( $get_posts_args );
 
 					if ( !empty( $get_posts ) ) {
-							echo '<div class="aside-card-title">';
-								echo '<h2 class="aside-title">'.$cpt['title_txt'].'</h2>';
-								echo '<a href="'.get_post_type_archive_link( $cpt['slug'] ).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">'.$cpt['btn_txt'].'</span></a>';
-							echo '</div>';
-							echo '<ul class="card-list card-list--'.$cpt['slug'].'">';
-								foreach ( $get_posts as $post ) {
-									$pc_post_related = new PC_Post( $post );
-									echo '<li class="card-list-item">';
-										$pc_post_related->display_card(3);
-									echo '</li>';
-								}
-							echo '</ul>';
+						$active_cpts[$key]['posts'] = $get_posts;
+						$display = true;
 					}
 
 				}
-				
-				echo '</aside>';
+
+				if ( $display ) {
+
+					echo '<aside class="aside aside--page">';
+					
+						do_action( 'pc_page_aside_related_start', $pc_post, $active_cpts );
+
+						foreach ( $active_cpts as $key => $cpt ) {
+
+							if ( isset( $cpt['posts'] ) ) {
+									echo '<div class="aside-card-title">';
+										echo '<h2 class="aside-title">'.$cpt['title_txt'].'</h2>';
+										echo '<a href="'.get_post_type_archive_link( $cpt['slug'] ).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">'.$cpt['btn_txt'].'</span></a>';
+									echo '</div>';
+									echo '<ul class="card-list card-list--'.$cpt['slug'].'">';
+										foreach ( $get_posts as $post ) {
+											$pc_post_related = new PC_Post( $post );
+											echo '<li class="card-list-item">';
+												$pc_post_related->display_card(3);
+											echo '</li>';
+										}
+									echo '</ul>';
+							}
+
+						}
+					
+						do_action( 'pc_page_aside_related_end', $pc_post, $active_cpts );
+					
+					echo '</aside>';
+
+				}
 
 			}
 
