@@ -120,7 +120,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 
 					echo '<aside class="aside aside--page">';
 					
-						do_action( 'pc_page_aside_related_start', $pc_post, $active_cpts );
+						do_action( 'pc_action_page_aside_related_start', $pc_post, $active_cpts );
 
 						foreach ( $active_cpts as $key => $cpt ) {
 
@@ -141,7 +141,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 
 						}
 					
-						do_action( 'pc_page_aside_related_end', $pc_post, $active_cpts );
+						do_action( 'pc_action_page_aside_related_end', $pc_post, $active_cpts );
 					
 					echo '</aside>';
 
