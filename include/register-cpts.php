@@ -100,7 +100,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                     break;
             }
 
-            $post_news_args = array(
+            $post_news_args = apply_filters( 'pc_filter_news_post_args', array(
                 'has_archive'			=> true,
                 'public'				=> true,
                 'show_in_nav_menus'		=> false,
@@ -110,7 +110,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 'supports'          	=> array( 'title', 'editor', 'thumbnail', 'author' ), 
                 'show_in_rest'			=> true,
                 'rewrite'				=> array( 'slug' => $post_news_rewrite )
-            );
+            ) );
 
             register_post_type( NEWS_POST_SLUG, $post_news_args );
 
@@ -157,6 +157,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 $post_event_args['taxonomies'] = get_option('options_events_tax_shared') ? array( NEWS_TAX_SLUG ):  array( EVENT_TAX_SLUG );
             }
 
+            $post_event_args = apply_filters( 'pc_filter_event_post_args', $post_event_args );
             register_post_type( EVENT_POST_SLUG, $post_event_args );
 
 
