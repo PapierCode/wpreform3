@@ -193,7 +193,7 @@ if ( function_exists('acf_add_options_page') ) {
                 break;
         }
 
-        acf_add_options_page( array(
+        acf_add_options_page( apply_filters( 'pc_filter_news_settings_args', array(
             'page_title'    => $news_settings_title,
             'menu_title'    => 'Paramètres',
             'menu_slug'     => 'news-settings',
@@ -201,7 +201,7 @@ if ( function_exists('acf_add_options_page') ) {
             'update_button' => 'Mettre à jour',
             'autoload'      => true,
             'parent_slug'   => 'edit.php?post_type='.NEWS_POST_SLUG
-        ) );
+        ) ) );
 
     } // FIN if options_news_enabled
 
@@ -210,7 +210,7 @@ if ( function_exists('acf_add_options_page') ) {
         
     if ( get_option('options_events_enabled') ) {
 
-        acf_add_options_page( array(
+        acf_add_options_page( apply_filters( 'pc_filter_event_settings_args', array(
             'page_title'    => 'Paramètres des événements',
             'menu_title'    => 'Paramètres',
             'menu_slug'     => 'events-settings',
@@ -218,7 +218,7 @@ if ( function_exists('acf_add_options_page') ) {
             'update_button' => 'Mettre à jour',
             'autoload'      => true,
             'parent_slug'   => 'edit.php?post_type='.EVENT_POST_SLUG
-        ) );
+        ) ) );
 
     } // FIN if options_events_enabled
 
