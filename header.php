@@ -11,6 +11,7 @@ echo '<!doctype html><html '.get_language_attributes().'>';
 
 	echo '</head>';
 
-	echo '<body class="'.implode(' ',get_body_class()).'">';
+	$body_class = is_front_page() ? 'home' : implode(' ',get_body_class());
+	echo '<body class="'.$body_class.'">';
 
 		do_action( 'pc_header' );
