@@ -39,7 +39,7 @@ if ( filter_var( $embed_url, FILTER_VALIDATE_URL ) ) {
 				echo '<div class="iframe" style="'.implode(';',$iframe_css).'">';
 						echo str_replace( 'src', 'data-src', $iframe_html );
 						echo '<div class="iframe-accept">';
-							printf( __('<p class="">En lisant cette vidéo, vous acceptez les <a href="%1s" target="blank" rel="noreferrer">conditions générales d\'utilisation</a> de <strong>%2s</strong>.</p>'), $providers[$datas->provider_name], $datas->provider_name );
+							printf( __('<p class="iframe-accept--txt">En lisant cette vidéo, vous acceptez les <a class="iframe-accept-cgu-link" href="%1s" target="blank" rel="noreferrer">conditions générales d\'utilisation</a> de <strong>%2s</strong>.</p>'), $providers[$datas->provider_name], $datas->provider_name );
 							echo '<button type="button" class="button button--blue-light button--arrow"><span class="ico">'.pc_svg('arrow').'</span><span class="txt">Lire la vidéo</span></button>';
 						echo '</div>';
 				echo '</div>';
