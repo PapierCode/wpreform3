@@ -48,10 +48,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
             // compteur
             const counter = field[0].querySelector('.pc-txt-length-counter');
-            if ( counter ) {           
+            if ( counter ) {         
+                const counterLength = counter.dataset.size;  
                 const display = counter.querySelector('.pc-txt-length-value');
-                updatePcWysiCounter( counter, 300, editor.getBody().textContent, display );
-                editor.on('change', (event)=> { updatePcWysiCounter( counter, 300, editor.getBody().textContent, display ); });
+                updatePcWysiCounter( counter, counterLength, editor.getBody().textContent, display );
+                editor.on('change', (event)=> { updatePcWysiCounter( counter, counterLength, editor.getBody().textContent, display ); });
             }
 
         });
