@@ -233,11 +233,11 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 			if ( $btn_href ) {
 
 				$btn_ico = 'arrow';
-				$btn_attrs = array( 'href="'.$btn_href.'"' );
+				$btn_attrs = array( 'href' => $btn_href );
 				
 				$btn_blank = $button->get_attribute('target');
 				if ( $btn_blank ) {
-					$btn_attrs[] = 'target="_blank"';
+					$btn_attrs['target'] = '_blank';
 					$btn_ico = 'external';
 				}
 
@@ -246,16 +246,15 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 					$mime_implode = explode( '|', $mime_key );
 					foreach( $mime_implode as $mime ) { 
 						if ( str_contains( $btn_href, '.'.$mime ) ) { 
-							$btn_attrs[] = 'download';
+							$btn_attrs['download'] = '';
 							$btn_ico = 'download';
 							break 2;
 						}
 					}
 				}
 
-				$btn_attrs[] = 'class="button button--'.$btn_ico.'"';
-
-				$content = '<a '.implode(' ',$btn_attrs).'><span class="ico">'.pc_svg($btn_ico).'</span><span class="txt">'.wp_strip_all_tags($content).'</span></a>';
+				$btn_attrs['class'] = 'button--'.$btn_ico;
+				$content = pc_get_button( wp_strip_all_tags($content), $btn_attrs, $btn_ico );
 
 			} else { $content = ''; }
 			

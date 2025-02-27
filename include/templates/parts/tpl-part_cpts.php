@@ -149,7 +149,7 @@ add_action( 'pc_action_template_archive_after', 'pc_display_event_archive_link',
             if ( get_query_var( 'archive' ) == 1 ) { $txt = 'Événements à venir'; }
             else {  $href .= '?archive=1'; }
             
-            echo '<a href="'.$href.'" class="past-events-link button"><span class="ico">'.pc_svg('more-s').'</span><span class="txt">'.$txt.'</span></a>';
+            echo pc_get_button( $txt, ['href'=>$href], 'more-s' );
             
         }
 
@@ -340,10 +340,30 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
             echo '<div class="filters filters--news">';
-                echo '<button type="button" class="button modal-btn-open" title="Boite de dialogue" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">Catégories</span></button>';
+                echo pc_get_button( 
+                    'Catégories', 
+                    [
+                        'class' => 'modal-btn-open',
+                        'title' => 'Boite de dialogue',
+                        'aria-control' => $modal_id,
+                        'type' => 'button'
+                    ], 
+                    'tag', 
+                    'button'
+                );
                 if ( get_query_var('category') ) {
                     $current_term = get_term_by( 'id', get_query_var('category'), $tax_slug );
-                    echo '<a href="'.$cancel_url.'" class="button button--cancel" title="Annuler le filtre '.$current_term->name.'" aria-label="Annuler le filtre '.$current_term->name.'" rel="nofollow"><span class="ico">'.pc_svg('cross').'</span><span class="txt">'.$current_term->name.'</span></a>';
+                    echo pc_get_button( 
+                        $current_term->name, 
+                        [
+                            'href' => $cancel_url,
+                            'title' => 'Annuler le filtre '.$current_term->name,
+                            'aria-label' => 'Annuler le filtre '.$current_term->name,
+                            'rel' => 'nofollow',
+                            'class' => 'button--cancel'
+                        ], 
+                        'cross'
+                     );
                 }
             echo '</div>';
 
@@ -353,7 +373,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
                     $is_active = get_query_var('category') && get_query_var('category') == $term->term_id;
                     $link_attrs = array(
-                        'class' => 'news-filter-link button',
+                        'class' => 'news-filter-link',
                         'rel' => 'nofollow'
                     );
                     if ( $is_active ) { 
@@ -377,10 +397,13 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                         );
                     }
                     
-                    $modal_content .= '<li class="archive-filters-item"><a '.pc_get_attrs_to_string( $link_attrs ).'>';
-                        if ( $is_active ) { $modal_content .= '<span class="ico">'.pc_svg('cross').'</span>'; }
-                        $modal_content .= '<span class="txt">'.$term->name.'</span>';
-                    $modal_content .= '</a></li>';
+                    $modal_content .= '<li class="archive-filters-item">';
+                        $modal_content .= pc_get_button(
+                            $term->name,
+                            $link_attrs,
+                            $is_active ? 'cross' : ''
+                        );
+                    $modal_content .= '</li>';
                     
                 }
             $modal_content .= '</ul>';

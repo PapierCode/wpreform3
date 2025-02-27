@@ -252,3 +252,38 @@ function pc_display_modal( $modal ) {
 
 
 /*=====  FIN Modale  =====*/
+
+/*==============================
+=            Bouton            =
+==============================*/
+
+/**
+ * 
+ * @param string	$txt		Texte du bouton
+ * @param array		$attrs		Attributs nom => valeur
+ * @param string	$ico		identifiant svg
+ * @param string	$tag		a / button
+ * 
+ */
+
+function pc_get_button( $txt, $attrs = [], $ico = '', $tag = 'a' ) {
+
+    if ( !array_key_exists( 'class', $attrs ) ) { $attrs['class'] = ''; }
+    $attrs['class'] = 'button '.$attrs['class'];
+
+    $button = '<'.$tag.' '.pc_get_attrs_to_string($attrs).'>';
+
+        if ( $ico ) { $button .= '<span class="ico">'.pc_svg($ico).'</span>'; }
+
+        // supp texte au lieu de le masquer ?
+        $txt_class = str_contains( $attrs['class'], 'button--ico' ) ? 'visually-hidden' : 'txt';
+        $button .= '<span class="'.$txt_class.'">'.$txt.'</span>';
+
+    $button .= '</'.$tag.'>';
+
+	return $button;
+
+}
+
+
+/*=====  FIN Bouton  =====*/
