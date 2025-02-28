@@ -65,11 +65,10 @@ function pc_display_search_results_content() {
 	if ( $search_query = get_search_query() ) {
 
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
-		$types = apply_filters( 'pc_filter_search_results_post_types', array( 
-			'page' => 'Page',
-			NEWS_POST_SLUG => 'Actualité',
-			EVENT_POST_SLUG => 'Événement'
-		) );
+		$types = array( 'page' => 'Page' );
+		if ( get_option('options_news_enabled') ) { $types[NEWS_POST_SLUG] = 'Actualité'; }
+		if ( get_option('options_events_enabled') ) { $types[EVENT_POST_SLUG] = 'Événement'; }
+		$types = apply_filters( 'pc_filter_search_results_post_types', $types );
 
 		echo '<p class="s-results-infos">'.pc_get_search_count_results( $search_query ).'.</p>';		
 
