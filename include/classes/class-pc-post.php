@@ -316,9 +316,11 @@ class PC_Post {
 				do_action( 'pc_post_card_after_start', $this, $params );
 			
 				// visual
-				echo '<figure class="card-figure">';
-					$this->display_card_image();				
-				echo '</figure>';
+				if ( apply_filters( 'pc_filter_card_image', true ) ) {
+					echo '<figure class="card-figure">';
+						$this->display_card_image();				
+					echo '</figure>';
+				}
 
 				// hook	
 				do_action( 'pc_post_card_after_figure', $this, $params );
