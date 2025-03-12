@@ -268,8 +268,7 @@ function pc_display_modal( $modal ) {
 
 function pc_get_button( $txt, $attrs = [], $ico = '', $tag = 'a' ) {
 
-    if ( !array_key_exists( 'class', $attrs ) ) { $attrs['class'] = ''; }
-    $attrs['class'] = 'button '.$attrs['class'];
+    $attrs['class'] = !array_key_exists( 'class', $attrs ) ?  'button' : 'button '.$attrs['class'];
 
     $button = '<'.$tag.' '.pc_get_attrs_to_string($attrs).'>';
 
