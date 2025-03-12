@@ -1,5 +1,5 @@
 <?php
-$sprite = array(
+$sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'arrow' => '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M16.5 2.9L13.6 0 3.5 10l10.1 10 2.9-2.9L9.3 10l7.2-7.1z"/></svg>',
 
@@ -59,6 +59,4 @@ $sprite = array(
 
 	'house' => '<svg width="16" height="16" viewBox="0 0 16 16"><path d="M1.781 7.094.004 8.474V6.236l8-6.222 8 6.222-.001 2.251-1.778-1.382v8.908H9.781V10.68H6.226v5.333H1.781V7.094Z"/></svg>'
 
-);
-
-if ( function_exists( 'apply_filters' ) ) {	apply_filters( 'pc_filter_sprite', $sprite ); }
+));
