@@ -570,7 +570,7 @@ class PC_Contact_Form {
 
 			wp_nonce_field( basename( __FILE__ ), 'none-pc-contact-form' );
 
-			echo '<ul class="form-list reset-list">';
+			echo '<ul class="form-list">';
 
 				/*----------  Champs  ----------*/
 				

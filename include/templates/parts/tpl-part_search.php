@@ -20,7 +20,7 @@ function pc_display_form_search( $css_suffix, $post_type = null ) {
 	$args = array(
         'form_id' => $css_suffix.'-form-search',
         'form_class' => [ 'form-search', 'form-search--'.$css_suffix, 'no-print' ],
-        'submit_class' => [ 'reset-btn', 'form-search-submit', 'button' ],
+        'submit_class' => [ 'form-search-submit', 'button' ],
 		'submit_ico' => pc_svg('zoom')
     );
     $args = apply_filters( 'pc_edit_form_search_args', $args, $css_suffix, $post_type );

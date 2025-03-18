@@ -193,7 +193,7 @@
 
             if (imgNb > 1) {
 
-                $glHeader.append('<button class="gl-btn gl-btn-nav gl-btn-nav--prev reset-btn '+plugin.settings.btnPrevClass+'" aria-hidden="true" tabindex="-1"><span class="ico">'+plugin.settings.btnPrevInner+'</span></button><button class="gl-btn gl-btn-nav gl-btn-nav--next reset-btn '+plugin.settings.btnNextClass+'" aria-hidden="true" tabindex="-1"><span class="ico">'+plugin.settings.btnPrevInner+'</span></button>');
+                $glHeader.append('<button class="gl-btn gl-btn-nav gl-btn-nav--prev '+plugin.settings.btnPrevClass+'" aria-hidden="true" tabindex="-1"><span class="ico">'+plugin.settings.btnPrevInner+'</span></button><button class="gl-btn gl-btn-nav gl-btn-nav--next '+plugin.settings.btnNextClass+'" aria-hidden="true" tabindex="-1"><span class="ico">'+plugin.settings.btnPrevInner+'</span></button>');
 
                 $btnNav = $('.gl-btn-nav').on('mouseup', function() { $(this).blur(); });
                 $btnPrev = $('.gl-btn-nav--prev').on('click', function(){ prevImg(); });
@@ -201,7 +201,7 @@
 
             }
 				
-			$glHeader.append('<button class="gl-btn gl-btn-close reset-btn '+plugin.settings.btnCloseClass+'"><span class="ico">'+plugin.settings.btnCloseInner+'</span></button>');
+			$glHeader.append('<button class="gl-btn gl-btn-close '+plugin.settings.btnCloseClass+'"><span class="ico">'+plugin.settings.btnCloseInner+'</span></button>');
 			$btnClose = $('.gl-btn-close').on('click', function(){ galleryHide(); });
 
 
