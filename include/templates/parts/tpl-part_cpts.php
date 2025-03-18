@@ -146,10 +146,15 @@ add_action( 'pc_action_template_archive_after', 'pc_display_event_archive_link',
             $href = get_post_type_archive_link(EVENT_POST_SLUG);
             $txt = 'Événements passés';       
 
-            if ( get_query_var( 'archive' ) == 1 ) { $txt = 'Événements à venir'; }
-            else {  $href .= '?archive=1'; }
+            if ( get_query_var( 'archive' ) == 1 ) {
+                $txt = 'Événements à venir';
+                $class = 'link-past-events';
+            } else {
+                $href .= '?archive=1';
+                $class = 'link-upcoming-events';
+            }
             
-            echo pc_get_button( $txt, ['href'=>$href], 'more-s' );
+            echo pc_get_button( $txt, ['href'=>$href,'class'=>$class], 'more-s' );
             
         }
 
