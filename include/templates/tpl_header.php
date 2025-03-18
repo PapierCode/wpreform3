@@ -47,11 +47,11 @@ function pc_display_skip_nav() {
 		if ( count( $skip_nav_list ) > 1 ) {
 			echo '<ul class="skip-nav-list">';
 				foreach ( $skip_nav_list as $args ) {
-					echo '<li><a href="'.$args['href'].'">'.$args['label'].'</a></li>';
+					echo '<li><a class="skip-nav-link" href="'.$args['href'].'">'.$args['label'].'</a></li>';
 				}
 			echo '</ul>';
 		} else {
-			echo '<a href="'.$skip_nav_list[0]['href'].'">'.$skip_nav_list[0]['label'].'</a>';
+			echo '<a class="skip-nav-link" href="'.$skip_nav_list[0]['href'].'">'.$skip_nav_list[0]['label'].'</a>';
 		}	
 	echo '</nav>';
 

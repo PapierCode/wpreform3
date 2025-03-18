@@ -63,9 +63,7 @@ add_action( 'acf/include_fields', function() {
                         'id' => '',
                     ),
                     'choices' => array(
-                        'none' => 'Aucun',
-                        'v1' => 'Orange',
-                        'v2' => 'Vert',
+                        'none' => 'Aucun'
                     ),
                     'default_value' => 'none',
                     'return_format' => 'value',
