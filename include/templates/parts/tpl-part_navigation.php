@@ -301,7 +301,9 @@ function pc_display_pager( $query = null, $current = null, $args = array() ) {
 			'type' 					=> 'array',
 			'before_page_number' 	=> '<span class="visually-hidden">Page </span>',
 			'format'                => '?paged=%#%',
-			'ul_css'				=> 'pager-list no-print' // custom
+			'ul_css'				=> 'pager-list no-print',
+			'before_page_number'	=> '<span class="txt">',
+			'after_page_number'		=> '</span>',
 		),
 		$args
 	);
