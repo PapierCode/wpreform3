@@ -65,6 +65,7 @@ function pc_display_search_results_content() {
 	if ( $search_query = get_search_query() ) {
 
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
+
 		$types = array( 'page' => 'Page' );
 		if ( get_option('options_news_enabled') ) { $types[NEWS_POST_SLUG] = 'Actualité'; }
 		if ( get_option('options_events_enabled') ) { $types[EVENT_POST_SLUG] = 'Événement'; }
@@ -82,14 +83,10 @@ function pc_display_search_results_content() {
 				
 				$pc_post = new PC_Post( $post );
 				$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
-				$css_has_image = $pc_post->thumbnail ? ' has-image' : '';
 
-				echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
+				echo '<li class="s-results-item s-results-item--'.$pc_post->type.'">';
 					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
-					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'<span class="card-desc-ico">&nbsp;<span class="ico">'.$ico.'</span></span></p>';			
-					if ( $thumb = $pc_post->thumbnail ) {
-						echo '<figure class="s-results-item-img"><img src="'.$thumb['sizes']['thumbnail_gallery'].'" alt="" width="'.$thumb['sizes']['thumbnail_gallery-width'].'" height="'.$thumb['sizes']['thumbnail_gallery-height'].'"></figure>';
-					}
+					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'<span class="card-desc-ico">&nbsp;<span class="ico">'.$ico.'</span></span></p>';
 				echo '</li>';
 
 			}
