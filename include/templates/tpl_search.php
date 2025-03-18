@@ -82,10 +82,10 @@ function pc_display_search_results_content() {
 			foreach ( $wp_query->posts as $post ) {
 				
 				$pc_post = new PC_Post( $post );
-				$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
 
 				echo '<li class="s-results-item s-results-item--'.$pc_post->type.'">';
-					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
+					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite">'.$pc_post->get_card_title().'</a></h2>';
+					if ( array_key_exists( $pc_post->type, $types ) ) { echo '<p class="s-results-item-type">'.$types[$pc_post->type].'</p>'; };
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'<span class="card-desc-ico">&nbsp;<span class="ico">'.$ico.'</span></span></p>';
 				echo '</li>';
 
