@@ -75,13 +75,13 @@ function pc_display_footer_contact() {
 
 	/*----------  Adresse  ----------*/
 	
-	$dd['list']['addr'] = get_option( 'options_coord_address' ).' <br>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
+	$dd['addr'] = get_option( 'options_coord_address' ).' <br>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
 
 	/*----------  Téléphone  ----------*/
 	
 	$phone = get_option( 'options_coord_phone' );
 	
-	$dd['list']['phone'] = pc_get_button(
+	$dd['phone'] = pc_get_button(
 		pc_get_phone_format($phone,false),
 		array(
 			'href' => 'tel:'.pc_get_phone_format($phone),
@@ -97,7 +97,7 @@ function pc_display_footer_contact() {
 	
 	foreach( $rs_list as $rs ) {
 		
-		$dd['list'][$rs['ico']['value']] = pc_get_button(
+		$dd[$rs['ico']['value']] = pc_get_button(
 			$rs['ico']['label'],
 			array(
 				'href' => $rs['url'],
@@ -110,17 +110,15 @@ function pc_display_footer_contact() {
 		);
 
 	}	
-	
 
 	/*----------  Affichage  ----------*/
 
-	// filtres	
 	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas );
 	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd );
 
 	echo '<address class="coord"><dl class="coord-list" style="--coord-cols:'.count($rs_list).'">';
 		echo '<dt class="coord-item coord-item--logo">'.$dt.'</dt>';
-		foreach ($dd['list'] as $id => $content) {
+		foreach ( $dd as $id => $content ) {
 			echo '<dd class="coord-item coord-item--'.$id.'">'.$content.'</dd>';
 		}
 	echo '</dl></address>';

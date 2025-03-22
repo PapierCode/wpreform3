@@ -48,9 +48,10 @@ function pc_display_share_links() {
 
 	$url_to_share = urlencode( $url_to_share );
 	$hrefs = apply_filters( 'pc_filter_share_links', array(
-		'Facebook' 	=> 'https://www.facebook.com/sharer/sharer.php?u='.$url_to_share,
-		'X' 		=> 'https://x.com/intent/tweet?url='.$url_to_share,
-		'LinkedIn' 	=> 'https://www.linkedin.com/shareArticle?mini=true&url='.$url_to_share
+		'Bluesky'	=> 'https://bsky.app/intent/compose?text='.$url_to_share,
+		'Mastodon' => 'https://mastodonshare.com/?url='.$url_to_share,	
+		'LinkedIn' 	=> 'https://www.linkedin.com/shareArticle?mini=true&url='.$url_to_share,	
+		'Facebook' 	=> 'https://www.facebook.com/sharer/sharer.php?u='.$url_to_share
 	) );
 
 	$share_title = apply_filters( 'pc_filter_share_links_title', 'Partage&nbsp;:' );
