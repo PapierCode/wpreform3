@@ -46,9 +46,6 @@ function pc_display_share_links() {
 		$url_to_share = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	}
 
-	// titre avant les liens
-	$share_title = apply_filters( 'pc_filter_share_links_title', 'Partage&nbsp;:' );
-	// données liens
 	$url_to_share = urlencode( $url_to_share );
 	$hrefs = apply_filters( 'pc_filter_share_links', array(
 		'Facebook' 	=> 'https://www.facebook.com/sharer/sharer.php?u='.$url_to_share,
@@ -56,19 +53,30 @@ function pc_display_share_links() {
 		'LinkedIn' 	=> 'https://www.linkedin.com/shareArticle?mini=true&url='.$url_to_share
 	) );
 
+	$share_title = apply_filters( 'pc_filter_share_links_title', 'Partage&nbsp;:' );
+	$btn_css = apply_filters( 'pc_filter_share_links_class', 'button' );
+
 
 	/*----------  Affichage  ----------*/
 	
 	echo '<div class="social-share no-print">';
 
-		if ( $share_title ) {	echo '<p class="social-share-title">'.$share_title.'</p>'; }
+		if ( $share_title ) { echo '<p class="social-share-title">'.$share_title.'</p>'; }
 		
 		echo '<ul class="social-list social-list--share">';
 			foreach ( $hrefs as $name => $href ) {
 				echo '<li class="social-item">';
-					echo '<a href="'.$href.'" target="_blank" class="social-link social-link--'.strtolower($name).'" rel="nofollow noreferrer" title="Partager sur '.$name.' (nouvelle fenêtre)">';
-						echo '<span class="ico">'.pc_svg( strtolower($name) ).'</span>';
-					echo '</a>';
+					echo pc_get_button(
+						$name,
+						array(
+							'href' => $href,
+							'class' => 'social-link '.$btn_css.' button--ico',
+							'title' => 'Partager sur '.$name.' (nouvelle fenêtre)',
+							'target' => '_blank',
+							'rel' => 'nofollow noreferrer'
+						),
+						strtolower($name)
+					);
 				echo '</li>';
 			}
 		echo '</ul>';

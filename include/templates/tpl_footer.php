@@ -59,47 +59,57 @@ function pc_display_footer_end() {
 
 function pc_display_footer_contact() {
 	
-	$dd = array(
-		'with-icons' => true,
-		'list' => array()
-	);
-
+	$dd = array();
+	$btn_css = apply_filters( 'pc_filter_footer_button_class', 'button button--white' );
 
 	/*----------  Logo  ----------*/
 	
 	// datas
-	$logo_datas = array(
+	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', array(
 		'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
 		'width' => 100,
 		'height' => 25,
 		'alt' => get_option( 'options_coord_name' )
-	);
-	// filtre
-	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas );
-	// html
+	));
 	$logo_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy">';
-
 
 	/*----------  Adresse  ----------*/
 	
-	$address = get_option( 'options_coord_address' ).' <br>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
-	// if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
-	// 	$address .= '<br aria-hidden="true" class="no-print"><button class="js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'">Afficher la carte</button>';
-	// }
-	$dd['list']['addr'] = array(
-		'ico' => 'map',
-		'txt' => $address
-	);
-
+	$dd['list']['addr'] = get_option( 'options_coord_address' ).' <br>'.get_option( 'options_coord_post_code' ).' '.get_option( 'options_coord_city' ).', '.get_option( 'options_coord_country' );
 
 	/*----------  Téléphone  ----------*/
 	
 	$phone = get_option( 'options_coord_phone' );
-	$phone_link = '<a href="tel:'.pc_get_phone_format($phone).'" title="Téléphone '.pc_get_phone_format($phone,false).'" class="coord-phone">'.pc_get_phone_format($phone,false).'</a>';
-	$dd['list']['phone'] = array(
-		'ico' => 'phone',
-		'txt' => $phone_link
+	
+	$dd['list']['phone'] = pc_get_button(
+		pc_get_phone_format($phone,false),
+		array(
+			'href' => 'tel:'.pc_get_phone_format($phone),
+			'class' => 'coord-phone '.$btn_css,
+			'title' => 'Téléphone '.pc_get_phone_format($phone,false)
+		),
+		'phone'
 	);
+
+	/*----------  Social  ----------*/
+	
+	$rs_list = get_field('coord_social','option');
+	
+	foreach( $rs_list as $rs ) {
+		
+		$dd['list'][$rs['ico']['value']] = pc_get_button(
+			$rs['ico']['label'],
+			array(
+				'href' => $rs['url'],
+				'class' => 'social-link '.$btn_css.' button--ico',
+				'title' => 'Suivez-nous sur '.$rs['ico']['label'].' (nouvelle fenêtre)',
+				'target' => '_blank',
+				'rel' => 'noreferrer'
+			),
+			$rs['ico']['value']
+		);
+
+	}	
 	
 
 	/*----------  Affichage  ----------*/
@@ -108,13 +118,10 @@ function pc_display_footer_contact() {
 	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas );
 	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd );
 
-	echo '<address class="coord"><dl class="coord-list">';
+	echo '<address class="coord"><dl class="coord-list" style="--coord-cols:'.count($rs_list).'">';
 		echo '<dt class="coord-item coord-item--logo">'.$dt.'</dt>';
 		foreach ($dd['list'] as $id => $content) {
-			echo '<dd class="coord-item coord-item--'.$id.'">';
-				if ( $dd['with-icons'] && isset($content['ico']) ) { echo '<span class="coord-ico">'.pc_svg($content['ico']).'</span>'; }
-				echo '<span class="coord-txt">'.$content['txt'].'</span>';
-			echo '</dd>';
+			echo '<dd class="coord-item coord-item--'.$id.'">'.$content.'</dd>';
 		}
 	echo '</dl></address>';
 

@@ -161,16 +161,6 @@ function pc_display_header_nav() {
 
 }
 
-/*----------  Social  ----------*/
-
-add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
-
-	function pc_display_header_social() {
-
-		pc_display_social_links( 'social-list--header' );
-
-	}
-
 
 /*=====  FIN Navigation  =====*/
 
