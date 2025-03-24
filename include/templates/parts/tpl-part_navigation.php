@@ -19,11 +19,17 @@ add_action( 'after_setup_theme', 'pc_preform_register_nav_menus' );
 
 	function pc_preform_register_nav_menus() {
 
-		$nav_locations = apply_filters( 'pc_filter_nav_locations', array( 
-			'nav-header' => 'Entête',
+		$nav_locations = array( 
+			'nav-header' => 'Entête principale',
 			'nav-footer' => 'Pied de page'
-		) );
+		);
 
+		if ( get_option('options_nav_secondary_enabled') ) {
+			$nav_locations['nav-header-secondary'] = 'Entête secondaire';
+		}
+
+		$nav_locations = apply_filters( 'pc_filter_nav_locations', $nav_locations );
+		asort($nav_locations);
 		register_nav_menus( $nav_locations );	
 
 	}

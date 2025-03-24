@@ -23,9 +23,10 @@ add_action( 'pc_header', 'pc_display_header_start', 40 );
 	add_action( 'pc_header', 'pc_display_header_logo', 50 );
 	add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
 	add_action( 'pc_header', 'pc_display_header_nav', 70 );
-	// TODO add_action( 'pc_header', 'pc_display_header_tools', 80 );
+	add_action( 'pc_header', 'pc_display_header_nav_secondary', 80 );
+	add_action( 'pc_header', 'pc_display_header_search', 90 );
 
-add_action( 'pc_header', 'pc_display_header_end', 90 );
+add_action( 'pc_header', 'pc_display_header_end', 100 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -128,12 +129,49 @@ function pc_display_header_logo() {
 
 function pc_display_nav_button_open_close() {
 
-	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button>';
+	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">Menu</span></button>';
 
 }
 
 
-/*----------  Menu  ----------*/
+/*----------  Menu secondaire  ----------*/
+
+function pc_display_header_nav_secondary_list() {
+
+	$nav_args = apply_filters( 'pc_filter_header_nav_secondary_list_args', array(
+		'theme_location'  	=> 'nav-header-secondary',
+		'nav_prefix'		=> array('h-nav', 'h-s-nav'),
+		'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-s-nav-list h-s-nav-list--l1',
+		'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
+		'depth'           	=> apply_filters( 'pc_filter_header_nav_secondary_depth', 1 ),
+		'container'       	=> '',
+		'item_spacing'		=> 'discard',
+		'fallback_cb'     	=> false,
+		'walker'          	=> new PC_Walker_Nav_Menu()
+	) );
+
+	wp_nav_menu( $nav_args ); // + include/navigation.php
+
+}
+
+function pc_display_header_nav_secondary() {
+
+	if ( !get_option('options_nav_secondary_enabled') ) { return; }
+
+	echo '<nav class="h-s-nav" role="navigation" aria-label="Navigation secondaire"><div class="h-s-nav-inner">';
+	
+		do_action( 'pc_header_nav_secondary_list_before' );
+
+		pc_display_header_nav_secondary_list();
+		
+		do_action( 'pc_header_nav_secondary_list_after' );
+
+	echo '</div></nav>';
+
+}
+
+
+/*----------  Menu principal  ----------*/
 
 function pc_display_header_nav() {
 
@@ -154,6 +192,11 @@ function pc_display_header_nav() {
 		) );
 
 		wp_nav_menu( $nav_args ); // + include/navigation.php
+
+		if ( get_option('options_nav_secondary_enabled') ) {
+			do_action( 'pc_header_nav_list_between' );
+			pc_display_header_nav_secondary_list();
+		}
 		
 		do_action( 'pc_header_nav_list_after' );
 
@@ -164,35 +207,25 @@ function pc_display_header_nav() {
 
 /*=====  FIN Navigation  =====*/
 
-/*=============================
-=            Tools            =
-=============================*/
+/*=================================
+=            Recherche            =
+=================================*/
 
-// function pc_display_header_tools() {
+function pc_display_header_search() {
 
-// 	$items = array();
+	if ( get_option('options_search_enabled') ) {
+		
+		echo '<button type="button" class="button button--ico h-btn-toggle-search" aria-label="Afficher le formulaire de recherche" aria-expanded="false"><span class="ico">'.pc_svg('zoom').'</span><span class="ico ico--close">'.pc_svg('cross').'</span><span class="txt">Recherche</span></button>';
 
-// 	$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
-// 	$items['search'] = array(
-// 		'attrs' => '',
-// 		'html' => '<a href="'.get_bloginfo('url').'/?s" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
-// 	);
+		$box_attrs = array( 'id' => 'header-form-search-box' );
+		if ( get_option('options_search_desktop_hidden') ) { $box_attrs['class'] = 'desktop-hidden'; }
+		echo '<div '.pc_get_attrs_to_string( $box_attrs ).'>';
+			pc_display_form_search( 'header' );
+		echo '</div>';
+		
+	}
 
-// 	$items = apply_filters( 'pc_filter_header_tools', $items );
-
-// 	if ( count( $items ) > 0 ) {
-
-// 		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list">';
-
-// 			foreach ( $items as $id => $args ) {
-// 				echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
-// 			}
-
-// 		echo '</ul></div></nav>';
-
-// 	}
-
-// }
+}
 
 
-/*=====  FIN Tools  =====*/
+/*=====  FIN Recherche  =====*/

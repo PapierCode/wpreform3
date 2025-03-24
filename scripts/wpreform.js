@@ -66,6 +66,70 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	// 	});
 	// }
 
+	/*----------  Recherche  ----------*/
+
+	const searchBtn = document.querySelector('.h-btn-toggle-search');
+
+	if ( searchBtn ) {
+
+		const searchBtnParentStyles = window.getComputedStyle(searchBtn.parentNode);
+		const searchBox = document.querySelector('#header-form-search-box');
+		const searchElts = searchBox.querySelectorAll('button,input');
+
+		const searchBtnClick = () => {
+
+			if ( searchBtn.getAttribute('aria-expanded') == 'false' ) {
+
+				searchBtn.setAttribute( 'aria-expanded', true );
+				searchBtn.setAttribute( 'aria-label', 'Masquer le formulaire de recherche' );
+				searchBox.setAttribute( 'aria-hidden', 'false' );
+				searchElts.forEach( elt => { elt.removeAttribute('tabindex'); } );
+
+			} else {
+
+				searchBtn.setAttribute( 'aria-expanded', false );
+				searchBtn.setAttribute( 'aria-label', 'Afficher le formulaire de recherche' );
+				searchBox.setAttribute( 'aria-hidden', 'true' );
+				searchElts.forEach( elt => { elt.setAttribute('tabindex','-1'); } );
+
+			}
+			
+		};
+
+		const searchToggle = () => {
+
+			if ( searchBtnParentStyles.display != 'none' ) {
+
+				searchBtn.classList.add('active');
+				searchBtn.addEventListener( 'click', searchBtnClick );
+
+				searchBox.setAttribute('aria-hidden','true');
+				searchElts.forEach( elt => { elt.setAttribute('tabindex','-1'); } );
+
+			} else if ( searchBtnParentStyles.display == 'none' && searchBtn.classList.contains('active') ) {
+				
+				searchBtn.classList.remove('active');
+				searchBtn.setAttribute( 'aria-expanded', false );
+				searchBtn.setAttribute( 'aria-label', 'Afficher le formulaire de recherche' );
+
+				searchBtn.removeEventListener( 'click', searchBtnClick );
+				searchBox.removeAttribute( 'aria-hidden' );
+				searchElts.forEach( elt => { elt.removeAttribute('tabindex'); } );
+
+			}
+
+		};
+
+		searchToggle();
+		let resizeTimer = null;
+		window.addEventListener( 'resize', () => { 
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout( searchToggle, 250 );
+		} );
+
+	}
+
+
 	/*----------  Modal  ----------*/
 
 	const btnOpenModal = document.querySelectorAll('.modal-btn-open');
@@ -103,6 +167,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 	}
 
+
 	/*----------  Bloc map  ----------*/
 	
 	const mapBlocs = document.querySelectorAll('.bloc-map');
@@ -137,6 +202,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		});
 
 	}
+	
 
 	/*----------  Formulaires  ----------*/
 	
