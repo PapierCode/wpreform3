@@ -176,7 +176,7 @@ add_filter( 'wp_insert_post_data', 'pc_admin_cgu_status', 10, 2 );
 
 	function pc_admin_cgu_status( $data, $postarr ) {
 		
-		if ( 'page' == $data['post_type'] && get_option( 'wp_page_for_privacy_policy' ) == $postarr['ID'] ) {
+		if ( $data['post_type'] == 'page' && $postarr['post_status'] != 'auto-draft' && get_option( 'wp_page_for_privacy_policy' ) == $postarr['ID'] ) {
 			$data['post_status'] = 'publish';
 			$data['post_password'] = '';
 		}
