@@ -215,7 +215,7 @@ function pc_display_header_search() {
 
 	if ( get_option('options_search_enabled') ) {
 		
-		echo '<button type="button" class="button button--ico h-btn-toggle-search" aria-label="'.__('Display search form','wpreform').'" aria-expanded="false"><span class="ico">'.pc_svg('zoom').'</span><span class="ico ico--close">'.pc_svg('cross').'</span><span class="txt">'.__('Search','wpreform').'</span></button>';
+		echo '<button type="button" class="button h-btn-toggle-search" aria-label="'.__('Display search form','wpreform').'" aria-expanded="false"><span class="ico">'.pc_svg('zoom').'</span><span class="ico ico--close">'.pc_svg('cross').'</span><span class="txt">'.__('Search','wpreform').'</span></button>';
 
 		$box_attrs = array( 'id' => 'header-form-search-box' );
 		if ( get_option('options_search_desktop_hidden') ) { $box_attrs['class'] = 'desktop-hidden'; }
