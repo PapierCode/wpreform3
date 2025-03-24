@@ -97,7 +97,7 @@ function pc_display_header_end() {
 
 function pc_display_header_logo() {
 		
-	echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Page d\'accueil">';
+	echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="'.__('Homepage','wpreform').'">';
 
 		$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', array(
 			'url' => get_bloginfo('template_directory').'/images/logo.svg',
@@ -129,7 +129,7 @@ function pc_display_header_logo() {
 
 function pc_display_nav_button_open_close() {
 
-	echo '<button type="button" title="Ouvrir le menu" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="Fermer le menu"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">Menu</span></button>';
+	echo '<button type="button" title="'.__('Open menu','wpreform').'" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="'.__('Close menu','wpreform').'"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">'.__('Menu','wpreform').'</span></button>';
 
 }
 
@@ -158,7 +158,7 @@ function pc_display_header_nav_secondary() {
 
 	if ( !get_option('options_nav_secondary_enabled') ) { return; }
 
-	echo '<nav class="h-s-nav" role="navigation" aria-label="Navigation secondaire"><div class="h-s-nav-inner">';
+	echo '<nav class="h-s-nav" role="navigation" aria-label="'.__('Secondary navigation','wpreform').'"><div class="h-s-nav-inner">';
 	
 		do_action( 'pc_header_nav_secondary_list_before' );
 
@@ -175,7 +175,7 @@ function pc_display_header_nav_secondary() {
 
 function pc_display_header_nav() {
 
-	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
+	echo '<nav class="h-nav" role="navigation" aria-label="'.__('Primary navigation','wpreform').'"><div class="h-nav-inner">';
 	
 		do_action( 'pc_header_nav_list_before' );
 
@@ -215,7 +215,7 @@ function pc_display_header_search() {
 
 	if ( get_option('options_search_enabled') ) {
 		
-		echo '<button type="button" class="button button--ico h-btn-toggle-search" aria-label="Afficher le formulaire de recherche" aria-expanded="false"><span class="ico">'.pc_svg('zoom').'</span><span class="ico ico--close">'.pc_svg('cross').'</span><span class="txt">Recherche</span></button>';
+		echo '<button type="button" class="button button--ico h-btn-toggle-search" aria-label="'.__('Display search form','wpreform').'" aria-expanded="false"><span class="ico">'.pc_svg('zoom').'</span><span class="ico ico--close">'.pc_svg('cross').'</span><span class="txt">'.__('Search','wpreform').'</span></button>';
 
 		$box_attrs = array( 'id' => 'header-form-search-box' );
 		if ( get_option('options_search_desktop_hidden') ) { $box_attrs['class'] = 'desktop-hidden'; }

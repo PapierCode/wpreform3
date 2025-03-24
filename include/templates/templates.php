@@ -105,3 +105,18 @@ add_filter( 'excerpt_length', 'pc_edit_excerpt_length' );
 
 
 /*=====  FIN Résumé auto  =====*/
+
+/*===================================
+=            Traductions            =
+===================================*/
+
+add_action( 'init', 'pc_load_theme_textdomain');
+
+	function pc_load_theme_textdomain() {
+		
+		load_theme_textdomain( 'wpreform', get_template_directory().'/languages' );
+	
+	}
+
+
+/*=====  FIN Traductions  =====*/
