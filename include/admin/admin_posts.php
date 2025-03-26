@@ -55,6 +55,40 @@ add_filter( 'wp_untrash_post_status', 'pc_admin_untrash_post_status', 10, 3 );
 
     }
 
+/*----------  Rank Math  ----------*/
+
+if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) {
+
+	if ( get_option('options_news_enabled') ) { add_filter( 'bulk_actions-edit-'.NEWS_POST_SLUG, 'aqui_edit_rankmath_bulk_actions', 666 ); }
+	if ( get_option('options_events_enabled') ) { add_filter( 'bulk_actions-edit-'.EVENT_POST_SLUG, 'aqui_edit_rankmath_bulk_actions', 666 ); }
+	add_filter( 'bulk_actions-edit-page', 'aqui_edit_rankmath_bulk_actions', 666 );
+
+		function aqui_edit_rankmath_bulk_actions( $actions ) {
+
+			unset( $actions['rank_math_options'] );
+			unset( $actions['rank_math_bulk_determine_search_intent'] );
+			return $actions;
+
+		}
+
+	add_filter( 'rank_math/researches/tests', 'pc_edit_rankmath_tests' , 10, 2 );
+	
+		function pc_edit_rankmath_tests( $tests, $type ) {
+		
+			unset(
+				$tests['hasContentAI'],
+				$tests['linksHasExternals'],
+				$tests['linksNotAllExternals'],
+				$tests['keywordInImageAlt'],
+				$tests['contentHasAssets'],
+				$tests['contentHasTOC']
+			);
+			return $tests;
+		
+		}
+
+}
+
 
 /*=====  FIN Communs  =====*/
 
