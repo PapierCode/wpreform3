@@ -75,11 +75,3 @@ msgstr ""
 
 msgid "Follow us on %s (new window)"
 msgstr ""
-
-# slug
-msgid "news"
-msgstr ""
-
-# slug
-msgid "events"
-msgstr ""
