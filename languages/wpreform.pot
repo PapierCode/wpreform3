@@ -16,34 +16,70 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: wpreform"
 
-#. Description of the theme
-msgid "Open menu"
+msgid "Skip link%s"
 msgstr ""
 
-#. Description of the theme
-msgid "Close menu"
+msgid "Skip to main content"
 msgstr ""
 
-#. Description of the theme
-msgid "Menu"
-msgstr ""
-
-#. Description of the theme
 msgid "Primary navigation"
 msgstr ""
 
-#. Description of the theme
 msgid "Secondary navigation"
 msgstr ""
 
-#. Description of the theme
+msgid "Footer navigation"
+msgstr ""
+
+msgid "Open menu"
+msgstr ""
+
+msgid "Close menu"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
+msgid "Previous page"
+msgstr ""
+
 msgid "Display search form"
 msgstr ""
 
-#. Description of the theme
 msgid "Search"
 msgstr ""
 
-#. Description of the theme
+msgid "Search results"
+msgstr ""
+
 msgid "Homepage"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "News"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "This page does not exist"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Follow us on %s (new window)"
+msgstr ""
+
+# slug
+msgid "news"
+msgstr ""
+
+# slug
+msgid "events"
 msgstr ""

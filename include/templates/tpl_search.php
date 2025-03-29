@@ -44,7 +44,7 @@ add_action( 'pc_action_template_search', 'pc_display_main_end', 100 ); // tpl-pa
 
 function pc_display_search_main_title() {
 	
-	$title = get_search_query() ? 'Résultats de la recherche' : "Recherche";
+	$title = get_search_query() ? __('Search results','wpreform') : __('Search','wpreform');
 	echo apply_filters( 'pc_filter_search_main_title', '<h1>'.$title.'</h1>' );
 
 }
@@ -66,9 +66,9 @@ function pc_display_search_results_content() {
 
 		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
 
-		$types = array( 'page' => 'Page' );
-		if ( get_option('options_news_enabled') ) { $types[NEWS_POST_SLUG] = 'Actualité'; }
-		if ( get_option('options_events_enabled') ) { $types[EVENT_POST_SLUG] = 'Événement'; }
+		$types = array( 'page' => __('Page','wpreform') );
+		if ( get_option('options_news_enabled') ) { $types[NEWS_POST_SLUG] = __('News','wpreform'); }
+		if ( get_option('options_events_enabled') ) { $types[EVENT_POST_SLUG] = __('Event','wpreform'); }
 		$types = apply_filters( 'pc_filter_search_results_post_types', $types );
 
 		echo '<p class="s-results-infos">'.pc_get_search_count_results( $search_query ).'.</p>';		
@@ -84,7 +84,7 @@ function pc_display_search_results_content() {
 				$pc_post = new PC_Post( $post );
 
 				echo '<li class="s-results-item s-results-item--'.$pc_post->type.'">';
-					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite">'.$pc_post->get_card_title().'</a></h2>';
+					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="'.__('Read more','wpreform').'">'.$pc_post->get_card_title().'</a></h2>';
 					if ( array_key_exists( $pc_post->type, $types ) ) { echo '<p class="s-results-item-type">'.$types[$pc_post->type].'</p>'; };
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'<span class="card-desc-ico">&nbsp;<span class="ico">'.$ico.'</span></span></p>';
 				echo '</li>';

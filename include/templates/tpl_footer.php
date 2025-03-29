@@ -86,7 +86,7 @@ function pc_display_footer_contact() {
 		array(
 			'href' => 'tel:'.pc_get_phone_format($phone),
 			'class' => 'coord-phone '.$btn_css,
-			'title' => 'Téléphone '.pc_get_phone_format($phone,false)
+			'title' => __('Phone','wpreform').' '.pc_get_phone_format($phone,false)
 		),
 		'phone'
 	);
@@ -102,7 +102,7 @@ function pc_display_footer_contact() {
 			array(
 				'href' => $rs['url'],
 				'class' => 'social-link '.$btn_css.' button--ico',
-				'title' => 'Suivez-nous sur '.$rs['ico']['label'].' (nouvelle fenêtre)',
+				'title' => sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']),
 				'target' => '_blank',
 				'rel' => 'noreferrer'
 			),
@@ -137,7 +137,7 @@ function pc_display_footer_contact() {
 
 function pc_display_footer_nav() {
 
-	echo '<nav class="f-nav" role="navigation" aria-label="Navigation du pied de page">';
+	echo '<nav class="f-nav" role="navigation" aria-label="'.__('Footer navigation','wpreform').'">';
 	
 		do_action( 'pc_footer_nav_items_before' );
 		

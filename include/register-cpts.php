@@ -81,7 +81,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                         'not_found'             => 'Aucune actualité',
                         'search_items'			=> 'Rechercher une actualité'
                     );
-                    $post_news_rewrite = 'actualites';
+                    $post_news_rewrite = __('news','wpreform');
                     break;
                 case 'blog':                
                     $post_news_labels = array (
@@ -138,7 +138,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 'menu_icon'         	=> 'dashicons-calendar-alt',
                 'supports'          	=> array( 'title', 'editor', 'thumbnail', 'author' ), 
                 'show_in_rest'			=> true,
-                'rewrite'				=> array( 'slug' => 'evenements' ),
+                'rewrite'				=> array( 'slug' => __('events','wpreform') ),
                 'labels' 				=> array (
                     'name'                  => 'Événements',
                     'singular_name'         => 'Événement',

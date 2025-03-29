@@ -93,13 +93,13 @@ function pc_display_main_footer_backlink( $pc_post ) {
 		
 		if ( $wp_referer ) {
 			$back_link = $wp_referer;
-			$back_title = 'Page précédente';
-			$back_txt = 'Page précédente';
+			$back_title = __('Previous page','wpreform');
+			$back_txt = __('Previous page','wpreform');
 			$back_ico = 'arrow';
 		} else if ( is_page() ) {
 			$back_link = get_the_permalink( $pc_post->parent );
-			$back_title = 'En savoir plus';
-			$back_txt = 'En savoir plus';
+			$back_title = __('Read more','wpreform');
+			$back_txt = __('Read more','wpreform');
 			$back_ico = 'more';
 		} else {
 			$post_object = get_post_type_object( $pc_post->type );
@@ -111,11 +111,11 @@ function pc_display_main_footer_backlink( $pc_post ) {
 
 		echo pc_get_button( 
 			$back_txt, 
-			[
+			array(
 				'href' => $back_link,
 				'class' => 'button--previous',
 				'title' => $back_title
-			], 
+			), 
 			$back_ico
 		);
 

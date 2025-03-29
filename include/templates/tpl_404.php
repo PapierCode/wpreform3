@@ -30,7 +30,7 @@ add_action( 'pc_action_template_404', 'pc_display_main_end', 50 ); // tpl-part_l
 
 function pc_display_404_main_title() {
 
-	echo apply_filters( 'pc_filter_404_main_title', '<h1>Cette page n\'existe pas.</h1>' );
+	echo apply_filters( 'pc_filter_404_main_title', '<h1>'.__('This page does not exist','wpreform').'</h1>' );
 
 } 
 

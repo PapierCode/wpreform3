@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-03-24 16:04+0000\n"
+"PO-Revision-Date: 2025-03-29 08:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -15,30 +15,70 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: wpreform"
 
-#. Description of the theme
 msgid "Close menu"
 msgstr "Fermer le menu"
 
-#. Description of the theme
 msgid "Display search form"
 msgstr "Afficher le formulaire de recherche"
 
-#. Description of the theme
+msgid "Event"
+msgstr "Événement"
+
+# slug
+msgid "events"
+msgstr "evenements"
+
+msgid "Follow us on %s (new window)"
+msgstr "Suivez-nous sur %s (nouvelle fenêtre)"
+
+msgid "Footer navigation"
+msgstr "Navigation pied de page"
+
+msgid "Homepage"
+msgstr "Page d'accueil"
+
 msgid "Menu"
 msgstr "Menu"
 
-#. Description of the theme
+msgid "News"
+msgstr "Actualité"
+
+# slug
+msgid "news"
+msgstr "actualites"
+
 msgid "Open menu"
 msgstr "Ouvrir le menu"
 
-#. Description of the theme
+msgid "Page"
+msgstr "Page"
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "Previous page"
+msgstr "Page précédente"
+
 msgid "Primary navigation"
 msgstr "Navigation principale"
 
-#. Description of the theme
+msgid "Read more"
+msgstr "Lire la suite"
+
 msgid "Search"
 msgstr "Rechercher"
 
-#. Description of the theme
+msgid "Search results"
+msgstr "Résultats de recherche"
+
 msgid "Secondary navigation"
 msgstr "Navigation secondaire"
+
+msgid "Skip link%s"
+msgstr "Lien%s d'évitement"
+
+msgid "Skip to main content"
+msgstr "Accéder au contenu principal"
+
+msgid "This page does not exist"
+msgstr "Cette page n'existe pas"

@@ -37,14 +37,10 @@ add_action( 'pc_header', 'pc_display_header_end', 100 );
 
 function pc_display_skip_nav() {
 	
-	$skip_nav_list = array(
-		array( 'href' => '#main', 'label' => 'Contenu' )
-	);
-
-	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
-
+	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', [ array( 'href' => '#main', 'label' => __('Skip to main content','wpreform') ) ] );
 	$plurial = ( count( $skip_nav_list ) > 1 ) ? 's' : '';
-	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Lien'.$plurial.' d\'accès rapide'.$plurial.'">';
+
+	echo '<nav class="skip-nav no-print" role="navigation" aria-label="'.sprintf(__('Skip link%s','wpreform'),$plurial).'">';
 		if ( count( $skip_nav_list ) > 1 ) {
 			echo '<ul class="skip-nav-list">';
 				foreach ( $skip_nav_list as $args ) {
