@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-03-29 09:26+0000\n"
+"PO-Revision-Date: 2025-03-31 10:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -15,62 +15,188 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: wpreform"
 
+#: include/templates/parts/tpl-part_page.php
+msgid "All events"
+msgstr "Tous les événements"
+
+#: include/templates/parts/tpl-part_page.php
+msgid "All news"
+msgstr "Toutes les actualités"
+
+#: include/templates/parts/tpl-part_search.php
+msgid "associated with"
+msgstr "associé à "
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Breadcrumbs"
+msgstr "Fil d'ariane"
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Cancel filter"
+msgstr "Annuler le filtre"
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Categories"
+msgstr "Catégories"
+
+#: include/tools.php
+msgid "Close dialog box"
+msgstr "Fermer la boite de dialogue"
+
+#: include/templates/tpl_header.php
 msgid "Close menu"
 msgstr "Fermer le menu"
 
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Dialog box"
+msgstr "Boite de dialogue"
+
+#: include/templates/tpl_header.php
 msgid "Display search form"
 msgstr "Afficher le formulaire de recherche"
 
+#: include/templates/tpl_search.php
 msgid "Event"
 msgstr "Événement"
 
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Event categories"
+msgstr "Catégories des événements"
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Filter by"
+msgstr "Filtrer par"
+
+#: include/templates/tpl_footer.php include/templates/tpl-part_social.php
 msgid "Follow us on %s (new window)"
 msgstr "Suivez-nous sur %s (nouvelle fenêtre)"
 
+#: include/templates/tpl_footer.php
 msgid "Footer navigation"
 msgstr "Navigation pied de page"
 
+#: include/templates/parts/tpl-part_search.php
+msgid "for"
+msgstr "pour"
+
+#: include/templates/parts/tpl-part_search.php
+msgid "for the search of"
+msgstr "pour la recherche de"
+
+#: include/templates/tpl_header.php
+#: include/templates/parts/tpl_part_navigation.php
 msgid "Homepage"
 msgstr "Page d'accueil"
 
+#: include/templates/parts/tpl-part_main.php
+msgid "Main content footer"
+msgstr "Pied de page du contenu principal"
+
+#: include/templates/parts/tpl-part_main.php
+msgid "Main content header"
+msgstr "Entête du contenu principal"
+
+#: include/templates/tpl_header.php
 msgid "Menu"
 msgstr "Menu"
 
+#: include/templates/tpl_search.php
 msgid "News"
 msgstr "Actualité"
 
+#: include/templates/parts/tpl-part_cpts.php
+msgid "News categories"
+msgstr "Catégories des actualités"
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Next"
+msgstr "Suivant"
+
+#: include/templates/parts/tpl-part_search.php
+msgid "of"
+msgstr "de"
+
+#: include/templates/tpl_header.php
 msgid "Open menu"
 msgstr "Ouvrir le menu"
 
+#: include/templates/tpl_search.php
+#: include/templates/parts/tpl_part_navigation.php
 msgid "Page"
 msgstr "Page"
 
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Pagination"
+msgstr "Pagination"
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Past events"
+msgstr "Événements passés"
+
+#: include/templates/parts/tpl-part_search.php
+msgid "Perform the search"
+msgstr "Effectuer la recherche"
+
+#: include/templates/tpl_footer.php
 msgid "Phone"
 msgstr "Téléphone"
 
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Previous"
+msgstr "Précédent"
+
+#: include/templates/tpl_index.php
 msgid "Previous page"
 msgstr "Page précédente"
 
+#: include/templates/tpl_header.php
 msgid "Primary navigation"
 msgstr "Navigation principale"
 
+#: include/templates/tpl_index.php include/templates/tpl_search.php
 msgid "Read more"
 msgstr "Lire la suite"
 
+#: include/templates/parts/tpl-part_search.php
+msgid "result"
+msgid_plural "results"
+msgstr[0] "résultat"
+msgstr[1] "résultats"
+
+#: include/templates/tpl_header.php include/templates/tpl_search.php
+#: include/templates/parts/tpl_part_navigation.php
+#: include/templates/parts/tpl_part_search.php
 msgid "Search"
 msgstr "Rechercher"
 
+#: include/templates/tpl_search.php
 msgid "Search results"
 msgstr "Résultats de recherche"
 
+#: include/templates/tpl_header.php
 msgid "Secondary navigation"
 msgstr "Navigation secondaire"
 
+#: include/templates/parts/tpl-part_social.php
+msgid "Share on %s (new window)"
+msgstr "Partager sur %s (nouvelle fenêtre)"
+
+#: include/templates/parts/tpl-part_social.php
+msgid "Sharing"
+msgstr "Partage"
+
+#: include/templates/tpl_header.php
 msgid "Skip link%s"
 msgstr "Lien%s d'évitement"
 
+#: include/templates/tpl_header.php
 msgid "Skip to main content"
 msgstr "Accéder au contenu principal"
 
+#: include/templates/tpl_404.php
 msgid "This page does not exist"
 msgstr "Cette page n'existe pas"
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Upcoming Events"
+msgstr "Événements à venir"

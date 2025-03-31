@@ -244,7 +244,7 @@ function pc_get_attrs_to_string( $attrs ) {
 function pc_display_modal( $modal ) {
 
     echo '<dialog id="'.$modal['id'].'" class="modal" autofocus aria-label="'.$modal['label'].'"><div class="modal-inner">';
-        echo '<button type="button" class="modal-btn-close button" title="Fermer la fenêtre" aria-label="Fermer la fenêtre"><span class="ico">'.pc_svg('cross').'</span></button>';
+        echo '<button type="button" class="modal-btn-close button" title="'.__('Close dialog box','wpreform').'" aria-label="'.__('Close dialog box','wpreform').'"><span class="ico">'.pc_svg('cross').'</span></button>';
         echo $modal['content'];
     echo '</div></dialog>';
 

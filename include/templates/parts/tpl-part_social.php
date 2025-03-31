@@ -21,7 +21,7 @@ function pc_display_social_links( $css_class ) {
 	
 	foreach( $rs_list as $rs ) {
 
-		echo '<li class="social-item"><a class="social-link social-link--'.$rs['ico']['value'].'" href="'.$rs['url'].'" target="_blank" rel="noreferrer" title="Suivez-nous sur '.$rs['ico']['label'].' (nouvelle fenêtre)"><span class="ico">'.pc_svg($rs['ico']['value']).'</span></a></li>';	
+		echo '<li class="social-item"><a class="social-link social-link--'.$rs['ico']['value'].'" href="'.$rs['url'].'" target="_blank" rel="noreferrer" title="'.sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']).'"><span class="ico">'.pc_svg($rs['ico']['value']).'</span></a></li>';	
 
 	}
 
@@ -54,7 +54,7 @@ function pc_display_share_links() {
 		'Facebook' 	=> 'https://www.facebook.com/sharer/sharer.php?u='.$url_to_share
 	) );
 
-	$share_title = apply_filters( 'pc_filter_share_links_title', 'Partage&nbsp;:' );
+	$share_title = apply_filters( 'pc_filter_share_links_title', __('Sharing','wpreform').'&nbsp;:' );
 	$btn_css = apply_filters( 'pc_filter_share_links_class', 'button' );
 
 
@@ -72,7 +72,7 @@ function pc_display_share_links() {
 						array(
 							'href' => $href,
 							'class' => 'social-link '.$btn_css.' button--ico',
-							'title' => 'Partager sur '.$name.' (nouvelle fenêtre)',
+							'title' => sprintf(__('Share on %s (new window)','wpreform'),$name),
 							'target' => '_blank',
 							'rel' => 'nofollow noreferrer'
 						),

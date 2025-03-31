@@ -16,62 +16,190 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: wpreform"
 
+#: include/templates/tpl_header.php
 msgid "Skip link%s"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Skip to main content"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Primary navigation"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Secondary navigation"
 msgstr ""
 
+#: include/templates/tpl_footer.php
 msgid "Footer navigation"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Open menu"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Close menu"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Menu"
 msgstr ""
 
+#: include/templates/tpl_index.php
+#: include/templates/tpl_search.php
 msgid "Read more"
 msgstr ""
 
+#: include/templates/tpl_index.php
 msgid "Previous page"
 msgstr ""
 
+#: include/templates/tpl_header.php
 msgid "Display search form"
 msgstr ""
 
+#: include/templates/tpl_header.php
+#: include/templates/tpl_search.php
+#: include/templates/parts/tpl_part_navigation.php
+#: include/templates/parts/tpl_part_search.php
 msgid "Search"
 msgstr ""
 
+#: include/templates/tpl_search.php
 msgid "Search results"
 msgstr ""
 
+#: include/templates/tpl_header.php
+#: include/templates/parts/tpl_part_navigation.php
 msgid "Homepage"
 msgstr ""
 
+#: include/templates/tpl_search.php
+#: include/templates/parts/tpl_part_navigation.php
 msgid "Page"
 msgstr ""
 
+#: include/templates/tpl_search.php
 msgid "News"
 msgstr ""
 
+#: include/templates/tpl_search.php
 msgid "Event"
 msgstr ""
 
+#: include/templates/tpl_404.php
 msgid "This page does not exist"
 msgstr ""
 
+#: include/templates/tpl_footer.php
 msgid "Phone"
 msgstr ""
 
+#: include/templates/tpl_footer.php
+#: include/templates/tpl-part_social.php
 msgid "Follow us on %s (new window)"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Upcoming Events"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Past events"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "News categories"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Event categories"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Categories"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Dialog box"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Cancel filter"
+msgstr ""
+
+#: include/templates/parts/tpl-part_cpts.php
+msgid "Filter by"
+msgstr ""
+
+#: include/templates/parts/tpl-part_main.php
+msgid "Main content header"
+msgstr ""
+
+#: include/templates/parts/tpl-part_main.php
+msgid "Main content footer"
+msgstr ""
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Breadcrumbs"
+msgstr ""
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Next"
+msgstr ""
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Previous"
+msgstr ""
+
+#: include/templates/parts/tpl-part_navigation.php
+msgid "Pagination"
+msgstr ""
+
+#: include/templates/parts/tpl-part_page.php
+msgid "All news"
+msgstr ""
+
+#: include/templates/parts/tpl-part_page.php
+msgid "All events"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "Perform the search"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "result"
+msgid_plural "results"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "for the search of"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "of"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "for"
+msgstr ""
+
+#: include/templates/parts/tpl-part_search.php
+msgid "associated with"
+msgstr ""
+
+#: include/templates/parts/tpl-part_social.php
+msgid "Sharing"
+msgstr ""
+
+#: include/templates/parts/tpl-part_social.php
+msgid "Share on %s (new window)"
+msgstr ""
+
+#: include/tools.php
+msgid "Close dialog box"
 msgstr ""

@@ -41,7 +41,7 @@ function pc_display_main_end() {
 
 function pc_display_main_header_start() {
 
-	$tag = '<header class="main-header" aria-label="Entête du contenu principal">';
+	$tag = '<header class="main-header" aria-label="'.__('Main content header','wpreform').'">';
 	if ( apply_filters( 'pc_filter_display_main_header_inner', false ) ) { $tag .= '<div class="main-header-inner">'; }
 
 	echo apply_filters( 'pc_filter_main_header_start', $tag );
@@ -93,7 +93,7 @@ function pc_display_main_content_end() {
 
 function pc_display_main_footer_start() {
 
-	$tag = '<footer class="main-footer" aria-label="Pied de page du contenu principal">';
+	$tag = '<footer class="main-footer" aria-label="'.__('Main content footer','wpreform').'">';
 	if ( apply_filters( 'pc_filter_display_main_footer_inner', false ) ) { $tag .= '<div class="main-footer-inner">'; }
 
     echo apply_filters( 'pc_filter_main_footer_start', $tag );

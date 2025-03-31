@@ -80,7 +80,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 				$active_cpts['news'] = array(
 					'slug' => NEWS_POST_SLUG,
 					'title_txt' => get_field('news_aside_page_title','option'),
-					'btn_txt' => 'Toutes les actualités'
+					'btn_txt' => __('All news','wpreform')
 				);
 			}
 
@@ -88,7 +88,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
 				$active_cpts['event'] = array(
 					'slug' => EVENT_POST_SLUG,
 					'title_txt' => get_field('events_aside_page_title','option'),
-					'btn_txt' => 'Tous les événements'
+					'btn_txt' => __('All events','wpreform')
 				);
 			}
 

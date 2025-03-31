@@ -147,7 +147,7 @@ add_action( 'pc_action_template_archive_after', 'pc_display_event_archive_link',
             $txt = 'Événements passés';       
 
             if ( get_query_var( 'archive' ) == 1 ) {
-                $txt = 'Événements à venir';
+                $txt = __('Upcoming Events','wpreform');
                 $class = 'link-past-events';
             } else {
                 $href .= '?archive=1';
@@ -260,7 +260,7 @@ add_filter( 'pc_filter_archive_main_header_title', 'pc_edit_news_events_archive_
     function pc_edit_news_events_archive_main_header_title( $title, $post_type, $settings ) {
 
         // événements passés
-        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && get_query_var( 'archive' ) == 1 ) { $title = 'Événements passés'; }
+        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && get_query_var( 'archive' ) == 1 ) { $title = __('Past events','wpreform'); }
 
         // catégorie en cours
         global $wpr_cpts;
@@ -297,11 +297,11 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
         if ( defined('NEWS_POST_SLUG') && $post_type == NEWS_POST_SLUG ) {
             $tax_slug = NEWS_TAX_SLUG;
             $modal_id = 'modal-news-filters';
-            $modal_title = 'Catégories des actualités';
+            $modal_title = __('News categories','wpreform');
         } else if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG ) {
             $tax_slug = get_option('options_events_tax_shared') ? NEWS_TAX_SLUG : EVENT_TAX_SLUG;
             $modal_id = 'modal-events-filters';
-            $modal_title = 'Catégories des événements';
+            $modal_title = __('Event categories','wpreform');
         }
 
         $archive_url = get_post_type_archive_link( $post_type );
@@ -346,10 +346,10 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
             echo '<div class="filters filters--news">';
                 echo pc_get_button( 
-                    'Catégories', 
+                    __('Categories','wpreform'), 
                     [
                         'class' => 'modal-btn-open',
-                        'title' => 'Boite de dialogue',
+                        'title' => __('Dialog box','wpreform'),
                         'aria-control' => $modal_id,
                         'type' => 'button'
                     ], 
@@ -362,8 +362,8 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                         $current_term->name, 
                         [
                             'href' => $cancel_url,
-                            'title' => 'Annuler le filtre '.$current_term->name,
-                            'aria-label' => 'Annuler le filtre '.$current_term->name,
+                            'title' => __('Cancel filter','wpreform').' '.$current_term->name,
+                            'aria-label' => __('Cancel filter','wpreform').' '.$current_term->name,
                             'rel' => 'nofollow',
                             'class' => 'button--cancel'
                         ], 
@@ -386,8 +386,8 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                         $link_attrs = array_merge( $link_attrs,
                             array(
                                 'href' => $cancel_url,
-                                'title' => 'Annuler le filtre '.$term->name,
-                                'aria-label' => 'Annuler le filtre '.$term->name
+                                'title' => __('Cancel filter','wpreform').' '.$term->name,
+                                'aria-label' => __('Cancel filter','wpreform').' '.$term->name
                             )
                         );
                     } else {
@@ -396,8 +396,8 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                         $link_attrs = array_merge( $link_attrs,
                             array(
                                 'href' => $archive_url.'?'.http_build_query($href_args),
-                                'title' => 'Filtrer par '.$term->name,
-                                'aria-label' => 'Filtrer par '.$term->name
+                                'title' => __('Filter by','wpreform').' '.$term->name,
+                                'aria-label' => __('Filter by','wpreform').' '.$term->name
                             )
                         );
                     }

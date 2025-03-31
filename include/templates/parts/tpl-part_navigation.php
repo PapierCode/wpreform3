@@ -95,10 +95,10 @@ function pc_display_breadcrumb() {
 	$links = apply_filters( 'pc_filter_breadcrumb', 
 		array(
 			array(
-				'name' => 'Accueil',
+				'name' => __('Homepage','wpreform'),
 				'ico' => pc_svg('house'),
 				'permalink' => get_bloginfo('url'),
-				'aria-label' => 'Accueil'
+				'aria-label' => __('Homepage','wpreform')
 			)
 		)
 	);
@@ -161,7 +161,7 @@ function pc_display_breadcrumb() {
 		if ( is_single() && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
 
 			$links[] = array(
-				'name' => 'Page '.get_query_var( 'paged' ),
+				'name' => __('Page','wpreform').' '.get_query_var( 'paged' ),
 				'permalink' => $pc_post->get_canonical()
 			);
 
@@ -205,7 +205,7 @@ function pc_display_breadcrumb() {
 		if ( get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
 
 			$links[] = array(
-				'name' => 'Page '.get_query_var( 'paged' ),
+				'name' => __('Page','wpreform').' '.get_query_var( 'paged' ),
 				'permalink' => $pc_term->permalink.'page/'.get_query_var( 'paged' ).'/'
 			); 
 		}
@@ -219,14 +219,14 @@ function pc_display_breadcrumb() {
 	if ( is_search() ) {
 
 		$links[] = array(
-			'name' => 'Recherche',
+			'name' => __('Search','wpreform'),
 			'permalink' => home_url().'/?s='.esc_html( get_search_query() )
 		); 		
 
 		if ( get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
 
 			$links[] = array(
-				'name' => 'Page '.get_query_var( 'paged' ),
+				'name' => __('Page','wpreform'),' '.get_query_var( 'paged' ),
 				'permalink' => home_url().'/?s='.esc_html( get_search_query() ).'&paged='.get_query_var( 'paged' )
 			); 
 		}
@@ -255,7 +255,7 @@ function pc_display_breadcrumb() {
 
 	/*----------  Affichage  ----------*/
 	
-	echo '<nav class="breadcrumb no-print" role="navigation" aria-label="Fil d\'ariane"><ol class="breadcrumb-list">';
+	echo '<nav class="breadcrumb no-print" role="navigation" aria-label="'.__('Breadcrumbs','wpreform').'"><ol class="breadcrumb-list">';
 
 		foreach ( $links as $key => $link ) {
 
@@ -302,10 +302,10 @@ function pc_display_pager( $query = null, $current = null, $args = array() ) {
 		array(
 			'mid_size'				=> 0,
 			'end_size'				=> 0,
-			'next_text' 			=> '<span class="visually-hidden">Suivant</span>'.pc_svg( 'arrow' ),
-			'prev_text' 			=> '<span class="visually-hidden">Précédent</span>'.pc_svg( 'arrow' ),
+			'next_text' 			=> '<span class="visually-hidden">'.__('Next','wpreform').'</span>'.pc_svg( 'arrow' ),
+			'prev_text' 			=> '<span class="visually-hidden">'.__('Previous','wpreform').'</span>'.pc_svg( 'arrow' ),
 			'type' 					=> 'array',
-			'before_page_number' 	=> '<span class="visually-hidden">Page </span>',
+			'before_page_number' 	=> '<span class="visually-hidden">'.__('Page','wpreform').' </span>',
 			'format'                => '?paged=%#%',
 			'ul_css'				=> 'pager-list no-print',
 			'before_page_number'	=> '<span class="txt">',
@@ -331,7 +331,7 @@ function pc_display_pager( $query = null, $current = null, $args = array() ) {
 		$css_old = array( 'page-numbers', 'prev', 'current', 'dots', 'next' );
 		$css_new = array( 'pager-link', 'pager-link--prev', 'is-active', 'pager-dots', 'pager-link--next' );
 
-		$pager = '<nav class="pager" role="navigation" aria-label="Pagination"><ul class="'.$args['ul_css'].'">';
+		$pager = '<nav class="pager" role="navigation" aria-label="'.__('Pagination','wpreform').'"><ul class="'.$args['ul_css'].'">';
 
         foreach ( $paginate_links as $page ) {
 

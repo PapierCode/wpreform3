@@ -26,10 +26,10 @@ function pc_display_form_search( $css_suffix, $post_type = null ) {
     $args = apply_filters( 'pc_edit_form_search_args', $args, $css_suffix, $post_type );
 
     echo '<form id="'.$args['form_id'].'" class="'.implode(' ',$args['form_class']).'" method="get" role="search" action="'.get_bloginfo('url').'"><div class="form-search-inner">';
-        echo '<label class="visually-hidden" for="'.$args['form_id'].'-input">Recherche</label>';
-        echo '<input type="search" class="form-search-input" name="s" id="'.$args['form_id'].'-input" value="'.esc_html( get_search_query() ).'" placeholder="Recherche" title="Recherche" aria-invalid="false" autocomplete="off">';
+        echo '<label class="visually-hidden" for="'.$args['form_id'].'-input">'.__('Search','wpreform').'</label>';
+        echo '<input type="search" class="form-search-input" name="s" id="'.$args['form_id'].'-input" value="'.esc_html( get_search_query() ).'" placeholder="'.__('Search','wpreform').'" title="'.__('Search','wpreform').'" aria-invalid="false" autocomplete="off">';
         if ( $post_type ) { echo '<input type="hidden" name="cpt" value="'.$post_type.'">'; }
-        echo '<button type="submit" class="'.implode(' ',$args['submit_class']).'" title="Effectuer la recherche" aria-label="Effectuer la recherche"><span class="ico">'.$args['submit_ico'].'</span></button>';
+        echo '<button type="submit" class="'.implode(' ',$args['submit_class']).'" title="'.__('Perform the search','wpreform').'" aria-label="'.__('Perform the search','wpreform').'"><span class="ico">'.$args['submit_ico'].'</span></button>';
     echo '</div></form>';
 
 }
@@ -50,14 +50,13 @@ function pc_get_search_count_results( $query ) {
 
 	if ( $posts_count <= $post_per_page ) {
 
-		$txt = ( $posts_count > 1 ) ? 'résultats' : 'résultat';
-		return '<strong>'.$posts_count.' '.$txt.'</strong> pour la recherche de &quot;'.$query.'&quot;';
+		return '<strong>'.$posts_count.' '._n('result','results',$posts_count,'wpreform').'</strong> '.__('for the search of','wpreform').' &quot;'.$query.'&quot;';
 
 	} else {
 
 		$pages_count = ceil( $posts_count / get_option( 'posts_per_page' ) );
 		$page_current = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;					
-		return '<strong>Page '.$page_current.' sur '.$pages_count.'</strong> pour <strong>'.$posts_count.' résultats</strong> associés à la recherche de &quot;'.$query.'&quot;';
+		return '<strong>'.__('Page','wpreform').' '.$page_current.' '.__('of','wpreform').' '.$pages_count.'</strong> '.__('for','wpreform').' <strong>'.$posts_count.' '._n('result','results',$posts_count,'wpreform').'</strong> '.__('associated with').' &quot;'.$query.'&quot;';
 
 	}
 
