@@ -81,7 +81,9 @@ if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) {
 				$tests['linksNotAllExternals'],
 				$tests['keywordInImageAlt'],
 				$tests['contentHasAssets'],
-				$tests['contentHasTOC']
+				$tests['contentHasTOC'],
+				$tests['titleHasPowerWords'],
+				$tests['titleHasNumber']
 			);
 			return $tests;
 		

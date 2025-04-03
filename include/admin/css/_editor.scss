@@ -11,7 +11,7 @@
 =            Interface            =
 =================================*/
 
-.block-editor-tabbed-sidebar__tablist-and-close-button, // onglets colonne ajout
+.editor-inserter-sidebar .block-editor-tabbed-sidebar__tablist-and-close-button, // onglets colonne ajout
 .metabox-location-side .handle-order-higher, // btn deplacer la métaboxe
 .metabox-location-side .handle-order-lower, // btn deplacer la métaboxe
 .editor-document-bar, // barre de recherche fonctionnalités
@@ -72,6 +72,9 @@ a[href*="site-editor"], // lien vers les compositions de blocs et autres ?
 
 	&::before { vertical-align: sub; }
 }
+.rank-math-keyword-intent-container,
+.rank-math-trends-tool-button 
+{ display: none !important; }
 
 
 /*=====  FIN Interface  =====*/
