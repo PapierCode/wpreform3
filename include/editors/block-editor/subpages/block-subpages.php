@@ -1,15 +1,43 @@
 <?php
-        
-global $post;
-$subpages = get_posts( array(
-    'post_type' => 'page',
+$error = false;
+$type = get_field('type') ?? 'subpages';
+$get_subpages_args = array(
+    'post_type' => 'any',
     'nopaging' => true,
-    'order' => 'ASC',
-    'orderby' => 'menu_order',
-    'post_parent' => $post->ID
-));
+);
 
-if ( !empty( $subpages ) ) {
+if ( $type == 'subpages' ) {
+
+    global $post;
+    $get_subpages_args['post_parent'] = $post->ID;
+    $get_subpages_args['order'] = 'ASC';
+    $get_subpages_args['orderby'] = 'menu_order';
+
+    $get_subpages = get_posts( $get_subpages_args );
+    if ( empty($get_subpages) ) {
+        $error = true;
+        $msg_error = 'aucune sous-page trouvée';
+    }
+
+} else if ( $type == 'selection' ) {
+
+    $selection = get_field('selection');
+    if ( $selection ) {
+        $get_subpages_args['post__in'] = $selection;
+        $get_subpages = get_posts( $get_subpages_args );
+        if ( empty($get_subpages) ) {
+            $error = true;
+            $msg_error = 'aucune page trouvée';
+        }
+
+    } else {
+        $error = true;
+        $msg_error = 'sélectionnez des pages';
+    }
+
+}
+
+if ( !$error ) {
 
     $block_css = array(
         'bloc-subpages',
@@ -24,7 +52,7 @@ if ( !empty( $subpages ) ) {
     $block_attrs = apply_filters( 'pc_filter_acf_block_subpages_attrs', $block_attrs, $block, $is_preview );
 
     echo '<ul '.pc_get_attrs_to_string( $block_attrs ).'>';
-    foreach ( $subpages as $page ) {
+    foreach ( $get_subpages as $page ) {
         $pc_post_page = new PC_Post( $page );
         echo '<li class="card-list-item">';
             if ( $is_preview ) {
@@ -38,6 +66,6 @@ if ( !empty( $subpages ) ) {
 
 } else if ( $is_preview ) {
 
-	echo '<p class="bloc-warning">Erreur bloc <em>Sous-pages</em> : aucune sous-page trouvée.</p>';
+	echo '<p class="bloc-warning">Erreur bloc <em>Sous-pages</em> : '.$msg_error.'.</p>';
 
 }

@@ -12,7 +12,7 @@ if ( isset( $block['anchor'] ) && trim( $block['anchor'] ) ) { $block_attrs['id'
 $block_attrs = apply_filters( 'pc_filter_acf_block_column_attrs', $block_attrs, $block, $is_preview );
 
 echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
-do_action( 'pc_action_acf_block_column_start', $block, $is_preview );
+    do_action( 'pc_action_acf_block_column_start', $block, $is_preview );
     echo '<InnerBlocks template="'.esc_attr( wp_json_encode( $template ) ).'" allowedBlocks="'.esc_attr( wp_json_encode( $allowedBlocks ) ).'" templateLock="false" />';
     do_action( 'pc_action_acf_block_column_end', $block, $is_preview );
 echo '</div>';

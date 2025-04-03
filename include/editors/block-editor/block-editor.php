@@ -166,7 +166,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all', 10, 2 );
 /*=====  FIN Blocs disponibles  =====*/
 
 /*====================================
-=            Blocs natifs            =
+=            Options des blocs            =
 ====================================*/
 
 /*----------  Titre  ----------*/
@@ -182,9 +182,21 @@ add_filter( 'register_block_type_args', 'pc_block_title_attributs', 10, 2 );
 		
 	}
 
+/*----------  Pages connexes  ----------*/
+
+add_filter('acf/fields/post_object/query/key=field_pc_block_subpages_selection', 'pc_admin_block_subpages_field_query', 10, 3);
+
+	function pc_admin_block_subpages_field_query( $args, $field, $post_id ) {
+
+		$args['post__not_in'] = array( $post_id, get_option('page_on_front') );
+		$args['post_parent__not_in'] = array( $post_id );
+
+		return $args;
+	}
 
 
-/*=====  FIN Blocs natifs  =====*/
+
+/*=====  FIN Options des blocs  =====*/
 
 /*=======================================
 =            Rendu des blocs            =

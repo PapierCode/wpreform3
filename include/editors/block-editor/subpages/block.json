@@ -1,7 +1,7 @@
 {
     "name": "acf/pc-subpages",
-    "title": "Sous-pages",
-    "description": "Affiche les résumés des sous-pages",
+    "title": "Pages connexes",
+    "description": "Affiche les résumés des sous-pages ou d'une sélection",
     "category": "specials",
     "keywords": [ "page", "sous" ],
     "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#1e1e1e\" d=\"M15 1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h6ZM9 3v4h6V3H9Z\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M12 9v3H6.049A1.05 1.05 0 0 0 5 13.049V15\"/><path fill=\"none\" stroke=\"#1e1e1e\" stroke-width=\"2\" d=\"M12 9v3h5.951c.579 0 1.049.47 1.049 1.049V15\"/><path fill=\"#1e1e1e\" d=\"M8 15a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h6Zm-6 2v4h6v-4H2Z\"/><path fill=\"#1e1e1e\" d=\"M22 15a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h6Zm-6 2v4h6v-4h-6Z\"/></svg>",
@@ -13,6 +13,7 @@
     },
     "supports": {
         "anchor": true,
-        "align": false
+        "align": false,
+        "mode": false
     }
 }

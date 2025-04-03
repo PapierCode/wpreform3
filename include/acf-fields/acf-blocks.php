@@ -1632,11 +1632,73 @@ add_action( 'acf/include_fields', function() {
     if ( apply_filters( 'pc_filter_add_acf_subpages_block', true ) ) {
 
         acf_add_local_field_group( array(
-            'key' => 'group_664ca4062483d',
+            'key' => 'group_pc_block_subpages',
             'title' => 'Sous-pages',
             'fields' => apply_filters( 'pc_filter_acf_subpages_block_fields', array(
                 array(
-                    'key' => 'field_664ca406eaec7',
+                    'key' => 'field_pc_block_subpages_type',
+                    'label' => 'Type',
+                    'name' => 'type',
+                    'aria-label' => '',
+                    'type' => 'button_group',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'choices' => array(
+                        'subpages' => 'Sous-pages',
+                        'selection' => 'Sélection',
+                    ),
+                    'default_value' => 'subpages',
+                    'return_format' => 'value',
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 0,
+                    'layout' => 'horizontal',
+                ),
+                array(
+                    'key' => 'field_pc_block_subpages_selection',
+                    'label' => 'Sélection',
+                    'name' => 'selection',
+                    'aria-label' => '',
+                    'type' => 'post_object',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field' => 'field_pc_block_subpages_type',
+                                'operator' => '==',
+                                'value' => 'selection',
+                            ),
+                        ),
+                    ),
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'page',
+                    ),
+                    'post_status' => array(
+                        0 => 'publish',
+                    ),
+                    'taxonomy' => '',
+                    'return_format' => 'id',
+                    'multiple' => 1,
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 0,
+                    'bidirectional' => 0,
+                    'ui' => 1,
+                    'bidirectional_target' => array(
+                    ),
+                ),
+                array(
+                    'key' => 'field_pc_block_subpages_level',
                     'label' => 'Niveau des titres',
                     'name' => 'title_level',
                     'aria-label' => '',
