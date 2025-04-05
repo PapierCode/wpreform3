@@ -1651,8 +1651,8 @@ add_action( 'acf/include_fields', function() {
                     ),
                     'choices' => array(
                         'subpages' => 'Sous-pages',
-                        'selection' => 'Sélection',
-                        'siblings' => 'Soeurs'
+                        'siblings' => 'Soeurs',
+                        'selection' => 'Sélection'
                     ),
                     'default_value' => 'subpages',
                     'return_format' => 'value',

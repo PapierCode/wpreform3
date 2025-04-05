@@ -22,6 +22,7 @@ switch ( $type ) {
         $selection = get_field('selection');
         if ( $selection ) {
             $get_subpages_args['post__in'] = $selection;
+            $get_subpages_args['orderby'] = 'post__in';
             $get_subpages = get_posts( $get_subpages_args );
             if ( empty($get_subpages) ) {
                 $error = true;
@@ -35,14 +36,20 @@ switch ( $type ) {
         break;
     case 'siblings':
         global $post;
-        $get_subpages_args['post_parent'] = $post->post_parent;
-        $get_subpages_args['order'] = 'ASC';
-        $get_subpages_args['orderby'] = 'menu_order';
-        $get_subpages_args['post__not_in'] = array($post->ID);
-        $get_subpages = get_posts( $get_subpages_args );
-        if ( empty($get_subpages) ) {
+        if ( $post->post_parent ) {
+            $get_subpages_args['post_parent'] = $post->post_parent;
+            $get_subpages_args['order'] = 'ASC';
+            $get_subpages_args['orderby'] = 'menu_order';
+            $get_subpages_args['post__not_in'] = array($post->ID);
+            $get_subpages = get_posts( $get_subpages_args );
+            if ( empty($get_subpages) ) {
+                $error = true;
+                $msg_error = 'aucune page soeur trouvée';
+            }
+    
+        } else {
             $error = true;
-            $msg_error = 'aucune page trouvée';
+            $msg_error = 'cette page n\'a pas de parent';
         }
         break;
 }
