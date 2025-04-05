@@ -6,35 +6,45 @@ $get_subpages_args = array(
     'nopaging' => true,
 );
 
-if ( $type == 'subpages' ) {
-
-    global $post;
-    $get_subpages_args['post_parent'] = $post->ID;
-    $get_subpages_args['order'] = 'ASC';
-    $get_subpages_args['orderby'] = 'menu_order';
-
-    $get_subpages = get_posts( $get_subpages_args );
-    if ( empty($get_subpages) ) {
-        $error = true;
-        $msg_error = 'aucune sous-page trouvée';
-    }
-
-} else if ( $type == 'selection' ) {
-
-    $selection = get_field('selection');
-    if ( $selection ) {
-        $get_subpages_args['post__in'] = $selection;
+switch ( $type ) {
+    case 'subpages':
+        global $post;
+        $get_subpages_args['post_parent'] = $post->ID;
+        $get_subpages_args['order'] = 'ASC';
+        $get_subpages_args['orderby'] = 'menu_order';
+        $get_subpages = get_posts( $get_subpages_args );
+        if ( empty($get_subpages) ) {
+            $error = true;
+            $msg_error = 'aucune sous-page trouvée';
+        }
+        break;
+    case 'selection':
+        $selection = get_field('selection');
+        if ( $selection ) {
+            $get_subpages_args['post__in'] = $selection;
+            $get_subpages = get_posts( $get_subpages_args );
+            if ( empty($get_subpages) ) {
+                $error = true;
+                $msg_error = 'aucune page trouvée';
+            }
+    
+        } else {
+            $error = true;
+            $msg_error = 'sélectionnez des pages';
+        }
+        break;
+    case 'siblings':
+        global $post;
+        $get_subpages_args['post_parent'] = $post->post_parent;
+        $get_subpages_args['order'] = 'ASC';
+        $get_subpages_args['orderby'] = 'menu_order';
+        $get_subpages_args['post__not_in'] = array($post->ID);
         $get_subpages = get_posts( $get_subpages_args );
         if ( empty($get_subpages) ) {
             $error = true;
             $msg_error = 'aucune page trouvée';
         }
-
-    } else {
-        $error = true;
-        $msg_error = 'sélectionnez des pages';
-    }
-
+        break;
 }
 
 if ( !$error ) {
