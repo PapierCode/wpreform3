@@ -17,7 +17,7 @@ function pc_admin_page_acf_include_fields() {
 	acf_add_local_field_group( array(
         'key' => 'group_pc_page_fields',
         'title' => 'Propriétés de la publication',
-        'fields' => array(
+        'fields' => apply_filters( 'pc_filter_acf_page_fields', array(
             array(
                 'key' => 'field_pc_page_thumbnail',
                 'label' => 'Image à la une',
@@ -112,7 +112,7 @@ function pc_admin_page_acf_include_fields() {
                 'placeholder' => '',
                 'new_lines' => '',
             )
-        ),
+        )),
         'location' => array(
             array(
                 array(
