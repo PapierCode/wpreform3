@@ -59,7 +59,8 @@ if ( !$error ) {
     $block_css = array(
         'bloc-subpages',
         'card-list',
-        'card-list--pages'
+        'card-list--pages',
+        'bloc-align-h--wide'
     );
     if ( isset( $block['className'] ) && trim( $block['className'] ) ) { $block_css[] = $block['className']; }	
 
