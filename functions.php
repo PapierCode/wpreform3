@@ -16,6 +16,7 @@ include 'include/editors/acf-tinymce/acf-tinymce.php'; // tinymce ACF
 include 'include/acf-fields/acf-wpr-settings.php';
 include 'include/acf-fields/acf-blocks.php';
 include 'include/acf-fields/acf-page.php';
+if ( apply_filters( 'pc_filter_single_main_hero', false ) ) { include 'include/acf-fields/acf-post-hero.php'; }
 
 if ( get_option('options_news_enabled') || get_option('options_events_enabled') ) {
     include 'include/register-cpts.php';

@@ -28,6 +28,8 @@ add_filter('acf/fields/google_map/api', 'pc_admin_acf_google_map_api_key');
 
 // https://www.advancedcustomfields.com/resources/acf-validate_value/
 
+add_filter( 'acf/validate_value/key=field_67f4e0579c9ac', 'pc_admin_acf_validate_phone', 10, 4 ); // bouton entête post (hero)
+
 function pc_admin_acf_validate_phone( $valid, $value, $field, $input_name ) {
 
     if ( ( $field['required'] || trim($value) != '' ) && !preg_match( '/^\d{2} \d{2} \d{2} \d{2} \d{2}$/', trim($value) ) ) {
@@ -62,6 +64,7 @@ add_filter( 'acf/load_field/type=gallery', 'pc_admin_acf_image_mimes' );
 
 add_filter( 'acf/load_field/name=post_short_title', 'pc_admin_acf_characters_counter' );
 add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_characters_counter' );
+add_filter( 'acf/load_field/name=post_header_intro', 'pc_admin_acf_characters_counter' );
 
 	function pc_admin_acf_characters_counter( $field ) {
 
@@ -74,9 +77,16 @@ add_filter( 'acf/load_field/name=post_excerpt', 'pc_admin_acf_characters_counter
                 $for = apply_filters( 'pc_filter_post_excerpt_for', 'Pour le résumé.', $field );
                 $length = apply_filters( 'pc_filter_post_excerpt_length', 150, $field );
                 break;
+            case 'post_header_intro':
+                $for = false;
+                $length = apply_filters( 'pc_filter_post_header_intro_length', 400, $field );
+                break;
         }
 
-		$field['instructions'] = $for.'<br><span class="pc-txt-length-counter" data-size="'.$length.'"><span class="pc-txt-length-value">0</span> / '.$length.' caractères conseillés.</span>';
+		$instructions = '';
+		if ( $for ) { $instructions .= $for.'<br>'; }
+		$instructions .= '<span class="pc-txt-length-counter" data-size="'.$length.'"><span class="pc-txt-length-value">0</span> / '.$length.' caractères conseillés.</span>';
+		$field['instructions'] = $instructions;
 
 		return $field;
 

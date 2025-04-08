@@ -25,6 +25,8 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_admin_acf_tinymce_toolbars' );
 	$toolbars['light'][1] = array( 'bold,italic,|,link,unlink' );
 	$toolbars['lightplus'] = array();
 	$toolbars['lightplus'][1] = array( 'bullist,numlist,|,bold,italic,|,link,unlink' );
+	$toolbars['hero'] = array();
+	$toolbars['hero'][1] = array( 'bold,italic' );
 
    	return $toolbars;
 
