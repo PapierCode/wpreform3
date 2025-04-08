@@ -65,7 +65,7 @@ function pc_display_single_main_hero( $pc_post ) {
 			$btn_class = 'main-header-btn';
 
 			switch ( $metas['post_header_button_type'] ) {
-				case 'post':
+				case 'page':
 					if ( get_post_status( $metas['post_header_button_post'] ) == 'publish' ) { 
 						$btn_href = get_the_permalink( $metas['post_header_button_post'] );
 						$btn_ico = 'arrow';
