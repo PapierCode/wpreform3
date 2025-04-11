@@ -232,7 +232,8 @@ add_filter( 'upload_mimes', 'pc_admin_edit_upload_mimes' );
             'jpg|jpeg' => 'image/jpeg',
             'png' => 'image/png',
             'pdf' => 'application/pdf',
-            'webp' => 'image/webp'
+            'webp' => 'image/webp',
+            'avif' => 'image/avif'
         );
 
     };
