@@ -92,31 +92,36 @@ function pc_display_footer_contact() {
 	);
 
 	/*----------  Social  ----------*/
-	
-	$rs_list = get_field('coord_social','option');
-	
-	foreach( $rs_list as $rs ) {
-		
-		$dd[$rs['ico']['value']] = pc_get_button(
-			$rs['ico']['label'],
-			array(
-				'href' => $rs['url'],
-				'class' => 'social-link '.$btn_css.' button--ico',
-				'title' => sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']),
-				'target' => '_blank',
-				'rel' => 'noreferrer'
-			),
-			$rs['ico']['value']
-		);
 
-	}	
+	if ( apply_filters( 'pc_filter_footer_contact_social_display', true ) ) {
+	
+		$rs_list = get_field('coord_social','option');
+		
+		foreach( $rs_list as $rs ) {
+			
+			$dd[$rs['ico']['value']] = pc_get_button(
+				$rs['ico']['label'],
+				array(
+					'href' => $rs['url'],
+					'class' => 'social-link '.$btn_css.' button--ico',
+					'title' => sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']),
+					'target' => '_blank',
+					'rel' => 'noreferrer'
+				),
+				$rs['ico']['value']
+			);
+
+		}	
+
+	}
 
 	/*----------  Affichage  ----------*/
 
 	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas );
 	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd );
 
-	echo '<address class="coord"><dl class="coord-list" style="--coord-cols:'.count($rs_list).'">';
+	$coord_cols = isset($rs_list) ? count($rs_list) : 1;
+	echo '<address class="coord"><dl class="coord-list" style="--coord-cols:'.$coord_cols.'">';
 		echo '<dt class="coord-item coord-item--logo">'.$dt.'</dt>';
 		foreach ( $dd as $id => $content ) {
 			echo '<dd class="coord-item coord-item--'.$id.'">'.$content.'</dd>';
