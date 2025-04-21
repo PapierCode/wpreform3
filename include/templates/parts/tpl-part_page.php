@@ -68,7 +68,7 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 =            Actualités associées            =
 ============================================*/
 
-add_action( 'pc_action_template_index', 'pc_page_aside_related', 125 );
+add_action( 'pc_action_template_index', 'pc_page_aside_related', 135 );
 
 	function pc_page_aside_related( $pc_post ) {
 
