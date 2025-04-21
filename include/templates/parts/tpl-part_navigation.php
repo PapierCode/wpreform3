@@ -233,6 +233,17 @@ function pc_display_breadcrumb() {
 
 	}
 
+	/*----------  404  ----------*/
+	
+	if ( is_404() ) {
+		
+		$links[] = array(
+			'name' => __('Page not found','wpreform'),
+			'permalink' => $_SERVER['REQUEST_URI']
+		); 	
+
+	}
+
 	
 	/*----------  Séparateur  ----------*/
 	
