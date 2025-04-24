@@ -89,6 +89,14 @@ if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) {
 		
 		}
 
+	add_action( 'do_meta_boxes', 'pc_edit_rankmath_metaboxes', 666, 3 );
+
+		function pc_edit_rankmath_metaboxes( $screen, $context, $data_object ){
+			if ( $screen == 'page' && $data_object->ID == get_option('page_on_front') ) {
+				remove_meta_box( 'rank_math_metabox', 'page', 'normal' );
+			}
+		}
+
 }
 
 
