@@ -46,13 +46,15 @@ $contact_form_fields = array(
 
 $block_form_to = get_field('to');
 
-if ( is_array($block_form_to) && !empty($block_form_to) ) {
-
-	$to = '';
-	foreach ( $block_form_to as $key => $email ) { 
+$to = '';
+foreach ( $block_form_to as $key => $email ) { 
+	if ( is_email( $email['email'] ) ) {
 		if ( $key > 0 ) { $to .= ','; }
 		$to .= $email['email'];
 	}
+}
+
+if ( $to ) {
 
 	$block_css = array( 'bloc-contactform' );
 	if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }

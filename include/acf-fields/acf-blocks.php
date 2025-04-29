@@ -1753,49 +1753,75 @@ add_action( 'acf/include_fields', function() {
     
     if ( apply_filters( 'pc_filter_add_acf_contact_form_block', true ) ) {
 
-        // acf_add_local_field_group( array(
-        //     'key' => 'group_66a5f79ea51b3',
-        //     'title' => '[Bloc] Formulaire de contact',
-        //     'fields' => apply_filters( 'pc_filter_acf_contact_form_block_fields', array(
-        //         array(
-        //             'key' => 'field_66a5f79e9a5cc',
-        //             'label' => 'Destinataire',
-        //             'name' => 'contact_form_to',
-        //             'aria-label' => '',
-        //             'type' => 'email',
-        //             'instructions' => '',
-        //             'required' => 0,
-        //             'conditional_logic' => 0,
-        //             'wrapper' => array(
-        //                 'width' => '',
-        //                 'class' => '',
-        //                 'id' => '',
-        //             ),
-        //             'default_value' => '',
-        //             'placeholder' => '',
-        //             'prepend' => '',
-        //             'append' => '',
-        //         ),
-        //     )),
-        //     'location' => array(
-        //         array(
-        //             array(
-        //                 'param' => 'block',
-        //                 'operator' => '==',
-        //                 'value' => 'acf/pc-contactform',
-        //             ),
-        //         ),
-        //     ),
-        //     'menu_order' => 0,
-        //     'position' => 'normal',
-        //     'style' => 'default',
-        //     'label_placement' => 'top',
-        //     'instruction_placement' => 'label',
-        //     'hide_on_screen' => '',
-        //     'active' => true,
-        //     'description' => '',
-        //     'show_in_rest' => 0,
-        // ) );
+        acf_add_local_field_group( array(
+            'key' => 'group_6810c13b93b64',
+            'title' => 'Contact',
+            'fields' => array(
+                array(
+                    'key' => 'field_6810c13b78001',
+                    'label' => 'Destinataire(s)',
+                    'name' => 'to',
+                    'aria-label' => '',
+                    'type' => 'repeater',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'layout' => 'block',
+                    'pagination' => 0,
+                    'min' => 1,
+                    'max' => 0,
+                    'collapsed' => '',
+                    'button_label' => 'Ajout un e-mail',
+                    'rows_per_page' => 20,
+                    'sub_fields' => array(
+                        array(
+                            'key' => 'field_6810c16778002',
+                            'label' => 'E-mail',
+                            'name' => 'email',
+                            'aria-label' => '',
+                            'type' => 'email',
+                            'instructions' => '',
+                            'required' => 1,
+                            'conditional_logic' => 0,
+                            'wrapper' => array(
+                                'width' => '',
+                                'class' => '',
+                                'id' => '',
+                            ),
+                            'default_value' => '',
+                            'allow_in_bindings' => 0,
+                            'placeholder' => '',
+                            'prepend' => '',
+                            'append' => '',
+                            'parent_repeater' => 'field_6810c13b78001',
+                        ),
+                    ),
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-contactform',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'normal',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
 
     }
     
