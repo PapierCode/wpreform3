@@ -44,9 +44,15 @@ $contact_form_fields = array(
 	)
 );
 
-$block_form_to = get_field('contact_form_to');
+$block_form_to = get_field('to');
 
-if ( $block_form_to && is_email( $block_form_to ) ) {
+if ( is_array($block_form_to) && !empty($block_form_to) ) {
+
+	$to = '';
+	foreach ( $block_form_to as $key => $email ) { 
+		if ( $key > 0 ) { $to .= ','; }
+		$to .= $email['email'];
+	}
 
 	$block_css = array( 'bloc-contactform' );
 	if ( $is_preview ) { $block_css[] = 'bloc-no-preview'; }
@@ -60,10 +66,10 @@ if ( $block_form_to && is_email( $block_form_to ) ) {
 		echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
 
 			if ( $is_preview ) { 
-				echo '<p><strong>Formulaire de contact</strong> / '.$block_form_to.'</p>'; 
+				echo '<p><strong>Formulaire de contact</strong></p>'; 
 			} else {
 				global $post;
-				$contact_form = new PC_Contact_Form( $contact_form_fields, $post, $block_form_to );
+				$contact_form = new PC_Contact_Form( $contact_form_fields, $post, $to );
 				$contact_form->display_form();
 			}
 
@@ -72,6 +78,6 @@ if ( $block_form_to && is_email( $block_form_to ) ) {
 
 } else {
 
-	echo '<p class="bloc-warning">Erreur bloc <em>Formulaire de contact</em> : saisissez un e-mail de destination valide.</p>';
+	echo '<p class="bloc-warning">Erreur bloc <em>Formulaire de contact</em> : saisissez au moins un e-mail valide.</p>';
 
 }
