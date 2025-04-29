@@ -47,10 +47,13 @@ $contact_form_fields = array(
 $block_form_to = get_field('to');
 
 $to = '';
-foreach ( $block_form_to as $key => $email ) { 
-	if ( is_email( $email['email'] ) ) {
-		if ( $key > 0 ) { $to .= ','; }
-		$to .= $email['email'];
+
+if ( is_array($block_form_to) ) {
+	foreach ( $block_form_to as $key => $email ) { 
+		if ( is_email( $email['email'] ) ) {
+			if ( $key > 0 ) { $to .= ','; }
+			$to .= $email['email'];
+		}
 	}
 }
 
