@@ -55,7 +55,7 @@ add_filter( 'acf/load_field/type=gallery', 'pc_admin_acf_image_mimes' );
 
 	function pc_admin_acf_image_mimes( $field ) {
 
-		$field['mime_types'] = 'jpg,jpeg,png,webp';
+		$field['mime_types'] = 'jpg,jpeg,png,webp,avif';
 		return $field;
 
 	}
