@@ -311,13 +311,13 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
             'post_type' => $post_type,
             'taxonomy' => $tax_slug
         );
+        $get_post_args = array(
+            'post_type' => $post_type,
+            'nopaging' => true,
+            'fields' => 'ids'
+        );
 
         if ( get_option('options_events_tax_shared') ) {
-            $get_post_args = array(
-                'post_type' => $post_type,
-                'nopaging' => true,
-                'fields' => 'ids'
-            );
             if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG ) {
                 if ( get_query_var( 'archive' ) == 1 ) { // passés
                     $meta_compare = '<=';
@@ -337,9 +337,9 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                 $get_post_args['meta_key'] = 'event_date_end';
                 $get_post_args['meta_type'] = 'DATETIME';
             }
-            $get_terms_args['object_ids'] = get_posts( $get_post_args);
         }
 
+        $get_terms_args['object_ids'] = get_posts( $get_post_args );
         $terms = get_terms($get_terms_args);
 
         if ( is_array( $terms ) && !empty( $terms ) ) {

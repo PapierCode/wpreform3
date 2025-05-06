@@ -81,7 +81,7 @@ if ( $to ) {
 		echo '</div>';
 	}
 
-} else {
+} else if ( $is_preview ) {
 
 	echo '<p class="bloc-warning">Erreur bloc <em>Formulaire de contact</em> : saisissez au moins un e-mail valide.</p>';
 

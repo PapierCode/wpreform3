@@ -130,8 +130,8 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 135 );
 										echo pc_get_button( $cpt['btn_txt'], ['href'=>get_post_type_archive_link($cpt['slug']) ], 'more' );
 									echo '</div>';
 									echo '<ul class="card-list card-list--'.$cpt['slug'].'">';
-										foreach ( $get_posts as $post ) {
-											$pc_post_related = new PC_Post( $post );
+										foreach ( $cpt['posts'] as $post_related ) {
+											$pc_post_related = new PC_Post( $post_related );
 											echo '<li class="card-list-item">';
 												$pc_post_related->display_card(3);
 											echo '</li>';
