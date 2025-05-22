@@ -55,7 +55,7 @@ function pc_display_share_links() {
 	) );
 
 	$share_title = apply_filters( 'pc_filter_share_links_title', __('Sharing','wpreform').'&nbsp;:' );
-	$btn_css = apply_filters( 'pc_filter_share_links_class', 'button' );
+	$btn_css = apply_filters( 'pc_filter_share_links_class', 'button button--ico' );
 
 
 	/*----------  Affichage  ----------*/
@@ -71,7 +71,7 @@ function pc_display_share_links() {
 						$name,
 						array(
 							'href' => $href,
-							'class' => 'social-link '.$btn_css.' button--ico',
+							'class' => 'social-link '.$btn_css,
 							'title' => sprintf(__('Share on %s (new window)','wpreform'),$name),
 							'target' => '_blank',
 							'rel' => 'nofollow noreferrer'
