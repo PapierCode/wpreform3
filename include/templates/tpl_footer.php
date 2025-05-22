@@ -60,7 +60,6 @@ function pc_display_footer_end() {
 function pc_display_footer_contact() {
 	
 	$dd = array();
-	$btn_css = apply_filters( 'pc_filter_footer_button_class', 'button button--white' );
 
 	/*----------  Logo  ----------*/
 	
@@ -80,16 +79,8 @@ function pc_display_footer_contact() {
 	/*----------  Téléphone  ----------*/
 	
 	$phone = get_option( 'options_coord_phone' );
-	
-	$dd['phone'] = pc_get_button(
-		pc_get_phone_format($phone,false),
-		array(
-			'href' => 'tel:'.pc_get_phone_format($phone),
-			'class' => 'coord-phone '.$btn_css,
-			'title' => __('Phone','wpreform').' '.pc_get_phone_format($phone,false)
-		),
-		'phone'
-	);
+
+	$dd['phone'] = '<a href="tel:'.pc_get_phone_format($phone).'" class="'.apply_filters( 'pc_filter_footer_contact_phone_class', 'button button--white' ).'" title="'.__('Phone','wpreform').' '.pc_get_phone_format($phone,false).'"><span class="ico">'.pc_svg('phone').'</span><span class="txt">'.pc_get_phone_format($phone,false).'</span></a>';
 
 	/*----------  Social  ----------*/
 
@@ -99,17 +90,7 @@ function pc_display_footer_contact() {
 		
 		foreach( $rs_list as $rs ) {
 			
-			$dd[$rs['ico']['value']] = pc_get_button(
-				$rs['ico']['label'],
-				array(
-					'href' => $rs['url'],
-					'class' => 'social-link '.$btn_css.' button--ico',
-					'title' => sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']),
-					'target' => '_blank',
-					'rel' => 'noreferrer'
-				),
-				$rs['ico']['value']
-			);
+			$dd[$rs['ico']['value']] = '<a href="'.$rs['url'].'" class="'.apply_filters( 'pc_filter_footer_contact_phone_class', 'social-link button button--white button--ico' ).'" title="'.sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']).'" target="_blank" rel="noreferrer"><span class="ico">'.pc_svg($rs['ico']['value']).'</span><span class="txt">'.$rs['ico']['label'].'</span></a>';
 
 		}	
 

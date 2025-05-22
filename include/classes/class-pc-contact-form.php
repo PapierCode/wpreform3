@@ -51,7 +51,7 @@ class PC_Contact_Form {
 		
 		$this->css = array(
 			'form-container' => array( 'form', 'form--contact', 'no-print' ),
-			'button-submit'	=> array( 'form-submit' )
+			'button-submit'	=> array( 'form-submit button' )
 		);
 
 		/*----------  Création captcha  ----------*/
@@ -599,7 +599,7 @@ class PC_Contact_Form {
 				/*----------  Submit  ----------*/
 				
 				echo '<li class="form-item form-item--submit">';
-					echo pc_get_button( $this->texts['submit-txt'], ['type'=>'submit','class'=>implode( ' ', $this->css['button-submit'] )], 'mail', 'button' );
+					echo '<button type="submit" class="'.implode( ' ', $this->css['button-submit'] ).'"><span class="ico">'.pc_svg('mail').'</span><span class="txt">'.$this->texts['submit-txt'].'</span></button>';
 				echo '</li>';
 
 			echo '</ul>';

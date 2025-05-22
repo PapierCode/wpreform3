@@ -148,13 +148,13 @@ add_action( 'pc_action_template_archive_after', 'pc_display_event_archive_link',
 
             if ( get_query_var( 'archive' ) == 1 ) {
                 $txt = __('Upcoming Events','wpreform');
-                $class = 'link-past-events';
+                $class = 'link-past-events button';
             } else {
                 $href .= '?archive=1';
-                $class = 'link-upcoming-events';
+                $class = 'link-upcoming-events button';
             }
             
-            echo pc_get_button( $txt, ['href'=>$href,'class'=>$class], 'more-s' );
+            echo '<a href="'.$href.'" class="'.$class.'"><span class="ico">'.pc_svg('more-s').'</span><span class="txt">'.$txt.'</span></a>';
             
         }
 
@@ -345,30 +345,10 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
             echo '<div class="filters filters--news">';
-                echo pc_get_button( 
-                    __('Categories','wpreform'), 
-                    [
-                        'class' => 'modal-btn-open',
-                        'title' => __('Dialog box','wpreform'),
-                        'aria-control' => $modal_id,
-                        'type' => 'button'
-                    ], 
-                    'tag', 
-                    'button'
-                );
+                echo '<button href="" class="modal-btn-open button" title="'.__('Dialog box','wpreform').'" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">'.__('Categories','wpreform').'</span></button>';
                 if ( get_query_var('category') ) {
                     $current_term = get_term_by( 'id', get_query_var('category'), $tax_slug );
-                    echo pc_get_button( 
-                        $current_term->name, 
-                        [
-                            'href' => $cancel_url,
-                            'title' => __('Cancel filter','wpreform').' '.$current_term->name,
-                            'aria-label' => __('Cancel filter','wpreform').' '.$current_term->name,
-                            'rel' => 'nofollow',
-                            'class' => 'button--cancel'
-                        ], 
-                        'cross'
-                     );
+                    echo '<a href="'.$cancel_url.'" class="button button--cancel" title="'.__('Cancel filter','wpreform').' '.$current_term->name.'" aria-label="'.__('Cancel filter','wpreform').' '.$current_term->name.'"><span class="ico">'.pc_svg('cross').'</span><span class="txt">'.$current_term->name.'</span></a>';
                 }
             echo '</div>';
 
@@ -378,7 +358,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
                     $is_active = get_query_var('category') && get_query_var('category') == $term->term_id;
                     $link_attrs = array(
-                        'class' => 'news-filter-link',
+                        'class' => 'news-filter-link button',
                         'rel' => 'nofollow'
                     );
                     if ( $is_active ) { 
@@ -403,11 +383,10 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
                     }
                     
                     $modal_content .= '<li class="archive-filters-item">';
-                        $modal_content .= pc_get_button(
-                            $term->name,
-                            $link_attrs,
-                            $is_active ? 'cross' : ''
-                        );
+                        $modal_content .= '<a '.pc_get_attrs_to_string($link_attrs).'>';
+                            $modal_content .= $is_active ? '<span class="ico">'.pc_svg('cross').'</span>' : '';
+                            $modal_content .= '<span class="txt">'.$term->name.'</span>';
+                        $modal_content .= '</a>';
                     $modal_content .= '</li>';
                     
                 }

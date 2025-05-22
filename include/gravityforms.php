@@ -436,7 +436,7 @@ add_filter( 'gform_field_content', 'pc_gravityforms_fileupload_html', 10, 2 );
     function pc_gravityforms_fileupload_html( $field_content, $field ) {
 
         if ( !is_admin() && $field->type == 'fileupload' ) {
-            $new = '<div class="input-file" aria-hidden="true"><button type="button" class="input-file-btn" title="">'.pc_svg('upload').'</button><div class="input-file-msg">Aucun fichier sélectionné.</div></div>';
+            $new = '<div class="input-file" aria-hidden="true"><button type="button" class="input-file-btn">'.pc_svg('upload').'</button><div class="input-file-msg">Aucun fichier sélectionné.</div></div>';
             $field_content = preg_replace( '/'.preg_quote('<input').'/', $new.'<input', $field_content, 1 );
         }
         return $field_content;

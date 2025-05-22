@@ -62,7 +62,7 @@ function pc_display_single_main_hero( $pc_post ) {
 
 		if ( isset( $metas['post_header_button_enable'] ) && $metas['post_header_button_enable'] == 1 ) {
 
-			$btn_class = 'main-header-btn';
+			$btn_class = 'button main-header-btn';
 
 			switch ( $metas['post_header_button_type'] ) {
 				case 'page':
@@ -92,7 +92,7 @@ function pc_display_single_main_hero( $pc_post ) {
 					break;
 			}
 
-			if ( isset( $btn_href ) ) { echo pc_get_button( $metas['post_header_button_txt'], array( 'href' => $btn_href, 'class' => $btn_class ), $btn_ico ); }
+			if ( isset( $btn_href ) ) { echo '<a href="'.$btn_href.'" class="'.$btn_class.'"><span class="ico">'.pc_svg($btn_ico).'</span><span class="txt">'.$metas['post_header_button_txt'].'</span></a>'; }
 
 		}
 
@@ -167,15 +167,7 @@ function pc_display_main_footer_backlink( $pc_post ) {
 			$back_ico = 'more';
 		}
 
-		echo pc_get_button( 
-			$back_txt, 
-			array(
-				'href' => $back_link,
-				'class' => 'button--previous',
-				'title' => $back_title
-			), 
-			$back_ico
-		);
+		echo '<a href="'.$back_link.'" class="button button--previous"><span class="ico">'.pc_svg($back_ico).'</span><span class="txt">'.$back_txt.'</span></a>';
 
 	}
 

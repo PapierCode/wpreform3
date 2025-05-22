@@ -235,8 +235,7 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 		}
 
 
-		/*----------  Bouton  ----------*/
-		
+		/*----------  Bouton  ----------*/		
 		
 		if ( $block['blockName'] == 'core/button' ) {
 
@@ -267,8 +266,8 @@ add_filter( 'render_block', 'pc_render_block', 10, 3 );
 					}
 				}
 
-				$btn_attrs['class'] = 'button--'.$btn_ico;
-				$content = pc_get_button( wp_strip_all_tags($content), $btn_attrs, $btn_ico );
+				$btn_attrs['class'] = 'button button--'.$btn_ico;
+				$content = '<a '.pc_get_attrs_to_string($btn_attrs).'><span class="ico">'.pc_svg($btn_ico).'</span><span class="txt">'.wp_strip_all_tags($content).'</span></a>';
 
 			} else { $content = ''; }
 			

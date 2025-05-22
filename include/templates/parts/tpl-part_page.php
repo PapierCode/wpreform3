@@ -127,7 +127,7 @@ add_action( 'pc_action_template_index', 'pc_page_aside_related', 135 );
 							if ( isset( $cpt['posts'] ) ) {
 									echo '<div class="aside-card-title">';
 										echo '<h2 class="aside-title">'.$cpt['title_txt'].'</h2>';
-										echo pc_get_button( $cpt['btn_txt'], ['href'=>get_post_type_archive_link($cpt['slug']) ], 'more' );
+										echo '<a href="'.get_post_type_archive_link($cpt['slug']).'" class="button"><span class="ico">'.pc_svg('more').'</span><span class="txt">'.$cpt['btn_txt'].'</span></a>';
 									echo '</div>';
 									echo '<ul class="card-list card-list--'.$cpt['slug'].'">';
 										foreach ( $cpt['posts'] as $post_related ) {

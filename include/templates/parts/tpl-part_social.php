@@ -55,7 +55,6 @@ function pc_display_share_links() {
 	) );
 
 	$share_title = apply_filters( 'pc_filter_share_links_title', __('Sharing','wpreform').'&nbsp;:' );
-	$btn_css = apply_filters( 'pc_filter_share_links_class', 'button button--ico' );
 
 
 	/*----------  Affichage  ----------*/
@@ -67,17 +66,9 @@ function pc_display_share_links() {
 		echo '<ul class="social-list social-list--share">';
 			foreach ( $hrefs as $name => $href ) {
 				echo '<li class="social-item">';
-					echo pc_get_button(
-						$name,
-						array(
-							'href' => $href,
-							'class' => 'social-link '.$btn_css,
-							'title' => sprintf(__('Share on %s (new window)','wpreform'),$name),
-							'target' => '_blank',
-							'rel' => 'nofollow noreferrer'
-						),
-						strtolower($name)
-					);
+					echo '<a href="'.$href.'" class="'.apply_filters( 'pc_filter_share_links_class', 'social-link button button--ico' ).'" title="'.sprintf(__('Share on %s (new window)','wpreform'),$name).'" target="_blank" rel="nofollow noreferrer">';
+						echo '<span class="ico">'.pc_svg(strtolower($name)).'</span>';
+					echo '</a>';
 				echo '</li>';
 			}
 		echo '</ul>';
