@@ -121,6 +121,32 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 register_taxonomy( NEWS_TAX_SLUG, array( NEWS_POST_SLUG ), $tax_args );
             }
 
+
+            /*----------  Paramètres  ----------*/
+
+            if ( function_exists('acf_add_options_page') ) {
+            
+                switch ( get_option('options_news_type') ) {
+                    case 'news':
+                        $news_settings_title = 'Paramètres des actualités';
+                        break;
+                    case 'blog':
+                        $news_settings_title = 'Paramètres du blog';
+                        break;
+                }
+
+                acf_add_options_page( apply_filters( 'pc_filter_news_settings_args', array(
+                    'page_title'    => $news_settings_title,
+                    'menu_title'    => 'Paramètres',
+                    'menu_slug'     => 'news-settings',
+                    'capability'    => 'edit_others_posts',
+                    'update_button' => 'Mettre à jour',
+                    'autoload'      => true,
+                    'parent_slug'   => 'edit.php?post_type='.NEWS_POST_SLUG
+                ) ) );
+
+            }
+
         } // FIN if options_news_enabled
 
 
@@ -167,65 +193,28 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 register_taxonomy( EVENT_TAX_SLUG, array( EVENT_POST_SLUG ), $tax_args );
             }
 
+            /*----------  Paramètres  ----------*/
+
+            if ( function_exists('acf_add_options_page') ) {
+            
+                acf_add_options_page( apply_filters( 'pc_filter_event_settings_args', array(
+                    'page_title'    => 'Paramètres des événements',
+                    'menu_title'    => 'Paramètres',
+                    'menu_slug'     => 'events-settings',
+                    'capability'    => 'edit_others_posts',
+                    'update_button' => 'Mettre à jour',
+                    'autoload'      => true,
+                    'parent_slug'   => 'edit.php?post_type='.EVENT_POST_SLUG
+                ) ) );
+
+            }
+
         } // FIN if options_events_enabled
 
     }
 
 
 /*=====  FIN Post & Taxonomie  =====*/
-
-/*==================================
-=            Paramètres            =
-==================================*/
-
-if ( function_exists('acf_add_options_page') ) {
-
-    /*----------  Actualités / Blog  ----------*/
-        
-    if ( get_option('options_news_enabled') ) {
-
-        switch ( get_option('options_news_type') ) {
-            case 'news':
-                $news_settings_title = 'Paramètres des actualités';
-                break;
-            case 'blog':
-                $news_settings_title = 'Paramètres du blog';
-                break;
-        }
-
-        acf_add_options_page( apply_filters( 'pc_filter_news_settings_args', array(
-            'page_title'    => $news_settings_title,
-            'menu_title'    => 'Paramètres',
-            'menu_slug'     => 'news-settings',
-            'capability'    => 'edit_posts',
-            'update_button' => 'Mettre à jour',
-            'autoload'      => true,
-            'parent_slug'   => 'edit.php?post_type='.NEWS_POST_SLUG
-        ) ) );
-
-    } // FIN if options_news_enabled
-
-
-    /*----------  Événements ----------*/
-        
-    if ( get_option('options_events_enabled') ) {
-
-        acf_add_options_page( apply_filters( 'pc_filter_event_settings_args', array(
-            'page_title'    => 'Paramètres des événements',
-            'menu_title'    => 'Paramètres',
-            'menu_slug'     => 'events-settings',
-            'capability'    => 'edit_posts',
-            'update_button' => 'Mettre à jour',
-            'autoload'      => true,
-            'parent_slug'   => 'edit.php?post_type='.EVENT_POST_SLUG
-        ) ) );
-
-    } // FIN if options_events_enabled
-
-}
-
-
-/*=====  FIN Settings  =====*/
 
 /*=====================================
 =            Customisation            =
