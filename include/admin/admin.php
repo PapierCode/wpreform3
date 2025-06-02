@@ -74,35 +74,41 @@ add_action( 'admin_enqueue_scripts', 'pc_admin_enqueue_scripts' );
 =            Settings            =
 ================================*/
 
-if ( function_exists('acf_add_options_page') ) {
+add_action( 'acf/init', 'pc_admin_acf_add_options_page' );
 
-    /*----------  Theme options (admin only)  ----------*/
-     
-    acf_add_options_page( array(
-        'page_title'    => 'Paramètres du thème WPreform',
-        'menu_title'    => 'WPréform',
-        'menu_slug'     => 'wpreform-settings',
-        'capability'    => 'manage_options',
-        'update_button' => 'Mettre à jour',
-        'autoload'      => true,
-        'parent_slug'   => 'options-general.php'
-    ) );
+	function pc_admin_acf_add_options_page() {
+
+		if ( function_exists('acf_add_options_page') ) {
+
+			/*----------  Theme options (admin only)  ----------*/
+			
+			acf_add_options_page( array(
+				'page_title'    => 'Paramètres du thème WPreform',
+				'menu_title'    => 'WPréform',
+				'menu_slug'     => 'wpreform-settings',
+				'capability'    => 'manage_options',
+				'update_button' => 'Mettre à jour',
+				'autoload'      => true,
+				'parent_slug'   => 'options-general.php'
+			) );
 
 
-    /*----------  Theme project options  ----------*/
-     
-    acf_add_options_page( array(
-        'page_title'    => 'Paramètres du site',
-        'menu_title'    => 'Paramètres',
-        'menu_slug'     => 'site-settings',
-        'capability'    => 'edit_pages',
-        'update_button' => 'Mettre à jour',
-        'autoload'      => true,
-        'position'      => 99,
-        'icon_url'      => 'dashicons-admin-settings'
-    ) );
+			/*----------  Theme project options  ----------*/
+			
+			acf_add_options_page( array(
+				'page_title'    => 'Paramètres du site',
+				'menu_title'    => 'Paramètres',
+				'menu_slug'     => 'site-settings',
+				'capability'    => 'edit_pages',
+				'update_button' => 'Mettre à jour',
+				'autoload'      => true,
+				'position'      => 99,
+				'icon_url'      => 'dashicons-admin-settings'
+			) );
 
-}
+		}
+
+	}
 
 
 /*=====  FIN Settings  =====*/
