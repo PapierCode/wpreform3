@@ -239,13 +239,13 @@ class PC_Post {
 	
 	/**
 	 * 
-	 * [CARD] Display visual
+	 * [CARD] Get visual tag
 	 * 
-	 * @return string HTML (article)
+	 * @return string HTML (img)
 	 * 
 	 */
 
-	public function display_card_image() {
+	public function get_card_image_tag() {
 
 		$args = $this->get_card_image_args();
 		$last_size_key = array_key_last( $args['sizes'] );
@@ -273,8 +273,22 @@ class PC_Post {
 			foreach ( $attrs as $attr => $attr_value ) { $tag .= ' '.$attr.'="'.$attr_value.'"'; }
 		$tag .= '>';
 		
-		echo apply_filters( 'pc_filter_card_image_tag', $tag, $attrs, $this );
+		return apply_filters( 'pc_filter_card_image_tag', $tag, $attrs, $this );
 	
+	}
+	
+	/**
+	 * 
+	 * [CARD] Display visual (compatiblity)
+	 * 
+	 * @return string HTML (img)
+	 * 
+	 */
+
+	public function display_card_image() {
+
+		echo $this->get_card_image_tag();	
+
 	}
 	
 	/**
@@ -318,7 +332,7 @@ class PC_Post {
 				// visual
 				if ( apply_filters( 'pc_filter_card_image', true ) ) {
 					echo '<figure class="card-figure">';
-						$this->display_card_image();				
+						echo $this->get_card_image_tag();				
 					echo '</figure>';
 				}
 
