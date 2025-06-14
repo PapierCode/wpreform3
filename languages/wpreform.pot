@@ -264,6 +264,10 @@ msgstr ""
 msgid "The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page"
 msgstr ""
 
+#: include/classes/class-pc-contact-form.php
+msgid "Send a message"
+msgstr ""
+
 #: include/classes/class-pc-hcaptcha.php
 msgid "Check the box %1$sI am human%2$s, and if necessary follow the instruction"
 msgstr ""
