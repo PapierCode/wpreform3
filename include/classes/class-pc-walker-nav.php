@@ -101,7 +101,7 @@ class PC_Walker_Nav_Menu extends Walker_Nav_Menu {
 			};
 			$output .= '<div class="' .implode( ' ', $box_css ) . '">';
 			if ( apply_filters( 'pc_filter_display_header_nav_sub_back', true ) ) {
-				$output .= '<button type="button" class="h-p-nav-sub-back" title="Retour menu précédent"><span class="ico">'.pc_svg('arrow').'</span></button>';
+				$output .= '<button type="button" class="h-p-nav-sub-back" title="'.__('Previous menu','wpreform').'"><span class="ico">'.pc_svg('arrow').'</span></button>';
 			}
 			$output .= apply_filters( 'pc_filter_nav_box_after_start', '', $item, $box_level, $args );
 		}

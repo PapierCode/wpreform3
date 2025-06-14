@@ -92,8 +92,8 @@ class PC_Post {
 		$format = apply_filters( 'pc_filter_post_display_date_format', 'j F Y', $this );		
 		$prefix = apply_filters( 'pc_filter_post_date_prefix', '<span class="ico">'.pc_svg('calendar').'</span>', $this );
 
-		$label = !$modified ? 'publication' : 'modification';
-		echo '<time class="'.$css.'" aria-label="Date de '.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">';
+		$label = !$modified ? __('Publication date','wpreform') : __('Date of modification','wpreform');
+		echo '<time class="'.$css.'" aria-label="'.$label.'" datetime="'.$this->get_date( 'c', $modified ).'">';
 			if ( $prefix ) { echo $prefix; }
 			echo '<span class="txt">'.$this->get_date( $format, $modified ).'</span>';
 		echo '</time>';
@@ -132,7 +132,8 @@ class PC_Post {
 							if ( $key > 0 ) { echo ', '; }
 							$href_args = array( 'category' => $term->term_id );
 							if ( get_query_var( 'archive' ) == 1 ) { $href_args['archive'] = 1; } // événements passés
-							echo '<a href="'.get_post_type_archive_link( $this->type ).'?'.http_build_query($href_args).'" title="Catégorie '.$term->name.'" rel="nofollow">'.$term->name.'</a>';	
+							$title = sprintf( __('%s category','wpreform'), $term->name );
+							echo '<a href="'.get_post_type_archive_link( $this->type ).'?'.http_build_query($href_args).'" title="'.$title.'" rel="nofollow">'.$term->name.'</a>';	
 						}	
 					echo '</p>';
 		
@@ -319,7 +320,6 @@ class PC_Post {
 				$param_index++;
 			}
 		}
-		$link_tag_start = '<a href="'.$href.'" class="card-link" title="Lire la suite de : '.$title.'">';
 		
 		// css
 		$classes_css = array_merge( array( 'card', 'card--'.$this->type ), $classes_css );
@@ -341,7 +341,7 @@ class PC_Post {
 	
 				// title
 				echo '<h'.$title_level.' class="card-title">';
-					echo apply_filters( 'pc_filter_card_title_link', true ) ? '<a href="'.$href.'" class="card-link" title="Lire la suite de : '.$title.'">'.$title.'</a>' : $title;
+					echo apply_filters( 'pc_filter_card_title_link', true ) ? '<a href="'.$href.'" class="card-link" title="'.sprintf( __('Read more of %s','wpreform'), $title).'">'.$title.'</a>' : $title;
 				echo '</h'.$title_level.'>';	
 	
 				// hook	

@@ -9,9 +9,7 @@
 class PC_MathCaptcha {
 
 	public $math;
-	public $msg_error;
-
-	private $lang; 
+	public $msg_error; 
 	
 	private $cipher_method;
 	private $pass_phrase;
@@ -22,18 +20,12 @@ class PC_MathCaptcha {
     =            Constructeur            =
     ====================================*/
 
-    function __construct( $pass_phrase, $iv, $lang = 'fr' ) {
+    function __construct( $pass_phrase, $iv ) {
 
-		switch ( $lang ) {
-			case 'fr':
-				$msg_error = '<strong>Résolvez le nouveau calcul</strong> (protection contre les spams)';
-				break;
-			case 'en':
-				$msg_error = '<strong>Solve the new calculation</strong> (spam protection)';
-				break;
-		}
-		$this->msg_error = apply_filters( 'pc_filter_mathcaptcha_msg_error', $msg_error, $lang );
-		$this->lang = $lang;
+		$this->msg_error = apply_filters(
+			'pc_filter_mathcaptcha_msg_error',
+			sprintf( __('%1$sSolve the new calculation%2$s (spam protection)','wpreform'), '<strong>', '</strong>' )
+		);
 		
 		$types = array( 'add', 'sub' );
 		$this->math = array( rand( 1, 10 ), rand( 1, 10 ), $types[ rand( 0, 1 ) ] );
@@ -54,19 +46,17 @@ class PC_MathCaptcha {
 	public function get_field_label_text() {
 
 		$math = $this->math;
+		$operator = $math[2] == 'add' ? __('plus','wpreform') : __('minus','wpreform');
 
-		switch ( $this->lang ) {
-			case 'fr':
-				$operator = ( 'add' == $math[2] ) ? 'plus' : 'moins';
-				$label_text = 'Protection contre les spams, combien font '.$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1].'&nbsp;?';
-				break;
-			case 'en':
-				$operator = ( 'add' == $math[2] ) ? 'plus' : 'minus';
-				$label_text = 'Spam protection, how many do '.$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1].'&nbsp;?';
-				break;
-		}
-
-		return apply_filters( 'pc_filter_mathcaptcha_label_text', $label_text , $math, $operator, $this->lang );
+		return apply_filters(
+			'pc_filter_mathcaptcha_label_text', 
+			sprintf( 
+				__('Spam protection, how many do %s?','wpreform'),
+				$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1].'&nbsp;'
+			),
+			$math,
+			$operator
+		);
 
 	}
 	

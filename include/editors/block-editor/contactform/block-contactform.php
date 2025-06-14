@@ -5,30 +5,26 @@ $contact_form_fields = array(
 		array(
 			'type'      				=> 'text',
 			'id'        				=> 'last-name',
-			'label'     				=> 'Nom',
-			'label-en'     				=> 'Last Name',
+			'label'     				=> __('Last Name','wpreform'),
 			'attr'						=> 'autocomplete="family-name"',
 			'notification-from-name'	=> true // pour la notification mail
 		),
 		array(
 			'type'      				=> 'text',
 			'id'        				=> 'name',
-			'label'     				=> 'Prénom',
-			'label-en'     				=> 'First Name',
+			'label'     				=> __('First Name','wpreform'),
 			'attr'						=> 'autocomplete="given-name"',
 		),
 		array(
 			'type'      				=> 'text',
 			'id'        				=> 'phone',
-			'label'     				=> 'Téléphone',
-			'label-en'     				=> 'Phone',
+			'label'     				=> __('Phone','wpreform'),
 			'attr'						=> 'autocomplete="tel"'
 		),
 		array(
 			'type'      				=> 'email',
 			'id'        				=> 'mail',
-			'label'     				=> 'E-mail',
-			'label-en'     				=> 'E-mail',
+			'label'     				=> __('E-mail','wpreform'),
 			'required' 	    			=> true,
 			'notification-from-email'	=> true, // pour la notification mail
 			'attr'						=> 'autocomplete="email"'
@@ -36,8 +32,7 @@ $contact_form_fields = array(
 		array(
 			'type'      				=> 'textarea',
 			'id'        				=> 'message',
-			'label'     				=> 'Message',
-			'label-en'     				=> 'Message',
+			'label'     				=> __('Message','wpreform'),
 			'attr'						=> 'rows="5"',
 			'required' 	    			=> true
 		)

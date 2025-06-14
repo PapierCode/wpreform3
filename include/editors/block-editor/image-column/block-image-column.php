@@ -61,7 +61,7 @@ if ( $img_args ) {
     echo '<div '.pc_get_attrs_to_string( $block_attrs ).'><'.$tag.' '.pc_get_attrs_to_string($tag_attrs).'>';
 
         if ( !$is_preview && $enable_js ) { 
-            echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="Afficher en plein écran l\'image '.$img_args['alt'].'" rel="nofollow"'.$img_container_style.'>';
+            echo '<a class="bloc-image-container diaporama-link" href="'.$img_args['sizes']['large'].'" data-gl-caption="'.$img_args['caption'].'" data-gl-responsive="'.$img_args['sizes']['medium'].'" title="'.__('View image in full screen','wpreform').'" rel="nofollow"'.$img_container_style.'>';
         } else {
             echo '<div class="bloc-image-container"'.$img_container_style.'>';
         }

@@ -1,305 +1,314 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2025-06-14 10:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (Spain)\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Loco-Version: 2.8.0; wp-6.8.1; php-8.2.12\n"
 "X-Domain: wpreform"
 
 #: include/templates/tpl_header.php
 msgid "Skip link%s"
-msgstr ""
+msgstr "Omitir enlace%s"
 
 #: include/templates/tpl_header.php
 msgid "Skip to main content"
-msgstr ""
+msgstr "Ir al contenido principal"
 
 #: include/templates/tpl_header.php
 msgid "Primary navigation"
-msgstr ""
+msgstr "Navegación principal"
 
 #: include/templates/tpl_header.php
 msgid "Secondary navigation"
-msgstr ""
+msgstr "Navegación secundaria"
 
 #: include/templates/tpl_footer.php
 msgid "Footer navigation"
-msgstr ""
+msgstr "Navegación de pie de página"
 
 #: include/templates/tpl_header.php
 msgid "Open menu"
-msgstr ""
+msgstr "Abrir menú"
 
 #: include/templates/tpl_header.php
 msgid "Close menu"
-msgstr ""
+msgstr "Cerrar menú"
 
 #: include/templates/tpl_header.php
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
-#: include/templates/tpl_index.php
-#: include/templates/tpl_search.php
+#: include/templates/tpl_index.php include/templates/tpl_search.php
 msgid "Read more"
-msgstr ""
+msgstr "Leer más"
 
 #: include/templates/tpl_index.php
 msgid "Previous page"
-msgstr ""
+msgstr "Página anterior"
 
 #: include/templates/tpl_header.php
 msgid "Display search form"
-msgstr ""
+msgstr "Mostrar formulario de búsqueda"
 
-#: include/templates/tpl_header.php
-#: include/templates/tpl_search.php
+#: include/templates/tpl_header.php include/templates/tpl_search.php
 #: include/templates/parts/tpl_part_navigation.php
 #: include/templates/parts/tpl_part_search.php
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: include/templates/tpl_search.php
 msgid "Search results"
-msgstr ""
+msgstr "Resultados de la búsqueda"
 
 #: include/templates/tpl_header.php
 #: include/templates/parts/tpl_part_navigation.php
 msgid "Homepage"
-msgstr ""
+msgstr "Página principal"
 
 #: include/templates/tpl_search.php
 #: include/templates/parts/tpl_part_navigation.php
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: include/templates/tpl_search.php
 msgid "News"
-msgstr ""
+msgstr "Noticias"
 
 #: include/templates/tpl_search.php
 msgid "Event"
-msgstr ""
+msgstr "Evento"
 
 #: include/templates/tpl_404.php
 msgid "This page does not exist"
-msgstr ""
+msgstr "Esta página no existe."
 
 #: include/templates/tpl_footer.php
 #: include/editors/block-editor/contactform/block-contactform.php
 msgid "Phone"
-msgstr ""
+msgstr "Teléfono"
 
-#: include/templates/tpl_footer.php
-#: include/templates/tpl-part_social.php
+#: include/templates/tpl_footer.php include/templates/tpl-part_social.php
 msgid "Follow us on %s (new window)"
-msgstr ""
+msgstr "Síguenos en %s (nueva ventana)"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Upcoming Events"
-msgstr ""
+msgstr "Próximos eventos"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Past events"
-msgstr ""
+msgstr "Pasado Eventos"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "News categories"
-msgstr ""
+msgstr "Categorías de noticias"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Event categories"
-msgstr ""
+msgstr "Categorías de eventos"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Dialog box"
-msgstr ""
+msgstr "Cuadro de diálogo"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Cancel filter"
-msgstr ""
+msgstr "Cancelar filtro"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Filter by"
-msgstr ""
+msgstr "Filtrar por"
 
 #: include/templates/parts/tpl-part_main.php
 msgid "Main content header"
-msgstr ""
+msgstr "Encabezado del contenido principal"
 
 #: include/templates/parts/tpl-part_main.php
 msgid "Main content footer"
-msgstr ""
+msgstr "Pie de página del contenido principal"
 
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Breadcrumbs"
-msgstr ""
+msgstr "Breadcrumbs"
 
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Pagination"
-msgstr ""
+msgstr "Paginación"
 
 #: include/templates/parts/tpl-part_page.php
 msgid "All news"
-msgstr ""
+msgstr "Todas las noticias"
 
 #: include/templates/parts/tpl-part_page.php
 msgid "All events"
-msgstr ""
+msgstr "Todos los eventos"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "Perform the search"
-msgstr ""
+msgstr "Realizar la búsqueda"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "result"
 msgid_plural "results"
-msgstr ""
+msgstr[0] "resultado"
+msgstr[1] "resultados"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "for the search of"
-msgstr ""
+msgstr "para la búsqueda de"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "for"
-msgstr ""
+msgstr "para"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "associated with"
-msgstr ""
+msgstr "asociada con"
 
 #: include/templates/parts/tpl-part_social.php
 msgid "Sharing"
-msgstr ""
+msgstr "Compartir"
 
 #: include/templates/parts/tpl-part_social.php
 msgid "Share on %s (new window)"
-msgstr ""
+msgstr "Compartir en %s (nueva ventana)"
 
 #: include/tools.php
 msgid "Close dialog box"
-msgstr ""
+msgstr "Cerrar cuadro de diálogo"
 
 #: include/classes/class-pc-wlaker-nav.php
 msgid "Previous menu"
-msgstr ""
+msgstr "Menú anterior"
 
 #: include/editors/block-editor/embed/block-embed.php
 msgid "By playing this video, you accept the"
-msgstr ""
+msgstr "Al reproducir este vídeo, acepta las"
 
 #: include/editors/block-editor/embed/block-embed.php
 msgid "general conditions of use"
-msgstr ""
+msgstr "Condiciones generales de uso"
 
 #: include/editors/block-editor/embed/block-embed.php
 msgid "from"
-msgstr ""
+msgstr "de"
 
 #: include/editors/block-editor/gallery/block-gallery.php
 msgid "Slideshow"
-msgstr ""
+msgstr "Presentación"
 
 #: include/editors/block-editor/gallery/block-gallery.php
 #: include/editors/block-editor/image/block-image.php
 #: include/editors/block-editor/image-column/block-image-column.php
 #: include/editors/block-editor/image-frame/block-image-frame.php
 msgid "View image in full screen"
-msgstr ""
+msgstr "Ver imagen en pantalla completa"
 
 #: include/editors/block-editor/contactform/block-contactform.php
 msgid "Last Name"
-msgstr ""
+msgstr "Apellidos"
 
 #: include/editors/block-editor/contactform/block-contactform.php
 msgid "First Name"
-msgstr ""
+msgstr "Nombre"
 
 #: include/editors/block-editor/contactform/block-contactform.php
 msgid "E-mail"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: include/editors/block-editor/contactform/block-contactform.php
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 #: include/classes/class-pc-contact-form.php
 msgid "Required"
-msgstr ""
+msgstr "Obligatorio"
 
 #: include/classes/class-pc-contact-form.php
-msgid "An error occurred, please validate the %1$s antispam%2$s and the %1$sform%2$s again"
+msgid ""
+"An error occurred, please validate the %1$s antispam%2$s and the "
+"%1$sform%2$s again"
 msgstr ""
+"Se ha producido un error. Por favor, valide el %1$s antispam%2$s y el "
+"%1$sform%2$s de nuevo."
 
 #: include/classes/class-pc-contact-form.php
 msgid "The field %s is required"
-msgstr ""
+msgstr "El campo %s es obligatorio."
 
 #: include/classes/class-pc-contact-form.php
-msgid "The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page"
+msgid ""
+"The %1$spersonal data%2$s collected in the form below will only be used "
+"%1$sto respond to your message%2$s. For more information, see %3$s page"
 msgstr ""
+"Los %1$sdatos personales%2$s recopilados en el formulario a continuación "
+"solo se utilizarán %1$spara responder a su mensaje%2$s. Para obtener más "
+"información, consulte la página %3$s."
 
 #: include/classes/class-pc-hcaptcha.php
-msgid "Check the box %1$sI am human%2$s, and if necessary follow the instruction"
+msgid ""
+"Check the box %1$sI am human%2$s, and if necessary follow the instruction"
 msgstr ""
+"Marque la casilla %1$sSoy humano%2$s y, si es necesario, siga las "
+"instrucciones."
 
 #: include/classes/class-pc-hcaptcha.php
 msgid "Antispam protection"
-msgstr ""
+msgstr "Protección antispam"
 
 #: include/classes/class-pc-math-captcha.php
 msgid "%1$sSolve the new calculation%2$s (spam protection)"
-msgstr ""
+msgstr "%1$sResolver el nuevo cálculo%2$s (protección antispam)"
 
 #: include/classes/class-pc-math-captcha.php
 msgid "plus"
-msgstr ""
+msgstr "más"
 
 #: include/classes/class-pc-math-captcha.php
 msgid "minus"
-msgstr ""
+msgstr "menos"
 
 #: include/classes/class-pc-math-captcha.php
 msgid "Spam protection, how many do %s?"
-msgstr ""
+msgstr "Protección antispam: ¿cuántos %s tienen?"
 
 #: include/classes/class-pc-post.php
 msgid "Publication date"
-msgstr ""
+msgstr "Fecha de publicación"
 
 #: include/classes/class-pc-post.php
 msgid "Date of modification"
-msgstr ""
+msgstr "Fecha de modificación"
 
 #: include/classes/class-pc-post.php
 msgid "%s category"
-msgstr ""
+msgstr "Categoría %s"
 
 #: include/classes/class-pc-post.php
 msgid "Read more of %s"
-msgstr ""
+msgstr "Leer más de %s"

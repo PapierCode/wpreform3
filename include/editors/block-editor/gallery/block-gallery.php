@@ -27,7 +27,9 @@ if ( $img_ids && count( $img_ids ) >= 2 ) {
 
 		echo '<li class="gallery-item">';
 
-			if ( !$is_preview && $enable_js ) { echo '<a class="diaporama-link" href="'.$img['sizes']['large'].'" data-gl-caption="'.$img['caption'].'" data-gl-responsive="'.$img['sizes']['medium'].'" title="Afficher l\'image '.$img['alt'].' en plein écran" rel="nofollow">'; }
+			if ( !$is_preview && $enable_js ) {
+				echo '<a class="diaporama-link" href="'.$img['sizes']['large'].'" data-gl-caption="'.$img['caption'].'" data-gl-responsive="'.$img['sizes']['medium'].'" title="'.__('View image in full screen','wpreform').'" rel="nofollow">';
+			}
 		
 				echo '<img class="gallery-img" src="'.$img['sizes'][$thumb].'" width="'.$img['sizes'][$thumb.'-width'].'" height="'.$img['sizes'][$thumb.'-height'].'" alt="'.$img['alt'].'" loading="lazy">';
 		
@@ -37,7 +39,7 @@ if ( $img_ids && count( $img_ids ) >= 2 ) {
 
 	}
 
-	if ( !$is_preview && $enable_js ) { echo '<li class="gallery-item gallery-item--play"><button type="button" class="gallery-play"><span class="ico">'.pc_svg('fullscreen').'</span><span class="txt">Diaporama</span></button></li>'; }
+	if ( !$is_preview && $enable_js ) { echo '<li class="gallery-item gallery-item--play"><button type="button" class="gallery-play"><span class="ico">'.pc_svg('fullscreen').'</span><span class="txt">'.__('Slideshow','wpreform').'</span></button></li>'; }
 
 	echo '</ul></div>';
 

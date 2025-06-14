@@ -8,8 +8,7 @@ class PC_Contact_Form {
 	private $captcha;				// [object] captcha
 	private $captcha_type;			// [string] captcha
 
-	private $lang;					// [string] langue du formulaire
-	private $texts;					// [array] textes, exceptés les champs
+	private $label_required;		// [string] label champ obligatoire
 	private $css;					// [array] classes css, exceptés les champs
 	private $notification;			// [array] paramètres notification
 
@@ -29,7 +28,6 @@ class PC_Contact_Form {
 
 		$this->from_post = $post;
 
-
 		/*----------  Validation finale  ----------*/
 		
 		$this->done = false;
@@ -42,10 +40,9 @@ class PC_Contact_Form {
 			'notification'	=> false, // erreur envoi email
 		);
 
-		/*----------  Textes  ----------*/
+		/*----------  Label champ obligatoire  ----------*/
 
-		$this->lang = 'fr';
-		$this->prepare_texts();
+		$this->label_required = '&nbsp;<span class="form-label-required"> /&nbsp;'.__('Required','wpreform').'</span>';
 
 		/*----------  CSS containers  ----------*/
 		
@@ -92,53 +89,6 @@ class PC_Contact_Form {
 	/*=====  FIN Construct  =====*/
 
 	/*==============================================
-	=            Préparation des textes            =
-	==============================================*/
-	
-	private function prepare_texts() {
-
-		switch ( $this->lang ) {
-
-			case 'fr':		
-				$texts = array(
-					'form-aria-label'			=> 'Formulaire de contact',
-					'label-required'			=> '&nbsp;<span class="form-label-required" aria-hidden="true"> /&nbsp;Obligatoire</span>',
-					'submit-txt'				=> 'Envoyer ce message',
-					'submit-title'				=> 'Envoyer ce message',
-					'msg-error-field'			=> 'Le formulaire contient des erreurs',
-					'msg-error-field-default'	=> 'Le champ <strong>{{label}}</strong> est obligatoire',
-					'msg-error-field-rgpd'		=> 'Vous devez <strong>accepter les Conditions Générales d\'Utilisation</strong>',
-					'msg-error-field-mail'		=> 'Le format du champ <strong>{{label}}</strong> n\'est pas valide',
-					'msg-error-actions'			=> 'Une erreur est survenue, merci de valider à nouveau l\'<strong>antispam</strong> et le <strong>formulaire</strong>',
-					'msg-done'					=> 'Le message est envoyé'
-				);
-				break;
-			
-			case 'en':
-				$texts = array(
-					'form-aria-label'			=> 'Contact form',
-					'label-required'			=> '&nbsp;<abbr title="Required" class="form-label-required">*</abbr>',
-					'submit-txt'				=> 'Send a message',
-					'submit-title'				=> 'Validate the form',
-					'msg-error-field'			=> 'The form contains errors',
-					'msg-error-field-default'	=> 'The field <strong>{{label}}</strong> is required.',
-					'msg-error-field-rgpd'		=> 'You must <strong>accept the General Conditions of Use</strong>.',
-					'msg-error-field-mail'		=> 'The format of the <strong>{{label}}</strong> field is not valid. ',
-					'msg-error-actions'			=> 'An error occurred, please validate the <strong>antispam</strong> and the <strong>form</strong> again.',
-					'msg-done'					=> 'The message is sent'
-				);
-				break;
-				
-		}
-
-		$this->texts = $texts;
-
-	}
-	
-	
-	/*=====  FIN Préparation des textes  =====*/
-
-	/*==============================================
 	=            Préparation des champs            =
 	==============================================*/
 	
@@ -164,14 +114,7 @@ class PC_Contact_Form {
 			);
 
 			// labels
-			switch ( $this->lang ) {
-				case 'fr':
-					$params['label'] = ( isset( $field['form-label'] ) ) ? $field['form-label'] : $field['label'];
-					break;
-				case 'en':
-					$params['label'] = ( isset( $field['form-label-en'] ) ) ? $field['form-label-en'] : $field['label-en'];
-					break;
-			}
+			$params['label'] = $field['label'];
 
 			// obligatoire			
 			if ( isset( $field['required'] ) ) {
@@ -190,15 +133,8 @@ class PC_Contact_Form {
 			}
 
 			// description
-			if ( isset( $field['form-desc'] ) || isset( $field['form-desc-en'] ) ) {
-				switch ( $this->lang ) {
-					case 'fr':
-						$params['desc'] = $field['form-desc'];
-						break;
-					case 'en':
-						$params['desc'] = $field['form-desc-en'];
-						break;
-				}
+			if ( isset( $field['form-desc'] ) ) {
+				$params['desc'] = $field['form-desc'];
 				$params['attr'][] = 'aria-describedby="form-item-desc-'.$name.'"';
 			}
 
@@ -236,7 +172,7 @@ class PC_Contact_Form {
 						$this->fields[$name]['error'] = true;
 
 						if ( isset( $params['rgpd'] ) ) {
-							$this->fields[$name]['msg-error'] = $this->texts['msg-error-field-rgpd'];
+							$this->fields[$name]['msg-error'] = 'You must <strong>accept the General Conditions of Use</strong>.';
 						}
 
 					} else if ( isset( $_POST[$name] ) ) {
@@ -256,7 +192,7 @@ class PC_Contact_Form {
 						if ( !is_email( trim( $_POST[$name] ) ) ) {
 							$this->fields[$name]['value'] = $_POST[$name];
 							$this->fields[$name]['error'] = true;
-							$this->fields[$name]['msg-error'] = str_replace( '{{label}}', $params['label'], $this->texts['msg-error-field-mail'] );
+							$this->fields[$name]['msg-error'] = sprintf( __('The format of the %s field is not valid.','wpreform'), '<strong>'.$params['label'].'</strong>' );
 
 						} else {
 							$this->fields[$name]['value'] = sanitize_email( $_POST[$name] );
@@ -321,7 +257,7 @@ class PC_Contact_Form {
 	private function display_label( $name, $params ) {
 
 		$label = $params['label'];
-		if ( isset( $params['required'] ) ) { $label .= $this->texts['label-required']; }
+		if ( isset( $params['required'] ) ) { $label .= $this->label_required; }
 		
 		echo '<label class="form-label" for="'.$name.'"><span>'.$label.'</span></label>';
 
@@ -508,19 +444,17 @@ class PC_Contact_Form {
 	
 	private function display_content_messages() {
 
-		$texts = $this->texts;
-
 		if ( in_array( true, $this->errors ) ) {
 
 			if ( $this->errors['field'] || $this->errors['captcha'] ) {
-				$message_error = '<strong>'.$texts['msg-error-field'].'&nbsp;:</strong>';
+				$message_error = '<strong>'.__('The form contains errors','wpreform').'&nbsp;:</strong>';
 			}
 	
 			if ( $this->errors['field'] ) {
 	
 				foreach ( $this->fields as $params ) {
 					if ( $params['error'] ) {
-						$message_error .=  ( isset( $params['msg-error'] ) ) ? $this->get_formated_msg_error( $params['msg-error'] ) : $this->get_formated_msg_error( str_replace( '{{label}}', $params['label'], $texts['msg-error-field-default'] ) );
+						$message_error .= sprintf( __('The field %1$s%2$s%3$s is required','wpreform'), '<strong>', $params['label'], '</strong>' ).'.';
 					}
 				}
 
@@ -528,13 +462,13 @@ class PC_Contact_Form {
 	
 			if ( $this->errors['captcha'] ) {
 	
-				$message_error .= $this->get_formated_msg_error( $this->captcha->msg_error );
+				$message_error .= '<br>'.$this->captcha->msg_error;
 
 			}
 
 			if ( $this->errors['notification'] ) {
 	
-				$message_error = $texts['msg-error-actions'].'.';
+				$message_error = sprintf( __('An error occurred, please validate the %1$s antispam%2$s and the %1$sform%2$s again','wpreform'), '<strong>', '</strong>' ).'.';
 	
 			}
 
@@ -543,7 +477,7 @@ class PC_Contact_Form {
 	
 		} else if ( $this->done ) {
 	
-			echo pc_get_message( $texts['msg-done'].'.', 'success', 'block' );
+			echo pc_get_message( __('The message is sent.','wpreform'), 'success', 'block' );
 	
 		}
 	
@@ -564,9 +498,16 @@ class PC_Contact_Form {
 		$this->display_content_messages();
 
 		$legal_page_id = get_option('wp_page_for_privacy_policy');
-		printf( '<p class="form-contact-rgpd-msg">Les <strong>données personnelles</strong> recueillies dans le formulaire ci-dessous seront utilisées <strong>uniquement pour répondre à votre message</strong>. Pour plus d’informations, consultez la page <a href="%1s">%2s</a>.</p>', get_the_permalink($legal_page_id), get_the_title($legal_page_id) );
+		echo '<p class="form-contact-rgpd-msg">';
+			printf( 
+				'The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page', 
+				'<strong>',
+				'</strong>',
+				'<a href="'.get_the_permalink($legal_page_id).'">'.get_the_title($legal_page_id).'</a>'
+			);
+		echo '.</p>';
 
-		echo '<form method="POST" action="#form-contact" aria-label="'.$this->texts['form-aria-label'].'">';
+		echo '<form method="POST" action="#form-contact" aria-label="'.__('Contact form','wpreform').'">';
 
 			wp_nonce_field( basename( __FILE__ ), 'none-pc-contact-form' );
 
@@ -582,7 +523,7 @@ class PC_Contact_Form {
 				
 				switch ( $this->captcha_type ) {
 					case 'hcaptcha':
-						echo '<span class="label-like form-label" aria-hidden="true">'.$this->captcha->get_field_label_text().$this->texts['label-required'].'</span>';
+						echo '<span class="label-like form-label" aria-hidden="true">'.$this->captcha->get_field_label_text().$this->label_required.'</span>';
 						$this->captcha->display();
 						break;
 					case 'calcul':
@@ -599,7 +540,7 @@ class PC_Contact_Form {
 				/*----------  Submit  ----------*/
 				
 				echo '<li class="form-item form-item--submit">';
-					echo '<button type="submit" class="'.implode( ' ', $this->css['button-submit'] ).'"><span class="ico">'.pc_svg('mail').'</span><span class="txt">'.$this->texts['submit-txt'].'</span></button>';
+					echo '<button type="submit" class="'.implode( ' ', $this->css['button-submit'] ).'"><span class="ico">'.pc_svg('mail').'</span><span class="txt">'.__('Send a message','wpreform').'</span></button>';
 				echo '</li>';
 
 			echo '</ul>';

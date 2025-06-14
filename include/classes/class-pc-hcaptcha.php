@@ -21,7 +21,10 @@ class PC_Hcaptcha {
 
     function __construct( $api_site, $api_secret ) {
 
-		$this->msg_error = apply_filters( 'pc_filter_hcaptcha_msg_error', 'Cochez la case <strong>Je suis un humain</strong>, et si nécessaire suivez les instructions' );
+		$this->msg_error = apply_filters( 
+            'pc_filter_hcaptcha_msg_error', 
+            sprintf( __('Check the box %1$sI am human%2$s, and if necessary follow the instructions','wpreform', '<strong>', '</strong>' ) )
+        );
 
         $this->api_secret = $api_secret;
         $this->api_site = $api_site;
@@ -37,7 +40,7 @@ class PC_Hcaptcha {
 
 	public function get_field_label_text() {
 
-		return apply_filters( 'pc_filter_hcaptcha_label_text', 'Protection contre les spams' );
+		return apply_filters( 'pc_filter_hcaptcha_label_text', __('Antispam protection','wpreform') );
 
 	}
 

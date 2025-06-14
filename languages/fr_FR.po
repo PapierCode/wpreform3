@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-03-31 10:30+0000\n"
+"PO-Revision-Date: 2025-06-14 10:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -12,8 +12,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Loco-Version: 2.8.0; wp-6.8.1; php-8.2.12\n"
 "X-Domain: wpreform"
+
+#: include/classes/class-pc-math-captcha.php
+msgid "%1$sSolve the new calculation%2$s (spam protection)"
+msgstr "%1$sRésolvez le nouveau calcul%2$s (protection contre les spams)"
+
+#: include/classes/class-pc-post.php
+msgid "%s category"
+msgstr "Categorie %s"
 
 #: include/templates/parts/tpl-part_page.php
 msgid "All events"
@@ -23,6 +31,18 @@ msgstr "Tous les événements"
 msgid "All news"
 msgstr "Toutes les actualités"
 
+#: include/classes/class-pc-contact-form.php
+msgid ""
+"An error occurred, please validate the %1$s antispam%2$s and the "
+"%1$sform%2$s again"
+msgstr ""
+"Une erreur est survenue, merci de valider à nouveau l\\'%1$santispam%2$s et "
+"le %1$sformulaire%2$s"
+
+#: include/classes/class-pc-hcaptcha.php
+msgid "Antispam protection"
+msgstr "Protection antispam"
+
 #: include/templates/parts/tpl-part_search.php
 msgid "associated with"
 msgstr "associé à "
@@ -30,6 +50,10 @@ msgstr "associé à "
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Breadcrumbs"
 msgstr "Fil d'ariane"
+
+#: include/editors/block-editor/embed/block-embed.php
+msgid "By playing this video, you accept the"
+msgstr "En jouant cette vidéo, vous accepter les"
 
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Cancel filter"
@@ -39,6 +63,13 @@ msgstr "Annuler le filtre"
 msgid "Categories"
 msgstr "Catégories"
 
+#: include/classes/class-pc-hcaptcha.php
+msgid ""
+"Check the box %1$sI am human%2$s, and if necessary follow the instruction"
+msgstr ""
+"Cochez la case %1$sJe suis un humain%2$s, et si nécessaire suivez les "
+"instructions"
+
 #: include/tools.php
 msgid "Close dialog box"
 msgstr "Fermer la boite de dialogue"
@@ -47,6 +78,10 @@ msgstr "Fermer la boite de dialogue"
 msgid "Close menu"
 msgstr "Fermer le menu"
 
+#: include/classes/class-pc-post.php
+msgid "Date of modification"
+msgstr "Date de modification"
+
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Dialog box"
 msgstr "Boite de dialogue"
@@ -54,6 +89,10 @@ msgstr "Boite de dialogue"
 #: include/templates/tpl_header.php
 msgid "Display search form"
 msgstr "Afficher le formulaire de recherche"
+
+#: include/editors/block-editor/contactform/block-contactform.php
+msgid "E-mail"
+msgstr "E-mail"
 
 #: include/templates/tpl_search.php
 msgid "Event"
@@ -66,6 +105,11 @@ msgstr "Catégories des événements"
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Filter by"
 msgstr "Filtrer par"
+
+#: include/editors/block-editor/contactform/block-contactform.php
+#| msgid "First name"
+msgid "First Name"
+msgstr "Prénom"
 
 #: include/templates/tpl_footer.php include/templates/tpl-part_social.php
 msgid "Follow us on %s (new window)"
@@ -83,10 +127,23 @@ msgstr "pour"
 msgid "for the search of"
 msgstr "pour la recherche de"
 
+#: include/editors/block-editor/embed/block-embed.php
+msgid "from"
+msgstr "de"
+
+#: include/editors/block-editor/embed/block-embed.php
+msgid "general conditions of use"
+msgstr "conditions générales d'utilisation"
+
 #: include/templates/tpl_header.php
 #: include/templates/parts/tpl_part_navigation.php
 msgid "Homepage"
 msgstr "Page d'accueil"
+
+#: include/editors/block-editor/contactform/block-contactform.php
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Nom"
 
 #: include/templates/parts/tpl-part_main.php
 msgid "Main content footer"
@@ -99,6 +156,14 @@ msgstr "Entête du contenu principal"
 #: include/templates/tpl_header.php
 msgid "Menu"
 msgstr "Menu"
+
+#: include/editors/block-editor/contactform/block-contactform.php
+msgid "Message"
+msgstr "Message"
+
+#: include/classes/class-pc-math-captcha.php
+msgid "minus"
+msgstr "moins"
 
 #: include/templates/tpl_search.php
 msgid "News"
@@ -138,12 +203,21 @@ msgid "Perform the search"
 msgstr "Effectuer la recherche"
 
 #: include/templates/tpl_footer.php
+#: include/editors/block-editor/contactform/block-contactform.php
 msgid "Phone"
 msgstr "Téléphone"
+
+#: include/classes/class-pc-math-captcha.php
+msgid "plus"
+msgstr "plus"
 
 #: include/templates/parts/tpl-part_navigation.php
 msgid "Previous"
 msgstr "Précédent"
+
+#: include/classes/class-pc-wlaker-nav.php
+msgid "Previous menu"
+msgstr "Menu précédent"
 
 #: include/templates/tpl_index.php
 msgid "Previous page"
@@ -153,9 +227,21 @@ msgstr "Page précédente"
 msgid "Primary navigation"
 msgstr "Navigation principale"
 
+#: include/classes/class-pc-post.php
+msgid "Publication date"
+msgstr "Date de publication"
+
 #: include/templates/tpl_index.php include/templates/tpl_search.php
 msgid "Read more"
 msgstr "Lire la suite"
+
+#: include/classes/class-pc-post.php
+msgid "Read more of %s"
+msgstr "Lire la suite de %s"
+
+#: include/classes/class-pc-contact-form.php
+msgid "Required"
+msgstr "Obligatoire"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "result"
@@ -193,6 +279,27 @@ msgstr "Lien%s d'évitement"
 msgid "Skip to main content"
 msgstr "Accéder au contenu principal"
 
+#: include/editors/block-editor/gallery/block-gallery.php
+msgid "Slideshow"
+msgstr "Diaporama"
+
+#: include/classes/class-pc-math-captcha.php
+msgid "Spam protection, how many do %s?"
+msgstr "Protection antispam, combien font %s?"
+
+#: include/classes/class-pc-contact-form.php
+msgid ""
+"The %1$spersonal data%2$s collected in the form below will only be used "
+"%1$sto respond to your message%2$s. For more information, see %3$s page"
+msgstr ""
+"Les %1$sdonnées personnelles%2$s recueillies dans le formulaire ci-dessous "
+"seront utilisées %1$suniquement pour répondre à votre message%2$s. Pour plus "
+"d’informations, consultez la page %3$s"
+
+#: include/classes/class-pc-contact-form.php
+msgid "The field %s is required"
+msgstr "Le champ %s est obligatoire"
+
 #: include/templates/tpl_404.php
 msgid "This page does not exist"
 msgstr "Cette page n'existe pas"
@@ -200,3 +307,10 @@ msgstr "Cette page n'existe pas"
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Upcoming Events"
 msgstr "Événements à venir"
+
+#: include/editors/block-editor/gallery/block-gallery.php
+#: include/editors/block-editor/image/block-image.php
+#: include/editors/block-editor/image-column/block-image-column.php
+#: include/editors/block-editor/image-frame/block-image-frame.php
+msgid "View image in full screen"
+msgstr "Afficher l'image en plein écran"
