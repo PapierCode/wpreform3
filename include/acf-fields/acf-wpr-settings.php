@@ -887,6 +887,44 @@ function pc_admin_wpr_settings_acf_include_fields() {
                     )
                 ),
             ),
+            array(
+                'key' => 'field_wpr_faq',
+                'label' => 'Foire aux questions',
+                'name' => 'faq',
+                'aria-label' => '',
+                'type' => 'group',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'layout' => 'row',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_wpr_faq_enabled',
+                        'label' => 'Activé',
+                        'name' => 'enabled',
+                        'aria-label' => '',
+                        'type' => 'true_false',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'message' => '',
+                        'default_value' => 0,
+                        'ui_on_text' => '',
+                        'ui_off_text' => '',
+                        'ui' => 1,
+                    )
+                ),
+            ),
         ),
         'location' => array(
             array(

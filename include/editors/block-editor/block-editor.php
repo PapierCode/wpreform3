@@ -126,6 +126,8 @@ $pc_blocks_acf = array(
 
 // Événements
 if ( get_option('options_events_enabled') ) { $pc_blocks_acf[] = 'events'; }
+// Événements
+if ( get_option('options_faq_enabled') ) { $pc_blocks_acf[] = 'faq'; }
 // Formulaires
 $pc_blocks_acf[] = is_plugin_active( 'gravityforms/gravityforms.php' ) ? 'gravityforms' : 'contactform';
 

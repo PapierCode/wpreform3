@@ -23,6 +23,7 @@ if ( get_option('options_news_enabled') || get_option('options_events_enabled') 
     if ( get_option('options_news_enabled') ) { include 'include/acf-fields/acf-news.php'; }
     if ( get_option('options_events_enabled') ) { include 'include/acf-fields/acf-events.php'; }
 }
+if ( get_option('options_faq_enabled') ) { include 'include/acf-fields/acf-faq.php'; }
 
 if ( is_plugin_active( 'gravityforms/gravityforms.php' ) ) { include 'include/gravityforms.php'; }
 

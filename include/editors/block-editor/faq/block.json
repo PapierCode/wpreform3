@@ -1,0 +1,17 @@
+{
+    "name": "acf/pc-faq",
+    "title": "Foire aux questions",
+    "apiVersion": 2,
+    "category": "specials",
+    "keywords": [ "foire", "question" ],
+    "icon": "editor-help",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block-faq.php"
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "mode": false
+    }
+}

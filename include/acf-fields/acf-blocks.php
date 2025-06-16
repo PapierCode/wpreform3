@@ -6,13 +6,17 @@
  * 2 Colonnes
  * Boutons
  * Citation
- * Vidéo
  * Encadré
  * Space
  * Galerie
  * Image
  * Posts
  * Formulaire de contact
+ * Gravity Forms
+ * Vidéo
+ * Événements
+ * Carte
+ * Foire aux questions
  * 
  */
 
@@ -719,51 +723,51 @@ add_action( 'acf/include_fields', function() {
     =            Vidéo            =
     =============================*/
 
-    if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) {
+    // if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) {
 
-        acf_add_local_field_group( array(
-            'key' => 'group_628cdbe86abd1',
-            'title' => 'Embed',
-            'fields' => apply_filters( 'pc_filter_acf_embed_block_fields', array(
-                array(
-                    'key' => 'field_628cdc01d84ae',
-                    'label' => 'Adresse de la page',
-                    'name' => '_bloc_embed',
-                    'aria-label' => '',
-                    'type' => 'url',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'placeholder' => '',
-                ),
-            )),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'block',
-                        'operator' => '==',
-                        'value' => 'acf/pc-embed',
-                    ),
-                ),
-            ),
-            'menu_order' => 0,
-            'position' => 'normal',
-            'style' => 'default',
-            'label_placement' => 'top',
-            'instruction_placement' => 'label',
-            'hide_on_screen' => '',
-            'active' => false,
-            'description' => '',
-            'show_in_rest' => 0,
-        ) );
+    //     acf_add_local_field_group( array(
+    //         'key' => 'group_628cdbe86abd1',
+    //         'title' => 'Embed',
+    //         'fields' => apply_filters( 'pc_filter_acf_embed_block_fields', array(
+    //             array(
+    //                 'key' => 'field_628cdc01d84ae',
+    //                 'label' => 'Adresse de la page',
+    //                 'name' => '_bloc_embed',
+    //                 'aria-label' => '',
+    //                 'type' => 'url',
+    //                 'instructions' => '',
+    //                 'required' => 0,
+    //                 'conditional_logic' => 0,
+    //                 'wrapper' => array(
+    //                     'width' => '',
+    //                     'class' => '',
+    //                     'id' => '',
+    //                 ),
+    //                 'default_value' => '',
+    //                 'placeholder' => '',
+    //             ),
+    //         )),
+    //         'location' => array(
+    //             array(
+    //                 array(
+    //                     'param' => 'block',
+    //                     'operator' => '==',
+    //                     'value' => 'acf/pc-embed',
+    //                 ),
+    //             ),
+    //         ),
+    //         'menu_order' => 0,
+    //         'position' => 'normal',
+    //         'style' => 'default',
+    //         'label_placement' => 'top',
+    //         'instruction_placement' => 'label',
+    //         'hide_on_screen' => '',
+    //         'active' => false,
+    //         'description' => '',
+    //         'show_in_rest' => 0,
+    //     ) );
 
-    }
+    // }
     
     
     /*=====  FIN Vidéo  =====*/
@@ -2129,6 +2133,104 @@ add_action( 'acf/include_fields', function() {
     
     
     /*=====  FIN Carte  =====*/
+
+    /*===========================================
+    =            Foire aux questions            =
+    ===========================================*/
+    
+    if ( get_option('options_faq_enabled') ) {
+
+        acf_add_local_field_group( array(
+            'key' => 'group_684fcae26048f',
+            'title' => 'FAQ',
+            'fields' => array(
+                array(
+                    'key' => 'field_684fcae2b3560',
+                    'label' => 'Afficher les questions',
+                    'name' => 'type',
+                    'aria-label' => '',
+                    'type' => 'button_group',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'choices' => array(
+                        'all' => 'Toutes',
+                        'selection' => 'Sélection',
+                    ),
+                    'default_value' => 'all',
+                    'return_format' => 'value',
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 0,
+                    'layout' => 'horizontal',
+                ),
+                array(
+                    'key' => 'field_684fcbb36ddc9',
+                    'label' => 'Sélection',
+                    'name' => 'selection',
+                    'aria-label' => '',
+                    'type' => 'post_object',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field' => 'field_684fcae2b3560',
+                                'operator' => '==',
+                                'value' => 'selection',
+                            ),
+                        ),
+                    ),
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'post_type' => array(
+                        0 => 'faqpost',
+                    ),
+                    'post_status' => array(
+                        0 => 'publish',
+                    ),
+                    'taxonomy' => '',
+                    'return_format' => 'id',
+                    'multiple' => 1,
+                    'allow_null' => 0,
+                    'allow_in_bindings' => 0,
+                    'bidirectional' => 0,
+                    'ui' => 1,
+                    'bidirectional_target' => array(
+                    ),
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'block',
+                        'operator' => '==',
+                        'value' => 'acf/pc-faq',
+                    ),
+                ),
+            ),
+            'menu_order' => 0,
+            'position' => 'normal',
+            'style' => 'default',
+            'label_placement' => 'top',
+            'instruction_placement' => 'label',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0,
+        ) );
+
+    }
+    
+    
+    /*=====  FIN Foire aux questions  =====*/
 
 } );
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Actualités/Blog & Événements
+* Actualités/Blog, Événements, Foire auw questions
  * 
  * Register Post & Taxonomie
  * Register Paramétres
@@ -22,6 +22,11 @@ if ( get_option('options_events_enabled') ) {
     define( 'EVENT_POST_SLUG', 'eventpost' );
     if ( !get_option('options_events_tax_shared') ) { define( 'EVENT_TAX_SLUG', 'eventtax' ); }
     $wpr_cpts[] = EVENT_POST_SLUG;
+}
+
+if ( get_option('options_faq_enabled') ) {
+    define( 'FAQ_POST_SLUG', 'faqpost' );
+    $wpr_cpts[] = FAQ_POST_SLUG;
 }
 
 
@@ -211,20 +216,57 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 
         } // FIN if options_events_enabled
 
+
+        /*----------  Événements  ----------*/        
+
+        if ( get_option('options_faq_enabled') ) {
+
+            /*----------  Post  ----------*/
+            
+            $post_faq_args = array(
+                'public'				=> true,
+                'publicly_queryable'    => false,
+                'menu_position'     	=> 23,
+                'menu_icon'         	=> 'dashicons-editor-help',
+                'supports'          	=> array( 'title', 'author' ), 
+                'labels' 				=> array (
+                    'name'                  => 'Foire aux questions',
+                    'singular_name'         => 'Question',
+                    'menu_name'             => 'FAQ',
+                    'add_new'               => 'Ajouter une question',
+                    'add_new_item'          => 'Ajouter une question',
+                    'new_item'              => 'Ajouter une question',
+                    'edit_item'             => 'Modifier la question',
+                    'all_items'             => 'Toutes les questions',
+                    'not_found'             => 'Aucune question',
+                    'search_items'			=> 'Rechercher une question'
+                )
+            );
+
+            $post_faq_args = apply_filters( 'pc_filter_faq_post_args', $post_faq_args );
+            register_post_type( FAQ_POST_SLUG, $post_faq_args );
+
+        } // FIN if options_events_enabled
+
     }
 
 
 /*=====  FIN Post & Taxonomie  =====*/
 
-/*=====================================
-=            Customisation            =
-=====================================*/
+/*=============================
+=            Admin            =
+=============================*/
 
-// taxonomie, suppression colonne Description
+/*----------  Taxonomie, suppression colonne Description  ----------*/
+
+
 function pc_admin_edit_taxonomy_columns( $columns ) {
     if ( isset( $columns['description'] ) ) { unset( $columns['description'] ); }
     return $columns;
 };
+
+
+/*----------  Actualités & Événements, gestion des colonnes  ----------*/
 
 if ( get_option('options_news_enabled')  ) {
 
@@ -245,4 +287,18 @@ if ( get_option('options_events_enabled')  ) {
 } // FIN if options_news_enabled
 
 
-/*=====  FIN Customisation  =====*/
+/*----------  FAQ post title placeholder  ----------*/
+
+add_filter( 'enter_title_here', 'pc_admin_faq_enter_title_here', 10, 2 );
+
+    function pc_admin_faq_enter_title_here( $txt, $post ) {
+
+        if ( get_option('options_faq_enabled') && $post->post_type == FAQ_POST_SLUG ) {
+            $txt = 'Saisisser la question sans point d\'interrogation';
+        }
+        return $txt;
+
+    }
+
+
+/*=====  FIN Admin  =====*/
