@@ -38,12 +38,14 @@ if ( !$error ) {
 
     $block_attrs = apply_filters( 'pc_filter_acf_block_faq_attrs', $block_attrs, $block, $is_preview );
 
+    echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
     foreach ( $get_questions as $question ) {
         echo '<details class="question">';
             echo '<summary class="question-title">'.$question->post_title.'&nbsp;?</summary>';
             echo '<div class="question-answer tiny-editor">'.wpautop(trim(get_field('faq_answer',$question->ID))).'</div>';
         echo '</details>';
     }
+    echo '</div>';
 
 } else if ( $is_preview ) {
 
