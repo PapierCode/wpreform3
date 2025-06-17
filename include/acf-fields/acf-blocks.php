@@ -519,6 +519,26 @@ add_action( 'acf/include_fields', function() {
                     'ui' => 1,
                 ),
                 array(
+                    'key' => 'field_679348a76dafa',
+                    'label' => 'Afficher la légende',
+                    'name' => 'enable_legend',
+                    'aria-label' => '',
+                    'type' => 'true_false',
+                    'instructions' => 'Saisie dans les propriétés de l\'image',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                    'ui' => 1,
+                ),
+                array(
                     'key' => 'field_665b2a83d52f0',
                     'label' => 'Alignement de la légende',
                     'name' => 'legend_align_h',
@@ -529,8 +549,8 @@ add_action( 'acf/include_fields', function() {
                     'conditional_logic' => array(
                         array(
                             array(
-                                'field' => 'field_6666fafa8011a',
-                                'operator' => '!=',
+                                'field' => 'field_679348a76dafa',
+                                'operator' => '==',
                                 'value' => '1',
                             ),
                         ),
@@ -1046,6 +1066,26 @@ add_action( 'acf/include_fields', function() {
                     'ui' => 1,
                 ),
                 array(
+                    'key' => 'field_686318a76pxfa',
+                    'label' => 'Afficher la légende',
+                    'name' => 'enable_legend',
+                    'aria-label' => '',
+                    'type' => 'true_false',
+                    'instructions' => 'Saisie dans les propriétés de l\'image',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                    'ui' => 1,
+                ),
+                array(
                     'key' => 'field_665db29763bc4',
                     'label' => 'Alignement de la légende',
                     'name' => 'legend_align_h',
@@ -1056,8 +1096,8 @@ add_action( 'acf/include_fields', function() {
                     'conditional_logic' => array(
                         array(
                             array(
-                                'field' => 'field_6666fb1572ce1',
-                                'operator' => '!=',
+                                'field' => 'field_686318a76pxfa',
+                                'operator' => '==',
                                 'value' => '1',
                             ),
                         ),
@@ -1549,6 +1589,26 @@ add_action( 'acf/include_fields', function() {
                     'ui' => 1,
                 ),
                 array(
+                    'key' => 'field_696318976cxfa',
+                    'label' => 'Afficher la légende',
+                    'name' => 'enable_legend',
+                    'aria-label' => '',
+                    'type' => 'true_false',
+                    'instructions' => 'Saisie dans les propriétés de l\'image',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => '',
+                    'default_value' => 1,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
+                    'ui' => 1,
+                ),
+                array(
                     'key' => 'field_66598ff282d92',
                     'label' => 'Alignement de la légende',
                     'name' => 'legend_align_h',
@@ -1559,8 +1619,8 @@ add_action( 'acf/include_fields', function() {
                     'conditional_logic' => array(
                         array(
                             array(
-                                'field' => 'field_6666fac3df1e1',
-                                'operator' => '!=',
+                                'field' => 'field_696318976cxfa',
+                                'operator' => '==',
                                 'value' => '1',
                             ),
                         ),

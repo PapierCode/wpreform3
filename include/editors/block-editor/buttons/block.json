@@ -10,7 +10,6 @@
     },
     "supports": {
         "align": false,
-        "anchor": true,
-        "mode": false
+        "anchor": true
     }
 }

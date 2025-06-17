@@ -1,5 +1,4 @@
 <?php
-
 $img_args = get_field('img_args');
 
 if ( $img_args ) {
@@ -7,10 +6,11 @@ if ( $img_args ) {
     $img_size = get_field('img_size');
 	$enable_js = get_field('enable_js');
 	$enable_circle = get_field('enable_circle');
+    $enable_caption = is_null( get_field('enable_legend') ) ? 1 : get_field('enable_legend');
     $caption = trim($img_args['caption']);
 
     $tag_attrs = array( 'class' => 'bloc-image-inner' );
-    if ( $caption ) {
+    if ( $enable_caption && $caption ) {
         $tag = 'figure';
         $tag_attrs['role'] = 'figure';
         $tag_attrs['aria-label'] = $caption;
@@ -74,7 +74,7 @@ if ( $img_args ) {
             echo '</div>';
         }
 
-        if ( $caption ) {
+        if ( $enable_caption && $caption ) {
             $caption_align = $enable_circle ? 'center' : get_field('legend_align_h');
             echo '<figcaption class="has-text-align-'.$caption_align.'">'.$caption.'</figcaption>';
         }
