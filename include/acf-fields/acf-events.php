@@ -651,50 +651,54 @@ function pc_admin_events_acf_include_fields() {
         'show_in_rest' => 0
     ) );
 
-    acf_add_local_field_group( array(
-        'key' => 'group_pc_events_aside_page',
-        'title' => 'Page',
-        'fields' => array(
-            array(
-                'key' => 'field_pc_events_aside_page_title',
-                'label' => 'Titre de la section événements dans les pages',
-                'name' => 'events_aside_page_title',
-                'aria-label' => '',
-                'type' => 'text',
-                'instructions' => '',
-                'required' => 1,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'default_value' => 'Événements',
-                'maxlength' => '',
-                'rows' => 6,
-                'placeholder' => '',
-                'new_lines' => '',
-            )
-        ),
-        'location' => array(
-            array(
+    if ( get_field('events_enabled','option') && get_field('events_pages','option') ) {
+
+        acf_add_local_field_group( array(
+            'key' => 'group_pc_events_aside_page',
+            'title' => 'Page',
+            'fields' => array(
                 array(
-                    'param' => 'options_page',
-                    'operator' => '==',
-                    'value' => 'events-settings',
+                    'key' => 'field_pc_events_aside_page_title',
+                    'label' => 'Titre de la section événements dans les pages',
+                    'name' => 'events_aside_page_title',
+                    'aria-label' => '',
+                    'type' => 'text',
+                    'instructions' => '',
+                    'required' => 1,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => 'Événements',
+                    'maxlength' => '',
+                    'rows' => 6,
+                    'placeholder' => '',
+                    'new_lines' => '',
+                )
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param' => 'options_page',
+                        'operator' => '==',
+                        'value' => 'events-settings',
+                    ),
                 ),
             ),
-        ),
-        'menu_order' => 1,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'left',
-        'instruction_placement' => 'field',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-        'show_in_rest' => 0
-    ) );
+            'menu_order' => 1,
+            'position' => 'normal',
+            'style' => 'default',
+            'label_placement' => 'left',
+            'instruction_placement' => 'field',
+            'hide_on_screen' => '',
+            'active' => true,
+            'description' => '',
+            'show_in_rest' => 0
+        ) );
+
+    }
     
     
     /*=====  FIN Settings  =====*/
