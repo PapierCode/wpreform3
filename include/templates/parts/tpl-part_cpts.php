@@ -253,14 +253,14 @@ if ( get_option('options_news_enabled') || get_option('options_events_enabled') 
 =            Filtres (archive)            =
 =========================================*/
 
-/*----------  Entête  ----------*/
+/*----------  Affichage titre & description  ----------*/
 
 add_filter( 'pc_filter_archive_main_header_title', 'pc_edit_news_events_archive_main_header_title', 10, 3 );
 
     function pc_edit_news_events_archive_main_header_title( $title, $post_type, $settings ) {
 
         // événements passés
-        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && get_query_var( 'archive' ) == 1 ) { $title = __('Past events','wpreform'); }
+        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && is_archive( EVENT_POST_SLUG ) ) { $title = __('Past events','wpreform'); }
 
         // catégorie en cours
         global $wpr_cpts;
@@ -284,7 +284,30 @@ add_filter( 'pc_filter_archive_main_header_description_display', 'pc_edit_news_e
 
     }
 
-/*----------  Filtres  ----------*/
+
+/*----------  Meta title  ----------*/
+
+add_filter( 'rank_math/frontend/title', function( $title ) {
+
+    global $post;
+
+    if ( defined( 'EVENT_POST_SLUG' ) && is_archive( EVENT_POST_SLUG ) ) { 
+        global $archive_settings;
+        $archive_title = $archive_settings['title'];
+        $rankmath_options = get_option( 'rank-math-options-titles' );
+        global $wpr_cpts;
+        if ( in_array( $post->post_type, $wpr_cpts ) && get_query_var('category') ) {
+            $category = get_term_by( 'term_taxonomy_id', get_query_var('category') );
+            if ( $category ) { $archive_title .= ', '.$category->name; }
+        }
+        $title = $archive_title.' '.$rankmath_options['title_separator'].' '.get_option('blogname');
+    }
+
+	return $title;
+});
+
+
+/*----------  Affichage filtres  ----------*/
 
 add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive_main_header_filters', 45 );
 
