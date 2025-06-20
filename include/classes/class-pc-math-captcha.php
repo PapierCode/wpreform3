@@ -51,7 +51,7 @@ class PC_MathCaptcha {
 		return apply_filters(
 			'pc_filter_mathcaptcha_label_text', 
 			sprintf( 
-				__('Spam protection, how many do %s?','wpreform'),
+				__('Antispam protection, How much is x plus/minus x?','wpreform'),
 				$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1].'&nbsp;'
 			),
 			$math,

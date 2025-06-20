@@ -500,7 +500,7 @@ class PC_Contact_Form {
 		$legal_page_id = get_option('wp_page_for_privacy_policy');
 		echo '<p class="form-contact-rgpd-msg">';
 			printf( 
-				'The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page', 
+				__('The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page','wpreform'), 
 				'<strong>',
 				'</strong>',
 				'<a href="'.get_the_permalink($legal_page_id).'">'.get_the_title($legal_page_id).'</a>'
