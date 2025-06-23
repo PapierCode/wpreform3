@@ -52,7 +52,7 @@ class PC_MathCaptcha {
 			'pc_filter_mathcaptcha_label_text', 
 			sprintf( 
 				__('Antispam protection, How much is %s?','wpreform'),
-				$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1].'&nbsp;'
+				$math[0].'&nbsp;'.$operator.'&nbsp;'.$math[1]
 			),
 			$math,
 			$operator
