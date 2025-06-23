@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-06-23 15:15+0000\n"
+"PO-Revision-Date: 2025-06-23 15:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es_ES\n"
@@ -45,7 +45,7 @@ msgstr "Protección antispam"
 
 #: include/classes/class-pc-math-captcha.php
 msgid "Antispam protection, How much is %s?"
-msgstr "Protección antispam, ¿Cuánto es %s ?"
+msgstr "Protección antispam, ¿Cuánto es %s?"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "associated with"
