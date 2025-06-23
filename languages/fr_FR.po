@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-06-14 10:35+0000\n"
+"PO-Revision-Date: 2025-06-23 15:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -42,6 +42,10 @@ msgstr ""
 #: include/classes/class-pc-hcaptcha.php
 msgid "Antispam protection"
 msgstr "Protection antispam"
+
+#: include/classes/class-pc-math-captcha.php
+msgid "Antispam protection, How much is %s?"
+msgstr "Protection antispam, combien font %s&nbsp;?"
 
 #: include/templates/parts/tpl-part_search.php
 msgid "associated with"
@@ -286,10 +290,6 @@ msgstr "Accéder au contenu principal"
 #: include/editors/block-editor/gallery/block-gallery.php
 msgid "Slideshow"
 msgstr "Diaporama"
-
-#: include/classes/class-pc-math-captcha.php
-msgid "Spam protection, how many do %s?"
-msgstr "Protection antispam, combien font %s?"
 
 #: include/classes/class-pc-contact-form.php
 msgid ""

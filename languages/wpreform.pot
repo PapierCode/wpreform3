@@ -289,7 +289,7 @@ msgid "minus"
 msgstr ""
 
 #: include/classes/class-pc-math-captcha.php
-msgid "Spam protection, how many do %s?"
+msgid "Antispam protection, How much is %s?"
 msgstr ""
 
 #: include/classes/class-pc-post.php
