@@ -56,7 +56,7 @@ add_action( 'pre_get_posts', 'pc_archive_news_pre_get_posts' );
 
     function pc_archive_news_pre_get_posts( $query ) {
         
-        if ( get_option('options_news_tax') && !is_admin() && $query->is_main_query() && $query->is_archive() && get_query_var('post_type') == NEWS_POST_SLUG && get_query_var('category') ) {
+        if ( get_option('options_news_tax') && !is_admin() && $query->is_main_query() && $query->is_post_type_archive(NEWS_POST_SLUG) && get_query_var('category') ) {
 
             $query->set( 'tax_query', array(
                 array(
@@ -204,7 +204,7 @@ add_action( 'pre_get_posts', 'pc_archive_events_pre_get_posts' );
 
     function pc_archive_events_pre_get_posts( $query ) {
 
-        if ( !is_admin() && $query->is_main_query() && $query->is_archive() && get_query_var('post_type') == EVENT_POST_SLUG ) {
+        if ( !is_admin() && $query->is_main_query() && $query->is_post_type_archive(EVENT_POST_SLUG) ) {
 
             if ( get_query_var( 'archive' ) == 1 ) { // passés
                 $meta_compare = '<=';
@@ -260,7 +260,7 @@ add_filter( 'pc_filter_archive_main_header_title', 'pc_edit_news_events_archive_
     function pc_edit_news_events_archive_main_header_title( $title, $post_type, $settings ) {
 
         // événements passés
-        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && is_archive( EVENT_POST_SLUG ) ) { $title = __('Past events','wpreform'); }
+        if ( defined('EVENT_POST_SLUG') && $post_type == EVENT_POST_SLUG && is_post_type_archive( EVENT_POST_SLUG ) ) { $title = __('Past events','wpreform'); }
 
         // catégorie en cours
         global $wpr_cpts;
@@ -291,7 +291,7 @@ add_filter( 'rank_math/frontend/title', function( $title ) {
 
     global $post;
 
-    if ( defined( 'EVENT_POST_SLUG' ) && is_archive( EVENT_POST_SLUG ) ) { 
+    if ( defined( 'EVENT_POST_SLUG' ) && is_post_type_archive( EVENT_POST_SLUG ) ) { 
         global $archive_settings;
         $archive_title = $archive_settings['title'];
         $rankmath_options = get_option( 'rank-math-options-titles' );
