@@ -129,7 +129,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 
             /*----------  Paramètres  ----------*/
 
-            if ( function_exists('acf_add_options_page') ) {
+            if ( function_exists('acf_add_options_page') && apply_filters( 'pc_filter_news_settings_display', true ) ) {
             
                 switch ( get_option('options_news_type') ) {
                     case 'news':
@@ -200,7 +200,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
 
             /*----------  Paramètres  ----------*/
 
-            if ( function_exists('acf_add_options_page') ) {
+            if ( function_exists('acf_add_options_page') && apply_filters( 'pc_filter_event_settings_display', true ) ) {
             
                 acf_add_options_page( apply_filters( 'pc_filter_event_settings_args', array(
                     'page_title'    => 'Paramètres des événements',
