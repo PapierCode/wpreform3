@@ -41,7 +41,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
         /*----------  Actualités / Blog  ----------*/     
 
         // partagé
-        $tax_args = array(	
+        $tax_args = apply_filters( 'pc_edit_news_tax_args', array(	
             'hierarchical'		    => false,
             'show_in_nav_menus'     => false,
             'show_admin_column'	    => true,
@@ -66,7 +66,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 'name_field_description'        => '',
                 'slug_field_description'        => 'Le "slug" est la version du nom avec uniquement des lettres, des chiffres et des traits d’union.'
             )
-        );
+        ));
 
         if ( get_option('options_news_enabled') ) {
 
