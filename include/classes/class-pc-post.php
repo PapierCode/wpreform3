@@ -133,7 +133,7 @@ class PC_Post {
 							$href_args = array( 'category' => $term->term_id );
 							if ( get_query_var( 'archive' ) == 1 ) { $href_args['archive'] = 1; } // événements passés
 							$title = sprintf( __('%s category','wpreform'), $term->name );
-							echo '<a href="'.get_post_type_archive_link( $this->type ).'?'.http_build_query($href_args).'" title="'.$title.'" rel="nofollow">'.$term->name.'</a>';	
+							echo '<a href="'.get_post_type_archive_link( $this->type ).'?'.http_build_query($href_args).'" title="'.$title.'" rel="nofollow">'.str_replace( ' ', '&nbsp;', $term->name ).'</a>';	
 						}	
 					echo '</p>';
 		
@@ -330,7 +330,7 @@ class PC_Post {
 				do_action( 'pc_post_card_after_start', $this, $params );
 			
 				// visual
-				if ( apply_filters( 'pc_filter_card_image', true ) ) {
+				if ( apply_filters( 'pc_filter_card_image', true, $this, $params ) ) {
 					echo '<figure class="card-figure">';
 						echo $this->get_card_image_tag();				
 					echo '</figure>';

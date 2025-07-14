@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-06-23 15:14+0000\n"
+"PO-Revision-Date: 2025-07-14 12:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -27,7 +27,7 @@ msgstr "Categorie %s"
 msgid "All events"
 msgstr "Tous les événements"
 
-#: include/templates/parts/tpl-part_page.php
+#: include/templates/parts/tpl-part_page.php front-page.php
 msgid "All news"
 msgstr "Toutes les actualités"
 
@@ -106,6 +106,14 @@ msgstr "Événement"
 msgid "Event categories"
 msgstr "Catégories des événements"
 
+#: front-page.php
+msgid "Featured news"
+msgstr "Actualités à la une"
+
+#: front-page.php
+msgid "Featured pages"
+msgstr "Pages à la une"
+
 #: include/templates/parts/tpl-part_cpts.php
 msgid "Filter by"
 msgstr "Filtrer par"
@@ -169,11 +177,11 @@ msgstr "Message"
 msgid "minus"
 msgstr "moins"
 
-#: include/templates/tpl_search.php
+#: include/templates/tpl_search.php front-page.php
 msgid "News"
 msgstr "Actualité"
 
-#: include/templates/parts/tpl-part_cpts.php
+#: include/templates/parts/tpl-part_cpts.php front-page.php
 msgid "News categories"
 msgstr "Catégories des actualités"
 

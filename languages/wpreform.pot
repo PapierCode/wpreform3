@@ -83,6 +83,7 @@ msgid "Page"
 msgstr ""
 
 #: include/templates/tpl_search.php
+#: front-page.php
 msgid "News"
 msgstr ""
 
@@ -113,6 +114,7 @@ msgid "Past events"
 msgstr ""
 
 #: include/templates/parts/tpl-part_cpts.php
+#: front-page.php
 msgid "News categories"
 msgstr ""
 
@@ -161,6 +163,7 @@ msgid "Pagination"
 msgstr ""
 
 #: include/templates/parts/tpl-part_page.php
+#: front-page.php
 msgid "All news"
 msgstr ""
 
@@ -306,4 +309,12 @@ msgstr ""
 
 #: include/classes/class-pc-post.php
 msgid "Read more of %s"
+msgstr ""
+
+#: front-page.php
+msgid "Featured pages"
+msgstr ""
+
+#: front-page.php
+msgid "Featured news"
 msgstr ""
