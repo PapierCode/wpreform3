@@ -216,7 +216,13 @@ function pc_get_markdown( $txt, $remove_all = false ) {
 function pc_get_attrs_to_string( $attrs ) {
 
 	$attrs = array_map(
-		function( $k, $v ) { return $k.'="'.$v.'"'; }, 
+		function( $k, $v ) { 
+			if ( $v ) {
+				return $k.'="'.$v.'"';
+			} else {
+				return $k;
+			}
+		},
 		array_keys( $attrs ),
 		array_values( $attrs )
 	);

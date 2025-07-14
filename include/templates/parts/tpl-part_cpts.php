@@ -367,7 +367,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
 
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
-            echo '<div class="filters filters--news">';
+            echo '<div class="filters filters--archive">';
                 echo '<button href="" class="modal-btn-open button" title="'.__('Dialog box','wpreform').'" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">'.__('Categories','wpreform').'</span></button>';
                 if ( get_query_var('category') ) {
                     $current_term = get_term_by( 'id', get_query_var('category'), $tax_slug );
@@ -376,12 +376,12 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
             echo '</div>';
 
             $modal_content = '<h2 class="modal-title">'.$modal_title.'</h2>';
-            $modal_content .= '<ul class="news-filter-list">';
+            $modal_content .= '<ul class="archive-filter-list">';
                 foreach ( $terms as $term ) {
 
                     $is_active = get_query_var('category') && get_query_var('category') == $term->term_id;
                     $link_attrs = array(
-                        'class' => 'news-filter-link button',
+                        'class' => 'archive-filter-link button',
                         'rel' => 'nofollow'
                     );
                     if ( $is_active ) { 
