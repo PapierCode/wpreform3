@@ -90,7 +90,7 @@ function pc_display_footer_contact() {
 		
 		foreach( $rs_list as $rs ) {
 			
-			$dd[$rs['ico']['value']] = '<a href="'.$rs['url'].'" class="'.apply_filters( 'pc_filter_footer_contact_phone_class', 'social-link button button--white button--ico' ).'" title="'.sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']).'" target="_blank" rel="noreferrer"><span class="ico">'.pc_svg($rs['ico']['value']).'</span><span class="txt">'.$rs['ico']['label'].'</span></a>';
+			$dd[$rs['ico']['value']] = '<a href="'.$rs['url'].'" class="'.apply_filters( 'pc_filter_footer_social_link_class', 'social-link button button--white button--ico' ).'" title="'.sprintf(__('Follow us on %s (new window)','wpreform'),$rs['ico']['label']).'" target="_blank" rel="noreferrer"><span class="ico">'.pc_svg($rs['ico']['value']).'</span><span class="txt">'.$rs['ico']['label'].'</span></a>';
 
 		}	
 
