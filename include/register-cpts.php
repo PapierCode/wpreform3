@@ -228,6 +228,7 @@ add_action( 'init', 'pc_register_custom_types', 20 );
                 'publicly_queryable'    => false,
                 'menu_position'     	=> 23,
                 'menu_icon'         	=> 'dashicons-editor-help',
+                'show_in_nav_menus'		=> false,
                 'supports'          	=> array( 'title', 'author' ), 
                 'labels' 				=> array (
                     'name'                  => 'Foire aux questions',
