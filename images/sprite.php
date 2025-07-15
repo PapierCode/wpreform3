@@ -53,7 +53,7 @@ $sprite = apply_filters( 'pc_filter_sprite', array(
 
 	'calendar' => '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 1v4a1 1 0 0 1-2 0V1a1 1 0 0 1 2 0Z"/><path d="M15 1v4a1 1 0 0 1-2 0V1a1 1 0 0 1 2 0Z"/><path d="M4 8h5v3H4z"/><path d="M11 8h5v3h-5z"/><path d="M4 13h5v3H4z"/><path d="M11 13h5v3h-5z"/><path d="M8 2h4v2H8z"/><path fill-rule="nonzero" d="M16 2v2h2v13.95H2V4h2V2H0v17.95h20V2h-4Z"/></svg>',
 
-	'quote' => '<svg width="26" height="20" viewBox="0 0 26 20"><path d="M12.07,2l-3.3,8.57h2.74L9.54,20H0l2-9.61L6.32,2Z"/><path d="M13.92,18l3.3-8.56H14.49l2-9.47H26L24,9.61,19.68,18Z"/></svg>',
+	'quote' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M3 16a1 1 0 0 0-1-1H1a1 1 0 0 1-1-1V1a.997.997 0 0 1 1-1h18a.997.997 0 0 1 1 1v13a.997.997 0 0 1-1 1H8.414a1 1 0 0 0-.707.293L3 20v-4Z"/></svg>',
 
 	'download' => '<svg width="20" height="20" viewBox="0 0 20 20"><polygon points="20 20 0 20 0 12.5 3 12.5 3 17 17 17 17 12.5 20 12.5 20 20"/><polygon points="13.88 6.59 11.5 8.97 11.5 0 8.5 0 8.5 8.97 6.12 6.59 4 8.71 10 14.71 16 8.71 13.88 6.59"/></svg>',
 
