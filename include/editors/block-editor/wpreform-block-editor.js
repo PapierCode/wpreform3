@@ -23,7 +23,7 @@
 
 	/*----------  Filtre blocs  ----------*/
 	
-	function pcRemoveOptions( settings, name ) {
+	function pcEditCoreBlocks( settings, name ) {
 
 		if ( ['core/heading'].includes(name)  ) {
 			return lodash.assign( {}, settings, {
@@ -33,14 +33,18 @@
 			} );
 		}
 		
+		if ( ['core/button'].includes(name)  ) {
+			return { ...settings, ...{ parent: [ 'acf/pc-buttons' ] } };		
+		}
+		
 		return settings;
 
 	}
 	 
 	wp.hooks.addFilter(
 		'blocks.registerBlockType',
-		'pc/pcRemoveOptions',
-		pcRemoveOptions
+		'pc/pcEditCoreBlocks',
+		pcEditCoreBlocks
 	);
 	
 } )()

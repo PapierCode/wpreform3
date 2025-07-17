@@ -24,12 +24,13 @@ if ( $address ) {
                 'height' => 32
             ))
         );
-        echo '<script>const mapArgs_'.$block['id'].'='.json_encode( $map_json, JSON_PRETTY_PRINT ).'</script>';
+        $block_id = preg_replace( '/[^0-9]/', '', $block['id'] ); // chiffres seulement
+        echo '<script>const mapArgs_'.$block_id.' = '.json_encode( $map_json, JSON_PRETTY_PRINT ).'</script>';
 
         if ( $is_preview ) {
             echo '<p><strong>Carte, adresse :</strong><br>'.$address['address'].'</p>';
         } else {
-            echo '<div id="'.$block['id'].'" class="map"></div>';
+            echo '<div id="'.$block_id.'" class="map"></div>';
         }
 
     echo '</div>';

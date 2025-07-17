@@ -9,7 +9,8 @@
     },
     "supports": {
         "align": false,
-        "anchor": true
+        "anchor": true,
+        "mode": false
     },
     "parent": [ "acf/pc-columns" ]
 }

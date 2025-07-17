@@ -599,7 +599,7 @@ $button-space 	: 10;
 
 /*----------  Paramètres  ----------*/
 
-.components-panel__body:has([aria-label="Largeur du bouton"]) { display: none; }
+.components-tools-panel:has([aria-label="Largeur"]) { display: none; }
 
 
 /*----------  Aperçu  ----------*/
