@@ -11,7 +11,7 @@ function pc_admin_post_hero_acf_include_fields() {
 
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) { return; }
 
-    acf_add_local_field_group( array(
+    acf_add_local_field_group( apply_filters( 'pc_filter_acf_post_hero_fields', array(
         'key' => 'group_pc_post_hero',
         'title' => 'Entête de la page',
         'fields' => array(
@@ -302,7 +302,7 @@ function pc_admin_post_hero_acf_include_fields() {
         'active' => true,
         'description' => '',
         'show_in_rest' => 0,
-    ) );
+    )));
 
 }
 
