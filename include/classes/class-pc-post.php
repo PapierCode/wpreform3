@@ -256,7 +256,8 @@ class PC_Post {
 			'width' => $args['sizes'][$last_size_key][1],
 			'height' => $args['sizes'][$last_size_key][2],
 			'alt' => $args['alt'],
-			'loading' => 'lazy'
+			'loading' => 'lazy',
+			'aria-hidden' => 'true'
 		);
 		if ( $args['default'] ) { $attrs['class'] = 'card-image-default'; }
 	
@@ -331,9 +332,9 @@ class PC_Post {
 			
 				// visual
 				if ( apply_filters( 'pc_filter_card_image', true, $this, $params ) ) {
-					echo '<figure class="card-figure">';
+					echo '<div class="card-figure">';
 						echo $this->get_card_image_tag();				
-					echo '</figure>';
+					echo '</div>';
 				}
 
 				// hook	
