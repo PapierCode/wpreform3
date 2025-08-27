@@ -206,7 +206,7 @@ function pc_enqueue_scripts() {
 
 		/*----------  Bloc Carte  ----------*/
 
-		if ( has_block( 'acf/pc-map', $pc_post->wp_post ) ) {
+		if ( has_block( 'acf/pc-map', $pc_post->wp_post ) || apply_filters( 'pc_filter_enqueue_leaflet_script', false, $pc_post ) ) {
 			
 			$js_leaflet_path = '/scripts/include/leaflet.js';
 			wp_enqueue_script( 
