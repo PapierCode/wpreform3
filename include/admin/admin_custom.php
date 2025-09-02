@@ -89,7 +89,7 @@ function pc_admin_menu_metaboxes_archive_content() {
 	$default = array();
 	if ( get_option('options_news_enabled') ) {
 		$default_index = empty($default) ? 1 : 2;
-		$default[$default_index] = [ NEWS_POST_SLUG, get_option('options_news_type') == 'news' ? 'Actualités' : 'Blog' ];
+		$default[$default_index] = [ NEWS_POST_SLUG, get_option('options_news_type') == 'news' ? 'Actualités' : 'Articles du blog' ];
 	}
 	if ( get_option('options_events_enabled') ) {
 		$default_index = empty($default) ? 1 : 2;
