@@ -211,6 +211,7 @@ add_action( 'wp_dashboard_setup', function() {
 
     // plugins
     remove_meta_box( 'tinypng_dashboard_widget', 'dashboard', 'normal' );   // TinyPng
+    remove_meta_box( 'rank_math_dashboard_widget', 'dashboard', 'normal' );   // Rankmath
 
 });
 
