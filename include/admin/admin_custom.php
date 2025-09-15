@@ -160,6 +160,18 @@ function pc_admin_menu() {
 			remove_submenu_page("gf_edit_forms","gf_help");
 		}
 
+		// Rank Math
+		if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) {
+			$rm_key = array_find_key( $menu, function ( $value, $key ) {
+				return str_contains( $value[0], 'SEO' );
+			});
+			if ( $rm_key ) { $menu[$rm_key][0] = 'SEO'; }
+			$rm_help_key = array_find_key( $submenu['rank-math'], function ( $value, $key ) {
+				return str_contains( $value[0], 'Aide' );
+			});
+			if ( $rm_help_key ) { unset( $submenu['rank-math'][$rm_help_key]); }
+		}
+
 	}
 
 
