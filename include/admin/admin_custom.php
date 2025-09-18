@@ -161,7 +161,7 @@ function pc_admin_menu() {
 		}
 
 		// Rank Math
-		if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) {
+		if ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) && array_key_exists( 'rank-math', $submenu ) ) {
 			$rm_key = array_find_key( $menu, function ( $value, $key ) {
 				return str_contains( $value[0], 'SEO' );
 			});
