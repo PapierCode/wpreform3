@@ -368,7 +368,7 @@ add_action( 'pc_action_template_archive_before', 'pc_display_news_events_archive
         if ( is_array( $terms ) && !empty( $terms ) ) {
 
             echo '<div class="filters filters--archive">';
-                echo '<button href="" class="modal-btn-open button" title="'.__('Dialog box','wpreform').'" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">'.__('Categories','wpreform').'</span></button>';
+                echo '<button class="modal-btn-open button" title="'.__('Dialog box','wpreform').'" aria-control="'.$modal_id.'"><span class="ico">'.pc_svg('tag').'</span><span class="txt">'.__('Categories','wpreform').'</span></button>';
                 if ( get_query_var('category') ) {
                     $current_term = get_term_by( 'id', get_query_var('category'), $tax_slug );
                     echo '<a href="'.$cancel_url.'" class="button button--cancel" title="'.__('Cancel filter','wpreform').' '.$current_term->name.'" aria-label="'.__('Cancel filter','wpreform').' '.$current_term->name.'"><span class="ico">'.pc_svg('cross').'</span><span class="txt">'.$current_term->name.'</span></a>';

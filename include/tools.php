@@ -52,7 +52,7 @@ function pc_svg( $index ) {
 	global $sprite; // cf. images/sprite.php
 	$svg = $sprite[$index];
 
-	$svg = str_replace('<svg', '<svg class="no-print"', $svg);
+	$svg = str_replace('<svg', '<svg class="no-print svg-'.$index.'"', $svg);
 	$svg = str_replace('<svg', '<svg aria-hidden="true" focusable="false"', $svg);
 
 	return $svg;
