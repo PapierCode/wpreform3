@@ -59,7 +59,7 @@ class PC_Contact_Form {
 				$this->captcha = new PC_Hcaptcha( get_field('wpr_captcha_site_key','option'), get_field('wpr_captcha_secret_key','option') );
 				break;
 			case 'calcul':
-				$this->captcha_type = 'calcul';
+				$this->captcha_type = 'mathcaptcha';
 				$this->captcha = new PC_MathCaptcha( get_field('wpr_captcha_password','option'), get_field('wpr_captcha_vector','option') );
 				break;
 		}
@@ -519,14 +519,14 @@ class PC_Contact_Form {
 
 				/*----------  Captcha  ----------*/
 				
-				echo '<li class="form-item form-item--captcha form-item--hcaptcha'.( $this->errors['captcha'] ? ' form-item--error' : '').'">';
+				echo '<li class="form-item form-item--captcha form-item--'.$this->captcha_type.( $this->errors['captcha'] ? ' form-item--error' : '').'">';
 				
 				switch ( $this->captcha_type ) {
 					case 'hcaptcha':
 						echo '<span class="label-like form-label" aria-hidden="true">'.$this->captcha->get_field_label_text().$this->label_required.'</span>';
 						$this->captcha->display();
 						break;
-					case 'calcul':
+					case 'mathcaptcha':
 						$this->display_label( 'form-captcha', array(
 							'label'		=> $this->captcha->get_field_label_text(),
 							'required'	=> true
