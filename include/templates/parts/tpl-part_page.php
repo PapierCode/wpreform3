@@ -47,8 +47,9 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 
 	function pc_edit_password_form( $output ) {
 		 
-		$output = '<form action="'.esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ).'" method="post" class="form--page-protected">';
-		$output .= '<p>'.__( 'This content is password protected. To view it please enter your password below:' ) . '</p>';
+		$output = '<div class="form form--password">';
+		$output .= '<p class="form--password-msg">'.__( 'This content is password protected. To view it please enter your password below:' ) . '</p>';
+		$output .= '<form action="'.esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ).'" method="post">';
 		$output .= '<ul class="form-list">';
 			$output .= '<li class="form-item form-item--password">';
 			$output .= '<label for="post-password" class="form-label">'.__( 'Password:' ).'</label>';
@@ -56,6 +57,7 @@ add_filter( 'the_password_form', 'pc_edit_password_form' );
 			$output .= '</li>';
 			$output .= '<li class="form-item form-item--submit"><button type="submit" title="'.esc_attr_x( 'Enter', 'post password form' ).'" class="form-submit button"><span class="form-submit-inner">'.esc_attr_x( 'Enter', 'post password form' ).'</span></button></li>';
 		$output .= '</ul></form>';
+		$output .= '</div>';
 
 		return $output;
 
