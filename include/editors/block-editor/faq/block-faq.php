@@ -41,7 +41,8 @@ if ( !$error ) {
     echo '<div '.pc_get_attrs_to_string( $block_attrs ).'>';
     foreach ( $get_questions as $question ) {
         echo '<details class="question">';
-            echo '<summary class="question-title">'.$question->post_title.'&nbsp;?</summary>';
+            $icon = apply_filters( 'pc_filter_faq_summary_icon', pc_svg('arrow') );
+            echo '<summary class="question-title"><span class="ico">'.$icon.'</span><span class="txt">'.$question->post_title.'&nbsp;?</span></summary>';
             echo '<div class="question-answer tiny-editor">'.wpautop(trim(get_field('faq_answer',$question->ID))).'</div>';
         echo '</details>';
     }
