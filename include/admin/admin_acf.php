@@ -7,7 +7,7 @@ add_action('acf/options_page/save', 'pc_admin_acf_coordname_to_blogname', 10, 2)
 	function pc_admin_acf_coordname_to_blogname( $post_id, $menu_slug ) {
 
 		if ( 'site-settings' == $menu_slug ) {
-			update_option( 'blogname', get_field( 'coord_name', $post_id) );
+			update_option( 'blogname', get_field( 'coord_name', $post_id ) );
 		}
 
 	}

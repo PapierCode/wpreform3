@@ -145,10 +145,12 @@ function pc_display_breadcrumb() {
 
 			$post_object = get_post_type_object( $pc_post->type );
 
-			$links[] = array(
-				'name' => $post_object->labels->name,
-				'permalink' => get_post_type_archive_link( $pc_post->type )
-			);
+			if ( $post_object->has_archive ) {
+				$links[] = array(
+					'name' => $post_object->labels->name,
+					'permalink' => get_post_type_archive_link( $pc_post->type )
+				);
+			}
 
 		}
 
