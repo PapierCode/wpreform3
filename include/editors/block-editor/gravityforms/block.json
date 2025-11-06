@@ -8,8 +8,7 @@
     "apiVersion": 2,
     "acf": {
         "mode": "preview",
-        "renderTemplate": "block-gravityforms.php",
-        "postTypes": ["page","newspost","eventpost"]
+        "renderTemplate": "block-gravityforms.php"
     },
     "supports": {
         "multiple": false,
