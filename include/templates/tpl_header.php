@@ -92,8 +92,9 @@ function pc_display_header_end() {
 ============================*/
 
 function pc_display_header_logo() {
-		
-	echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="'.__('Homepage','wpreform').'">';
+	
+	$home_url = apply_filters( 'pc_filter_home_url', home_url() );
+	echo '<a href="'.$home_url.'" class="h-logo-link" title="'.__('Homepage','wpreform').'">';
 
 		$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', array(
 			'url' => get_bloginfo('template_directory').'/images/logo.svg',
