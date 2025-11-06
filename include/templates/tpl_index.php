@@ -145,7 +145,7 @@ function pc_display_single_content( $pc_post ) {
 
 function pc_display_main_footer_backlink( $pc_post ) {
 
-	if ( ( is_page() && $pc_post->parent > 0 ) || is_single() ) {
+	if ( apply_filters( 'pc_filter_display_single_backlink', true, $pc_post ) && ( ( is_page() && $pc_post->parent > 0 ) || is_single() ) ) {
 
 		$wp_referer = wp_get_referer();
 		
