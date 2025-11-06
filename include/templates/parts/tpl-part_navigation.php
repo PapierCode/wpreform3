@@ -97,7 +97,7 @@ function pc_display_breadcrumb() {
 			array(
 				'name' => __('Homepage','wpreform'),
 				'ico' => pc_svg('house'),
-				'permalink' => get_bloginfo('url'),
+				'permalink' => apply_filters( 'pc_filter_home_url', home_url() ),
 				'aria-label' => __('Homepage','wpreform')
 			)
 		)
