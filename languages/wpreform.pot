@@ -260,15 +260,31 @@ msgid "An error occurred, please validate the %1$s antispam%2$s and the %1$sform
 msgstr ""
 
 #: include/classes/class-pc-contact-form.php
-msgid "The field %s is required"
-msgstr ""
-
-#: include/classes/class-pc-contact-form.php
 msgid "The %1$spersonal data%2$s collected in the form below will only be used %1$sto respond to your message%2$s. For more information, see %3$s page"
 msgstr ""
 
 #: include/classes/class-pc-contact-form.php
 msgid "Send a message"
+msgstr ""
+
+#: include/classes/class-pc-contact-form.php
+msgid "Contact form"
+msgstr ""
+
+#: include/classes/class-pc-contact-form.php
+msgid "The form contains errors"
+msgstr ""
+
+#: include/classes/class-pc-contact-form.php
+msgid "The field %1$s%2$s%3$s is required"
+msgstr ""
+
+#: include/classes/class-pc-contact-form.php
+msgid "The message is sent"
+msgstr ""
+
+#: include/classes/class-pc-contact-form.php
+msgid "The format of the %s field is not valid."
 msgstr ""
 
 #: include/classes/class-pc-hcaptcha.php
