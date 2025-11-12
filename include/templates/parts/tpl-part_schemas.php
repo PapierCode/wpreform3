@@ -5,6 +5,12 @@
  * 
  */
 
+
+// add_filter( 'rank_math/json_ld', function( $data, $jsonld ) {
+//     unset($data['ProfilePage']);
+//     return $data;
+// }, 666, 2);
+
 /*===================================
 =            Client type            =
 ===================================*/
