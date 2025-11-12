@@ -134,9 +134,12 @@ add_action( 'phpmailer_init', 'pc_mail_smtp_settings' );
 			$phpmailer->Username = $smtp['authentication_user'];
 			$phpmailer->Password = $smtp['authentication_password'];
 
-
 			$phpmailer->From = $smtp['from_mail'];
 			$phpmailer->FromName = $smtp['from_name'];
+
+			if ( isset( $_POST['contact-mail'] ) && is_email( trim($_POST['contact-mail']) ) ) {
+				$phpmailer->addReplyTo( trim($_POST['contact-mail']) );
+			}
 
 		}
 
