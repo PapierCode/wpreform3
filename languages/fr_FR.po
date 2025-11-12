@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPreform V3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-24 14:40+0000\n"
-"PO-Revision-Date: 2025-11-12 16:18+0000\n"
+"PO-Revision-Date: 2025-11-12 16:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -325,8 +325,9 @@ msgid "The format of the %s field is not valid."
 msgstr "Le format du champ %s field n'est pas valide."
 
 #: include/classes/class-pc-contact-form.php
-msgid "The message is sent"
-msgstr "Le message est envoyé"
+#| msgid "The message is sent"
+msgid "The message is sent."
+msgstr "Le message est envoyé."
 
 #: include/templates/tpl_404.php
 msgid "This page does not exist"

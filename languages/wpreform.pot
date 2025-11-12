@@ -280,7 +280,7 @@ msgid "The field %1$s%2$s%3$s is required"
 msgstr ""
 
 #: include/classes/class-pc-contact-form.php
-msgid "The message is sent"
+msgid "The message is sent."
 msgstr ""
 
 #: include/classes/class-pc-contact-form.php
