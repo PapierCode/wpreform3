@@ -18,15 +18,14 @@
 
 add_action( 'pc_header', 'pc_display_skip_nav', 10 );
 
-add_action( 'pc_header', 'pc_display_header_start', 40 );
+add_action( 'pc_header', 'pc_display_header_start', 20 );
 
-	add_action( 'pc_header', 'pc_display_header_logo', 50 );
-	add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
-	add_action( 'pc_header', 'pc_display_header_nav', 70 );
-	add_action( 'pc_header', 'pc_display_header_nav_secondary', 80 );
-	add_action( 'pc_header', 'pc_display_header_search', 90 );
+	add_action( 'pc_header', 'pc_display_header_logo', 30 );
+	add_action( 'pc_header', 'pc_display_header_nav', 40 );
+	add_action( 'pc_header', 'pc_display_header_nav_secondary', 50 );
+	add_action( 'pc_header', 'pc_display_header_search', 60 );
 
-add_action( 'pc_header', 'pc_display_header_end', 100 );
+add_action( 'pc_header', 'pc_display_header_end', 70 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -122,15 +121,6 @@ function pc_display_header_logo() {
 =            Navigation            =
 ==================================*/
 
-/*----------  Bouton menu caché  ----------*/
-
-function pc_display_nav_button_open_close() {
-
-	echo '<button type="button" title="'.__('Open menu','wpreform').'" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="'.__('Close menu','wpreform').'"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">'.__('Menu','wpreform').'</span></button>';
-
-}
-
-
 /*----------  Menu secondaire  ----------*/
 
 function pc_display_header_nav_secondary_list() {
@@ -153,27 +143,27 @@ function pc_display_header_nav_secondary_list() {
 
 function pc_display_header_nav_secondary() {
 
-	if ( !get_option('options_nav_secondary_enabled') ) { return; }
+	if ( get_option('options_nav_secondary_enabled') ) {
 
-	echo '<nav class="h-s-nav" role="navigation" aria-label="'.__('Secondary navigation','wpreform').'"><div class="h-s-nav-inner">';
-	
-		do_action( 'pc_header_nav_secondary_list_before' );
-
-		pc_display_header_nav_secondary_list();
+		echo '<nav class="h-s-nav" role="navigation" aria-label="'.__('Secondary navigation','wpreform').'"><div class="h-s-nav-inner">';
 		
-		do_action( 'pc_header_nav_secondary_list_after' );
+			do_action( 'pc_header_nav_secondary_list_before' );
 
-	echo '</div></nav>';
+			pc_display_header_nav_secondary_list();
+			
+			do_action( 'pc_header_nav_secondary_list_after' );
+
+		echo '</div></nav>';
+
+	}
 
 }
 
 
 /*----------  Menu principal  ----------*/
 
-function pc_display_header_nav() {
+function pc_display_header_nav_content() {
 
-	echo '<nav class="h-nav" role="navigation" aria-label="'.__('Primary navigation','wpreform').'"><div class="h-nav-inner">';
-	
 		do_action( 'pc_header_nav_list_before' );
 
 		$nav_args = apply_filters( 'pc_filter_header_nav_list_args', array(
@@ -197,7 +187,34 @@ function pc_display_header_nav() {
 		
 		do_action( 'pc_header_nav_list_after' );
 
-	echo '</div></nav>';
+}
+
+function pc_display_header_nav() {
+
+	if ( apply_filters( 'pc_filter_header_nav_dialog', false ) ) { 
+
+		echo '<nav class="h-nav" role="navigation" aria-label="'.__('Primary navigation','wpreform').'">';
+			if ( apply_filters( 'pc_filter_display_header_nav_inner', false ) ) { echo '<div class="h-nav-inner">'; }
+		
+			echo '<button class="h-nav-btn modal-btn-open button" title="'.__('Open menu','wpreform').'" aria-control="modal-navigation"><span class="ico">'.pc_svg('burger').'</span></button>';
+			echo '<dialog id="modal-navigation" class="h-nav-modal" autofocus><div class="h-nav-modal-inner">';
+				echo '<button type="button" class="modal-btn-close button" title="'.__('Close menu','wpreform').'" aria-label="'.__('Close menu','wpreform').'"><span class="ico">'.pc_svg('cross').'</span></button>';
+				pc_display_header_nav_content();
+			echo '</div></dialog>';
+			
+			pc_display_header_nav_content();
+
+			if ( apply_filters( 'pc_filter_display_header_nav_inner', false ) ) { echo '</div>'; }
+		echo '</nav>';
+
+	} else { // ancienne version
+		
+		echo '<button type="button" title="'.__('Open menu','wpreform').'" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="'.__('Close menu','wpreform').'"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">'.__('Menu','wpreform').'</span></button>';
+		echo '<nav class="h-nav" role="navigation" aria-label="'.__('Primary navigation','wpreform').'"><div class="h-nav-inner">';
+			pc_display_header_nav_content();
+		echo '</div></nav>';
+
+	}
 
 }
 

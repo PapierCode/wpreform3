@@ -47,7 +47,7 @@ var postCssPlugins = [
 function cssAdmin() {
     
     return src( ['include/admin/css/use.scss'] )
-        .pipe(sass({ precision: 3 }))
+        .pipe(sass({ precision: 3 }).on('error', sass.logError))
         .pipe(postcss( postCssPlugins ))
 		.pipe(rename( 'wpreform-admin.css' ))
         .pipe(dest( 'include/admin/css/' ));
@@ -63,12 +63,23 @@ function cssAdmin() {
 
 function js() {
 
-    return src( [ 'scripts/include/nav.js', 'scripts/wpreform.js' ] )
+    return src( [ 'scripts/wpreform.js' ] )
         .pipe(jshint( { esnext:true, browser:true } ))
         .pipe(jshint.reporter( 'default' ))
         .pipe(concat( 'wpreform.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
+
+}
+
+function jsOldNav() {
+
+    return src( [ 'scripts/include/oldnav.js' ] )
+        .pipe(jshint( { esnext:true, browser:true } ))
+        .pipe(jshint.reporter( 'default' ))
+        .pipe(concat( 'oldnav.min.js' ))
+        .pipe(terser())
+        .pipe(dest( 'scripts/include/' ));
 
 }
 
@@ -82,7 +93,9 @@ function js() {
 exports.watch = function() {
 
     watch( 'include/admin/css/**/*.scss', series( cssAdmin ) )
-	watch( [ 'scripts/**/*.js', '!scripts/wpreform.min.js' ], series( js )  )
+	watch( [ 'scripts/**/*.js', '!scripts/wpreform.min.js', '!scripts/include/oldnav.js', '!scripts/include/oldnav.min.js' ], series( js )  )
+	watch( 'scripts/include/oldnav.js', series( jsOldNav )  )
+
 };
 
 

@@ -2,10 +2,31 @@
 
 document.addEventListener( 'DOMContentLoaded', () => {
 
+	const body = document.querySelector('body');
+    let resizeTimer = null;
+
 	const rem = function( size, base ) {
 		if ( base == undefined ) { base = 16; }
 		return size / base + 'rem';
 	};
+
+	const hNavBtn = document.querySelector('.h-nav-btn');
+	const hNavModal = document.querySelector('.h-nav-modal');
+
+	window.addEventListener( 'resize', () => {
+    
+        clearTimeout(resizeTimer);
+    
+        resizeTimer = setTimeout( () => {
+    
+            if ( getComputedStyle( hNavBtn ).display == 'none' ) {
+				hNavModal.close();
+			}
+    
+        }, 250 );
+    
+    } );
+
 
 	/*----------  Vidéo  ----------*/
 	
@@ -22,49 +43,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		});
 	});
 	
-
-	/*----------  Toggle display  ----------*/
-
-	// const toggleDisplay = ( btn, target, targetTabIndex, btnIco ) => {
-		
-	// 	if ( btn.getAttribute('aria-expanded') == 'false' ) { // si fermé > ouvrir
-
-	// 		target.setAttribute('aria-hidden',false);
-	// 		targetTabIndex.forEach( element => { element.removeAttribute('tabindex'); } ); // enfant accessible à la tabulation	
-
-	// 		btn.setAttribute('aria-expanded',true);
-	// 		btn.setAttribute('title','Masquer '+btn.dataset.txt);
-	// 		btn.setAttribute('aria-label','Masquer '+btn.dataset.txt);
-	// 		btn.querySelector('.ico').innerHTML = sprite.cross;
-
-	// 	} else { // si ouvert > fermer
-			
-	// 		target.setAttribute('aria-hidden',true);
-	// 		targetTabIndex.forEach( element => { element.setAttribute('tabindex','-1'); } ); // enfant non accessible à la tabulation
-
-	// 		btn.setAttribute('aria-expanded',false);
-	// 		btn.setAttribute('title','Afficher '+btn.dataset.txt);
-	// 		btn.setAttribute('aria-label','Afficher '+btn.dataset.txt);
-	// 		btn.querySelector('.ico').innerHTML = btnIco;
-
-	// 	}
-		
-	// };
-
-	// const btnToggleDisplay = document.querySelectorAll('.js-toggle-display');
-
-	// if ( btnToggleDisplay.length > 0 ) {
-		
-	// 	btnToggleDisplay.forEach((btn) => {
-	// 		const target = document.querySelector('#'+btn.getAttribute('aria-control'));
-	// 		const tabindex = target.querySelectorAll('a,button,input,select,textarea');
-	// 		const btnIco = btn.querySelector('.ico').innerHTML;
-			
-	// 		btn.addEventListener('click', (event) => {
-	// 			toggleDisplay( btn, target, tabindex, btnIco );
-	// 		});
-	// 	});
-	// }
 
 	/*----------  Recherche  ----------*/
 
@@ -130,10 +108,33 @@ document.addEventListener( 'DOMContentLoaded', () => {
 	}
 
 
-	/*----------  Modal  ----------*/
+	/*----------  Modale  ----------*/
 
 	const btnOpenModal = document.querySelectorAll('.modal-btn-open');
-	const body = document.querySelector('body');
+	const focusableElsQuery = ':is(a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], input[type="number"], input[type="date"], select):not([disabled])';
+
+	const trapFocus = ( container, firstFocusableEl, lastFocusableEl ) => {
+
+		container.addEventListener( 'keydown', function(event) {
+
+			const isTabPressed = ( event.key === 'Tab' || event.keyCode === 9 );
+			if ( !isTabPressed ) { return; }
+
+			if ( event.shiftKey ) {  /* shift + tab */
+				if ( document.activeElement === firstFocusableEl ) {
+					lastFocusableEl.focus();
+					event.preventDefault();
+				}
+			} else { /* tab */
+				if ( document.activeElement === lastFocusableEl ) {
+					firstFocusableEl.focus();
+					event.preventDefault();
+				}
+			}
+
+		});
+
+	};
 
 	if ( btnOpenModal ) {
 
@@ -141,9 +142,15 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
 			const modal = document.querySelector('#'+btn.getAttribute('aria-control'));
 			const btnsClose = modal.querySelectorAll('.modal-btn-close');
+
+			const focusableEls = modal.querySelectorAll(focusableElsQuery);
+			const firstFocusableEl = focusableEls[0];  
+			const lastFocusableEl = focusableEls[focusableEls.length - 1];
+			
 		
 			btn.addEventListener( 'click', () => {
 				modal.showModal();
+				if ( firstFocusableEl ) { firstFocusableEl.focus(); }
 				body.style.overflow = 'hidden';
 			});
 			
@@ -155,13 +162,17 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				});
 			});
 		
-			modal.addEventListener('click', (event) => {
+			// clic hors modale
+			modal.addEventListener( 'click', (event) => {
+					console.log(event.target);
 				if ( event.target === modal ) { 
 					modal.close();
 					btn.focus();
 					body.style.overflow = 'auto';
 				}
 			});
+
+			trapFocus( modal, firstFocusableEl, lastFocusableEl );
 
 		});
 

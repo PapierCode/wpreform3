@@ -235,11 +235,27 @@ function pc_enqueue_scripts() {
 	$js_preform_path = '/scripts/wpreform.min.js';
 	wp_enqueue_script( 
 		'wpreform',
-		get_template_directory_uri().'/scripts/wpreform.min.js',
+		get_template_directory_uri().$js_preform_path,
 		array(),
 		filemtime(get_template_directory().$js_preform_path),
 		array( 'strategy' => 'defer', 'in_footer' => true )
 	);
+
+	/*----------  Ancien navigation  ----------*/
+	
+	if ( !apply_filters( 'pc_filter_header_nav_dialog', false ) ) {
+
+		$js_old_nav_path = '/scripts/include/oldnav.min.js';
+		wp_enqueue_script( 
+			'oldnav',
+			get_template_directory_uri().$js_old_nav_path,
+			array(),
+			filemtime(get_template_directory().$js_old_nav_path),
+			array( 'strategy' => 'defer', 'in_footer' => true )
+		);
+
+	}
+	
 
 }
 
