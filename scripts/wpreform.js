@@ -19,7 +19,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
         resizeTimer = setTimeout( () => {
     
-            if ( getComputedStyle( hNavBtn ).display == 'none' ) {
+            if ( hNavModal && getComputedStyle( hNavBtn ).display == 'none' ) {
 				hNavModal.close();
 			}
     
