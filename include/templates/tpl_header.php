@@ -209,7 +209,9 @@ function pc_display_header_nav() {
 
 	} else { // ancienne version
 		
-		echo '<button type="button" title="'.__('Open menu','wpreform').'" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="'.__('Close menu','wpreform').'"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">'.__('Menu','wpreform').'</span></button>';
+		if ( apply_filters( 'pc_filter_display_old_header_nav_btn', true ) ) {
+			echo '<button type="button" title="'.__('Open menu','wpreform').'" id="header-nav-btn" class="h-nav-btn" aria-controls="header-nav" aria-expanded="false" data-title="'.__('Close menu','wpreform').'"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="txt">'.__('Menu','wpreform').'</span></button>';
+		}
 		echo '<nav class="h-nav" role="navigation" aria-label="'.__('Primary navigation','wpreform').'"><div class="h-nav-inner">';
 			pc_display_header_nav_content();
 		echo '</div></nav>';
