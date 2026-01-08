@@ -18,12 +18,14 @@
 
 		wp.blocks.unregisterBlockStyle( 'core/button', 'fill' );
 		wp.blocks.unregisterBlockStyle( 'core/button', 'outline' );	
+		wp.blocks.unregisterBlockVariation( 'core/paragraph', 'stretchy-paragraph' );
+		wp.blocks.unregisterBlockVariation( 'core/heading', 'stretchy-heading' );
    
     });
 
 	/*----------  Filtre blocs  ----------*/
 	
-	function pcEditCoreBlocks( settings, name ) {
+	function pcEditCoreBlocks( settings, name ) {		
 
 		if ( ['core/heading'].includes(name)  ) {
 			return lodash.assign( {}, settings, {

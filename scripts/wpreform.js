@@ -21,6 +21,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     
             if ( hNavModal && getComputedStyle( hNavBtn ).display == 'none' ) {
 				hNavModal.close();
+				body.removeAttribute('style');
 			}
     
         }, 250 );
@@ -147,7 +148,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			const firstFocusableEl = focusableEls[0];  
 			const lastFocusableEl = focusableEls[focusableEls.length - 1];
 			
-		
 			btn.addEventListener( 'click', () => {
 				modal.showModal();
 				if ( firstFocusableEl ) { firstFocusableEl.focus(); }
@@ -158,7 +158,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				btnClose.addEventListener( 'click', () => {
 					modal.close();
 					btn.focus();
-					body.style.overflow = 'auto';
+					body.removeAttribute('style');
 				});
 			});
 		
@@ -168,7 +168,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				if ( event.target === modal ) { 
 					modal.close();
 					btn.focus();
-					body.style.overflow = 'auto';
+					body.removeAttribute('style');
 				}
 			});
 
